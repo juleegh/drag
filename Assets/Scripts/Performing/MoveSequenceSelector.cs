@@ -11,27 +11,28 @@ public class MoveSequenceSelector : MonoBehaviour, IRequiredComponent
     private List<MoveSlot> slots;
     public List<MoveSlot> Slots { get { return slots; } }
     public List<Move> SequenceMoves { get { return sequenceMoves; } }
+    private List<MoveSequence> songSequences;
+    private int currentSequence;
 
     public void ConfigureRequiredComponent()
     {
         instance = this;
         slots = new List<MoveSlot>();
         sequenceMoves = new List<Move>();
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.WaitingForSequenceCreation, NewSequence);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.WaitingForSequenceCreation, NextSequence);
     }
 
-    private void NewSequence()
+    public void ConfigureSongSequences(List<MoveSequence> sequences)
     {
-        slots.Clear();
-        sequenceMoves.Clear();
+        songSequences = sequences;
+        currentSequence = -1;
+    }
 
-        int slotCount = Random.Range(4, 8);
-        for (int i = 0; i < slotCount; i++)
-        {
-            MoveSlot slot = new MoveSlot();
-            slot.SelectRandomBuff();
-            slots.Add(slot);
-        }
+    private void NextSequence()
+    {
+        currentSequence++;
+        sequenceMoves.Clear();
+        slots = songSequences[currentSequence].slots;
         PerformingEventsManager.Instance.Notify(PerformingEvent.SequenceCreated);
     }
 

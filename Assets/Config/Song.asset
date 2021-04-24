@@ -16,3 +16,8 @@ MonoBehaviour:
   tempo: 0.9
   duration: 0
   track: {fileID: 0}
+  path: 
+  sections:
+  - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
+  - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
+  - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D

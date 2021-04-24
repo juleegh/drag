@@ -32,10 +32,17 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
     private void StartPerformingSystem()
     {
         TempoCounter.Instance.SetTempo(song.tempo);
+        LoadSongToSelector();
         emotionFeed = new EmotionFeed();
         emotionFeed.GenerateRandom();
         performState = PerformState.PickingSequence;
         PerformingEventsManager.Instance.Notify(PerformingEvent.WaitingForSequenceCreation);
+    }
+
+    private void LoadSongToSelector()
+    {
+        SongLoader loader = new SongLoader();
+        MoveSequenceSelector.Instance.ConfigureSongSequences(loader.LoadSong(song));
     }
 
     private void StartPerforming()
