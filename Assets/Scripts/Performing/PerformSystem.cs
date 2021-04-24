@@ -3,95 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PerformSystem : MonoBehaviour
+public class PerformSystem : MonoBehaviour, IRequiredComponent
 {
     public static PerformSystem Instance { get { return instance; } }
     private static PerformSystem instance;
 
     [SerializeField] private Song song;
-    //[SerializeField] private Audience audience;
-    [SerializeField] private EmotionFeed emotionFeed;
-    [SerializeField] private TempoCounter tempo;
-    [SerializeField] private MovePerformer performer;
-    [SerializeField] private MoveSequenceSelector sequence;
-    [SerializeField] private MoveSelectorUI ui;
-    [SerializeField] private AudienceEmotionsUI audienceUi;
     [SerializeField] private MovesProperties movesProperties;
-
     public MovesProperties MovesProperties { get { return movesProperties; } }
+    private EmotionFeed emotionFeed;
+    public EmotionFeed EmotionFeed { get { return emotionFeed; } }
 
-    private MoveType moveMultType;
-    private float moveTypeMult;
-
-    private float engagement;
-    private float happiness;
     private int currentMove;
     public int CurrentMoveIndex { get { return currentMove; } }
-    public float TempoMovePercentage { get { return performState == PerformState.Executing ? tempo.TempoPercentage : 0f; } }
-    public MoveSlot CurrentSlot { get { return sequence.Slots[currentMove]; } }
-    public PerformState PerformState { get { return performState; } }
+    public MoveSlot CurrentSlot { get { return MoveSequenceSelector.Instance.Slots[currentMove]; } }
 
+    public PerformState PerformState { get { return performState; } }
     private PerformState performState;
 
-    void Awake()
+    public void ConfigureRequiredComponent()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        instance = this;
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.WaitingForSequenceInput, StartPerforming);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TempoEnded, NextMove);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartPerformingSystem);
     }
 
-    void Start()
+    private void StartPerformingSystem()
     {
-        tempo.SetTempo(song.tempo);
-        performState = PerformState.PickingSequence;
+        TempoCounter.Instance.SetTempo(song.tempo);
         emotionFeed = new EmotionFeed();
         emotionFeed.GenerateRandom();
-        audienceUi.SetSequenceEmotions(emotionFeed.EmotionsFeed);
-        emotionFeed.Clean();
-        performer.isPerforming = false;
-        sequence.NewSequence();
-        ui.CreateSlots(sequence.Slots);
+        performState = PerformState.PickingSequence;
+        PerformingEventsManager.Instance.Notify(PerformingEvent.WaitingForSequenceCreation);
     }
 
-    public void StartPerforming()
+    private void StartPerforming()
     {
-        emotionFeed.Clean();
         currentMove = 0;
         StartCoroutine(TinyWait());
     }
 
     private IEnumerator TinyWait()
     {
-        performState = PerformState.Executing;
         yield return new WaitForSeconds(0.5f);
-        tempo.StartTempoCount();
-        performer.isPerforming = true;
+        performState = PerformState.Executing;
+        TempoCounter.Instance.StartTempoCount();
     }
 
     public void NextMove()
     {
-        if (currentMove >= sequence.Slots.Count - 1)
+        if (currentMove >= MoveSequenceSelector.Instance.Slots.Count - 1)
         {
             Sequence seq = DOTween.Sequence();
             seq.Pause();
             seq.AppendInterval(3f);
             seq.OnComplete(Create);
             performState = PerformState.PickingSequence;
-            performer.isPerforming = false;
-            tempo.StopTempoCount();
-            sequence.NewSequence();
+            TempoCounter.Instance.StopTempoCount();
+            //sequence.NewSequence();
             seq.PlayForward();
             return;
         }
 
-        if (!sequence.Slots[currentMove].performed)
+        if (!MoveSequenceSelector.Instance.Slots[currentMove].performed)
         {
-            sequence.Slots[currentMove].performed = true;
+            MoveSequenceSelector.Instance.Slots[currentMove].performed = true;
         }
 
         currentMove++;
@@ -99,28 +76,26 @@ public class PerformSystem : MonoBehaviour
 
     public void PerformedMove(Move move)
     {
-        if (sequence.Slots[currentMove].performed)
+        if (MoveSequenceSelector.Instance.Slots[currentMove].performed)
             return;
 
-        sequence.Slots[currentMove].performed = true;
 
-        bool isCorrect = tempo.IsOnTempo && move.moveType == sequence.SequenceMoves[currentMove].moveType;
-        ui.PerformedMove(currentMove, isCorrect);
+        bool isCorrect = TempoCounter.Instance.IsOnTempo && move.moveType == MoveSequenceSelector.Instance.SequenceMoves[currentMove].moveType;
+        MoveSequenceSelector.Instance.Slots[currentMove].performed = true;
+        MoveSequenceSelector.Instance.Slots[currentMove].correct = isCorrect;
 
         if (isCorrect)
         {
-            move.score *= sequence.Slots[currentMove].GetMultiplier();
+            move.score *= MoveSequenceSelector.Instance.Slots[currentMove].GetMultiplier();
             move.score = move.score / 100f;
             emotionFeed.ReactToMove(move);
-            audienceUi.SetEmotionProgress(move.moveType, emotionFeed.EmotionsFeed[move.moveType]);
         }
+        PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
     }
 
     private void Create()
     {
-        ui.CreateSlots(sequence.Slots);
         emotionFeed.GenerateRandom();
-        audienceUi.SetSequenceEmotions(emotionFeed.EmotionsFeed);
-        emotionFeed.Clean();
+        PerformingEventsManager.Instance.Notify(PerformingEvent.WaitingForSequenceCreation);
     }
 }

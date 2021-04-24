@@ -4,32 +4,36 @@ using System;
 using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 
-public class AudienceEmotionsUI : MonoBehaviour
+public class AudienceEmotionsUI : MonoBehaviour, IRequiredComponent
 {
     [Serializable]
     public class AudienceBarsDictionary : SerializableDictionaryBase<MoveType, EmotionBar> { }
 
     [SerializeField] private AudienceBarsDictionary bars;
 
-    void Start()
+    public void ConfigureRequiredComponent()
     {
         foreach (KeyValuePair<MoveType, EmotionBar> bar in bars)
         {
             bar.Value.SetEmotion(bar.Key, PerformSystem.Instance.MovesProperties.ColorByMove[bar.Key]);
         }
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.CreatedAudienceEmotions, SetSequenceEmotions);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, SetEmotionProgress);
     }
 
-    public void SetSequenceEmotions(Dictionary<MoveType, float> emotions)
+    public void SetSequenceEmotions()
     {
-        foreach (KeyValuePair<MoveType, float> emotion in emotions)
+        foreach (KeyValuePair<MoveType, float> emotion in PerformSystem.Instance.EmotionFeed.EmotionsFeed)
         {
             bars[emotion.Key].SetExpected(emotion.Value);
             bars[emotion.Key].SetFilled(0);
         }
     }
 
-    public void SetEmotionProgress(MoveType emotion, float value)
+    public void SetEmotionProgress()
     {
+        MoveType emotion = MoveSequenceSelector.Instance.SequenceMoves[PerformSystem.Instance.CurrentMoveIndex].moveType;
+        float value = PerformSystem.Instance.EmotionFeed.EmotionsFeed[emotion];
         bars[emotion].SetFilled(value);
     }
 }

@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveSequenceSelector : MonoBehaviour
+public class MoveSequenceSelector : MonoBehaviour, IRequiredComponent
 {
-    [SerializeField] private PerformSystem performSystem;
-    [SerializeField] private MoveSelectorUI ui;
+    public static MoveSequenceSelector Instance { get { return instance; } }
+    private static MoveSequenceSelector instance;
 
-    public bool isRecording;
     private List<Move> sequenceMoves;
     private List<MoveSlot> slots;
     public List<MoveSlot> Slots { get { return slots; } }
     public List<Move> SequenceMoves { get { return sequenceMoves; } }
-    void Start()
+
+    public void ConfigureRequiredComponent()
     {
+        instance = this;
         slots = new List<MoveSlot>();
         sequenceMoves = new List<Move>();
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.WaitingForSequenceCreation, NewSequence);
     }
 
-    public void NewSequence()
+    private void NewSequence()
     {
         slots.Clear();
         sequenceMoves.Clear();
@@ -30,51 +32,44 @@ public class MoveSequenceSelector : MonoBehaviour
             slot.SelectRandomBuff();
             slots.Add(slot);
         }
-        isRecording = true;
+        PerformingEventsManager.Instance.Notify(PerformingEvent.SequenceCreated);
     }
 
     void Update()
     {
-        if (!isRecording || sequenceMoves.Count == slots.Count)
+        if (PerformSystem.Instance.PerformState != PerformState.PickingSequence || sequenceMoves.Count == slots.Count)
             return;
 
         if (Input.GetKeyDown(MovesInputManager.Instance.A))
         {
-            Move move = new Move();
-            move.moveType = MoveType.AType;
-            move.score = 200;
-            sequenceMoves.Add(move);
-            ui.AddedMove(sequenceMoves.Count - 1, move);
+            PlayerSelectedMove(MoveType.AType);
         }
         else if (Input.GetKeyDown(MovesInputManager.Instance.B))
         {
-            Move move = new Move();
-            move.moveType = MoveType.BType;
-            move.score = 200;
-            sequenceMoves.Add(move);
-            ui.AddedMove(sequenceMoves.Count - 1, move);
+            PlayerSelectedMove(MoveType.BType);
         }
         else if (Input.GetKeyDown(MovesInputManager.Instance.X))
         {
-            Move move = new Move();
-            move.moveType = MoveType.XType;
-            move.score = 200;
-            sequenceMoves.Add(move);
-            ui.AddedMove(sequenceMoves.Count - 1, move);
+            PlayerSelectedMove(MoveType.XType);
         }
         else if (Input.GetKeyDown(MovesInputManager.Instance.Y))
         {
-            Move move = new Move();
-            move.moveType = MoveType.YType;
-            move.score = 200;
-            sequenceMoves.Add(move);
-            ui.AddedMove(sequenceMoves.Count - 1, move);
+            PlayerSelectedMove(MoveType.YType);
         }
 
         if (sequenceMoves.Count == slots.Count)
         {
-            isRecording = false;
-            performSystem.StartPerforming();
+            PerformingEventsManager.Instance.Notify(PerformingEvent.WaitingForSequenceInput);
         }
+    }
+
+    private void PlayerSelectedMove(MoveType moveType)
+    {
+        Move move = new Move();
+        move.moveType = moveType;
+        move.score = 200;
+
+        sequenceMoves.Add(move);
+        PerformingEventsManager.Instance.Notify(PerformingEvent.SlotAdded);
     }
 }

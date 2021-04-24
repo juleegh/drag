@@ -6,6 +6,7 @@ public class MoveSlot
 {
     public MoveBuff buff;
     public bool performed;
+    public bool correct;
 
     public void SelectRandomBuff()
     {
@@ -15,6 +16,7 @@ public class MoveSlot
         buffs.Add(MoveBuff.Double);
         buff = buffs[Random.Range(0, buffs.Count)];
         performed = false;
+        correct = false;
     }
 
     public float GetMultiplier()

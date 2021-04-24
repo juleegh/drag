@@ -10,7 +10,6 @@ public class EmotionFeed
     public EmotionFeed()
     {
         emotionsFeed = new Dictionary<MoveType, float>();
-        GenerateRandom();
     }
 
     public void GenerateRandom()
@@ -19,9 +18,11 @@ public class EmotionFeed
         emotionsFeed[MoveType.BType] = Random.Range(0f, 1f);
         emotionsFeed[MoveType.XType] = Random.Range(0f, 1f);
         emotionsFeed[MoveType.YType] = Random.Range(0f, 1f);
+        PerformingEventsManager.Instance.Notify(PerformingEvent.CreatedAudienceEmotions);
+        Clean();
     }
 
-    public void Clean()
+    private void Clean()
     {
         emotionsFeed[MoveType.AType] = 0f;
         emotionsFeed[MoveType.BType] = 0f;

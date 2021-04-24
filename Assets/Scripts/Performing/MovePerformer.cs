@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class MovePerformer : MonoBehaviour
 {
-    public bool isPerforming;
-
-    /*
-        [SerializeField] private Move AMove;
-        [SerializeField] private Move BMove;
-        [SerializeField] private Move XMove;
-        [SerializeField] private Move YMove;
-        */
-    [SerializeField] private PerformSystem performSystem;
-
     void Update()
     {
-        if (!isPerforming)
+        if (PerformSystem.Instance.PerformState != PerformState.Executing)
             return;
 
         if (Input.GetKeyDown(MovesInputManager.Instance.A))
@@ -35,6 +25,6 @@ public class MovePerformer : MonoBehaviour
         Move move = new Move();
         move.moveType = moveType;
         move.score = 50;
-        performSystem.PerformedMove(move);
+        PerformSystem.Instance.PerformedMove(move);
     }
 }
