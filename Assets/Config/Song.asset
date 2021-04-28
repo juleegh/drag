@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Song
   m_EditorClassIdentifier: 
   songName: 
-  tempo: 0.9
+  tempo: 0.483
   duration: 0
-  track: {fileID: 0}
-  path: 
+  track: {fileID: 8300000, guid: c685719462b4560498c4950ee5e7c877, type: 3}
+  initialDelay: 0.483
   sections:
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D

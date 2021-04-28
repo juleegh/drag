@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MoveSlot
 {
+    public Move move;
+    //move { get { return theMove; } set { theMove = value; Debug.LogError(value); } }
+    public Move theMove;
     public MoveBuff buff;
     public bool performed;
     public bool correct;

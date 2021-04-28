@@ -43,3 +43,5 @@ MonoBehaviour:
     - {r: 1, g: 1, b: 0, a: 1}
     - {r: 1, g: 0.48235294, b: 0, a: 1}
   acceptablePercentage: 0.3
+  movesBefore: 5
+  movesAhead: 8

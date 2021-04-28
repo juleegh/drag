@@ -9,6 +9,6 @@ public class Song : ScriptableObject
     public float tempo;
     public float duration;
     public AudioClip track;
-    public string path;
+    public float initialDelay;
     public List<string> sections;
 }

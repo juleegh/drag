@@ -20,7 +20,17 @@ public class MoveUI : MonoBehaviour
     [SerializeField] private Sprite halfBuff;
     [SerializeField] private Sprite doubleBuff;
 
-    public void MarkAsEmpty(MoveBuff moveBuff)
+    public void MarkAsEmpty()
+    {
+        timeProgress.fillAmount = 0f;
+        background.color = empty;
+        sphere.color = transparent;
+        typeText.text = "";
+        buff.sprite = null;
+        buff.color = transparent;
+    }
+
+    public void MarkAsBuff(MoveBuff moveBuff)
     {
         timeProgress.fillAmount = 0f;
         background.color = empty;
@@ -70,7 +80,7 @@ public class MoveUI : MonoBehaviour
 
     public void MarkCompleted(bool correct)
     {
-        timeProgress.fillAmount = 0f;
+        //timeProgress.fillAmount = 0f;
 
         if (correct)
             background.color = right;

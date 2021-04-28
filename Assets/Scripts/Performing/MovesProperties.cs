@@ -14,4 +14,8 @@ public class MovesProperties : ScriptableObject
     public MoveColorsDictionary ColorByMove { get { return colorByMove; } }
     [SerializeField] private float acceptablePercentage;
     public float AcceptablePercentage { get { return acceptablePercentage; } }
+    [SerializeField] private int movesBefore;
+    public int MovesBefore { get { return movesBefore; } }
+    [SerializeField] private int movesAhead;
+    public int MovesAhead { get { return movesAhead; } }
 }

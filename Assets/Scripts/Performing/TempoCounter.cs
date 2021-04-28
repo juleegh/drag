@@ -27,6 +27,7 @@ public class TempoCounter : MonoBehaviour, IRequiredComponent
 
     public void StartTempoCount()
     {
+        tempoTime = 0f;
         isPlaying = true;
         StartCoroutine(QualifyTempo());
     }

@@ -13,6 +13,7 @@ public class MoveSequenceSelector : MonoBehaviour, IRequiredComponent
     public List<Move> SequenceMoves { get { return sequenceMoves; } }
     private List<MoveSequence> songSequences;
     private int currentSequence;
+    public int CurrentSequence { get { return currentSequence; } }
 
     public void ConfigureRequiredComponent()
     {

@@ -30,9 +30,9 @@ public class AudienceEmotionsUI : MonoBehaviour, IRequiredComponent
         }
     }
 
-    public void SetEmotionProgress()
+    private void SetEmotionProgress()
     {
-        MoveType emotion = MoveSequenceSelector.Instance.SequenceMoves[PerformSystem.Instance.CurrentMoveIndex].moveType;
+        MoveType emotion = SongSequence.Instance.Slots[PerformSystem.Instance.CurrentMoveIndex].move.moveType;
         float value = PerformSystem.Instance.EmotionFeed.EmotionsFeed[emotion];
         bars[emotion].SetFilled(value);
     }
