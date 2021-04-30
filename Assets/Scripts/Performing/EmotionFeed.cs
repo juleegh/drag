@@ -13,29 +13,28 @@ public class EmotionFeed
     {
         currentEmotions = new Dictionary<MoveType, float>();
         targetEmotions = new Dictionary<MoveType, float>();
-        Clean();
+        CleanAll();
     }
 
-    public void DefineTargets(float totalEmotions)
+    public void DefineTargets(List<MoveSlot> sequenceMoves)
     {
-        float remaining = totalEmotions;
-        float random = Random.Range(0f, remaining);
-        targetEmotions[MoveType.AType] += random;
+        List<MoveType> types = new List<MoveType>();
+        types.Add(MoveType.AType);
+        types.Add(MoveType.BType);
+        types.Add(MoveType.XType);
+        types.Add(MoveType.YType);
 
-        remaining -= random;
-        random = Random.Range(0f, remaining);
-        targetEmotions[MoveType.BType] += random;
+        for (int i = 0; i < sequenceMoves.Count; i++)
+        {
+            //if (sequenceMoves[i].GetMultiplier() != 0)
+            //Debug.LogError(sequenceMoves[i].GetMultiplier());
+            targetEmotions[types[Random.Range(0, types.Count)]] += sequenceMoves[i].GetMultiplier() * 200f;
+        }
 
-        remaining -= random;
-        random = Random.Range(0f, remaining);
-        targetEmotions[MoveType.XType] += random;
-
-        remaining -= random;
-        targetEmotions[MoveType.YType] += remaining;
         PerformingEventsManager.Instance.Notify(PerformingEvent.CreatedAudienceEmotions);
     }
 
-    private void Clean()
+    private void CleanAll()
     {
         currentEmotions[MoveType.AType] = 0f;
         currentEmotions[MoveType.BType] = 0f;

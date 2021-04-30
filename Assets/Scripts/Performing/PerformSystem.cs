@@ -31,21 +31,6 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartPerformingSystem);
     }
 
-    private void Update()
-    {
-        return;
-
-        if (count > 0)
-            delay += Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            count += 1.0f;
-            if (count > 1)
-                Debug.LogError((float)delay / (count - 1));
-        }
-    }
-
     private void StartPerformingSystem()
     {
         SoundManager.Instance.SetTrack(song.track);
@@ -61,7 +46,7 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         SongSequence.Instance.ConfigureSongSequences(loader.LoadSong(song));
 
         emotionFeed = new EmotionFeed();
-        emotionFeed.DefineTargets(SongSequence.Instance.GetScoreForCurrentSequence());
+        emotionFeed.DefineTargets(SongSequence.Instance.GetMovesForCurrentSequence());
     }
 
     private void StartPerforming()
@@ -80,8 +65,8 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
 
         currentMove++;
 
-        if (SongSequence.Instance.GetNextSequenceIndex() == currentMove)
-            emotionFeed.DefineTargets(SongSequence.Instance.GetScoreForCurrentSequence());
+        if (SongSequence.Instance.GetNextSequenceIndex() == currentMove && currentMove != SongSequence.Instance.Slots.Count)
+            emotionFeed.DefineTargets(SongSequence.Instance.GetMovesForCurrentSequence());
 
         if (currentMove == SongSequence.Instance.Slots.Count)
         {

@@ -36,6 +36,7 @@ public class SongLoader
                 newSlot.buff = MoveBuff.Double;
             if (slot == "H")
                 newSlot.buff = MoveBuff.Half;
+
             sequence.Add(newSlot);
         }
         return sequence;

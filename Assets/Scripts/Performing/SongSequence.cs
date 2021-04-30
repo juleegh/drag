@@ -22,28 +22,41 @@ public class SongSequence : MonoBehaviour, IRequiredComponent
     {
         songSequences = sequences;
         sequenceIndexes = new List<int>();
-        for (int i = 0; i < sequences.Count; i++)
+        for (int i = 0; i < songSequences.Count; i++)
         {
             sequenceIndexes.Add(slots.Count);
-            for (int j = 0; j < sequences[i].slots.Count; j++)
+            for (int j = 0; j < songSequences[i].slots.Count; j++)
             {
-                slots.Add(sequences[i].slots[j]);
+                slots.Add(songSequences[i].slots[j]);
             }
+            sequenceIndexes.Add(slots.Count);
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.SequenceCreated);
     }
 
-    public float GetScoreForCurrentSequence()
+    public List<MoveSlot> GetMovesForCurrentSequence()
     {
-        float score = 0;
-        int index = GetNextSequenceIndex();
-
-        for (int j = 0; j < index; j++)
+        int start = 0;
+        int finish = 0;
+        for (int i = 1; i < sequenceIndexes.Count; i++)
         {
-            score += 200 * slots[j].GetMultiplier();
+            if (sequenceIndexes[i - 1] <= PerformSystem.Instance.CurrentMoveIndex)
+            {
+                start = sequenceIndexes[i - 1];
+                finish = sequenceIndexes[i];
+            }
         }
 
-        return score;
+        List<MoveSlot> nextSequence = new List<MoveSlot>();
+
+        for (int j = start; j < finish; j++)
+        {
+            nextSequence.Add(slots[j]);
+            //if (slots[j].GetMultiplier() != 0)
+            //Debug.LogError(j + " - " + slots[j].GetMultiplier());
+        }
+
+        return nextSequence;
     }
 
     public float GetTotalScore()
@@ -63,7 +76,7 @@ public class SongSequence : MonoBehaviour, IRequiredComponent
         int currentMove = PerformSystem.Instance.CurrentMoveIndex;
         int index = 0;
 
-        for (int i = 0; i < sequenceIndexes.Count && index == 0; i++)
+        for (int i = 0; i <= sequenceIndexes.Count && index == 0; i++)
         {
             if (sequenceIndexes[i] >= currentMove)
                 index = sequenceIndexes[i];
