@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Song
   m_EditorClassIdentifier: 
   songName: 
-  tempo: 0.483
+  tempo: 1
   duration: 0
   track: {fileID: 8300000, guid: c685719462b4560498c4950ee5e7c877, type: 3}
   initialDelay: 0.483

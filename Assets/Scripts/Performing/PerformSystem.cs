@@ -104,16 +104,41 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
 
     public void PerformedMove(Move move)
     {
+        if (TempoCounter.Instance.IsOnPostTempo)
+            PostTempo(move);
+        else
+            PreTempo(move);
+    }
+
+    private void PreTempo(Move move)
+    {
         if (SongSequence.Instance.Slots[currentMove].performed)
             return;
 
-        bool isCorrect = TempoCounter.Instance.IsOnTempo;
+        bool isCorrect = TempoCounter.Instance.IsOnPreTempo;
         SongSequence.Instance.Slots[currentMove].performed = true;
         SongSequence.Instance.Slots[currentMove].correct = isCorrect;
 
         if (isCorrect)
         {
             move.score *= SongSequence.Instance.Slots[currentMove].GetMultiplier();
+            emotionFeed.ReactToMove(move);
+        }
+        PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
+    }
+
+    private void PostTempo(Move move)
+    {
+        if (SongSequence.Instance.Slots[currentMove - 1].performed)
+            return;
+
+        bool isCorrect = TempoCounter.Instance.IsOnPostTempo;
+        SongSequence.Instance.Slots[currentMove - 1].performed = true;
+        SongSequence.Instance.Slots[currentMove - 1].correct = isCorrect;
+
+        if (isCorrect)
+        {
+            move.score *= SongSequence.Instance.Slots[currentMove - 1].GetMultiplier();
             emotionFeed.ReactToMove(move);
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);

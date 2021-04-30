@@ -9,6 +9,7 @@ public class MoveUI : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Image sphere;
     [SerializeField] private Image buff;
+    [SerializeField] private Image timeProgress;
     [SerializeField] private TextMeshProUGUI typeText;
 
     [SerializeField] private Color empty;
@@ -23,6 +24,7 @@ public class MoveUI : MonoBehaviour
 
     public void MarkAsEmpty()
     {
+        timeProgress.fillAmount = 0f;
         background.color = empty;
         sphere.color = transparent;
         typeText.text = "";
@@ -40,6 +42,7 @@ public class MoveUI : MonoBehaviour
             return;
         }
 
+        timeProgress.fillAmount = 0f;
         background.color = empty;
         sphere.color = transparent;
         typeText.text = "";
@@ -100,5 +103,15 @@ public class MoveUI : MonoBehaviour
             background.color = right;
         else
             background.color = wrong;
+    }
+
+    public void MarkProgress(float progress)
+    {
+        timeProgress.fillAmount = progress;
+
+        if (TempoCounter.Instance.IsOnPreTempo || TempoCounter.Instance.IsOnPostTempo)
+            timeProgress.color = Color.green;
+        else
+            timeProgress.color = Color.red;
     }
 }

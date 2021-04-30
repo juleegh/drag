@@ -9,9 +9,11 @@ public class TempoCounter : MonoBehaviour, IRequiredComponent
 
     private float frequency;
     private bool isPlaying;
-    private bool beatFrame;
+    private bool preBeatFrame;
+    private bool postBeatFrame;
 
-    public bool IsOnTempo { get { return beatFrame; } }
+    public bool IsOnPreTempo { get { return preBeatFrame; } }
+    public bool IsOnPostTempo { get { return postBeatFrame; } }
     public float TempoPercentage { get { return isPlaying ? tempoTime / frequency : 0f; } }
     private float tempoTime;
 
@@ -46,17 +48,27 @@ public class TempoCounter : MonoBehaviour, IRequiredComponent
 
     private IEnumerator QualifyTempo()
     {
-        beatFrame = false;
-        WaitForSeconds unacceptable = new WaitForSeconds(frequency * (1 - PerformSystem.Instance.MovesProperties.AcceptablePercentage));
-        WaitForSeconds acceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage);
+        WaitForSeconds unaceptable = new WaitForSeconds(frequency * (1 - PerformSystem.Instance.MovesProperties.AcceptablePercentage));
+        WaitForSeconds preAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.8f);
+        WaitForSeconds postAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.2f);
+
+        bool firstTime = true;
         while (isPlaying)
         {
-            yield return unacceptable;
-            beatFrame = true;
-            yield return acceptable;
-            beatFrame = false;
-            tempoTime = 0f;
+            if (firstTime)
+            {
+                yield return postAcceptable;
+                firstTime = false;
+            }
+            yield return unaceptable;
+            preBeatFrame = true;
+            yield return preAcceptable;
             PerformingEventsManager.Instance.Notify(PerformingEvent.TempoEnded);
+            tempoTime = 0f;
+            preBeatFrame = false;
+            postBeatFrame = true;
+            yield return postAcceptable;
+            postBeatFrame = false;
         }
     }
 }
