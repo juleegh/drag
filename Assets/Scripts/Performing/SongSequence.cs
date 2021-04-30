@@ -7,6 +7,7 @@ public class SongSequence : MonoBehaviour, IRequiredComponent
     public static SongSequence Instance { get { return instance; } }
     private static SongSequence instance;
 
+    private List<int> sequenceIndexes;
     private List<MoveSlot> slots;
     public List<MoveSlot> Slots { get { return slots; } }
     private List<MoveSequence> songSequences;
@@ -20,14 +21,54 @@ public class SongSequence : MonoBehaviour, IRequiredComponent
     public void ConfigureSongSequences(List<MoveSequence> sequences)
     {
         songSequences = sequences;
+        sequenceIndexes = new List<int>();
         for (int i = 0; i < sequences.Count; i++)
         {
+            sequenceIndexes.Add(slots.Count);
             for (int j = 0; j < sequences[i].slots.Count; j++)
             {
                 slots.Add(sequences[i].slots[j]);
             }
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.SequenceCreated);
+    }
+
+    public float GetScoreForCurrentSequence()
+    {
+        float score = 0;
+        int index = GetNextSequenceIndex();
+
+        for (int j = 0; j < index; j++)
+        {
+            score += 200 * slots[j].GetMultiplier();
+        }
+
+        return score;
+    }
+
+    public float GetTotalScore()
+    {
+        float score = 0;
+
+        for (int j = 0; j < slots.Count; j++)
+        {
+            score += 200 * slots[j].GetMultiplier();
+        }
+
+        return score;
+    }
+
+    public int GetNextSequenceIndex()
+    {
+        int currentMove = PerformSystem.Instance.CurrentMoveIndex;
+        int index = 0;
+
+        for (int i = 0; i < sequenceIndexes.Count && index == 0; i++)
+        {
+            if (sequenceIndexes[i] >= currentMove)
+                index = sequenceIndexes[i];
+        }
+        return index;
     }
 
     void Update()

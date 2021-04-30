@@ -19,6 +19,7 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
 
     public PerformState PerformState { get { return performState; } }
     private PerformState performState;
+    public float Tempo { get { return song.tempo; } }
     float delay = 0;
     float count = 0;
 
@@ -50,8 +51,6 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         SoundManager.Instance.SetTrack(song.track);
         TempoCounter.Instance.SetTempo(song.tempo);
         LoadSongToSelector();
-        emotionFeed = new EmotionFeed();
-        emotionFeed.GenerateRandom();
         performState = PerformState.PickingSequence;
         StartPerforming();
     }
@@ -60,6 +59,9 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
     {
         SongLoader loader = new SongLoader();
         SongSequence.Instance.ConfigureSongSequences(loader.LoadSong(song));
+
+        emotionFeed = new EmotionFeed();
+        emotionFeed.DefineTargets(SongSequence.Instance.GetScoreForCurrentSequence());
     }
 
     private void StartPerforming()
@@ -77,6 +79,10 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         }
 
         currentMove++;
+
+        if (SongSequence.Instance.GetNextSequenceIndex() == currentMove)
+            emotionFeed.DefineTargets(SongSequence.Instance.GetScoreForCurrentSequence());
+
         if (currentMove == SongSequence.Instance.Slots.Count)
         {
             count--;
@@ -108,7 +114,6 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         if (isCorrect)
         {
             move.score *= SongSequence.Instance.Slots[currentMove].GetMultiplier();
-            move.score = move.score / 100f;
             emotionFeed.ReactToMove(move);
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);

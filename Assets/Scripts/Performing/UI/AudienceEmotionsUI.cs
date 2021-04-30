@@ -19,21 +19,26 @@ public class AudienceEmotionsUI : MonoBehaviour, IRequiredComponent
         }
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.CreatedAudienceEmotions, SetSequenceEmotions);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, SetEmotionProgress);
+
+        foreach (KeyValuePair<MoveType, EmotionBar> emotion in bars)
+        {
+            bars[emotion.Key].SetExpected(0);
+            bars[emotion.Key].SetFilled(0);
+        }
     }
 
     public void SetSequenceEmotions()
     {
-        foreach (KeyValuePair<MoveType, float> emotion in PerformSystem.Instance.EmotionFeed.EmotionsFeed)
+        foreach (KeyValuePair<MoveType, float> emotion in PerformSystem.Instance.EmotionFeed.TargetEmotions)
         {
-            bars[emotion.Key].SetExpected(emotion.Value);
-            bars[emotion.Key].SetFilled(0);
+            bars[emotion.Key].SetExpected(emotion.Value / SongSequence.Instance.GetTotalScore());
         }
     }
 
     private void SetEmotionProgress()
     {
         MoveType emotion = SongSequence.Instance.Slots[PerformSystem.Instance.CurrentMoveIndex].move.moveType;
-        float value = PerformSystem.Instance.EmotionFeed.EmotionsFeed[emotion];
-        bars[emotion].SetFilled(value);
+        float value = PerformSystem.Instance.EmotionFeed.CurrentEmotions[emotion];
+        bars[emotion].SetFilled(value / SongSequence.Instance.GetTotalScore());
     }
 }

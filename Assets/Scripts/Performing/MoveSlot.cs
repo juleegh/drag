@@ -27,6 +27,8 @@ public class MoveSlot
         switch (buff)
         {
             case MoveBuff.None:
+                return 0f;
+            case MoveBuff.Regular:
                 return 1f;
             case MoveBuff.Half:
                 return 0.5f;

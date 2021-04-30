@@ -30,6 +30,8 @@ public class SongLoader
             MoveSlot newSlot = new MoveSlot();
             if (slot == "N")
                 newSlot.buff = MoveBuff.None;
+            if (slot == "R")
+                newSlot.buff = MoveBuff.Regular;
             if (slot == "D")
                 newSlot.buff = MoveBuff.Double;
             if (slot == "H")

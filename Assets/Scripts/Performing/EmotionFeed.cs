@@ -4,37 +4,55 @@ using UnityEngine;
 
 public class EmotionFeed
 {
-    private Dictionary<MoveType, float> emotionsFeed;
-    public Dictionary<MoveType, float> EmotionsFeed { get { return emotionsFeed; } }
+    private Dictionary<MoveType, float> targetEmotions;
+    private Dictionary<MoveType, float> currentEmotions;
+    public Dictionary<MoveType, float> TargetEmotions { get { return targetEmotions; } }
+    public Dictionary<MoveType, float> CurrentEmotions { get { return currentEmotions; } }
 
     public EmotionFeed()
     {
-        emotionsFeed = new Dictionary<MoveType, float>();
+        currentEmotions = new Dictionary<MoveType, float>();
+        targetEmotions = new Dictionary<MoveType, float>();
+        Clean();
     }
 
-    public void GenerateRandom()
+    public void DefineTargets(float totalEmotions)
     {
-        emotionsFeed[MoveType.AType] = Random.Range(0f, 1f);
-        emotionsFeed[MoveType.BType] = Random.Range(0f, 1f);
-        emotionsFeed[MoveType.XType] = Random.Range(0f, 1f);
-        emotionsFeed[MoveType.YType] = Random.Range(0f, 1f);
+        float remaining = totalEmotions;
+        float random = Random.Range(0f, remaining);
+        targetEmotions[MoveType.AType] += random;
+
+        remaining -= random;
+        random = Random.Range(0f, remaining);
+        targetEmotions[MoveType.BType] += random;
+
+        remaining -= random;
+        random = Random.Range(0f, remaining);
+        targetEmotions[MoveType.XType] += random;
+
+        remaining -= random;
+        targetEmotions[MoveType.YType] += remaining;
         PerformingEventsManager.Instance.Notify(PerformingEvent.CreatedAudienceEmotions);
-        Clean();
     }
 
     private void Clean()
     {
-        emotionsFeed[MoveType.AType] = 0f;
-        emotionsFeed[MoveType.BType] = 0f;
-        emotionsFeed[MoveType.XType] = 0f;
-        emotionsFeed[MoveType.YType] = 0f;
+        currentEmotions[MoveType.AType] = 0f;
+        currentEmotions[MoveType.BType] = 0f;
+        currentEmotions[MoveType.XType] = 0f;
+        currentEmotions[MoveType.YType] = 0f;
+
+        targetEmotions[MoveType.AType] = 0f;
+        targetEmotions[MoveType.BType] = 0f;
+        targetEmotions[MoveType.XType] = 0f;
+        targetEmotions[MoveType.YType] = 0f;
     }
 
     public void ReactToMove(Move move)
     {
-        if (emotionsFeed.ContainsKey(move.moveType))
-            emotionsFeed[move.moveType] += move.score;
+        if (currentEmotions.ContainsKey(move.moveType))
+            currentEmotions[move.moveType] += move.score;
         else
-            emotionsFeed[move.moveType] = move.score;
+            currentEmotions[move.moveType] = move.score;
     }
 }

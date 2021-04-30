@@ -7,6 +7,7 @@ public class MoveSelectorUI : MonoBehaviour, IRequiredComponent
 {
     [SerializeField] private SimpleObjectPool pool;
     [SerializeField] private Transform container;
+    [SerializeField] private GameObject indicator;
     [SerializeField] private float moveDistance = 60f;
 
     private List<MoveUI> moves;
@@ -49,17 +50,12 @@ public class MoveSelectorUI : MonoBehaviour, IRequiredComponent
             else
                 ui.MarkAsEmpty();
             ui.transform.SetParent(container);
-            ui.transform.position = transform.position - Vector3.right * (amountOfMoves - (i + 1)) * moveDistance;
+            float xPosition = ((float)(2 * i - amountOfMoves) / amountOfMoves) * (amountOfMoves * moveDistance / 2);
+            ui.transform.position = transform.position + Vector3.right * xPosition;
             moves.Add(ui);
-        }
-    }
 
-    private void Update()
-    {
-        // && !PerformSystem.Instance.CurrentSlot.performed
-        if (PerformSystem.Instance.PerformState == PerformState.Executing)
-        {
-            moves[PerformSystem.Instance.MovesProperties.MovesBefore].MarkProgress(TempoCounter.Instance.TempoPercentage);
+            if (i == PerformSystem.Instance.MovesProperties.MovesBefore)
+                indicator.transform.position = ui.transform.position;
         }
     }
 
@@ -102,7 +98,7 @@ public class MoveSelectorUI : MonoBehaviour, IRequiredComponent
 
         for (int i = 0; i < moves.Count; i++)
         {
-            moves[i].transform.DOMoveX(moves[i].transform.position.x - moveDistance, 0.3f);
+            moves[i].transform.DOMoveX(moves[i].transform.position.x - moveDistance, PerformSystem.Instance.Tempo).SetEase(Ease.Linear);
         }
 
         MoveUI old = moves[0];

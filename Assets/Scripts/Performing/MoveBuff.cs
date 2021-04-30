@@ -5,6 +5,7 @@ using UnityEngine;
 public enum MoveBuff
 {
     None,
+    Regular,
     Half,
     Double
 }

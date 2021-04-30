@@ -9,7 +9,6 @@ public class MoveUI : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Image sphere;
     [SerializeField] private Image buff;
-    [SerializeField] private Image timeProgress;
     [SerializeField] private TextMeshProUGUI typeText;
 
     [SerializeField] private Color empty;
@@ -20,9 +19,10 @@ public class MoveUI : MonoBehaviour
     [SerializeField] private Sprite halfBuff;
     [SerializeField] private Sprite doubleBuff;
 
+    private MoveBuff moveBuff;
+
     public void MarkAsEmpty()
     {
-        timeProgress.fillAmount = 0f;
         background.color = empty;
         sphere.color = transparent;
         typeText.text = "";
@@ -30,16 +30,23 @@ public class MoveUI : MonoBehaviour
         buff.color = transparent;
     }
 
-    public void MarkAsBuff(MoveBuff moveBuff)
+    public void MarkAsBuff(MoveBuff theBuff)
     {
-        timeProgress.fillAmount = 0f;
+        moveBuff = theBuff;
+
+        if (moveBuff == MoveBuff.None)
+        {
+            MarkAsEmpty();
+            return;
+        }
+
         background.color = empty;
         sphere.color = transparent;
         typeText.text = "";
 
-        switch (moveBuff)
+        switch (theBuff)
         {
-            case MoveBuff.Half:
+            case MoveBuff.None:
                 buff.sprite = null;
                 buff.color = transparent;
                 break;
@@ -47,7 +54,7 @@ public class MoveUI : MonoBehaviour
                 buff.sprite = doubleBuff;
                 buff.color = Color.white;
                 break;
-            case MoveBuff.None:
+            case MoveBuff.Half:
                 buff.sprite = halfBuff;
                 buff.color = Color.white;
                 break;
@@ -56,6 +63,12 @@ public class MoveUI : MonoBehaviour
 
     public void MarkAsMove(MoveType moveType)
     {
+        if (moveBuff == MoveBuff.None)
+        {
+            MarkAsEmpty();
+            return;
+        }
+
         background.color = full;
         switch (moveType)
         {
@@ -80,16 +93,12 @@ public class MoveUI : MonoBehaviour
 
     public void MarkCompleted(bool correct)
     {
-        //timeProgress.fillAmount = 0f;
+        if (moveBuff == MoveBuff.None)
+            return;
 
         if (correct)
             background.color = right;
         else
             background.color = wrong;
-    }
-
-    public void MarkProgress(float progress)
-    {
-        timeProgress.fillAmount = progress;
     }
 }
