@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1272302f4d941046b0b60660552690c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  song: {fileID: 11400000, guid: 81178dfac32b3d241af8e0661e42f5bb, type: 2}
+  song: {fileID: 11400000, guid: 0387eb4d348d75342b4735105b05d487, type: 2}
   movesProperties: {fileID: 11400000, guid: 8a93d148daf6b944093f9a4e59863f64, type: 2}
 --- !u!4 &718751630
 Transform:

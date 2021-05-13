@@ -49,8 +49,8 @@ public class TempoCounter : MonoBehaviour, IRequiredComponent
     private IEnumerator QualifyTempo()
     {
         WaitForSeconds unaceptable = new WaitForSeconds(frequency * (1 - PerformSystem.Instance.MovesProperties.AcceptablePercentage));
-        WaitForSeconds preAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.8f);
-        WaitForSeconds postAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.2f);
+        WaitForSeconds preAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.65f);
+        WaitForSeconds postAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.35f);
 
         bool firstTime = true;
         while (isPlaying)

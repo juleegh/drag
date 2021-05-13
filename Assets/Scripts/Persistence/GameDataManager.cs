@@ -14,7 +14,7 @@ public class GameDataManager : MonoBehaviour
     void Awake()
     {
         savePath = Application.persistentDataPath;
-        savePath = Path.Combine(Application.persistentDataPath, "saveFile2");
+        savePath = Path.Combine(Application.persistentDataPath, "saveFile3");
     }
 
     void Update()

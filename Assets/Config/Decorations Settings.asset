@@ -37,7 +37,10 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - sequin
+    - feather
     _keys:
     - sequin
+    - feather
     _values:
     - {fileID: 11400000, guid: 08bbae7dfbda8784f98f192ff4f06f81, type: 2}
+    - {fileID: 11400000, guid: d222c580da01e784c850f09fa5fac54c, type: 2}

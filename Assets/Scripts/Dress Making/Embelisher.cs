@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class Embelisher : MonoBehaviour
 {
+    private static Embelisher instance;
+    public static Embelisher Instance { get { return instance; } }
+
+    public Color CurrentColor;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -16,6 +33,7 @@ public class Embelisher : MonoBehaviour
                 decoration.transform.position = hit.point;
                 decoration.transform.rotation = Quaternion.LookRotation(hit.normal);
                 decoration.transform.SetParent(hit.transform);
+                decoration.GetComponent<GarmentDecoration>().SetColor(CurrentColor);
             }
         }
     }
