@@ -16,10 +16,12 @@ public class GarmentDecoration : GameData
     public Vector3 Scale { get { return scale; } }
 
     [SerializeField] private SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer { get { return spriteRenderer; } }
 
-    public void LoadInfo(string code)
+    public void LoadInfo(string code, Sprite sprite)
     {
         codeName = code;
+        spriteRenderer.sprite = sprite;
     }
 
     public void SetColor(Color newColor)

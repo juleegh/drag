@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decoName: Feather
   price: 30
-  prefab: {fileID: 1856336126563063132, guid: 50b7ddbb0ab6be649a5f4d8f8c001145, type: 3}
+  sprite: {fileID: 21300000, guid: efe246a7239d2bc48a1417386a22b11d, type: 3}

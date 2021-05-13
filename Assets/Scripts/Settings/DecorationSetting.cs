@@ -7,9 +7,9 @@ public class DecorationSetting : ScriptableObject
 {
     [SerializeField] private string decoName;
     [SerializeField] private int price;
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private Sprite sprite;
 
     public string DecoName { get { return decoName; } }
     public int Price { get { return price; } }
-    public GameObject Prefab { get { return prefab; } }
+    public Sprite Sprite { get { return sprite; } }
 }

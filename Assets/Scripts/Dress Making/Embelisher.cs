@@ -8,8 +8,9 @@ public class Embelisher : MonoBehaviour
     public static Embelisher Instance { get { return instance; } }
 
     public Color CurrentColor;
-    public Vector3 CurrentScale;
-    public float CurrentRotation;
+    private Vector3 CurrentScale;
+    private float CurrentRotation;
+    private bool mirrored = false;
 
     private GameObject preview;
 
@@ -34,19 +35,16 @@ public class Embelisher : MonoBehaviour
 
     void Update()
     {
+        preview.gameObject.SetActive(false);
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.layer == LayerMask.NameToLayer("Manniquin"))
             {
                 GameObject decoration = Inventory.Instance.GetOneDecoration();
-                decoration.transform.position = hit.point;
-                decoration.transform.localScale = CurrentScale;
-                decoration.transform.rotation = Quaternion.LookRotation(hit.normal);
-                decoration.transform.Rotate(Vector3.forward * CurrentRotation, Space.Self);
+                CreateObjectToHit(decoration, hit);
                 decoration.transform.SetParent(hit.transform);
-                decoration.GetComponent<GarmentDecoration>().SetColor(CurrentColor);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Keypad4))
@@ -67,18 +65,32 @@ public class Embelisher : MonoBehaviour
             if (CurrentScale.magnitude > 1.1f)
                 CurrentScale *= 0.9f;
         }
+        else if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            mirrored = !mirrored;
+        }
         else
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.layer == LayerMask.NameToLayer("Manniquin"))
             {
-                preview.transform.position = hit.point;
-                preview.transform.rotation = Quaternion.LookRotation(hit.normal);
-                preview.transform.Rotate(Vector3.forward * CurrentRotation, Space.Self);
-                preview.transform.localScale = CurrentScale;
-                preview.GetComponent<GarmentDecoration>().SetColor(CurrentColor);
+                preview.gameObject.SetActive(true);
+                CreateObjectToHit(preview, hit);
+                preview.GetComponent<GarmentDecoration>().LoadInfo(Inventory.Instance.CurrentSelected.DecoName, Inventory.Instance.CurrentSelected.Sprite);
             }
         }
+
+    }
+
+    private void CreateObjectToHit(GameObject decoration, RaycastHit hit)
+    {
+        decoration.transform.position = hit.point + hit.normal * 0.04f;
+        decoration.transform.rotation = Quaternion.LookRotation(hit.normal);
+        decoration.transform.Rotate(Vector3.forward * CurrentRotation, Space.Self);
+        if (mirrored)
+            decoration.transform.Rotate(Vector3.up * 180, Space.Self);
+        decoration.transform.localScale = CurrentScale;
+        decoration.GetComponent<GarmentDecoration>().SetColor(CurrentColor);
     }
 }
