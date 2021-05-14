@@ -44,7 +44,7 @@ public class Embelisher : MonoBehaviour
             {
                 GameObject decoration = Inventory.Instance.GetOneDecoration();
                 CreateObjectToHit(decoration, hit);
-                decoration.transform.SetParent(hit.transform);
+                decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
             }
         }
         else if (Input.GetKeyDown(KeyCode.Keypad4))

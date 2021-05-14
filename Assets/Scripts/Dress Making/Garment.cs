@@ -8,10 +8,10 @@ public class Garment : GameData
     private List<GarmentDecoration> GetDecorations()
     {
         List<GarmentDecoration> decos = new List<GarmentDecoration>();
-        foreach (Transform ornament in transform)
+        GarmentDecoration[] decosInBody = GameObject.FindObjectsOfType<GarmentDecoration>();
+        foreach (GarmentDecoration ornament in decosInBody)
         {
-            if (ornament.GetComponent<GarmentDecoration>() != null)
-                decos.Add(ornament.GetComponent<GarmentDecoration>());
+            decos.Add(ornament);
         }
         return decos;
     }
@@ -22,7 +22,7 @@ public class Garment : GameData
         writer.Write(decorations.Count);
         foreach (GarmentDecoration ornament in decorations)
         {
-            ornament.GetComponent<GarmentDecoration>().Save(writer);
+            ornament.Save(writer);
         }
     }
 
@@ -32,10 +32,11 @@ public class Garment : GameData
         for (int i = 0; i < ornaments; i++)
         {
             string code = reader.ReadString();
+            Debug.LogError(":v");
 
             GameObject ornament = Instantiate(Inventory.Instance.GetPrefabByOrnamentType(code));
-            ornament.transform.SetParent(transform);
             ornament.GetComponent<GarmentDecoration>().Load(reader);
+            ornament.transform.SetParent(PosePerformer.Instance.GetClosestBone(ornament.transform.position));
 
         }
     }

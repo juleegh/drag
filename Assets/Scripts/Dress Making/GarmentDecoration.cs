@@ -32,16 +32,16 @@ public class GarmentDecoration : GameData
     public override void Save(GameDataWriter writer)
     {
         writer.Write(codeName);
-        writer.Write(transform.localPosition);
-        writer.Write(transform.localRotation);
-        writer.Write(transform.localScale);
+        writer.Write(transform.position);
+        writer.Write(transform.rotation);
+        writer.Write(transform.lossyScale);
         writer.Write(GetColorVector());
     }
 
     public override void Load(GameDataReader reader)
     {
-        transform.localPosition = reader.ReadVector3();
-        transform.localRotation = reader.ReadQuaternion();
+        transform.position = reader.ReadVector3();
+        transform.rotation = reader.ReadQuaternion();
         transform.localScale = reader.ReadVector3();
         spriteRenderer.color = LoadColorVector(reader.ReadVector3());
     }
