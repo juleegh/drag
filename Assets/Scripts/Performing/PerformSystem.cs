@@ -108,6 +108,7 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         {
             move.score *= SongSequence.Instance.Slots[currentMove].GetMultiplier();
             emotionFeed.ReactToMove(move);
+            PosePerformer.Instance.HitPose(move.poseType);
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
     }
@@ -125,6 +126,7 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         {
             move.score *= SongSequence.Instance.Slots[currentMove - 1].GetMultiplier();
             emotionFeed.ReactToMove(move);
+            PosePerformer.Instance.HitPose(move.poseType);
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
     }

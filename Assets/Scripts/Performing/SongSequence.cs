@@ -112,6 +112,7 @@ public class SongSequence : MonoBehaviour, IRequiredComponent
         Move newMove = new Move();
         newMove.moveType = moveType;
         newMove.score = 200;
+        newMove.poseType = Random.Range(0, 10) > 5 ? PoseType.Idle : PoseType.Boogie;
 
         slots[PerformSystem.Instance.CurrentMoveIndex].move = newMove;
         PerformSystem.Instance.PerformedMove(newMove);

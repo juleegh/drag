@@ -8,4 +8,5 @@ public class Move : MonoBehaviour
     public MoveType moveType;
     public float score;
     public bool performed;
+    public PoseType poseType;
 }
