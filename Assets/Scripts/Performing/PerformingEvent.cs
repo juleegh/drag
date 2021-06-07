@@ -9,7 +9,6 @@ public enum PerformingEvent
     SlotAdded,
     SequenceCreated,
     CreatedAudienceEmotions,
-    WaitingForSequenceInput,
     PlayerSelectedMove,
     SequenceInputComplete,
     MovePerformed,

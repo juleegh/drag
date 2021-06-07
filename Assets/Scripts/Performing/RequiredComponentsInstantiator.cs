@@ -8,7 +8,7 @@ public class RequiredComponentsInstantiator : MonoBehaviour
     private PerformingEventsManager eventsManager;
     private IEnumerable<IRequiredComponent> requiredComponents;
 
-    void Awake()
+    void Start()
     {
         requiredComponents = FindObjectsOfType<MonoBehaviour>().OfType<IRequiredComponent>();
         eventsManager = new PerformingEventsManager();

@@ -1,6 +1,15 @@
 public enum PoseType
 {
     Idle,
-    Boogie,
-    To_The_Sky,
+    Cobra,
+    Egiptian,
+    Face_Cover,
+    Hand_Up,
+    Hands_Hips,
+    Knee_Down,
+    Muscle_Up,
+    Schwazeneger,
+    Squat_Like,
+    Tiger,
+    Vogue
 }

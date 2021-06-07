@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Dress Making.unity
+    guid: ae03993d705eb8f4eaa9a90243541b35
+  - enabled: 1
+    path: Assets/Scenes/Performing.unity
+    guid: 097ad614dcd64264898b499643cf3efb
   m_configObjects: {}

@@ -32,7 +32,6 @@ public class Garment : GameData
         for (int i = 0; i < ornaments; i++)
         {
             string code = reader.ReadString();
-            Debug.LogError(":v");
 
             GameObject ornament = Instantiate(Inventory.Instance.GetPrefabByOrnamentType(code));
             ornament.GetComponent<GarmentDecoration>().Load(reader);

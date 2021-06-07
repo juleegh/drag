@@ -112,9 +112,27 @@ public class SongSequence : MonoBehaviour, IRequiredComponent
         Move newMove = new Move();
         newMove.moveType = moveType;
         newMove.score = 200;
-        newMove.poseType = Random.Range(0, 10) > 5 ? PoseType.Idle : PoseType.Boogie;
+        newMove.poseType = RandomPose();
 
         slots[PerformSystem.Instance.CurrentMoveIndex].move = newMove;
         PerformSystem.Instance.PerformedMove(newMove);
+    }
+
+    private PoseType RandomPose()
+    {
+        List<PoseType> poses = new List<PoseType>();
+        poses.Add(PoseType.Cobra);
+        poses.Add(PoseType.Egiptian);
+        poses.Add(PoseType.Face_Cover);
+        poses.Add(PoseType.Hand_Up);
+        poses.Add(PoseType.Hands_Hips);
+        poses.Add(PoseType.Knee_Down);
+        poses.Add(PoseType.Muscle_Up);
+        poses.Add(PoseType.Schwazeneger);
+        poses.Add(PoseType.Squat_Like);
+        poses.Add(PoseType.Tiger);
+        poses.Add(PoseType.Vogue);
+
+        return poses[Random.Range(0, poses.Count)];
     }
 }

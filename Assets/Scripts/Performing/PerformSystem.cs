@@ -27,7 +27,6 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
     {
         instance = this;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TempoEnded, NextMove);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.WaitingForSequenceInput, StartPerforming);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartPerformingSystem);
     }
 
@@ -53,11 +52,15 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
     {
         currentMove = 0;
         SoundManager.Instance.StartTrack();
+        PosePerformer.Instance.HitPose(PoseType.Idle);
         StartCoroutine(TinyWait());
     }
 
     private void NextMove()
     {
+        if (performState == PerformState.PickingSequence)
+            return;
+
         if (!SongSequence.Instance.Slots[currentMove].performed)
         {
             SongSequence.Instance.Slots[currentMove].performed = true;
@@ -72,7 +75,7 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
         {
             count--;
             performState = PerformState.PickingSequence;
-            TempoCounter.Instance.StopTempoCount();
+            //TempoCounter.Instance.StopTempoCount();
         }
         else
         {

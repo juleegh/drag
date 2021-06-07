@@ -85,7 +85,7 @@ public class Embelisher : MonoBehaviour
 
     private void CreateObjectToHit(GameObject decoration, RaycastHit hit)
     {
-        decoration.transform.position = hit.point + hit.normal * 0.04f;
+        decoration.transform.position = hit.point + hit.normal * 0.01f;
         decoration.transform.rotation = Quaternion.LookRotation(hit.normal);
         decoration.transform.Rotate(Vector3.forward * CurrentRotation, Space.Self);
         if (mirrored)

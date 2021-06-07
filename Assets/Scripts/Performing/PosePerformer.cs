@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PosePerformer : MonoBehaviour
 {
     private static PosePerformer instance;
     public static PosePerformer Instance { get { return instance; } }
 
-    [SerializeField] private Animator animator;
-    [SerializeField] private BodyPoseSettings settings;
+    [SerializeField] private Animator bodyAnimator;
 
     private List<Transform> bones;
 
@@ -31,9 +31,41 @@ public class PosePerformer : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+            HitPose(RandomPose());
+    }
+
+    private PoseType RandomPose()
+    {
+        List<PoseType> poses = new List<PoseType>();
+        poses.Add(PoseType.Cobra);
+        poses.Add(PoseType.Egiptian);
+        poses.Add(PoseType.Face_Cover);
+        poses.Add(PoseType.Hand_Up);
+        poses.Add(PoseType.Hands_Hips);
+        poses.Add(PoseType.Knee_Down);
+        poses.Add(PoseType.Muscle_Up);
+        poses.Add(PoseType.Schwazeneger);
+        poses.Add(PoseType.Squat_Like);
+        poses.Add(PoseType.Tiger);
+        poses.Add(PoseType.Vogue);
+
+        return poses[Random.Range(0, poses.Count)];
+    }
+
     public void HitPose(PoseType poseType)
     {
-        animator.Play(settings.Poses[poseType]);
+        bodyAnimator.Rebind();
+        bodyAnimator.Play(poseType.ToString());
+
+        CameraPosing.Instance.HitPose(poseType);
     }
 
     public Transform GetClosestBone(Vector3 pos)
