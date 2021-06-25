@@ -1,0 +1,20 @@
+public enum DecorationType
+{
+    Feather,
+    FeatherLong,
+    Daisy,
+    Flower,
+    Heart,
+    Hibiscus,
+    LeafShort,
+    LeafLong,
+    Lotus,
+    Rombus,
+    Rose,
+    Sprinkles,
+    Star,
+    Stud,
+    Teardrop,
+    Thunder,
+    Triangles,
+}

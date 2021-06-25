@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Decoration
 {
-    private string decoName;
-    private string codeName;
+    private DecorationType decoType;
     private int quantity;
     private int price;
     private Sprite sprite;
-    public string DecoName { get { return decoName; } }
     public int Price { get { return price; } }
     public int Quantity { get { return quantity; } }
-    public string CodeName { get { return codeName; } }
+    public string CodeName { get { return decoType.ToString(); } }
     public Sprite Sprite { get { return sprite; } }
+    public DecorationType DecoType { get { return decoType; } }
 
-    public Decoration(DecorationSetting deco, string codeN, int q)
+    public Decoration(DecorationSetting deco, int q)
     {
-        decoName = deco.DecoName;
-        codeName = codeN;
+        decoType = deco.DecoType;
         quantity = q;
         price = deco.Price;
         sprite = deco.Sprite;

@@ -19,6 +19,6 @@ public class EmbelishmentButton : MonoBehaviour
 
     private void DecorationSelected()
     {
-        Inventory.Instance.ChangeSelected(decoration.CodeName);
+        Inventory.Instance.ChangeSelected(decoration.DecoType);
     }
 }

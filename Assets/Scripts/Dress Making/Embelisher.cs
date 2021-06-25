@@ -77,7 +77,7 @@ public class Embelisher : MonoBehaviour
             {
                 preview.gameObject.SetActive(true);
                 CreateObjectToHit(preview, hit);
-                preview.GetComponent<GarmentDecoration>().LoadInfo(Inventory.Instance.CurrentSelected.DecoName, Inventory.Instance.CurrentSelected.Sprite);
+                preview.GetComponent<GarmentDecoration>().LoadInfo(Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
             }
         }
 

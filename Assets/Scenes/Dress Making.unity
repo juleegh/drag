@@ -3024,6 +3024,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ed234925169cbd0438ffbe7cf28ef2e8, type: 3}
   m_PrefabInstance: {fileID: 2001070113}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &442290177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442290172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2b794e3f8f0d84da83e56fab33b37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &445850287
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,7 +4684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000055053144}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &644891180
@@ -4684,21 +4696,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 644891178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 140, y: 140}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 1
-  m_ConstraintCount: 2
+  m_HorizontalFit: 1
+  m_VerticalFit: 1
 --- !u!1 &678307090
 GameObject:
   m_ObjectHideFlags: 0
@@ -5420,21 +5422,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 822289432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 140, y: 140}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 1
-  m_ConstraintCount: 2
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &906577710
 GameObject:
   m_ObjectHideFlags: 0
@@ -7279,6 +7271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1072340747}
   - component: {fileID: 1072340748}
+  - component: {fileID: 1072340749}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -7314,6 +7307,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1072340746}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &1072340749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072340746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -7325,9 +7332,9 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 140, y: 140}
+  m_CellSize: {x: 100, y: 100}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 1
+  m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1092636421
 GameObject:
@@ -9754,7 +9761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32eb8f85590a232458ed6a2045a62b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  garment: {fileID: 0}
+  garment: {fileID: 442290177}
 --- !u!4 &1555657919
 Transform:
   m_ObjectHideFlags: 0
@@ -11489,21 +11496,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1856453727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 140, y: 140}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 1
-  m_ConstraintCount: 2
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &1857702667
 GameObject:
   m_ObjectHideFlags: 0

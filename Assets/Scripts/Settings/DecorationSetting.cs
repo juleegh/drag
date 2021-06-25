@@ -5,11 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Decoration Settings")]
 public class DecorationSetting : ScriptableObject
 {
-    [SerializeField] private string decoName;
     [SerializeField] private int price;
     [SerializeField] private Sprite sprite;
+    [SerializeField] private DecorationType decorationType;
 
-    public string DecoName { get { return decoName; } }
+    public string CodeName { get { return decorationType.ToString(); } }
     public int Price { get { return price; } }
     public Sprite Sprite { get { return sprite; } }
+    public DecorationType DecoType { get { return decorationType; } }
 }

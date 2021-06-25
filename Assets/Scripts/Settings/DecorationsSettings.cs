@@ -8,7 +8,7 @@ using RotaryHeart.Lib.SerializableDictionary;
 public class DecorationsSettings : ScriptableObject
 {
     [Serializable]
-    public class DecorationsDictionary : SerializableDictionaryBase<string, DecorationSetting> { }
+    public class DecorationsDictionary : SerializableDictionaryBase<DecorationType, DecorationSetting> { }
 
     [SerializeField] private DecorationsDictionary decorations;
     public DecorationsDictionary Decorations { get { return decorations; } }
