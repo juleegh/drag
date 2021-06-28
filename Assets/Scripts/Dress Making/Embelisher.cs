@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Embelisher : MonoBehaviour
+public class Embelisher : ColorPicking
 {
     private static Embelisher instance;
     public static Embelisher Instance { get { return instance; } }
 
-    public Color CurrentColor;
     private Vector3 CurrentScale;
     private float CurrentRotation;
     private bool mirrored = false;
@@ -91,6 +90,16 @@ public class Embelisher : MonoBehaviour
         if (mirrored)
             decoration.transform.Rotate(Vector3.up * 180, Space.Self);
         decoration.transform.localScale = CurrentScale;
-        decoration.GetComponent<GarmentDecoration>().SetColor(CurrentColor);
+        decoration.GetComponent<GarmentDecoration>().SetColor(currentColor);
+    }
+
+    public void SetCurrentColor(Color color)
+    {
+        currentColor = color;
+    }
+
+    public Color GetCurrentColor()
+    {
+        return currentColor;
     }
 }

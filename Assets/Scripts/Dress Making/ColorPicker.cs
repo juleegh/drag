@@ -9,12 +9,13 @@ public class ColorPicker : MonoBehaviour
     [SerializeField] private Slider hue;
     [SerializeField] private Slider saturation;
     [SerializeField] private Slider value;
+    [SerializeField] private ColorPicking colorPicking;
 
     // Update is called once per frame
     void Update()
     {
         Color currentColor = Color.HSVToRGB(hue.value, saturation.value, value.value);
         colorView.color = currentColor;
-        Embelisher.Instance.CurrentColor = currentColor;
+        if (colorPicking != null) colorPicking.SetCurrentColor(currentColor);
     }
 }
