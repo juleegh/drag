@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: assymetric_bob
   m_EditorClassIdentifier: 
   mesh: {fileID: 7263511702148181003, guid: 1f808e8b8845eb948a0f51948e3ad615, type: 3}
+  sprite: {fileID: -3448697811733506390, guid: dd053fac9736b54499e7e4d8d08b5594, type: 3}
   price: 0

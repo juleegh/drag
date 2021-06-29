@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ice_cream
   m_EditorClassIdentifier: 
   mesh: {fileID: 4185667621936952069, guid: ee8d5042dd6b25f4280bab1562f12296, type: 3}
+  sprite: {fileID: -5755410639089308127, guid: 74140b336721b584a8c63738d65082d0, type: 3}
   price: 0

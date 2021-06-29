@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: afro
   m_EditorClassIdentifier: 
   mesh: {fileID: 8904667554318410350, guid: 2edcd8b5a18969d4da126dda149a11ec, type: 3}
+  sprite: {fileID: 8306720759655096588, guid: 104564ecc0cbd6843b98c2de07924fba, type: 3}
   price: 0

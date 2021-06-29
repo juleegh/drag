@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: wavy_updo
   m_EditorClassIdentifier: 
   mesh: {fileID: -7556961886726395276, guid: 2c67143e5a9fba947bacba8d0c54f355, type: 3}
+  sprite: {fileID: -5107067503737238117, guid: 1876361de8781af4395bec8de82a2041, type: 3}
   price: 0

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: choipped_straight
   m_EditorClassIdentifier: 
   mesh: {fileID: 8284379792881697484, guid: 154f3324c41dde2418628754eda617e8, type: 3}
+  sprite: {fileID: 1624230936217238379, guid: 6f7c05116deb9c346b6f5710a62aaf48, type: 3}
   price: 0
