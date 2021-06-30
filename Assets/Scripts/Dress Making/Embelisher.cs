@@ -102,6 +102,9 @@ public class Embelisher : ColorPicking
         h = Mathf.Abs(h);
         s = Mathf.Abs(s);
         v = Mathf.Abs(v);
+        h = Mathf.Clamp(h, 0, 1);
+        s = Mathf.Clamp(s, 0, 1);
+        v = Mathf.Clamp(v, 0, 1);
         return Color.HSVToRGB(h, s, v);
     }
 
