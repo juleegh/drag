@@ -94,8 +94,15 @@ public class Embelisher : ColorPicking
 
     private Color GetTempColor()
     {
-        Color delta = Color.HSVToRGB(EmbelishingVariables.RandomColorVariation.x, EmbelishingVariables.RandomColorVariation.y, EmbelishingVariables.RandomColorVariation.z);
-        return currentColor + delta;
+        float h = 0; float s = 0; float v = 0;
+        Color.RGBToHSV(currentColor, out h, out s, out v);
+        h = (h + EmbelishingVariables.RandomColorVariation.x);
+        s = (s + EmbelishingVariables.RandomColorVariation.y);
+        v = (v + EmbelishingVariables.RandomColorVariation.z);
+        h = Mathf.Abs(h);
+        s = Mathf.Abs(s);
+        v = Mathf.Abs(v);
+        return Color.HSVToRGB(h, s, v);
     }
 
     private void CheckRandoms()
