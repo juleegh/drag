@@ -6,10 +6,7 @@ public class Embelisher : ColorPicking
 {
     private static Embelisher instance;
     public static Embelisher Instance { get { return instance; } }
-
-    private Vector3 CurrentScale;
-    private float CurrentRotation;
-    private bool mirrored = false;
+    public EmbelishingVariables EmbelishingVariables;
 
     private GameObject preview;
 
@@ -18,6 +15,7 @@ public class Embelisher : ColorPicking
         if (instance == null)
         {
             instance = this;
+            EmbelishingVariables = new EmbelishingVariables();
         }
         else
         {
@@ -29,7 +27,7 @@ public class Embelisher : ColorPicking
     void Start()
     {
         preview = Inventory.Instance.GetOneDecoration();
-        CurrentScale = Vector3.one;
+        EmbelishingVariables.CurrentScale = Vector3.one;
     }
 
     void Update()
@@ -43,30 +41,31 @@ public class Embelisher : ColorPicking
             {
                 GameObject decoration = Inventory.Instance.GetOneDecoration();
                 CreateObjectToHit(decoration, hit);
+                CheckRandoms();
                 decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
             }
         }
         else if (Input.GetKeyDown(KeyCode.Keypad4))
         {
-            CurrentRotation -= 2f;
+            EmbelishingVariables.CurrentRotation -= 2f;
         }
         else if (Input.GetKeyDown(KeyCode.Keypad6))
         {
-            CurrentRotation += 2f;
+            EmbelishingVariables.CurrentRotation += 2f;
         }
         else if (Input.GetKeyDown(KeyCode.Keypad8))
         {
-            if (CurrentScale.magnitude < 5)
-                CurrentScale *= 1.1f;
+            if (EmbelishingVariables.CurrentScale.magnitude < 5)
+                EmbelishingVariables.CurrentScale *= 1.1f;
         }
         else if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            if (CurrentScale.magnitude > 1.1f)
-                CurrentScale *= 0.9f;
+            if (EmbelishingVariables.CurrentScale.magnitude > 1.1f)
+                EmbelishingVariables.CurrentScale *= 0.9f;
         }
         else if (Input.GetKeyDown(KeyCode.Keypad5))
         {
-            mirrored = !mirrored;
+            EmbelishingVariables.mirrored = !EmbelishingVariables.mirrored;
         }
         else
         {
@@ -86,20 +85,27 @@ public class Embelisher : ColorPicking
     {
         decoration.transform.position = hit.point + hit.normal * 0.01f;
         decoration.transform.rotation = Quaternion.LookRotation(hit.normal);
-        decoration.transform.Rotate(Vector3.forward * CurrentRotation, Space.Self);
-        if (mirrored)
+        decoration.transform.Rotate(Vector3.forward * EmbelishingVariables.Rotation, Space.Self);
+        if (EmbelishingVariables.mirrored)
             decoration.transform.Rotate(Vector3.up * 180, Space.Self);
-        decoration.transform.localScale = CurrentScale;
-        decoration.GetComponent<GarmentDecoration>().SetColor(currentColor);
+        decoration.transform.localScale = EmbelishingVariables.Scale;
+        decoration.GetComponent<GarmentDecoration>().SetColor(GetTempColor());
     }
 
-    public void SetCurrentColor(Color color)
+    private Color GetTempColor()
     {
-        currentColor = color;
+        Color delta = Color.HSVToRGB(EmbelishingVariables.RandomColorVariation.x, EmbelishingVariables.RandomColorVariation.y, EmbelishingVariables.RandomColorVariation.z);
+        return currentColor + delta;
     }
 
-    public Color GetCurrentColor()
+    private void CheckRandoms()
     {
-        return currentColor;
+        EmbelishingVariables.RandomnizeValues();
+    }
+
+    public override void SetCurrentColor(Color color)
+    {
+        base.SetCurrentColor(color);
+        EmbelishingVariables.RandomnizeValues();
     }
 }
