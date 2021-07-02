@@ -1,0 +1,694 @@
+fileFormatVersion: 2
+guid: 0f1e2b889f643d34daaa940cbb3297bc
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4867463001956024935
+    second: makeup_sheet_0
+  - first:
+      213: -3917610862090426551
+    second: makeup_sheet_1
+  - first:
+      213: 1941401830025493211
+    second: makeup_sheet_2
+  - first:
+      213: -7258177834690688367
+    second: makeup_sheet_3
+  - first:
+      213: 5281594221757847476
+    second: makeup_sheet_4
+  - first:
+      213: 4866199356286479431
+    second: makeup_sheet_5
+  - first:
+      213: -9006715875053417501
+    second: makeup_sheet_6
+  - first:
+      213: 8677007710102737882
+    second: makeup_sheet_7
+  - first:
+      213: 336787255137550410
+    second: makeup_sheet_8
+  - first:
+      213: -3475464046961012967
+    second: makeup_sheet_9
+  - first:
+      213: -5554703646229947233
+    second: makeup_sheet_10
+  - first:
+      213: -133487049972237751
+    second: makeup_sheet_11
+  - first:
+      213: -1765293273487264538
+    second: makeup_sheet_12
+  - first:
+      213: -2301719780051684842
+    second: makeup_sheet_13
+  - first:
+      213: 8506246668001278983
+    second: makeup_sheet_14
+  - first:
+      213: 4360579573349465443
+    second: makeup_sheet_15
+  - first:
+      213: 4261148227608425539
+    second: makeup_sheet_16
+  - first:
+      213: 7127951905591189620
+    second: makeup_sheet_17
+  - first:
+      213: 1345032478471166194
+    second: makeup_sheet_18
+  - first:
+      213: -8298994786145938491
+    second: makeup_sheet_19
+  - first:
+      213: 1430895285063309895
+    second: makeup_sheet_20
+  - first:
+      213: 5261229101623312039
+    second: makeup_sheet_21
+  - first:
+      213: 8944767107612099491
+    second: makeup_sheet_22
+  - first:
+      213: -1241783304885785731
+    second: makeup_sheet_23
+  - first:
+      213: 287246060895977707
+    second: makeup_sheet_24
+  - first:
+      213: 7675387371106003334
+    second: makeup_sheet_25
+  - first:
+      213: 6926348041107796274
+    second: makeup_sheet_26
+  - first:
+      213: -4565571659854253233
+    second: makeup_sheet_27
+  - first:
+      213: -765399221096153323
+    second: makeup_sheet_28
+  - first:
+      213: -502696615611318372
+    second: makeup_sheet_29
+  - first:
+      213: -2305912964379344599
+    second: makeup_sheet_30
+  - first:
+      213: -1467871639209599535
+    second: makeup_sheet_31
+  - first:
+      213: -1863362184595211685
+    second: makeup_sheet_32
+  - first:
+      213: 982399681416238052
+    second: makeup_sheet_33
+  - first:
+      213: -6629743836625920409
+    second: makeup_sheet_34
+  - first:
+      213: -3593826526099172166
+    second: makeup_sheet_35
+  - first:
+      213: 782300696058531980
+    second: makeup_sheet_36
+  - first:
+      213: -4074826681082450372
+    second: makeup_sheet_37
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 80000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: makeup_sheet_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 528
+        width: 120
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: 5}
+        - {x: 9, y: 12}
+        - {x: -17, y: 12}
+        - {x: -19, y: 9}
+        - {x: -19, y: -8}
+        - {x: -16, y: -12}
+        - {x: -11, y: -12}
+        - {x: -6, y: -9}
+        - {x: 9, y: -12}
+        - {x: 19, y: -12}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76202f4bfc3bc8340800000000000000
+      internalID: 4867463001956024935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_2
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 539
+        width: 110
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bda76fcadae31fa10800000000000000
+      internalID: 1941401830025493211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 530
+        width: 47
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b7d1ab26fdfb4940800000000000000
+      internalID: 5281594221757847476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 473
+        width: 120
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ca0b54886388340800000000000000
+      internalID: 4866199356286479431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_7
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 476
+        width: 110
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad3dff12a8cea6870800000000000000
+      internalID: 8677007710102737882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_9
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 472
+        width: 31
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91f4f33fcdba4cfc0800000000000000
+      internalID: -3475464046961012967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_10
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 424
+        width: 120
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9c95edb67ab9e2b0800000000000000
+      internalID: -5554703646229947233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_12
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 419
+        width: 110
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e4b765ee1b6087e0800000000000000
+      internalID: -1765293273487264538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_14
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 413
+        width: 49
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70cf01ac6424c0670800000000000000
+      internalID: 8506246668001278983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 365
+        width: 120
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36db154c404e38c30800000000000000
+      internalID: 4360579573349465443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_17
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 343
+        width: 44
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 470e4dc1e729be260800000000000000
+      internalID: 7127951905591189620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_18
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 347
+        width: 110
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f813a2b9e38aa210800000000000000
+      internalID: 1345032478471166194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_20
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 313
+        width: 120
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74adaf83eaf8bd310800000000000000
+      internalID: 1430895285063309895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_22
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 290
+        width: 110
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a341dffa42322c70800000000000000
+      internalID: 8944767107612099491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_24
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 284
+        width: 48
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0c5de35c08cf300800000000000000
+      internalID: 287246060895977707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_25
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 267
+        width: 120
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 689ea48e524748a60800000000000000
+      internalID: 7675387371106003334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_27
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 204
+        width: 120
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f43fbc9c3c4d3a0c0800000000000000
+      internalID: -4565571659854253233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_29
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 218
+        width: 110
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9f32bc67101609f0800000000000000
+      internalID: -502696615611318372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_31
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 221
+        width: 47
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dd9a01758211abe0800000000000000
+      internalID: -1467871639209599535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_32
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 143
+        width: 120
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5a7e4337f10426e0800000000000000
+      internalID: -1863362184595211685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_34
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 77
+        width: 120
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e93124b1b6ef3a0800000000000000
+      internalID: -6629743836625920409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_sheet_36
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 18
+        width: 120
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c801c18965a4bda00800000000000000
+      internalID: 782300696058531980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
