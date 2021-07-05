@@ -1,0 +1,189 @@
+fileFormatVersion: 2
+guid: 700d39dbb167d7a42a14d24a0294adbc
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: -4830825099056879807
+    second: fem_jumpsuit.001|0TPose
+  - first:
+      74: -5586969216257874503
+    second: fem_jumpsuit.001|0TPose.001
+  - first:
+      74: 150620343233860196
+    second: fem_jumpsuit.001|0TPose.002
+  - first:
+      74: 5328439466038307776
+    second: fem_jumpsuit.001|0TPose.005
+  - first:
+      74: 5646622878741702591
+    second: fem_jumpsuit.001|0TPose.006
+  - first:
+      74: 1138329153395384546
+    second: fem_jumpsuit.001|0TPose.007
+  - first:
+      74: 7621088772935393284
+    second: fem_jumpsuit.001|0TPose.008
+  - first:
+      74: 3427886108555594176
+    second: fem_jumpsuit.001|0TPose.009
+  - first:
+      74: 4312832139076144974
+    second: fem_jumpsuit.001|0TPose.010
+  - first:
+      74: -8556695455687569023
+    second: fem_jumpsuit.001|0TPose.011
+  - first:
+      74: -8960974800097588235
+    second: fem_jumpsuit.001|0TPose.012
+  - first:
+      74: -4214980205337592497
+    second: fem_jumpsuit.001|0TPose.013
+  - first:
+      74: 1782232348270419866
+    second: fem_jumpsuit.001|0TPose.014
+  - first:
+      74: -2924157684320433726
+    second: fem_jumpsuit.001|Cobra
+  - first:
+      74: -1767325079897107172
+    second: fem_jumpsuit.001|Egiptian
+  - first:
+      74: 7077287324114511961
+    second: fem_jumpsuit.001|Face_Cover
+  - first:
+      74: 3319033859155227456
+    second: fem_jumpsuit.001|Hand_Up
+  - first:
+      74: -7275264470388149246
+    second: fem_jumpsuit.001|Hands_Hips
+  - first:
+      74: 475765578146636562
+    second: fem_jumpsuit.001|Hands_Hips.001
+  - first:
+      74: 6498315544454807979
+    second: fem_jumpsuit.001|Hands_Hips.002
+  - first:
+      74: -8486604811887504991
+    second: fem_jumpsuit.001|Idle
+  - first:
+      74: 6983972514574517312
+    second: fem_jumpsuit.001|Knee_Down
+  - first:
+      74: 3074707110213215324
+    second: fem_jumpsuit.001|Muscle_Up
+  - first:
+      74: 6433452608942353429
+    second: fem_jumpsuit.001|Schwazeneger
+  - first:
+      74: -5373551260296413390
+    second: fem_jumpsuit.001|Squat_Like
+  - first:
+      74: -5685958419264480706
+    second: fem_jumpsuit.001|Tiger
+  - first:
+      74: 9075566742976970992
+    second: fem_jumpsuit.001|Vogue
+  - first:
+      74: 2290748338377148752
+    second: fem_jumpsuit.001|Vogue.005
+  - first:
+      74: 2812806788196708355
+    second: fem_jumpsuit.001|Vogue.006
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
