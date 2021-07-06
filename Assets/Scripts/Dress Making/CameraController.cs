@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform mannequin;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] float minFov = 0.5f;
     [SerializeField] float maxFov = 2f;
@@ -13,10 +12,7 @@ public class CameraController : MonoBehaviour
     float maxUp = 1f;
     float upSensitivity = 0.3f;
     float moveSensitivity = 10f;
-
-    void Start()
-    {
-    }
+    private Transform mannequin { get { return GlobalPlayerManager.Instance.transform; } }
 
     void Update()
     {

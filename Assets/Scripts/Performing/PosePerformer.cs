@@ -35,11 +35,12 @@ public class PosePerformer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene(1);
+            GlobalPlayerManager.Instance.GoToPerforming();
         }
-
-        if (Input.GetKeyDown(KeyCode.H))
-            HitPose(RandomPose());
+        /*
+                if (Input.GetKeyDown(KeyCode.H))
+                    HitPose(RandomPose());
+                    */
     }
 
     private PoseType RandomPose()

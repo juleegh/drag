@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WigFitter : ColorPicking
+public class WigFitter : MonoBehaviour
 {
     public static WigFitter Instance { get { return instance; } }
     private static WigFitter instance;
@@ -45,9 +45,8 @@ public class WigFitter : ColorPicking
         //wigMesh.mesh = wigsConfig.Wigs[current].Mesh;
     }
 
-    public override void SetCurrentColor(Color color)
+    public void SetCurrentColor(Color color)
     {
-        base.SetCurrentColor(color);
         wigRenderer.material.color = color;
     }
 }
