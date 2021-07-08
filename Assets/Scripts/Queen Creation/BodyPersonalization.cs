@@ -10,6 +10,7 @@ public class BodyPersonalization : MonoBehaviour
     public static BodyPersonalization Instance { get { return instance; } }
 
     private SkinnedMeshRenderer bodyMesh { get { return GlobalPlayerManager.Instance.SkinnedMeshRenderer; } }
+    private MeshCollider colliderMesh { get { return GlobalPlayerManager.Instance.MeshCollider; } }
     [SerializeField] private Button readyButton;
     [SerializeField] private TMP_InputField nameField;
 
@@ -31,6 +32,7 @@ public class BodyPersonalization : MonoBehaviour
     {
         Mesh meshInstance = Instantiate(bodyType.Mesh);
         bodyMesh.sharedMesh = meshInstance;
+        colliderMesh.sharedMesh = meshInstance;
     }
 
     public void ChangeColor(SkinType skinType)

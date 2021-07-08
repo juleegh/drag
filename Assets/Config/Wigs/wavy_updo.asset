@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ed88e0c5ffcdf49a153de4ff9f6342, type: 3}
   m_Name: wavy_updo
   m_EditorClassIdentifier: 
-  mesh: {fileID: -7556961886726395276, guid: 2c67143e5a9fba947bacba8d0c54f355, type: 3}
+  mesh: {fileID: 5993218115837737598, guid: 6a87ad76f4d056649a724e6e4ecae93a, type: 3}
   sprite: {fileID: -5107067503737238117, guid: 1876361de8781af4395bec8de82a2041, type: 3}
   price: 0

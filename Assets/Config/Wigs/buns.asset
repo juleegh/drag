@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ed88e0c5ffcdf49a153de4ff9f6342, type: 3}
   m_Name: buns
   m_EditorClassIdentifier: 
-  mesh: {fileID: 759506092439493106, guid: 67103400cb152e140a6a6107435d6636, type: 3}
+  mesh: {fileID: 5993218115837737598, guid: d82a8359249255a45abbb45d353899bc, type: 3}
   sprite: {fileID: -8910211113748639563, guid: f5db0d4ff045db34db07a94a573b3968, type: 3}
   price: 0

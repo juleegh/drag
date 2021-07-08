@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ed88e0c5ffcdf49a153de4ff9f6342, type: 3}
   m_Name: ponytail
   m_EditorClassIdentifier: 
-  mesh: {fileID: 7066253115105230413, guid: d71869ed1f50d424c89357132b0c3e85, type: 3}
+  mesh: {fileID: 5993218115837737598, guid: 2a7efe12c498e75429180c7b6d075411, type: 3}
   sprite: {fileID: -507730805829082370, guid: bb63550388abeee4c930ae31051ad2d9, type: 3}
   price: 0

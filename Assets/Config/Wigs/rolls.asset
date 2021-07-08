@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ed88e0c5ffcdf49a153de4ff9f6342, type: 3}
   m_Name: rolls
   m_EditorClassIdentifier: 
-  mesh: {fileID: -3844017736015772692, guid: 83e663c936bcae743877fef9948fbde3, type: 3}
+  mesh: {fileID: 5993218115837737598, guid: 8c726d6828dc97248ac93a8e07e00178, type: 3}
   sprite: {fileID: 7121117149966164365, guid: 83464941f3d192c42b77cc51e079afc3, type: 3}
   price: 0

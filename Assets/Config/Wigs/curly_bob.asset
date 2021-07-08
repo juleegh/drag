@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ed88e0c5ffcdf49a153de4ff9f6342, type: 3}
   m_Name: curly_bob
   m_EditorClassIdentifier: 
-  mesh: {fileID: 9006991414639625610, guid: e5ada858e7a519c4ba3763db08ebfa92, type: 3}
+  mesh: {fileID: 5993218115837737598, guid: 429ddfdb55025c34b9d69b395aff6ca2, type: 3}
   sprite: {fileID: 216245563543248969, guid: 9aeec2fa35116fc43acf90edaef50120, type: 3}
   price: 0

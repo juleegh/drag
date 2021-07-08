@@ -14,6 +14,8 @@ public class WigFitter : MonoBehaviour
     public Dictionary<WigType, Wig> Wigs { get { return wigs; } }
 
     private WigType current;
+    private GameObject currentPrefab;
+    private Color currentColor;
 
     void Awake()
     {
@@ -40,13 +42,19 @@ public class WigFitter : MonoBehaviour
     public void ChangeSelected(WigType selected)
     {
         current = selected;
-        Mesh meshInstance = Instantiate(wigsConfig.Wigs[current].Mesh);
-        wigMesh.mesh = meshInstance;
-        //wigMesh.mesh = wigsConfig.Wigs[current].Mesh;
+        GameObject meshInstance = Instantiate(wigsConfig.Wigs[current].Mesh);
+        Destroy(currentPrefab);
+        meshInstance.transform.SetParent(this.transform);
+        meshInstance.transform.localPosition = Vector3.zero;
+        meshInstance.transform.localScale = Vector3.one;
+        meshInstance.transform.localRotation = Quaternion.identity;
+        currentPrefab = meshInstance;
+        currentPrefab.GetComponentInChildren<MeshRenderer>().material.color = currentColor;
     }
 
     public void SetCurrentColor(Color color)
     {
-        wigRenderer.material.color = color;
+        currentColor = color;
+        if (currentPrefab != null) currentPrefab.GetComponentInChildren<MeshRenderer>().material.color = color;
     }
 }

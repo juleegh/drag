@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ed88e0c5ffcdf49a153de4ff9f6342, type: 3}
   m_Name: afro
   m_EditorClassIdentifier: 
-  mesh: {fileID: 8904667554318410350, guid: 2edcd8b5a18969d4da126dda149a11ec, type: 3}
+  mesh: {fileID: 5993218115837737598, guid: 6239ee71f4b54a34fb4f5f4eb211bcf8, type: 3}
   sprite: {fileID: 8306720759655096588, guid: 104564ecc0cbd6843b98c2de07924fba, type: 3}
   price: 0
