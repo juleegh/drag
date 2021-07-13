@@ -24,6 +24,6 @@ public class AccesoryButton : MonoBehaviour
         if (decoration != null) Inventory.Instance.ChangeSelected(decoration.DecoType);
 
         Wig wig = accesory as Wig;
-        if (wig != null) WigFitter.Instance.ChangeSelected(wig.WigType);
+        if (wig != null) WigSelection.Instance.ChangeSelected(wig.WigType);
     }
 }

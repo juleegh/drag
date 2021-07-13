@@ -7,6 +7,6 @@ public class HairColorPicker : ColorPicking
     public override void SetCurrentColor(Color color)
     {
         base.SetCurrentColor(color);
-        WigFitter.Instance.SetCurrentColor(color);
+        if (WigFitter.Instance != null) WigFitter.Instance.SetCurrentColor(color);
     }
 }

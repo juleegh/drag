@@ -33,7 +33,7 @@ public class Garment : GameData
         {
             string code = reader.ReadString();
 
-            GameObject ornament = Instantiate(Inventory.Instance.GetPrefabByOrnamentType(code));
+            GameObject ornament = Inventory.Instance.GetEmbelishmentByOrnamentType(code);
             ornament.GetComponent<GarmentDecoration>().Load(reader);
             ornament.transform.SetParent(PosePerformer.Instance.GetClosestBone(ornament.transform.position));
 

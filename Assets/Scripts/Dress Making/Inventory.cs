@@ -2,24 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IRequiredComponent
 {
     public static Inventory Instance { get { return instance; } }
     private static Inventory instance;
     public Dictionary<DecorationType, Decoration> decorations;
     [SerializeField] private DecorationsSettings decorationsSettings;
-    [SerializeField] private GameObject decorationPrefab;
+    [SerializeField] private SimpleObjectPool decorationsPool;
     public DecorationSetting CurrentSelected { get { return decorationsSettings.Decorations[current]; } }
     private DecorationType current;
-    void Awake()
+
+    public void ConfigureRequiredComponent()
     {
-        if (instance == null)
-        {
-            instance = this;
-            LoadDecorations();
-        }
-        else
-            Destroy(this.gameObject);
+        instance = this;
+        LoadDecorations();
     }
 
     private void LoadDecorations()
@@ -43,14 +39,15 @@ public class Inventory : MonoBehaviour
 
     public GameObject GetOneDecoration()
     {
-        GameObject newDeco = Instantiate(decorationPrefab);
+        GameObject newDeco = decorationsPool.GetObject();
         newDeco.GetComponent<GarmentDecoration>().LoadInfo(current.ToString(), CurrentSelected.Sprite);
         return newDeco;
     }
 
-    public GameObject GetPrefabByOrnamentType(string code)
+    public GameObject GetEmbelishmentByOrnamentType(string code)
     {
         DecorationType decoType = (DecorationType)System.Enum.Parse(typeof(DecorationType), code);
+        GameObject decorationPrefab = decorationsPool.GetObject();
         decorationPrefab.GetComponent<GarmentDecoration>().SpriteRenderer.sprite = decorationsSettings.Decorations[decoType].Sprite;
         return decorationPrefab;
     }

@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     float maxUp = 1f;
     float upSensitivity = 0.3f;
     float moveSensitivity = 10f;
-    private Transform mannequin { get { return GlobalPlayerManager.Instance.transform; } }
+    private Transform mannequin { get { return GlobalPlayerManager.Instance != null ? GlobalPlayerManager.Instance.transform : null; } }
 
     void Update()
     {
@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
             MoveY();
         else if (Input.GetKey(KeyCode.C))
             RotateInX();
-        else
+        else if (Input.GetAxis("Mouse ScrollWheel") != 0)
             Zoom();
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MakeupManager : MonoBehaviour
+public class MakeupManager : MonoBehaviour, IRequiredComponent
 {
     private static MakeupManager instance;
     public static MakeupManager Instance { get { return instance; } }
@@ -11,10 +11,9 @@ public class MakeupManager : MonoBehaviour
     [SerializeField] private SpriteRenderer shadows;
     [SerializeField] private SpriteRenderer lips;
 
-    void Awake()
+    public void ConfigureRequiredComponent()
     {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
+        instance = this;
     }
 
     public void SelectedFeature(FaceFeature feature)

@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WigsUILoader : MonoBehaviour
+public class WigsUILoader : MonoBehaviour, IRequiredComponent
 {
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform container;
-    // Start is called before the first frame update
-    void Start()
+
+    public void ConfigureRequiredComponent()
     {
-        foreach (Wig Wig in WigFitter.Instance.Wigs.Values)
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadWigs);
+    }
+
+    private void LoadWigs()
+    {
+        foreach (Wig Wig in WigSelection.Instance.Wigs.Values)
         {
             AccesoryButton button = Instantiate(buttonPrefab).GetComponent<AccesoryButton>();
             button.Initialize(Wig);

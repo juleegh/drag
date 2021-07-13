@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class RequiredComponentsInstantiator : MonoBehaviour
+public class RequiredComponentsInstantiator<T> : MonoBehaviour
 {
-    private PerformingEventsManager eventsManager;
+    private EventsManager<T> eventsManager;
     private IEnumerable<IRequiredComponent> requiredComponents;
 
-    void Start()
+    void Awake()
     {
         requiredComponents = FindObjectsOfType<MonoBehaviour>().OfType<IRequiredComponent>();
-        eventsManager = new PerformingEventsManager();
+        eventsManager = new EventsManager<T>();
         foreach (IRequiredComponent comp in requiredComponents)
         {
             comp.ConfigureRequiredComponent();
         }
-        eventsManager.Notify(PerformingEvent.DependenciesLoaded);
+        eventsManager.Notify(default(T));
     }
 }

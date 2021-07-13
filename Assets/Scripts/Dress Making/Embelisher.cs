@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Embelisher : ColorPicking
+public class Embelisher : ColorPicking, IRequiredComponent
 {
     private static Embelisher instance;
     public static Embelisher Instance { get { return instance; } }
@@ -10,21 +10,15 @@ public class Embelisher : ColorPicking
 
     private GameObject preview;
 
-    void Awake()
+    public void ConfigureRequiredComponent()
     {
-        if (instance == null)
-        {
-            instance = this;
-            EmbelishingVariables = new EmbelishingVariables();
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        instance = this;
+        EmbelishingVariables = new EmbelishingVariables();
 
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadPreview);
     }
 
-    void Start()
+    private void LoadPreview()
     {
         preview = Inventory.Instance.GetOneDecoration();
         EmbelishingVariables.CurrentScale = Vector3.one;
