@@ -7,16 +7,18 @@ using System;
 public class TabButton : MonoBehaviour
 {
     [SerializeField] private Button button;
-    private Action<TabButton> linkedAction;
+    private Action<OutfitStep> linkedAction;
+    OutfitStep step;
 
-    public void SetButtonClick(Action<TabButton> theAction)
+    public void SetButtonClick(Action<OutfitStep> theAction, OutfitStep outfitStep)
     {
+        step = outfitStep;
         linkedAction = theAction;
         button.onClick.AddListener(ButtonPressed);
     }
 
     private void ButtonPressed()
     {
-        linkedAction(this);
+        linkedAction(step);
     }
 }

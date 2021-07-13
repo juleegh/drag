@@ -26,6 +26,9 @@ public class Embelisher : ColorPicking, IRequiredComponent
 
     void Update()
     {
+        if (OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
+            return;
+
         preview.gameObject.SetActive(false);
         if (Input.GetMouseButtonDown(0))
         {

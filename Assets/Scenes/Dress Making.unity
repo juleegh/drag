@@ -9019,7 +9019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f55ddd43c7677d4dbeeb0ef11f55116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
+  sections:
     reorderableList:
       canAdd: 1
       canRemove: 1
@@ -9040,23 +9040,15 @@ MonoBehaviour:
       elementNameProperty: 
       elementNameOverride: 
       elementIcon: {fileID: 0}
-    reqReferences: {fileID: 11400000, guid: 3d6785e46e940b843aa5fbe4ca729d60, type: 2}
+    reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues:
-    - {fileID: 441657589}
-    - {fileID: 1594126201}
-    - {fileID: 1281991745}
-    - {fileID: 1692602962}
-    _keys:
-    - {fileID: 441657589}
-    - {fileID: 1594126201}
-    - {fileID: 1281991745}
-    - {fileID: 1692602962}
+    _keyValues: 01000000000000000200000003000000
+    _keys: 01000000000000000200000003000000
     _values:
-    - {fileID: 4056335273361419146}
-    - {fileID: 591383406}
-    - {fileID: 468082218}
-    - {fileID: 1997027196}
+    - {fileID: 1594126201}
+    - {fileID: 441657589}
+    - {fileID: 1281991745}
+    - {fileID: 1692602962}
 --- !u!114 &1028118434
 MonoBehaviour:
   m_ObjectHideFlags: 0
