@@ -140,9 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db51f856d1fb30544924e9e7bc0c6831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wigMesh: {fileID: 7614671958228866163}
-  wigRenderer: {fileID: 8410823181812245781}
-  wigsConfig: {fileID: 11400000, guid: 54eecc51f18e4da42be5a90dfbf97345, type: 2}
 --- !u!1 &1028817120147019346
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,18 +318,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5677615302971514300, guid: ed234925169cbd0438ffbe7cf28ef2e8, type: 3}
---- !u!114 &1455588268969632668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015359216492718787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb2b794e3f8f0d84da83e56fab33b37d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1135112924345091129
 Animator:
   serializedVersion: 3
@@ -352,18 +337,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5298182107766313739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3400860942612840086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb2b794e3f8f0d84da83e56fab33b37d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8197694965356545767
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GarmentDecoration : GameData
@@ -15,44 +13,33 @@ public class GarmentDecoration : GameData
     public Vector3 Color { get { return color; } }
     public Vector3 Scale { get { return scale; } }
 
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    public SpriteRenderer SpriteRenderer { get { return spriteRenderer; } }
-
-    public void LoadInfo(string code, Sprite sprite)
+    public void LoadInfo(string code)
     {
         codeName = code;
-        spriteRenderer.sprite = sprite;
     }
 
-    public void SetColor(Color newColor)
+    public void SetPhysicalInfo(Vector3 pos, Vector3 col, Quaternion rot, Vector3 sca)
     {
-        spriteRenderer.color = newColor;
+        position = pos;
+        color = col;
+        rotation = rot;
+        scale = sca;
     }
 
     public override void Save(GameDataWriter writer)
     {
         writer.Write(codeName);
-        writer.Write(transform.position);
-        writer.Write(transform.rotation);
-        writer.Write(transform.lossyScale);
-        writer.Write(GetColorVector());
+        writer.Write(position);
+        writer.Write(rotation);
+        writer.Write(scale);
+        writer.Write(color);
     }
 
     public override void Load(GameDataReader reader)
     {
-        transform.position = reader.ReadVector3();
-        transform.rotation = reader.ReadQuaternion();
-        transform.localScale = reader.ReadVector3();
-        spriteRenderer.color = LoadColorVector(reader.ReadVector3());
-    }
-
-    private Color LoadColorVector(Vector3 vector)
-    {
-        return new Color(vector.x, vector.y, vector.z, 1f);
-    }
-
-    private Vector3 GetColorVector()
-    {
-        return new Vector3(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b);
+        position = reader.ReadVector3();
+        rotation = reader.ReadQuaternion();
+        scale = reader.ReadVector3();
+        color = reader.ReadVector3();
     }
 }

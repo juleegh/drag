@@ -40,7 +40,7 @@ public class Inventory : MonoBehaviour, IRequiredComponent
     public GameObject GetOneDecoration()
     {
         GameObject newDeco = decorationsPool.GetObject();
-        newDeco.GetComponent<GarmentDecoration>().LoadInfo(current.ToString(), CurrentSelected.Sprite);
+        newDeco.GetComponent<DecorationPhysicalProperties>().LoadInfo(current.ToString(), CurrentSelected.Sprite);
         return newDeco;
     }
 
@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour, IRequiredComponent
     {
         DecorationType decoType = (DecorationType)System.Enum.Parse(typeof(DecorationType), code);
         GameObject decorationPrefab = decorationsPool.GetObject();
-        decorationPrefab.GetComponent<GarmentDecoration>().SpriteRenderer.sprite = decorationsSettings.Decorations[decoType].Sprite;
+        decorationPrefab.GetComponent<DecorationPhysicalProperties>().SpriteRenderer.sprite = decorationsSettings.Decorations[decoType].Sprite;
         return decorationPrefab;
     }
 }

@@ -5,7 +5,7 @@ using System.IO;
 
 public class GameDataManager : MonoBehaviour
 {
-    [SerializeField] private Garment garment;
+    [SerializeField] private GameObject garmentHolder;
     GameDataWriter writer;
     GameDataReader reader;
 
@@ -29,6 +29,8 @@ public class GameDataManager : MonoBehaviour
     {
         BinaryWriter bWriter = new BinaryWriter(File.Open(savePath, FileMode.Create));
         writer = new GameDataWriter(bWriter);
+        Garment garment = new Garment();
+        garment.SetDecorations(GetDecorations());
         garment.Save(writer);
     }
 
@@ -36,6 +38,18 @@ public class GameDataManager : MonoBehaviour
     {
         BinaryReader bWriter = new BinaryReader(File.Open(savePath, FileMode.Open));
         reader = new GameDataReader(bWriter);
+        Garment garment = new Garment();
         garment.Load(reader);
+    }
+
+    private List<GarmentDecoration> GetDecorations()
+    {
+        List<GarmentDecoration> decos = new List<GarmentDecoration>();
+        GarmentDecoration[] decosInBody = garmentHolder.GetComponentsInChildren<GarmentDecoration>();
+        foreach (GarmentDecoration ornament in decosInBody)
+        {
+            decos.Add(ornament);
+        }
+        return decos;
     }
 }

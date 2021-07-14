@@ -5,20 +5,15 @@ using System.IO;
 
 public class Garment : GameData
 {
-    private List<GarmentDecoration> GetDecorations()
+    private List<GarmentDecoration> decorations;
+
+    public void SetDecorations(List<GarmentDecoration> decos)
     {
-        List<GarmentDecoration> decos = new List<GarmentDecoration>();
-        GarmentDecoration[] decosInBody = GameObject.FindObjectsOfType<GarmentDecoration>();
-        foreach (GarmentDecoration ornament in decosInBody)
-        {
-            decos.Add(ornament);
-        }
-        return decos;
+        decorations = decos;
     }
 
     public override void Save(GameDataWriter writer)
     {
-        List<GarmentDecoration> decorations = GetDecorations();
         writer.Write(decorations.Count);
         foreach (GarmentDecoration ornament in decorations)
         {
@@ -36,7 +31,6 @@ public class Garment : GameData
             GameObject ornament = Inventory.Instance.GetEmbelishmentByOrnamentType(code);
             ornament.GetComponent<GarmentDecoration>().Load(reader);
             ornament.transform.SetParent(PosePerformer.Instance.GetClosestBone(ornament.transform.position));
-
         }
     }
 }

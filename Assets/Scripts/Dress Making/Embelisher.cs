@@ -9,6 +9,8 @@ public class Embelisher : ColorPicking, IRequiredComponent
     public EmbelishingVariables EmbelishingVariables;
 
     private GameObject preview;
+    private DecorationPhysicalProperties currentlySelected;
+    private bool erasing;
 
     public void ConfigureRequiredComponent()
     {
@@ -30,17 +32,14 @@ public class Embelisher : ColorPicking, IRequiredComponent
             return;
 
         preview.gameObject.SetActive(false);
+        erasing = Input.GetKey(KeyCode.Tab);
+
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.layer == LayerMask.NameToLayer("Manniquin"))
-            {
-                GameObject decoration = Inventory.Instance.GetOneDecoration();
-                CreateObjectToHit(decoration, hit);
-                CheckRandoms();
-                decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
-            }
+            if (erasing)
+                CheckForErasing();
+            else
+                CheckForPlacement();
         }
         else if (Input.GetKeyDown(KeyCode.Keypad4))
         {
@@ -66,16 +65,23 @@ public class Embelisher : ColorPicking, IRequiredComponent
         }
         else
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.layer == LayerMask.NameToLayer("Manniquin"))
-            {
-                preview.gameObject.SetActive(true);
-                CreateObjectToHit(preview, hit);
-                preview.GetComponent<GarmentDecoration>().LoadInfo(Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
-            }
+            ChangeCurrentlySelected(null);
+            if (erasing)
+                PreviewForErasing();
+            else
+                PreviewForPlacement();
         }
+    }
 
+    private void ChangeCurrentlySelected(DecorationPhysicalProperties next)
+    {
+        if (currentlySelected == next)
+            return;
+        if (currentlySelected != null)
+            currentlySelected.PreviewColor(false);
+        currentlySelected = next;
+        if (currentlySelected != null)
+            currentlySelected.PreviewColor(true);
     }
 
     private void CreateObjectToHit(GameObject decoration, RaycastHit hit)
@@ -86,33 +92,63 @@ public class Embelisher : ColorPicking, IRequiredComponent
         if (EmbelishingVariables.mirrored)
             decoration.transform.Rotate(Vector3.up * 180, Space.Self);
         decoration.transform.localScale = EmbelishingVariables.Scale;
-        decoration.GetComponent<GarmentDecoration>().SetColor(GetTempColor());
-    }
-
-    private Color GetTempColor()
-    {
-        float h = 0; float s = 0; float v = 0;
-        Color.RGBToHSV(currentColor, out h, out s, out v);
-        h = (h + EmbelishingVariables.RandomColorVariation.x);
-        s = (s + EmbelishingVariables.RandomColorVariation.y);
-        v = (v + EmbelishingVariables.RandomColorVariation.z);
-        h = Mathf.Abs(h);
-        s = Mathf.Abs(s);
-        v = Mathf.Abs(v);
-        h = Mathf.Clamp(h, 0, 1);
-        s = Mathf.Clamp(s, 0, 1);
-        v = Mathf.Clamp(v, 0, 1);
-        return Color.HSVToRGB(h, s, v);
-    }
-
-    private void CheckRandoms()
-    {
-        EmbelishingVariables.RandomnizeValues();
+        decoration.GetComponent<DecorationPhysicalProperties>().SetColor(EmbelishingVariables.GetTempColor(currentColor));
+        decoration.GetComponent<DecorationPhysicalProperties>().LoadInfo(Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
     }
 
     public override void SetCurrentColor(Color color)
     {
         base.SetCurrentColor(color);
         EmbelishingVariables.RandomnizeValues();
+    }
+
+    private void CheckForPlacement()
+    {
+        ChangeCurrentlySelected(preview.GetComponent<DecorationPhysicalProperties>());
+        int layer_mask = LayerMask.GetMask("Manniquin");
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, layer_mask))
+        {
+            GameObject decoration = Inventory.Instance.GetOneDecoration();
+            CreateObjectToHit(decoration, hit);
+            EmbelishingVariables.RandomnizeValues();
+            decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
+        }
+    }
+
+    private void CheckForErasing()
+    {
+        int layer_mask = LayerMask.GetMask("Decoration");
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, layer_mask))
+        {
+            Destroy(hit.transform.gameObject);
+        }
+    }
+
+    private void PreviewForPlacement()
+    {
+        RaycastHit hit;
+        int layer_mask = LayerMask.GetMask("Manniquin");
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, layer_mask))
+        {
+            preview.gameObject.SetActive(true);
+            CreateObjectToHit(preview, hit);
+            ChangeCurrentlySelected(preview.GetComponent<DecorationPhysicalProperties>());
+        }
+    }
+
+    private void PreviewForErasing()
+    {
+        RaycastHit hit;
+        int layer_mask = LayerMask.GetMask("Decoration");
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, layer_mask))
+        {
+            ChangeCurrentlySelected(hit.transform.GetComponent<DecorationPhysicalProperties>());
+        }
     }
 }
