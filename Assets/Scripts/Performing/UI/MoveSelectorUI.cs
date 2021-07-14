@@ -60,16 +60,6 @@ public class MoveSelectorUI : MonoBehaviour, IRequiredComponent
         }
     }
 
-    /*
-        private void Update()
-        {
-            // && !PerformSystem.Instance.CurrentSlot.performed
-            if (PerformSystem.Instance.PerformState == PerformState.Executing)
-            {
-                moves[PerformSystem.Instance.MovesProperties.MovesBefore].MarkProgress(TempoCounter.Instance.TempoPercentage);
-            }
-        }
-    */
     private void RefreshMoves()
     {
         int amountOfMoves = PerformSystem.Instance.MovesProperties.MovesAhead + PerformSystem.Instance.MovesProperties.MovesBefore + 1;

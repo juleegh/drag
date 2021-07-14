@@ -16,6 +16,9 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
+            return;
+
         if (Input.GetKey(KeyCode.X))
             MoveY();
         else if (Input.GetKey(KeyCode.C))
