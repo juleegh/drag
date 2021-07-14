@@ -66,7 +66,7 @@ public class PosePerformer : MonoBehaviour
         bodyAnimator.Rebind();
         bodyAnimator.Play(poseType.ToString());
 
-        CameraPosing.Instance.HitPose(poseType);
+        if (CameraPosing.Instance != null) CameraPosing.Instance.HitPose(poseType);
     }
 
     public Transform GetClosestBone(Vector3 pos)

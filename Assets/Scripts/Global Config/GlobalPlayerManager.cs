@@ -11,8 +11,10 @@ public class GlobalPlayerManager : MonoBehaviour
     public static GlobalPlayerManager Instance { get { return instance; } }
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private MeshCollider meshCollider;
+    [SerializeField] private Transform faceBone;
     public SkinnedMeshRenderer SkinnedMeshRenderer { get { return skinnedMeshRenderer; } }
     public MeshCollider MeshCollider { get { return meshCollider; } }
+    public Transform FaceBone { get { return faceBone; } }
 
     void Awake()
     {

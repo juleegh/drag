@@ -15,8 +15,14 @@ public class LightsSystem : MonoBehaviour, IRequiredComponent
     public void ConfigureRequiredComponent()
     {
         instance = this;
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, SetupFaceBone);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TempoEnded, MarkTempo);
-        faceBone = GameObject.Find("Head").transform;
+    }
+
+    private void SetupFaceBone()
+    {
+        if (GlobalPlayerManager.Instance != null)
+            faceBone = GlobalPlayerManager.Instance.FaceBone;
     }
 
     private void Update()

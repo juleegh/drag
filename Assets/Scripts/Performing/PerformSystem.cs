@@ -52,7 +52,7 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
     {
         currentMove = 0;
         SoundManager.Instance.StartTrack();
-        PosePerformer.Instance.HitPose(PoseType.Idle);
+        if (PosePerformer.Instance != null) PosePerformer.Instance.HitPose(PoseType.Idle);
         StartCoroutine(TinyWait());
     }
 
