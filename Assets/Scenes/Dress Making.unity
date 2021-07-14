@@ -182,7 +182,7 @@ MonoBehaviour:
     - {fileID: 1040047843}
     - {fileID: 1962802828}
     - {fileID: 1518892329}
-  cameraTransform: {fileID: 2093572121}
+  cameraObject: {fileID: 2093572120}
   movementDelay: 1
 --- !u!4 &5053895
 Transform:
@@ -1814,7 +1814,7 @@ MonoBehaviour:
   hue: {fileID: 1857702669}
   saturation: {fileID: 254799688}
   value: {fileID: 1240276063}
-  colorPicking: {fileID: 0}
+  colorPicking: {fileID: 780480863}
 --- !u!114 &205630781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18341,7 +18341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093572119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}

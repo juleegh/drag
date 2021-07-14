@@ -11,8 +11,9 @@ public class StepCameraPosition : MonoBehaviour, IRequiredComponent
     public class StepPositions : SerializableDictionaryBase<OutfitStep, Transform> { }
 
     [SerializeField] private StepPositions positions;
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private CameraController cameraObject;
     [SerializeField] private float movementDelay;
+
 
     public void ConfigureRequiredComponent()
     {
@@ -21,7 +22,8 @@ public class StepCameraPosition : MonoBehaviour, IRequiredComponent
 
     private void MoveCameraToSection()
     {
-        cameraTransform.DOMove(positions[OutfitStepManager.Instance.CurrentOutfitStep].position, movementDelay).SetEase(Ease.OutExpo);
-        cameraTransform.DORotate(positions[OutfitStepManager.Instance.CurrentOutfitStep].eulerAngles, movementDelay).SetEase(Ease.OutExpo);
+        cameraObject.ClearValues();
+        cameraObject.transform.DOMove(positions[OutfitStepManager.Instance.CurrentOutfitStep].position, movementDelay).SetEase(Ease.OutExpo);
+        cameraObject.transform.DORotate(positions[OutfitStepManager.Instance.CurrentOutfitStep].eulerAngles, movementDelay).SetEase(Ease.OutExpo);
     }
 }

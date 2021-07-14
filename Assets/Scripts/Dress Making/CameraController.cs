@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IRequiredComponent
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] float minFov = 0.5f;
@@ -13,6 +13,15 @@ public class CameraController : MonoBehaviour
     float upSensitivity = 0.3f;
     float moveSensitivity = 10f;
     private Transform mannequin { get { return GlobalPlayerManager.Instance != null ? GlobalPlayerManager.Instance.transform : null; } }
+
+    private Vector3 basePosition;
+    private Vector3 baseRotation;
+
+    public void ConfigureRequiredComponent()
+    {
+        basePosition = cameraTransform.localPosition;
+        baseRotation = cameraTransform.localEulerAngles;
+    }
 
     void Update()
     {
@@ -25,6 +34,12 @@ public class CameraController : MonoBehaviour
             RotateInX();
         else if (Input.GetAxis("Mouse ScrollWheel") != 0)
             Zoom();
+    }
+
+    public void ClearValues()
+    {
+        cameraTransform.localPosition = basePosition;
+        cameraTransform.localEulerAngles = baseRotation;
     }
 
     private void Zoom()
