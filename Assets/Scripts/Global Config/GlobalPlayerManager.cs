@@ -43,7 +43,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
             SceneManager.LoadScene((int)GameFunctions.Queen_Creation);
         }
         else
-            SceneManager.LoadScene((int)GameFunctions.Dress_Making);
+            SceneManager.LoadScene((int)GameFunctions.Lobby);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

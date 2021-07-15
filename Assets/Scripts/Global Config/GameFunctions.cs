@@ -6,6 +6,7 @@ public enum GameFunctions
 {
     Entry = 0,
     Queen_Creation = 1,
-    Dress_Making = 2,
-    Performing = 3,
+    Lobby = 2,
+    Dress_Making = 3,
+    Performing = 4,
 }

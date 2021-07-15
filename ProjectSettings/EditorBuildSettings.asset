@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Queen Creation.unity
     guid: 024e99962c59804428944714345a99a6
   - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: b033d2fd2fa736241aa29bf1eefc9582
+  - enabled: 1
     path: Assets/Scenes/Dress Making.unity
     guid: ae03993d705eb8f4eaa9a90243541b35
   - enabled: 1
