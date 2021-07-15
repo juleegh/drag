@@ -6,13 +6,16 @@ using System.Linq;
 public class RequiredComponentsInstantiator<T> : MonoBehaviour
 {
     private EventsManager<T> eventsManager;
-    private IEnumerable<IRequiredComponent> requiredComponents;
+    private IEnumerable<RequiredComponent> requiredComponents;
 
     void Awake()
     {
-        requiredComponents = FindObjectsOfType<MonoBehaviour>().OfType<IRequiredComponent>();
+        if (GlobalPlayerManager.Instance == null)
+            return;
+
+        requiredComponents = FindObjectsOfType<MonoBehaviour>().OfType<RequiredComponent>();
         eventsManager = new EventsManager<T>();
-        foreach (IRequiredComponent comp in requiredComponents)
+        foreach (RequiredComponent comp in requiredComponents)
         {
             comp.ConfigureRequiredComponent();
         }

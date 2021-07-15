@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightsSystem : MonoBehaviour, IRequiredComponent
+public class LightsSystem : MonoBehaviour, RequiredComponent
 {
     private static LightsSystem instance;
     public static LightsSystem Instance { get { return instance; } }
@@ -21,8 +21,7 @@ public class LightsSystem : MonoBehaviour, IRequiredComponent
 
     private void SetupFaceBone()
     {
-        if (GlobalPlayerManager.Instance != null)
-            faceBone = GlobalPlayerManager.Instance.FaceBone;
+        faceBone = GlobalPlayerManager.Instance.FaceBone;
     }
 
     private void Update()

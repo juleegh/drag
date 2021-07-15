@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class GameDataManager : MonoBehaviour, IRequiredComponent
+public class GameDataManager : MonoBehaviour, RequiredComponent
 {
     private GameObject garmentHolder;
     GameDataWriter writer;
@@ -20,7 +20,7 @@ public class GameDataManager : MonoBehaviour, IRequiredComponent
     {
         savePath = Application.persistentDataPath;
         savePath = Path.Combine(Application.persistentDataPath, "saveFile4");
-        if (GlobalPlayerManager.Instance != null) garmentHolder = GlobalPlayerManager.Instance.Body;
+        garmentHolder = GlobalPlayerManager.Instance.Body;
     }
 
     void Update()

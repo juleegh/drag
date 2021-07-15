@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WigSelection : MonoBehaviour, IRequiredComponent
+public class WigSelection : MonoBehaviour, RequiredComponent
 {
     public static WigSelection Instance { get { return instance; } }
     private static WigSelection instance;
@@ -24,6 +24,12 @@ public class WigSelection : MonoBehaviour, IRequiredComponent
         WigFitter.Instance.ChangeSelected(wigsConfig.Wigs[current]);
     }
 
+    public void ChangeSelected(string selected)
+    {
+        current = GetWigTypeFromName(selected);
+        WigFitter.Instance.ChangeSelected(wigsConfig.Wigs[current]);
+    }
+
     private void LoadWigs()
     {
         wigs = new Dictionary<WigType, Wig>();
@@ -33,5 +39,15 @@ public class WigSelection : MonoBehaviour, IRequiredComponent
             wigs.Add(wig.Key, nextWig);
             current = wig.Key;
         }
+    }
+
+    public WigType GetWigTypeFromName(string wigName)
+    {
+        foreach (KeyValuePair<WigType, Wig> wig in wigs)
+        {
+            if (wig.Value.CodeName.Equals(wigName))
+                return wig.Key;
+        }
+        return WigType.None;
     }
 }

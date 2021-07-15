@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour, IRequiredComponent
+public class Inventory : MonoBehaviour, RequiredComponent
 {
     public static Inventory Instance { get { return instance; } }
     private static Inventory instance;

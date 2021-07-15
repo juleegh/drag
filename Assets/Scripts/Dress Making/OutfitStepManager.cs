@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using RotaryHeart.Lib.SerializableDictionary;
 
-public class OutfitStepManager : MonoBehaviour, IRequiredComponent
+public class OutfitStepManager : MonoBehaviour, RequiredComponent
 {
     private static OutfitStepManager instance;
     public static OutfitStepManager Instance { get { return instance; } }

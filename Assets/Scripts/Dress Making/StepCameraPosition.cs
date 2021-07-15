@@ -5,7 +5,7 @@ using System;
 using RotaryHeart.Lib.SerializableDictionary;
 using DG.Tweening;
 
-public class StepCameraPosition : MonoBehaviour, IRequiredComponent
+public class StepCameraPosition : MonoBehaviour, RequiredComponent
 {
     [Serializable]
     public class StepPositions : SerializableDictionaryBase<OutfitStep, Transform> { }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour, IRequiredComponent
+public class CameraController : MonoBehaviour, RequiredComponent
 {
     [SerializeField] private Transform cameraTransform;
     [SerializeField] float minFov = 0.5f;
@@ -16,16 +16,18 @@ public class CameraController : MonoBehaviour, IRequiredComponent
 
     private Vector3 basePosition;
     private Vector3 baseRotation;
+    bool ready = false;
 
     public void ConfigureRequiredComponent()
     {
         basePosition = cameraTransform.localPosition;
         baseRotation = cameraTransform.localEulerAngles;
+        ready = true;
     }
 
     void Update()
     {
-        if (OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
+        if (!ready || OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
             return;
 
         if (Input.GetKey(KeyCode.X))

@@ -19,6 +19,8 @@ public class Garment : GameData
         {
             ornament.Save(writer);
         }
+        writer.Write(WigFitter.Instance.CurrentWig);
+        writer.Write(ColorConversion.VectorFromColor(WigFitter.Instance.CurrentColor));
     }
 
     public override void Load(GameDataReader reader)
@@ -32,5 +34,9 @@ public class Garment : GameData
             ornament.GetComponent<Decoration>().LoadFromFile(reader);
             ornament.transform.SetParent(PosePerformer.Instance.GetClosestBone(ornament.transform.position));
         }
+        string wig = reader.ReadString();
+        WigSelection.Instance.ChangeSelected(wig);
+        Color color = ColorConversion.ColorFromVector(reader.ReadVector3());
+        WigFitter.Instance.SetCurrentColor(color);
     }
 }

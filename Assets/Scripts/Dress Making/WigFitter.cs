@@ -9,6 +9,9 @@ public class WigFitter : MonoBehaviour
 
     private GameObject currentPrefab;
     private Color currentColor;
+    public Color CurrentColor { get { return currentColor; } }
+    public string CurrentWig { get { return current != null ? current.name : ""; } }
+    private WigConfig current;
 
     void Awake()
     {
@@ -18,8 +21,11 @@ public class WigFitter : MonoBehaviour
 
     public void ChangeSelected(WigConfig selected)
     {
-        GameObject meshInstance = Instantiate(selected.Mesh);
+        current = selected;
         Destroy(currentPrefab);
+        if (selected.Mesh == null)
+            return;
+        GameObject meshInstance = Instantiate(selected.Mesh);
         meshInstance.transform.SetParent(this.transform);
         meshInstance.transform.localPosition = Vector3.zero;
         meshInstance.transform.localScale = Vector3.one;

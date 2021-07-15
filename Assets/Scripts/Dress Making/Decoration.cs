@@ -19,9 +19,7 @@ public class Decoration : MonoBehaviour
 
     private void ConfigPhysicalInfo()
     {
-        //boxCollider.size = transform.lossyScale;
-        //Debug.LogError(transform.lossyScale);
-        data.SetPhysicalInfo(transform.position, VectorFromColor(spriteRenderer.color), transform.rotation, transform.localScale);
+        data.SetPhysicalInfo(transform.position, ColorConversion.VectorFromColor(spriteRenderer.color), transform.rotation, transform.localScale);
     }
 
     public void LoadFromFile(GameDataReader dataReader)
@@ -31,22 +29,12 @@ public class Decoration : MonoBehaviour
         transform.position = data.Position;
         transform.rotation = data.Rotation;
         transform.localScale = data.Scale;
-        spriteRenderer.color = ColorFromVector(data.Color);
+        spriteRenderer.color = ColorConversion.ColorFromVector(data.Color);
     }
 
     public void Save(GameDataWriter dataWriter)
     {
         data.Save(dataWriter);
-    }
-
-    private Vector3 VectorFromColor(Color color)
-    {
-        return new Vector3(color.r, color.g, color.b);
-    }
-
-    private Color ColorFromVector(Vector3 color)
-    {
-        return new Color(color.x, color.y, color.z, 1);
     }
 
     public void PreviewColor(bool isPreview)

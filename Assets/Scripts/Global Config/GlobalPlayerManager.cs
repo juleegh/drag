@@ -5,7 +5,7 @@ using RotaryHeart.Lib.SerializableDictionary;
 using System;
 using UnityEngine.SceneManagement;
 
-public class GlobalPlayerManager : MonoBehaviour
+public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
 {
     private static GlobalPlayerManager instance;
     public static GlobalPlayerManager Instance { get { return instance; } }
@@ -18,7 +18,7 @@ public class GlobalPlayerManager : MonoBehaviour
     public GameObject Body { get { return body; } }
     public Transform FaceBone { get { return faceBone; } }
 
-    void Awake()
+    public void ConfigureRequiredComponent()
     {
         if (instance == null)
         {
@@ -28,10 +28,13 @@ public class GlobalPlayerManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        GameEventsManager.Instance.AddActionToEvent(GameEvent.DependenciesLoaded, CheckEntry);
     }
 
-    void Start()
+    void CheckEntry()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SongSequence : MonoBehaviour, IRequiredComponent
+public class SongSequence : MonoBehaviour, RequiredComponent
 {
     public static SongSequence Instance { get { return instance; } }
     private static SongSequence instance;

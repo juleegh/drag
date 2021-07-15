@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour, IRequiredComponent
+public class SoundManager : MonoBehaviour, RequiredComponent
 {
     public static SoundManager Instance { get { return instance; } }
     private static SoundManager instance;

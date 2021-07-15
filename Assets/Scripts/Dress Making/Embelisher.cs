@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Embelisher : ColorPicking, IRequiredComponent
+public class Embelisher : ColorPicking, RequiredComponent
 {
     private static Embelisher instance;
     public static Embelisher Instance { get { return instance; } }
@@ -28,7 +28,7 @@ public class Embelisher : ColorPicking, IRequiredComponent
 
     void Update()
     {
-        if (OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
+        if (instance == null || OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
             return;
 
         preview.gameObject.SetActive(false);
@@ -99,7 +99,7 @@ public class Embelisher : ColorPicking, IRequiredComponent
     public override void SetCurrentColor(Color color)
     {
         base.SetCurrentColor(color);
-        EmbelishingVariables.RandomnizeValues();
+        if (EmbelishingVariables != null) EmbelishingVariables.RandomnizeValues();
     }
 
     private void CheckForPlacement()

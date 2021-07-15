@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempoCounter : MonoBehaviour, IRequiredComponent
+public class TempoCounter : MonoBehaviour, RequiredComponent
 {
     public static TempoCounter Instance { get { return instance; } }
     private static TempoCounter instance;

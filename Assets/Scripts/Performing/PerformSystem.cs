@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PerformSystem : MonoBehaviour, IRequiredComponent
+public class PerformSystem : MonoBehaviour, RequiredComponent
 {
     public static PerformSystem Instance { get { return instance; } }
     private static PerformSystem instance;
@@ -52,7 +52,7 @@ public class PerformSystem : MonoBehaviour, IRequiredComponent
     {
         currentMove = 0;
         SoundManager.Instance.StartTrack();
-        if (PosePerformer.Instance != null) PosePerformer.Instance.HitPose(PoseType.Idle);
+        PosePerformer.Instance.HitPose(PoseType.Idle);
         StartCoroutine(TinyWait());
     }
 

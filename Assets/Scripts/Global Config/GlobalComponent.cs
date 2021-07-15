@@ -1,4 +1,4 @@
-public interface RequiredComponent
+public interface GlobalComponent
 {
     void ConfigureRequiredComponent();
 }

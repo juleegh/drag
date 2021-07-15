@@ -2,12 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecorationUILoader : MonoBehaviour
+public class DecorationUILoader : MonoBehaviour, RequiredComponent
 {
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform container;
-    // Start is called before the first frame update
-    void Start()
+    private bool loaded;
+
+    public void ConfigureRequiredComponent()
+    {
+        loaded = false;
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.OutfitStepChanged, CheckDecorations);
+    }
+
+    private void CheckDecorations()
+    {
+        if (OutfitStepManager.Instance.CurrentOutfitStep == OutfitStep.Outfit)
+        {
+            if (!loaded)
+                LoadDecorations();
+        }
+    }
+
+    private void LoadDecorations()
     {
         foreach (DecorationInfo Decoration in Inventory.Instance.decorations.Values)
         {
@@ -15,5 +31,6 @@ public class DecorationUILoader : MonoBehaviour
             button.Initialize(Decoration);
             button.transform.SetParent(container);
         }
+        loaded = true;
     }
 }

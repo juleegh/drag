@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WigsUILoader : MonoBehaviour, IRequiredComponent
+public class WigsUILoader : MonoBehaviour, RequiredComponent
 {
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform container;

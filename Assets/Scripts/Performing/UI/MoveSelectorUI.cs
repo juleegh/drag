@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class MoveSelectorUI : MonoBehaviour, IRequiredComponent
+public class MoveSelectorUI : MonoBehaviour, RequiredComponent
 {
     [SerializeField] private SimpleObjectPool pool;
     [SerializeField] private Transform container;

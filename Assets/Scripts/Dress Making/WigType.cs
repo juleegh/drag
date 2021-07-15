@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum WigType
 {
+    None,
     Afro,
     Assymetric_Bob,
     Buns,

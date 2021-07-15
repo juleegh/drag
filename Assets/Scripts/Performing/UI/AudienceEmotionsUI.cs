@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 
-public class AudienceEmotionsUI : MonoBehaviour, IRequiredComponent
+public class AudienceEmotionsUI : MonoBehaviour, RequiredComponent
 {
     [Serializable]
     public class AudienceBarsDictionary : SerializableDictionaryBase<MoveType, EmotionBar> { }
