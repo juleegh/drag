@@ -19,8 +19,15 @@ public class Garment : GameData
         {
             ornament.Save(writer);
         }
+
         writer.Write(WigFitter.Instance.CurrentWig);
         writer.Write(ColorConversion.VectorFromColor(WigFitter.Instance.CurrentColor));
+
+        foreach (FacePart facepart in MakeupSelection.Instance.FaceParts)
+        {
+            writer.Write(MakeupSelection.Instance.GetCurrent(facepart).name);
+            writer.Write(ColorConversion.VectorFromColor(MakeupSelection.Instance.GetCurrentColor(facepart)));
+        }
     }
 
     public override void Load(GameDataReader reader)
@@ -36,7 +43,15 @@ public class Garment : GameData
         }
         string wig = reader.ReadString();
         WigSelection.Instance.ChangeSelected(wig);
-        Color color = ColorConversion.ColorFromVector(reader.ReadVector3());
-        WigFitter.Instance.SetCurrentColor(color);
+        Color wigColor = ColorConversion.ColorFromVector(reader.ReadVector3());
+        WigFitter.Instance.SetCurrentColor(wigColor);
+
+        foreach (FacePart facepart in MakeupSelection.Instance.FaceParts)
+        {
+            string faceFeature = reader.ReadString();
+            MakeupSelection.Instance.SetMakeupPart(facepart, faceFeature);
+            Vector3 color = reader.ReadVector3();
+            MakeupSelection.Instance.SetMakeupColor(facepart, ColorConversion.ColorFromVector(color));
+        }
     }
 }

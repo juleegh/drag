@@ -5,13 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Face Feature")]
 public class FaceFeature : ScriptableObject
 {
-    public enum FacePart
-    {
-        Eyebrow,
-        Eyeshadow,
-        Lips
-    }
-
     [SerializeField] private FacePart facePart;
     [SerializeField] private Sprite sprite;
 

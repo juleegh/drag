@@ -7,7 +7,7 @@ TextureImporter:
     second: makeup_sheet_0
   - first:
       213: -3917610862090426551
-    second: makeup_sheet_1
+    second: makeup_empty
   - first:
       213: 1941401830025493211
     second: makeup_sheet_2
@@ -672,6 +672,27 @@ TextureImporter:
       bones: []
       spriteID: c801c18965a4bda00800000000000000
       internalID: 782300696058531980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_empty
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 130
+        width: 85
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94763e46da9d1a9c0800000000000000
+      internalID: -3917610862090426551
       vertices: []
       indices: 
       edges: []

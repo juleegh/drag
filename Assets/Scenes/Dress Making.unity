@@ -2488,6 +2488,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383055474}
   m_CullTransparentMesh: 1
+--- !u!1 &387846138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 387846140}
+  - component: {fileID: 387846139}
+  m_Layer: 0
+  m_Name: Makeup Selection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &387846139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387846138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020022f7c0cc6934bb2d1c24d824f729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  makeupConfigs:
+  - {fileID: 11400000, guid: 225a1ccb1230d694d8a6b0c568eb3962, type: 2}
+  - {fileID: 11400000, guid: d6122403b2453a74fbb7f0bafa2d91dd, type: 2}
+  - {fileID: 11400000, guid: 4c97335e716386f45879fd7b3057d9b3, type: 2}
+  - {fileID: 11400000, guid: 6fd6f19ed05871c4a82e5b14cae5016c, type: 2}
+  - {fileID: 11400000, guid: 66ef1ade80902f94881be8bd11940272, type: 2}
+  - {fileID: 11400000, guid: 87da369b145e12d42b63245cea52f168, type: 2}
+  - {fileID: 11400000, guid: 5d91321c68f2fe14fb227eda62191076, type: 2}
+  - {fileID: 11400000, guid: 3d2628afc7b583247974febabcb4fe7e, type: 2}
+  - {fileID: 11400000, guid: d621222e0d2535947b166e8481839db6, type: 2}
+  - {fileID: 11400000, guid: a00cced2588ccea4a8017497c84817ba, type: 2}
+  - {fileID: 11400000, guid: 1f3bc5862b2199946b22c5dbbe145407, type: 2}
+  - {fileID: 11400000, guid: ba8ae15b0f69adb42be7b55654f4eb9c, type: 2}
+  - {fileID: 11400000, guid: f4c6debadda0782499bc7982d7192788, type: 2}
+  - {fileID: 11400000, guid: 1a23d7e9a01c13447bae15d4fa61c5e7, type: 2}
+  - {fileID: 11400000, guid: 40171771bf28ed0488f7150545d9d6b3, type: 2}
+  - {fileID: 11400000, guid: 4d907478b8beff3439dea788fe179631, type: 2}
+  - {fileID: 11400000, guid: fdbcef65aa82bd542b5b6e1b80e2683a, type: 2}
+  - {fileID: 11400000, guid: 8e1e617ba5ce0fa4dad9682b8cc759ee, type: 2}
+  - {fileID: 11400000, guid: cc85913682d4fdd4f9c58c0632faba59, type: 2}
+  - {fileID: 11400000, guid: 0409b124eb4e5454f8c2d75a851ec92a, type: 2}
+  - {fileID: 11400000, guid: d29a39f33071c7346b6a2045b84c82a9, type: 2}
+--- !u!4 &387846140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387846138}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &412809473
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,7 +3172,6 @@ GameObject:
   - component: {fileID: 449938814}
   - component: {fileID: 449938813}
   - component: {fileID: 449938812}
-  - component: {fileID: 449938815}
   m_Layer: 5
   m_Name: Lips
   m_TagString: Untagged
@@ -3155,7 +3219,7 @@ MonoBehaviour:
   hue: {fileID: 1360270184}
   saturation: {fileID: 765252707}
   value: {fileID: 9443054}
-  colorPicking: {fileID: 449938815}
+  colorPicking: {fileID: 1108483297}
 --- !u!114 &449938813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3194,28 +3258,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449938810}
   m_CullTransparentMesh: 1
---- !u!114 &449938815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449938810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290bcb333619a9c46a22aa107aaf87ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - {fileID: 11400000, guid: 4d907478b8beff3439dea788fe179631, type: 2}
-  - {fileID: 11400000, guid: fdbcef65aa82bd542b5b6e1b80e2683a, type: 2}
-  - {fileID: 11400000, guid: 8e1e617ba5ce0fa4dad9682b8cc759ee, type: 2}
-  - {fileID: 11400000, guid: cc85913682d4fdd4f9c58c0632faba59, type: 2}
-  - {fileID: 11400000, guid: 0409b124eb4e5454f8c2d75a851ec92a, type: 2}
-  - {fileID: 11400000, guid: d29a39f33071c7346b6a2045b84c82a9, type: 2}
-  previousButton: {fileID: 124087795}
-  nextButton: {fileID: 743332596}
-  preview: {fileID: 383055476}
 --- !u!1 &457455090
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,7 +4105,6 @@ GameObject:
   - component: {fileID: 529269142}
   - component: {fileID: 529269141}
   - component: {fileID: 529269140}
-  - component: {fileID: 529269143}
   m_Layer: 5
   m_Name: Eyeshadow
   m_TagString: Untagged
@@ -4111,7 +4152,7 @@ MonoBehaviour:
   hue: {fileID: 507042439}
   saturation: {fileID: 1808607744}
   value: {fileID: 938658596}
-  colorPicking: {fileID: 529269143}
+  colorPicking: {fileID: 1108483298}
 --- !u!114 &529269141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4150,28 +4191,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529269138}
   m_CullTransparentMesh: 1
---- !u!114 &529269143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529269138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290bcb333619a9c46a22aa107aaf87ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - {fileID: 11400000, guid: d621222e0d2535947b166e8481839db6, type: 2}
-  - {fileID: 11400000, guid: a00cced2588ccea4a8017497c84817ba, type: 2}
-  - {fileID: 11400000, guid: 1f3bc5862b2199946b22c5dbbe145407, type: 2}
-  - {fileID: 11400000, guid: ba8ae15b0f69adb42be7b55654f4eb9c, type: 2}
-  - {fileID: 11400000, guid: f4c6debadda0782499bc7982d7192788, type: 2}
-  - {fileID: 11400000, guid: 1a23d7e9a01c13447bae15d4fa61c5e7, type: 2}
-  previousButton: {fileID: 949726571}
-  nextButton: {fileID: 1278637384}
-  preview: {fileID: 702723135}
 --- !u!1 &544692038
 GameObject:
   m_ObjectHideFlags: 0
@@ -9845,6 +9864,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1108483295}
   - component: {fileID: 1108483296}
+  - component: {fileID: 1108483299}
+  - component: {fileID: 1108483298}
+  - component: {fileID: 1108483297}
   m_Layer: 5
   m_Name: UI Loaders
   m_TagString: Untagged
@@ -9885,6 +9907,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPrefab: {fileID: 5954260121674040453, guid: 9297e17cedf58814084f41901815b7b2, type: 3}
   container: {fileID: 1734112708}
+--- !u!114 &1108483297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108483294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290bcb333619a9c46a22aa107aaf87ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facePart: 2
+  previousButton: {fileID: 124087795}
+  nextButton: {fileID: 743332596}
+  preview: {fileID: 383055476}
+--- !u!114 &1108483298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108483294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290bcb333619a9c46a22aa107aaf87ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facePart: 1
+  previousButton: {fileID: 949726571}
+  nextButton: {fileID: 1278637384}
+  preview: {fileID: 702723135}
+--- !u!114 &1108483299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108483294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290bcb333619a9c46a22aa107aaf87ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facePart: 0
+  previousButton: {fileID: 2016688466}
+  nextButton: {fileID: 1774420525}
+  preview: {fileID: 1917718636}
 --- !u!1 &1129078218
 GameObject:
   m_ObjectHideFlags: 0
@@ -14489,7 +14559,6 @@ GameObject:
   - component: {fileID: 1719899927}
   - component: {fileID: 1719899926}
   - component: {fileID: 1719899925}
-  - component: {fileID: 1719899928}
   m_Layer: 5
   m_Name: Eyebrows
   m_TagString: Untagged
@@ -14537,7 +14606,7 @@ MonoBehaviour:
   hue: {fileID: 889009090}
   saturation: {fileID: 466006702}
   value: {fileID: 1609937062}
-  colorPicking: {fileID: 1719899928}
+  colorPicking: {fileID: 1108483299}
 --- !u!114 &1719899926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14576,28 +14645,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719899923}
   m_CullTransparentMesh: 1
---- !u!114 &1719899928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719899923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290bcb333619a9c46a22aa107aaf87ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - {fileID: 11400000, guid: d6122403b2453a74fbb7f0bafa2d91dd, type: 2}
-  - {fileID: 11400000, guid: 4c97335e716386f45879fd7b3057d9b3, type: 2}
-  - {fileID: 11400000, guid: 6fd6f19ed05871c4a82e5b14cae5016c, type: 2}
-  - {fileID: 11400000, guid: 66ef1ade80902f94881be8bd11940272, type: 2}
-  - {fileID: 11400000, guid: 87da369b145e12d42b63245cea52f168, type: 2}
-  - {fileID: 11400000, guid: 5d91321c68f2fe14fb227eda62191076, type: 2}
-  previousButton: {fileID: 2016688466}
-  nextButton: {fileID: 1774420525}
-  preview: {fileID: 1917718636}
 --- !u!1 &1723333378
 GameObject:
   m_ObjectHideFlags: 0

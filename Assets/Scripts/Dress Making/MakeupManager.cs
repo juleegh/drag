@@ -20,29 +20,29 @@ public class MakeupManager : MonoBehaviour, RequiredComponent
     {
         switch (feature.Location)
         {
-            case FaceFeature.FacePart.Eyebrow:
+            case FacePart.Eyebrow:
                 brows.sprite = feature.Sprite;
                 break;
-            case FaceFeature.FacePart.Eyeshadow:
+            case FacePart.Eyeshadow:
                 shadows.sprite = feature.Sprite;
                 break;
-            case FaceFeature.FacePart.Lips:
+            case FacePart.Lips:
                 lips.sprite = feature.Sprite;
                 break;
         }
     }
 
-    public void SelectedColor(FaceFeature feature, Color color)
+    public void SelectedColor(FacePart feature, Color color)
     {
-        switch (feature.Location)
+        switch (feature)
         {
-            case FaceFeature.FacePart.Eyebrow:
+            case FacePart.Eyebrow:
                 brows.color = color;
                 break;
-            case FaceFeature.FacePart.Eyeshadow:
+            case FacePart.Eyeshadow:
                 shadows.color = color;
                 break;
-            case FaceFeature.FacePart.Lips:
+            case FacePart.Lips:
                 lips.color = color;
                 break;
         }

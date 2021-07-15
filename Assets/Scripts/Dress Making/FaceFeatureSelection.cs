@@ -3,52 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FaceFeatureSelection : ColorPicking
+public class FaceFeatureSelection : ColorPicking, RequiredComponent
 {
-    [SerializeField] private List<FaceFeature> options;
+    [SerializeField] private FacePart facePart;
     [SerializeField] private Button previousButton;
     [SerializeField] private Button nextButton;
     [SerializeField] private Image preview;
 
     private int currentIndex;
 
-    void Awake()
+    public void ConfigureRequiredComponent()
     {
         previousButton.onClick.AddListener(Previous);
         nextButton.onClick.AddListener(Next);
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, Initialize);
     }
 
-    void Start()
+    void Initialize()
     {
-        RefreshSelection();
+        RefreshSelection(MakeupSelection.Instance.GetCurrent(facePart));
     }
 
     void Previous()
     {
-        currentIndex--;
-        if (currentIndex < 0)
-            currentIndex = options.Count - 1;
-        RefreshSelection();
+        FaceFeature feature = MakeupSelection.Instance.GetPrevious(facePart);
+        RefreshSelection(feature);
     }
 
     void Next()
     {
-        currentIndex++;
-        if (currentIndex == options.Count)
-            currentIndex = 0;
-        RefreshSelection();
+        FaceFeature feature = MakeupSelection.Instance.GetNext(facePart);
+        RefreshSelection(feature);
     }
 
-    void RefreshSelection()
+    void RefreshSelection(FaceFeature feature)
     {
-        preview.sprite = options[currentIndex].Sprite;
-        MakeupManager.Instance.SelectedFeature(options[currentIndex]);
+        preview.sprite = feature.Sprite;
+        MakeupManager.Instance.SelectedFeature(feature);
     }
 
     public override void SetCurrentColor(Color color)
     {
         base.SetCurrentColor(color);
         preview.color = color;
-        MakeupManager.Instance.SelectedColor(options[currentIndex], color);
+        MakeupSelection.Instance.UpdatedColor(facePart, color);
+        MakeupManager.Instance.SelectedColor(facePart, color);
     }
 }
