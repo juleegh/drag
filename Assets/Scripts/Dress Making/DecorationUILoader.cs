@@ -9,7 +9,7 @@ public class DecorationUILoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Decoration Decoration in Inventory.Instance.decorations.Values)
+        foreach (DecorationInfo Decoration in Inventory.Instance.decorations.Values)
         {
             AccesoryButton button = Instantiate(buttonPrefab).GetComponent<AccesoryButton>();
             button.Initialize(Decoration);

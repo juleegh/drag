@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skinnedMeshRenderer: {fileID: 6226962976390139912}
   meshCollider: {fileID: 1603419906846073322}
+  body: {fileID: 3400860942612840086}
   faceBone: {fileID: 5120539093953016332}
 --- !u!1 &221118090670102603
 GameObject:

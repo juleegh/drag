@@ -5,9 +5,9 @@ using System.IO;
 
 public class Garment : GameData
 {
-    private List<GarmentDecoration> decorations;
+    private List<Decoration> decorations;
 
-    public void SetDecorations(List<GarmentDecoration> decos)
+    public void SetDecorations(List<Decoration> decos)
     {
         decorations = decos;
     }
@@ -15,7 +15,7 @@ public class Garment : GameData
     public override void Save(GameDataWriter writer)
     {
         writer.Write(decorations.Count);
-        foreach (GarmentDecoration ornament in decorations)
+        foreach (Decoration ornament in decorations)
         {
             ornament.Save(writer);
         }
@@ -29,7 +29,7 @@ public class Garment : GameData
             string code = reader.ReadString();
 
             GameObject ornament = Inventory.Instance.GetEmbelishmentByOrnamentType(code);
-            ornament.GetComponent<GarmentDecoration>().Load(reader);
+            ornament.GetComponent<Decoration>().LoadFromFile(reader);
             ornament.transform.SetParent(PosePerformer.Instance.GetClosestBone(ornament.transform.position));
         }
     }

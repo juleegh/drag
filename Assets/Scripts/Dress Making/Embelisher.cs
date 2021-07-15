@@ -9,7 +9,7 @@ public class Embelisher : ColorPicking, IRequiredComponent
     public EmbelishingVariables EmbelishingVariables;
 
     private GameObject preview;
-    private DecorationPhysicalProperties currentlySelected;
+    private Decoration currentlySelected;
     private bool erasing;
 
     public void ConfigureRequiredComponent()
@@ -73,7 +73,7 @@ public class Embelisher : ColorPicking, IRequiredComponent
         }
     }
 
-    private void ChangeCurrentlySelected(DecorationPhysicalProperties next)
+    private void ChangeCurrentlySelected(Decoration next)
     {
         if (currentlySelected == next)
             return;
@@ -92,8 +92,8 @@ public class Embelisher : ColorPicking, IRequiredComponent
         if (EmbelishingVariables.mirrored)
             decoration.transform.Rotate(Vector3.up * 180, Space.Self);
         decoration.transform.localScale = EmbelishingVariables.Scale;
-        decoration.GetComponent<DecorationPhysicalProperties>().SetColor(EmbelishingVariables.GetTempColor(currentColor));
-        decoration.GetComponent<DecorationPhysicalProperties>().LoadInfo(Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
+        decoration.GetComponent<Decoration>().SetColor(EmbelishingVariables.GetTempColor(currentColor));
+        decoration.GetComponent<Decoration>().LoadInfo(Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
     }
 
     public override void SetCurrentColor(Color color)
@@ -104,7 +104,7 @@ public class Embelisher : ColorPicking, IRequiredComponent
 
     private void CheckForPlacement()
     {
-        ChangeCurrentlySelected(preview.GetComponent<DecorationPhysicalProperties>());
+        ChangeCurrentlySelected(preview.GetComponent<Decoration>());
         int layer_mask = LayerMask.GetMask("Manniquin");
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -137,7 +137,7 @@ public class Embelisher : ColorPicking, IRequiredComponent
         {
             preview.gameObject.SetActive(true);
             CreateObjectToHit(preview, hit);
-            ChangeCurrentlySelected(preview.GetComponent<DecorationPhysicalProperties>());
+            ChangeCurrentlySelected(preview.GetComponent<Decoration>());
         }
     }
 
@@ -148,7 +148,7 @@ public class Embelisher : ColorPicking, IRequiredComponent
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, layer_mask))
         {
-            ChangeCurrentlySelected(hit.transform.GetComponent<DecorationPhysicalProperties>());
+            ChangeCurrentlySelected(hit.transform.GetComponent<Decoration>());
         }
     }
 }

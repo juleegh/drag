@@ -16,7 +16,7 @@ public class AccesoryButton : MonoBehaviour
         preview.sprite = accesory.Sprite;
         button.onClick.AddListener(DecorationSelected);
 
-        Decoration decoration = accesory as Decoration;
+        DecorationInfo decoration = accesory as DecorationInfo;
         if (decoration != null)
         {
             RectTransform rect = preview.GetComponent<RectTransform>();
@@ -42,7 +42,7 @@ public class AccesoryButton : MonoBehaviour
 
     protected virtual void DecorationSelected()
     {
-        Decoration decoration = accesory as Decoration;
+        DecorationInfo decoration = accesory as DecorationInfo;
         if (decoration != null) Inventory.Instance.ChangeSelected(decoration.DecoType);
 
         Wig wig = accesory as Wig;

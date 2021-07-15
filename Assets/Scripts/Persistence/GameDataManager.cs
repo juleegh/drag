@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class GameDataManager : MonoBehaviour
+public class GameDataManager : MonoBehaviour, IRequiredComponent
 {
-    [SerializeField] private GameObject garmentHolder;
+    private GameObject garmentHolder;
     GameDataWriter writer;
     GameDataReader reader;
 
     string savePath;
 
-    void Awake()
+    public void ConfigureRequiredComponent()
+    {
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, Initialize);
+    }
+
+    private void Initialize()
     {
         savePath = Application.persistentDataPath;
         savePath = Path.Combine(Application.persistentDataPath, "saveFile4");
+        if (GlobalPlayerManager.Instance != null) garmentHolder = GlobalPlayerManager.Instance.Body;
     }
 
     void Update()
@@ -42,11 +48,11 @@ public class GameDataManager : MonoBehaviour
         garment.Load(reader);
     }
 
-    private List<GarmentDecoration> GetDecorations()
+    private List<Decoration> GetDecorations()
     {
-        List<GarmentDecoration> decos = new List<GarmentDecoration>();
-        GarmentDecoration[] decosInBody = garmentHolder.GetComponentsInChildren<GarmentDecoration>();
-        foreach (GarmentDecoration ornament in decosInBody)
+        List<Decoration> decos = new List<Decoration>();
+        Decoration[] decosInBody = garmentHolder.GetComponentsInChildren<Decoration>();
+        foreach (Decoration ornament in decosInBody)
         {
             decos.Add(ornament);
         }

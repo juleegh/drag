@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Decoration : Accesory
+public class DecorationInfo : Accesory
 {
     private DecorationType decoType;
     private int quantity;
@@ -12,7 +12,7 @@ public class Decoration : Accesory
     public string CodeName { get { return decoType.ToString(); } }
     public DecorationType DecoType { get { return decoType; } }
 
-    public Decoration(DecorationSetting deco, int q)
+    public DecorationInfo(DecorationSetting deco, int q)
     {
         decoType = deco.DecoType;
         quantity = q;
