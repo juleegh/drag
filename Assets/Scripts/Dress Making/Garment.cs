@@ -14,6 +14,7 @@ public class Garment : GameData
 
     public override void Save(GameDataWriter writer)
     {
+        writer.Write(ColorConversion.VectorFromColor(BodyMeshController.Instance.ClothesColor));
         writer.Write(decorations.Count);
         foreach (Decoration ornament in decorations)
         {
@@ -32,6 +33,9 @@ public class Garment : GameData
 
     public override void Load(GameDataReader reader)
     {
+        Color clothesColor = ColorConversion.ColorFromVector(reader.ReadVector3());
+        BodyMeshController.Instance.ChangeClothesColor(clothesColor);
+
         int ornaments = reader.ReadInt();
         for (int i = 0; i < ornaments; i++)
         {

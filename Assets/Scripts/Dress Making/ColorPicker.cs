@@ -14,9 +14,9 @@ public class ColorPicker : MonoBehaviour
 
     void Awake()
     {
-        hue.onValueChanged.AddListener(delegate { SomethingChanged(); });
-        saturation.onValueChanged.AddListener(delegate { SomethingChanged(); });
-        value.onValueChanged.AddListener(delegate { SomethingChanged(); });
+        if (hue != null) hue.onValueChanged.AddListener(delegate { SomethingChanged(); });
+        if (saturation != null) saturation.onValueChanged.AddListener(delegate { SomethingChanged(); });
+        if (value != null) value.onValueChanged.AddListener(delegate { SomethingChanged(); });
     }
 
     void Start()
@@ -26,7 +26,15 @@ public class ColorPicker : MonoBehaviour
 
     void SomethingChanged()
     {
-        Color currentColor = Color.HSVToRGB(hue.value, saturation.value, value.value);
+        float h = 1;
+        if (hue != null) h = hue.value;
+        float s = 1;
+        if (saturation != null) s = saturation.value;
+        float v = 1;
+        if (value != null) v = value.value;
+
+        Color currentColor = Color.HSVToRGB(h, s, v);
+
         if (colorPicking != null)
             colorPicking.SetCurrentColor(currentColor);
     }

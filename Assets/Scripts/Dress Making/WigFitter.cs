@@ -32,11 +32,12 @@ public class WigFitter : MonoBehaviour
         meshInstance.transform.localRotation = Quaternion.identity;
         currentPrefab = meshInstance;
         currentPrefab.GetComponentInChildren<MeshRenderer>().material.color = currentColor;
+        SetCurrentColor(currentColor);
     }
 
     public void SetCurrentColor(Color color)
     {
         currentColor = color;
-        if (currentPrefab != null) currentPrefab.GetComponentInChildren<MeshRenderer>().material.color = color;
+        if (currentPrefab != null) currentPrefab.GetComponentInChildren<MeshRenderer>().material.SetColor("Color_20784d248b894514aa916400667bcfb5", color);
     }
 }

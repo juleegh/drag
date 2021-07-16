@@ -20,6 +20,6 @@ public class BodyTypeSelection : MonoBehaviour
 
     void ChangeBody(BodyType bodyType)
     {
-        BodyPersonalization.Instance.ChangedBody(bodyType);
+        BodyTypePersonalization.Instance.ChangedBody(bodyType);
     }
 }

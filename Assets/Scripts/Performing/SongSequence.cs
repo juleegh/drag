@@ -86,7 +86,7 @@ public class SongSequence : MonoBehaviour, RequiredComponent
 
     void Update()
     {
-        if (PerformSystem.Instance.PerformState != PerformState.Executing)
+        if (instance == null || PerformSystem.Instance.PerformState != PerformState.Executing)
             return;
 
         if (Input.GetKeyDown(MovesInputManager.Instance.A))
