@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour, RequiredComponent
+public class Inventory : MonoBehaviour, GlobalComponent
 {
     public static Inventory Instance { get { return instance; } }
     private static Inventory instance;
@@ -50,5 +50,10 @@ public class Inventory : MonoBehaviour, RequiredComponent
         GameObject decorationPrefab = decorationsPool.GetObject();
         decorationPrefab.GetComponent<Decoration>().LoadInfo(code, decorationsSettings.Decorations[decoType].Sprite);
         return decorationPrefab;
+    }
+
+    public void ReturnDecoration(GameObject decoration)
+    {
+        decorationsPool.ReturnObject(decoration);
     }
 }

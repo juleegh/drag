@@ -36,18 +36,18 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
         {
             string skin = PlayerPrefs.GetString("Queen_Skin");
             string[] values = skin.Split(',');
-            int r = int.Parse(values[0]);
-            int g = int.Parse(values[1]);
-            int b = int.Parse(values[2]);
+            float r = float.Parse(values[0]);
+            float g = float.Parse(values[1]);
+            float b = float.Parse(values[2]);
             Color skinColor = new Color(r, g, b, 1f);
             ChangeSkinColor(skinColor);
         }
         else
         {
             ChangeSkinColor(baseSkinColor);
-            ChangeClothesColor(baseClothesColor);
         }
 
+        ChangeClothesColor(baseClothesColor);
     }
 
     public void ChangeSkinColor(Color color)

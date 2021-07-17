@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class GameDataManager : MonoBehaviour, RequiredComponent
+public class GameDataManager : MonoBehaviour, GlobalComponent
 {
+    private static GameDataManager instance;
+    public static GameDataManager Instance { get { return instance; } }
+
     private GameObject garmentHolder;
     GameDataWriter writer;
     GameDataReader reader;
@@ -13,39 +16,52 @@ public class GameDataManager : MonoBehaviour, RequiredComponent
 
     public void ConfigureRequiredComponent()
     {
-        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, Initialize);
+        instance = this;
+        GameEventsManager.Instance.AddActionToEvent(GameEvent.DependenciesLoaded, Initialize);
     }
 
     private void Initialize()
     {
-        savePath = Application.persistentDataPath;
-        savePath = Path.Combine(Application.persistentDataPath, "saveFile4");
         garmentHolder = GlobalPlayerManager.Instance.Body;
     }
 
-    void Update()
+    public List<string> GetSavedOutfits()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-            Save();
-        if (Input.GetKeyDown(KeyCode.P))
-            Load();
+        int quantity = PlayerPrefs.GetInt("Outfit_Count", 0);
+        List<string> outfitNames = new List<string>();
+        for (int i = 0; i < quantity; i++)
+        {
+            outfitNames.Add(PlayerPrefs.GetString("Outfit" + i));
+        }
+        return outfitNames;
     }
 
-    void Save()
+    public void Save(string outfitName)
     {
+        int outfits = PlayerPrefs.GetInt("Outfit_Count", 0);
+        PlayerPrefs.SetString("Outfit" + outfits, outfitName);
+        outfits++;
+        PlayerPrefs.SetInt("Outfit_Count", outfits);
+
+        savePath = Path.Combine(Application.persistentDataPath, outfitName);
+
         BinaryWriter bWriter = new BinaryWriter(File.Open(savePath, FileMode.Create));
         writer = new GameDataWriter(bWriter);
         Garment garment = new Garment();
         garment.SetDecorations(GetDecorations());
         garment.Save(writer);
+        bWriter.Close();
     }
 
-    void Load()
+    public void Load(string outfitName)
     {
+        ClearDecorations();
+        savePath = Path.Combine(Application.persistentDataPath, outfitName);
         BinaryReader bWriter = new BinaryReader(File.Open(savePath, FileMode.Open));
         reader = new GameDataReader(bWriter);
         Garment garment = new Garment();
         garment.Load(reader);
+        bWriter.Close();
     }
 
     private List<Decoration> GetDecorations()
@@ -57,5 +73,14 @@ public class GameDataManager : MonoBehaviour, RequiredComponent
             decos.Add(ornament);
         }
         return decos;
+    }
+
+    private void ClearDecorations()
+    {
+        Decoration[] decosInBody = garmentHolder.GetComponentsInChildren<Decoration>();
+        foreach (Decoration ornament in decosInBody)
+        {
+            Inventory.Instance.ReturnDecoration(ornament.gameObject);
+        }
     }
 }

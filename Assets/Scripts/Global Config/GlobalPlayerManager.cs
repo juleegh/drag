@@ -37,7 +37,6 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     void CheckEntry()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
         if (PlayerPrefs.GetString("Queen_Name") == "")
         {
             SceneManager.LoadScene((int)GameFunctions.Queen_Creation);
@@ -61,8 +60,8 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
         SceneManager.LoadScene((int)GameFunctions.Performing);
     }
 
-    private void LoadPlayerProfile()
+    public void GoToLobby()
     {
-
+        SceneManager.LoadScene((int)GameFunctions.Lobby);
     }
 }

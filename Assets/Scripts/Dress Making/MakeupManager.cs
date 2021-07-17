@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MakeupManager : MonoBehaviour, RequiredComponent
+public class MakeupManager : MonoBehaviour, GlobalComponent
 {
     private static MakeupManager instance;
     public static MakeupManager Instance { get { return instance; } }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WigSelection : MonoBehaviour, RequiredComponent
+public class WigSelection : MonoBehaviour, GlobalComponent
 {
     public static WigSelection Instance { get { return instance; } }
     private static WigSelection instance;

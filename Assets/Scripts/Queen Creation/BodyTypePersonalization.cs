@@ -51,6 +51,6 @@ public class BodyTypePersonalization : MonoBehaviour
         Color skin = BodyMeshController.Instance.SkinColor;
         string skinColor = skin.r + "," + skin.g + "," + skin.b;
         PlayerPrefs.SetString("Queen_Skin", skinColor);
-        PlayerPrefs.GetString("Queen_Name", nameField.text);
+        PlayerPrefs.SetString("Queen_Name", nameField.text);
     }
 }

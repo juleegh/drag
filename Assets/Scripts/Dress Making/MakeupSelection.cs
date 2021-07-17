@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 
-public class MakeupSelection : MonoBehaviour, RequiredComponent
+public class MakeupSelection : MonoBehaviour, GlobalComponent
 {
     public static MakeupSelection Instance { get { return instance; } }
     private static MakeupSelection instance;

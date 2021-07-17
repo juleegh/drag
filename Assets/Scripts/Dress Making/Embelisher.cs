@@ -105,10 +105,9 @@ public class Embelisher : ColorPicking, RequiredComponent
     private void CheckForPlacement()
     {
         ChangeCurrentlySelected(preview.GetComponent<Decoration>());
-        int layer_mask = LayerMask.GetMask("Manniquin");
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, layer_mask))
+        if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.layer == LayerMask.NameToLayer("Manniquin"))
         {
             GameObject decoration = Inventory.Instance.GetOneDecoration();
             CreateObjectToHit(decoration, hit);
@@ -119,21 +118,19 @@ public class Embelisher : ColorPicking, RequiredComponent
 
     private void CheckForErasing()
     {
-        int layer_mask = LayerMask.GetMask("Decoration");
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, layer_mask))
+        if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.layer == LayerMask.NameToLayer("Decoration"))
         {
-            Destroy(hit.transform.gameObject);
+            Inventory.Instance.ReturnDecoration(hit.transform.gameObject);
         }
     }
 
     private void PreviewForPlacement()
     {
         RaycastHit hit;
-        int layer_mask = LayerMask.GetMask("Manniquin");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, layer_mask))
+        if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.layer == LayerMask.NameToLayer("Manniquin"))
         {
             preview.gameObject.SetActive(true);
             CreateObjectToHit(preview, hit);
@@ -144,9 +141,8 @@ public class Embelisher : ColorPicking, RequiredComponent
     private void PreviewForErasing()
     {
         RaycastHit hit;
-        int layer_mask = LayerMask.GetMask("Decoration");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, layer_mask))
+        if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.layer == LayerMask.NameToLayer("Decoration"))
         {
             ChangeCurrentlySelected(hit.transform.GetComponent<Decoration>());
         }
