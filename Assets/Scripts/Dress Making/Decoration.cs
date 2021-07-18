@@ -8,10 +8,12 @@ public class Decoration : MonoBehaviour
     [SerializeField] private BoxCollider boxCollider;
     public SpriteRenderer SpriteRenderer { get { return spriteRenderer; } }
     GarmentDecoration data;
+    private Vector3 initialBounds = new Vector3(0.1f, 0.1f, 0.001f);
 
     public void LoadInfo(string code, Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
+        ScaleCollider(sprite);
         data = new GarmentDecoration();
         data.LoadInfo(code);
         ConfigPhysicalInfo();
@@ -20,6 +22,11 @@ public class Decoration : MonoBehaviour
     private void ConfigPhysicalInfo()
     {
         data.SetPhysicalInfo(transform.position, ColorConversion.VectorFromColor(spriteRenderer.color), transform.rotation, transform.localScale);
+    }
+
+    private void ScaleCollider(Sprite sprite)
+    {
+        boxCollider.size = initialBounds * SpriteAspectRatio.GetAspectRatio(SpriteAspectRatio.GetDimension(sprite));
     }
 
     public void LoadFromFile(GameDataReader dataReader)

@@ -20,24 +20,13 @@ public class AccesoryButton : MonoBehaviour
         if (decoration != null)
         {
             RectTransform rect = preview.GetComponent<RectTransform>();
-            float dimension = accesory.Sprite.rect.width > accesory.Sprite.rect.height ? accesory.Sprite.rect.width : accesory.Sprite.rect.height;
-            float aspectRatio = GetAspectRatio(dimension);
+            float dimension = SpriteAspectRatio.GetDimension(accesory.Sprite);
+            float aspectRatio = SpriteAspectRatio.GetAspectRatio(dimension);
             float distanceFromEdges = 1 - aspectRatio;
             rect.anchorMin = new Vector2(distanceFromEdges / 2, distanceFromEdges / 2);
             rect.anchorMax = new Vector2(1 - distanceFromEdges / 2, 1 - distanceFromEdges / 2);
         }
 
-    }
-
-    private float GetAspectRatio(float dimension)
-    {
-        if (dimension <= 30)
-            return 0.2f;
-        else if (dimension <= 100)
-            return 0.3f;
-        else if (dimension <= 250)
-            return 0.5f;
-        return 1f;
     }
 
     protected virtual void DecorationSelected()

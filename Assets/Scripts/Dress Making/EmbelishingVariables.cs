@@ -4,38 +4,65 @@ using UnityEngine;
 
 public class EmbelishingVariables
 {
-    public bool randomnizeRotation = false;
-    public bool randomnizeScale = false;
-    public bool randomnizeColorHue = false;
-    public bool randomnizeColorSaturation = false;
-    public bool randomnizeColorValue = false;
+    public delegate void EmbelisherChanges();
+    public static event EmbelisherChanges ValueChanged;
 
-    public float rotationPercentage;
-    public float scalePercentage;
-    public float colorPercentage;
+    private Color currentColor;
+    private Sprite currentStyle;
 
-    public Vector3 CurrentScale;
-    public float CurrentRotation;
-    public bool mirrored = false;
+    private bool randomnizeRotation = false;
+    private bool randomnizeScale = false;
+    private bool randomnizeColorHue = false;
+    private bool randomnizeColorSaturation = false;
+    private bool randomnizeColorValue = false;
 
-    public Vector3 RandomScale;
-    public float RandomRotation;
-    public Vector3 RandomColorVariation;
+    private float rotationPercentage;
+    private float scalePercentage;
+    private float colorPercentage;
+
+    private Vector3 currentScale;
+    private float currentRotation;
+    private bool mirrored = false;
+
+    private Vector3 randomScale;
+    private float randomRotation;
+    private Vector3 randomColorVariation;
+
+    public Color CurrentColor { get { return currentColor; } set { currentColor = value; CallForUpdate(); } }
+    public Sprite CurrentStyle { get { return currentStyle; } set { currentStyle = value; CallForUpdate(); } }
+
+    public bool RandomnizeRotation { get { return randomnizeRotation; } set { randomnizeRotation = value; CallForUpdate(); } }
+    public bool RandomnizeScale { get { return randomnizeScale; } set { randomnizeScale = value; CallForUpdate(); } }
+    public bool RandomnizeColorHue { get { return randomnizeColorHue; } set { randomnizeColorHue = value; CallForUpdate(); } }
+    public bool RandomnizeColorSaturation { get { return randomnizeColorSaturation; } set { randomnizeColorSaturation = value; CallForUpdate(); } }
+    public bool RandomnizeColorValue { get { return randomnizeColorValue; } set { randomnizeColorValue = value; CallForUpdate(); } }
+
+    public float RotationPercentage { get { return rotationPercentage; } set { rotationPercentage = value; CallForUpdate(); } }
+    public float ScalePercentage { get { return scalePercentage; } set { scalePercentage = value; CallForUpdate(); } }
+    public float ColorPercentage { get { return colorPercentage; } set { colorPercentage = value; CallForUpdate(); } }
+
+    public Vector3 CurrentScale { get { return currentScale; } set { currentScale = value; CallForUpdate(); } }
+    public float CurrentRotation { get { return currentRotation; } set { currentRotation = value; CallForUpdate(); } }
+    public bool Mirrored { get { return mirrored; } set { mirrored = value; CallForUpdate(); } }
+
+    public Vector3 RandomScale { get { return randomScale; } set { randomScale = value; CallForUpdate(); } }
+    public float RandomRotation { get { return randomRotation; } set { randomRotation = value; CallForUpdate(); } }
+    public Vector3 RandomColorVariation { get { return randomColorVariation; } set { randomColorVariation = value; CallForUpdate(); } }
 
     public Vector3 Scale { get { return CurrentScale + RandomScale; } }
     public float Rotation { get { return CurrentRotation + RandomRotation; } }
 
     public void RandomnizeValues()
     {
-        RandomScale = randomnizeScale ? Vector3.one * Random.Range(-scalePercentage, scalePercentage) : Vector3.zero;
-        RandomRotation = randomnizeRotation ? 180 * Random.Range(-rotationPercentage, rotationPercentage) : 0;
-        RandomColorVariation = new Vector3(randomnizeColorHue ? Random.Range(-colorPercentage, colorPercentage) : 0, randomnizeColorSaturation ? Random.Range(-colorPercentage, colorPercentage) : 0, randomnizeColorValue ? Random.Range(-colorPercentage, colorPercentage) : 0);
+        RandomScale = RandomnizeScale ? Vector3.one * Random.Range(-ScalePercentage, ScalePercentage) : Vector3.zero;
+        RandomRotation = RandomnizeRotation ? 180 * Random.Range(-RotationPercentage, RotationPercentage) : 0;
+        RandomColorVariation = new Vector3(RandomnizeColorHue ? Random.Range(-ColorPercentage, ColorPercentage) : 0, RandomnizeColorSaturation ? Random.Range(-ColorPercentage, ColorPercentage) : 0, RandomnizeColorValue ? Random.Range(-ColorPercentage, ColorPercentage) : 0);
     }
 
-    public Color GetTempColor(Color currentColor)
+    public Color GetTempColor()
     {
         float h = 0; float s = 0; float v = 0;
-        Color.RGBToHSV(currentColor, out h, out s, out v);
+        Color.RGBToHSV(CurrentColor, out h, out s, out v);
         h = (h + RandomColorVariation.x);
         s = (s + RandomColorVariation.y);
         v = (v + RandomColorVariation.z);
@@ -46,5 +73,10 @@ public class EmbelishingVariables
         s = Mathf.Clamp(s, 0, 1);
         v = Mathf.Clamp(v, 0, 1);
         return Color.HSVToRGB(h, s, v);
+    }
+
+    private void CallForUpdate()
+    {
+        EmbelisherTransform.Instance.UpdatePreview();
     }
 }

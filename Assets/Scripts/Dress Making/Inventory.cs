@@ -35,6 +35,7 @@ public class Inventory : MonoBehaviour, GlobalComponent
     public void ChangeSelected(DecorationType selected)
     {
         current = selected;
+        Embelisher.Instance.EmbelishingVariables.CurrentStyle = CurrentSelected.Sprite;
     }
 
     public GameObject GetOneDecoration()

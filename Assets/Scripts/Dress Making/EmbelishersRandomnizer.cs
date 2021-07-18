@@ -32,14 +32,14 @@ public class EmbelishersRandomnizer : MonoBehaviour
 
     private void SomethingChanged(bool result)
     {
-        Embelisher.Instance.EmbelishingVariables.rotationPercentage = rotationProportion.value;
-        Embelisher.Instance.EmbelishingVariables.scalePercentage = scaleProportion.value;
-        Embelisher.Instance.EmbelishingVariables.colorPercentage = colorProportion.value;
-        Embelisher.Instance.EmbelishingVariables.randomnizeScale = sizeToggle.isOn;
-        Embelisher.Instance.EmbelishingVariables.randomnizeRotation = rotationToggle.isOn;
-        Embelisher.Instance.EmbelishingVariables.randomnizeColorHue = hueToggle.isOn;
-        Embelisher.Instance.EmbelishingVariables.randomnizeColorSaturation = saturationToggle.isOn;
-        Embelisher.Instance.EmbelishingVariables.randomnizeColorValue = valueToggle.isOn;
+        Embelisher.Instance.EmbelishingVariables.RotationPercentage = rotationProportion.value;
+        Embelisher.Instance.EmbelishingVariables.ScalePercentage = scaleProportion.value;
+        Embelisher.Instance.EmbelishingVariables.ColorPercentage = colorProportion.value;
+        Embelisher.Instance.EmbelishingVariables.RandomnizeScale = sizeToggle.isOn;
+        Embelisher.Instance.EmbelishingVariables.RandomnizeRotation = rotationToggle.isOn;
+        Embelisher.Instance.EmbelishingVariables.RandomnizeColorHue = hueToggle.isOn;
+        Embelisher.Instance.EmbelishingVariables.RandomnizeColorSaturation = saturationToggle.isOn;
+        Embelisher.Instance.EmbelishingVariables.RandomnizeColorValue = valueToggle.isOn;
         Embelisher.Instance.EmbelishingVariables.RandomnizeValues();
     }
 }

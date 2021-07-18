@@ -41,28 +41,6 @@ public class Embelisher : ColorPicking, RequiredComponent
             else
                 CheckForPlacement();
         }
-        else if (Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            EmbelishingVariables.CurrentRotation -= 2f;
-        }
-        else if (Input.GetKeyDown(KeyCode.Keypad6))
-        {
-            EmbelishingVariables.CurrentRotation += 2f;
-        }
-        else if (Input.GetKeyDown(KeyCode.Keypad8))
-        {
-            if (EmbelishingVariables.CurrentScale.magnitude < 5)
-                EmbelishingVariables.CurrentScale *= 1.1f;
-        }
-        else if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            if (EmbelishingVariables.CurrentScale.magnitude > 1.1f)
-                EmbelishingVariables.CurrentScale *= 0.9f;
-        }
-        else if (Input.GetKeyDown(KeyCode.Keypad5))
-        {
-            EmbelishingVariables.mirrored = !EmbelishingVariables.mirrored;
-        }
         else
         {
             ChangeCurrentlySelected(null);
@@ -87,19 +65,23 @@ public class Embelisher : ColorPicking, RequiredComponent
     private void CreateObjectToHit(GameObject decoration, RaycastHit hit)
     {
         decoration.transform.position = hit.point + hit.normal * 0.01f;
-        decoration.transform.rotation = Quaternion.LookRotation(hit.normal);
+        decoration.transform.rotation = Quaternion.LookRotation(-hit.normal);
         decoration.transform.Rotate(Vector3.forward * EmbelishingVariables.Rotation, Space.Self);
-        if (EmbelishingVariables.mirrored)
+        if (EmbelishingVariables.Mirrored)
             decoration.transform.Rotate(Vector3.up * 180, Space.Self);
         decoration.transform.localScale = EmbelishingVariables.Scale;
-        decoration.GetComponent<Decoration>().SetColor(EmbelishingVariables.GetTempColor(currentColor));
+        decoration.GetComponent<Decoration>().SetColor(EmbelishingVariables.GetTempColor());
         decoration.GetComponent<Decoration>().LoadInfo(Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
     }
 
     public override void SetCurrentColor(Color color)
     {
         base.SetCurrentColor(color);
-        if (EmbelishingVariables != null) EmbelishingVariables.RandomnizeValues();
+        if (EmbelishingVariables != null)
+        {
+            EmbelishingVariables.CurrentColor = color;
+            EmbelishingVariables.RandomnizeValues();
+        }
     }
 
     private void CheckForPlacement()
