@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class BodyTypePersonalization : MonoBehaviour
 {
     private static BodyTypePersonalization instance;
     public static BodyTypePersonalization Instance { get { return instance; } }
-
-    private SkinnedMeshRenderer bodyMesh { get { return GlobalPlayerManager.Instance.SkinnedMeshRenderer; } }
-    private MeshCollider colliderMesh { get { return GlobalPlayerManager.Instance.MeshCollider; } }
-    [SerializeField] private Button readyButton;
-    [SerializeField] private TMP_InputField nameField;
+    private BodyType selectedBody;
 
     void Awake()
     {
@@ -23,34 +17,26 @@ public class BodyTypePersonalization : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        readyButton.onClick.AddListener(TryToSave);
-    }
-
     public void ChangedBody(BodyType bodyType)
     {
-        Mesh meshInstance = Instantiate(bodyType.Mesh);
-        bodyMesh.sharedMesh = meshInstance;
-        colliderMesh.sharedMesh = meshInstance;
+        selectedBody = bodyType;
+        BodyMeshController.Instance.ChangeBody(bodyType);
     }
 
-    public void TryToSave()
+    public void TryToSave(string dragName)
     {
-        if (nameField.text == "")
-            return;
-        else
-        {
-            SaveInfo();
-            GlobalPlayerManager.Instance.GoToDragging();
-        }
+        SaveInfo(dragName);
+        GlobalPlayerManager.Instance.GoToDragging();
     }
 
-    private void SaveInfo()
+    private void SaveInfo(string dragName)
     {
         Color skin = BodyMeshController.Instance.SkinColor;
         string skinColor = skin.r + "," + skin.g + "," + skin.b;
+        string[] bodyTypeInfo = selectedBody.name.Split('_');
         PlayerPrefs.SetString("Queen_Skin", skinColor);
-        PlayerPrefs.SetString("Queen_Name", nameField.text);
+        PlayerPrefs.SetString("Queen_Body", bodyTypeInfo[0] + "_" + bodyTypeInfo[1]);
+        BodyMeshController.Instance.LoadOutfitsByPlayer();
+        PlayerPrefs.SetString("Queen_Name", dragName);
     }
 }

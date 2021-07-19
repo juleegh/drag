@@ -9,12 +9,8 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
 {
     private static GlobalPlayerManager instance;
     public static GlobalPlayerManager Instance { get { return instance; } }
-    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
-    [SerializeField] private MeshCollider meshCollider;
     [SerializeField] private GameObject body;
     [SerializeField] private Transform faceBone;
-    public SkinnedMeshRenderer SkinnedMeshRenderer { get { return skinnedMeshRenderer; } }
-    public MeshCollider MeshCollider { get { return meshCollider; } }
     public GameObject Body { get { return body; } }
     public Transform FaceBone { get { return faceBone; } }
 

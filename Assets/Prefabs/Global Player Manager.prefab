@@ -131,8 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4107e1789a76e364faf09aa18d7acda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 6226962976390139912}
-  meshCollider: {fileID: 1603419906846073322}
   body: {fileID: 3400860942612840086}
   faceBone: {fileID: 5120539093953016332}
 --- !u!114 &6196990030242932224
@@ -147,9 +145,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58c0c616a8d534409626fda010272f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyMesh: {fileID: 6226962976390139912}
+  colliderMesh: {fileID: 1603419906846073322}
   meshMaterial: {fileID: 2100000, guid: 5c94dcb880fd6ea4b9ba7734cb6ea65c, type: 2}
   baseSkinColor: {r: 1, g: 0.9386792, b: 0.9386792, a: 1}
   baseClothesColor: {r: 1, g: 1, b: 1, a: 1}
+  outfits:
+  - {fileID: 11400000, guid: 9f359a59e70e7a14980d384b72b16562, type: 2}
+  - {fileID: 11400000, guid: d5fcc1d276c8ea74b9bee864993bc94e, type: 2}
+  - {fileID: 11400000, guid: 2607cab294cc1ea42bfbe5f8a52e451a, type: 2}
+  - {fileID: 11400000, guid: 7484506ba139cd546b6d1d0c3640c7fc, type: 2}
+  - {fileID: 11400000, guid: 21af25040c916e548afd5e2ee00ffbfb, type: 2}
+  - {fileID: 11400000, guid: b311d1a1649af9241a3e64ed2547f458, type: 2}
+  - {fileID: 11400000, guid: d0825b2923146c2449543dfeb2587df5, type: 2}
+  - {fileID: 11400000, guid: 1efa03ba871af0e4ba53587e3c81d95c, type: 2}
+  - {fileID: 11400000, guid: c5972318e261f4f4f8ef9e021a54a5ec, type: 2}
+  - {fileID: 11400000, guid: f93a468b26419cd4aa35e9274f1d33a3, type: 2}
+  - {fileID: 11400000, guid: 2e1db92897b167247938393fffff2786, type: 2}
+  - {fileID: 11400000, guid: 4220ca3dcab2c39459a9e6dea2f724a3, type: 2}
+  - {fileID: 11400000, guid: 96d8c660547ec2948a7fd8790a94cbda, type: 2}
+  - {fileID: 11400000, guid: 476a0bbdf88abc343b32ff6245b18eb8, type: 2}
+  - {fileID: 11400000, guid: d2cfeecb8f3af1e46ac2b7064e1faa73, type: 2}
+  - {fileID: 11400000, guid: 4aa7b2087eb7ebe46a432e88b91b6b89, type: 2}
 --- !u!1 &221118090670102603
 GameObject:
   m_ObjectHideFlags: 0

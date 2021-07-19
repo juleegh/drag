@@ -11502,6 +11502,7 @@ GameObject:
   - component: {fileID: 1108483300}
   - component: {fileID: 1108483301}
   - component: {fileID: 1108483302}
+  - component: {fileID: 1108483303}
   m_Layer: 5
   m_Name: UI Loaders
   m_TagString: Untagged
@@ -11634,6 +11635,20 @@ MonoBehaviour:
   rotation: {fileID: 1530170890}
   mirror: {fileID: 1831169339}
   decoration: {fileID: 538420659}
+--- !u!114 &1108483303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108483294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7be00e162fb703448cd33fa9407b421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 5954260121674040453, guid: 9297e17cedf58814084f41901815b7b2, type: 3}
+  container: {fileID: 1361173300}
 --- !u!1 &1129087499
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,8 +34,8 @@ public class OutfitStepManager : MonoBehaviour, RequiredComponent
     private void LoadUI()
     {
         int index = 0;
-        TabButton[] buttons = GetComponentsInChildren<TabButton>();
-        foreach (TabButton button in buttons)
+        DragTabButton[] buttons = GetComponentsInChildren<DragTabButton>();
+        foreach (DragTabButton button in buttons)
         {
             button.SetButtonClick((step) => { ButtonPressed(step); }, (OutfitStep)index);
             index++;

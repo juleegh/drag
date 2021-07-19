@@ -17,6 +17,6 @@ namespace RotaryHeart.Lib.SerializableDictionary
         [SerializeField]
         private AudioClip _audioClip;
         [SerializeField]
-        private TabButton _tabButton;
+        private DragTabButton _tabButton;
     }
 }

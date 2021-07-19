@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: bald
   m_EditorClassIdentifier: 
   mesh: {fileID: 0}
-  sprite: {fileID: 0}
+  sprite: {fileID: -7968757556875089879, guid: 9755ee88348d9e6478902e1847ffbdea, type: 3}
   price: 0

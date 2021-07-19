@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class TabButton : MonoBehaviour
+public class DragTabButton : MonoBehaviour
 {
     [SerializeField] private Button button;
     private Action<OutfitStep> linkedAction;

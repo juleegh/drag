@@ -36,5 +36,8 @@ public class AccesoryButton : MonoBehaviour
 
         Wig wig = accesory as Wig;
         if (wig != null) WigSelection.Instance.ChangeSelected(wig.WigType);
+
+        OutfitStyle outfit = accesory as OutfitStyle;
+        if (outfit != null) BodyMeshController.Instance.ChangeOutfit(outfit.CodeName);
     }
 }
