@@ -10,7 +10,7 @@ public class Embelisher : ColorPicking, RequiredComponent
 
     private GameObject preview;
     private Decoration currentlySelected;
-    private bool erasing;
+    public bool erasing;
 
     public void ConfigureRequiredComponent()
     {
@@ -32,7 +32,6 @@ public class Embelisher : ColorPicking, RequiredComponent
             return;
 
         preview.gameObject.SetActive(false);
-        erasing = Input.GetKey(KeyCode.Tab);
 
         if (Input.GetMouseButtonDown(0))
         {
