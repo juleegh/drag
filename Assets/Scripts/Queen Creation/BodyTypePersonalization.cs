@@ -6,18 +6,22 @@ public class BodyTypePersonalization : MonoBehaviour
 {
     private static BodyTypePersonalization instance;
     public static BodyTypePersonalization Instance { get { return instance; } }
-    private BodyType selectedBody;
+    private BodyMesh selectedBody;
 
     void Awake()
     {
-        if (instance == null) instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            selectedBody = BodyMeshController.Instance.GetBodyTypes()[0];
+        }
         else
         {
             Destroy(gameObject);
         }
     }
 
-    public void ChangedBody(BodyType bodyType)
+    public void ChangedBody(BodyMesh bodyType)
     {
         selectedBody = bodyType;
         BodyMeshController.Instance.ChangeBody(bodyType);

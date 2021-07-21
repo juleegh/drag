@@ -16,6 +16,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
 
     public void ConfigureRequiredComponent()
     {
+        //PlayerPrefs.DeleteAll();
         if (instance == null)
         {
             instance = this;
@@ -49,6 +50,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     public void GoToDragging()
     {
         SceneManager.LoadScene((int)GameFunctions.Dress_Making);
+        GameEventsManager.Instance.Notify(GameEvent.EnteredDraggingRoom);
     }
 
     public void GoToPerforming()

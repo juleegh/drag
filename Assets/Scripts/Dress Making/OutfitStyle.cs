@@ -7,7 +7,7 @@ public class OutfitStyle : Accesory
     private string codeName;
     public string CodeName { get { return codeName; } }
 
-    public OutfitStyle(BodyType bodyType)
+    public OutfitStyle(BodyMesh bodyType)
     {
         codeName = bodyType.OutfitName;
     }

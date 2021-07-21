@@ -14,7 +14,7 @@ public class BodyTypeSelection : MonoBehaviour, RequiredComponent
     {
         BodyOptionButton[] buttons = GetComponentsInChildren<BodyOptionButton>();
         int index = 0;
-        List<BodyType> bodyTypes = BodyMeshController.Instance.GetBodyTypes();
+        List<BodyMesh> bodyTypes = BodyMeshController.Instance.GetBodyTypes();
         foreach (BodyOptionButton button in buttons)
         {
             button.Initialize(bodyTypes[index], ChangeBody);
@@ -22,7 +22,7 @@ public class BodyTypeSelection : MonoBehaviour, RequiredComponent
         }
     }
 
-    void ChangeBody(BodyType bodyType)
+    void ChangeBody(BodyMesh bodyType)
     {
         BodyTypePersonalization.Instance.ChangedBody(bodyType);
     }

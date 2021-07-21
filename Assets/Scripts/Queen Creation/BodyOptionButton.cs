@@ -7,10 +7,10 @@ using System;
 public class BodyOptionButton : MonoBehaviour
 {
     private Button button;
-    private BodyType bodyType;
-    private Action<BodyType> CallBack;
+    private BodyMesh bodyType;
+    private Action<BodyMesh> CallBack;
 
-    public void Initialize(BodyType bt, Action<BodyType> cb)
+    public void Initialize(BodyMesh bt, Action<BodyMesh> cb)
     {
         button = GetComponent<Button>();
         bodyType = bt;

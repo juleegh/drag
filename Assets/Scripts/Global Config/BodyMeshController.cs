@@ -12,19 +12,21 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
     [SerializeField] private Material meshMaterial;
     [SerializeField] private Color baseSkinColor;
     [SerializeField] private Color baseClothesColor;
-    [SerializeField] private List<BodyType> outfits;
+    [SerializeField] private string baseStyle;
+    [SerializeField] private List<BodyMesh> bodyMeshes;
 
-    private Dictionary<string, List<BodyType>> allOutfits;
+    private Dictionary<string, List<BodyMesh>> allOutfits;
     private List<OutfitStyle> outfitStyles;
     private Color skinColor;
     private Color clothesColor;
     private string outfitStyle;
+    private string bodyType;
     public Color SkinColor { get { return skinColor; } }
     public Color ClothesColor { get { return clothesColor; } }
     public string OutfitStyle { get { return outfitStyle; } }
 
     public List<OutfitStyle> OutfitStyles { get { return outfitStyles; } }
-    public string PlayerBodyType { get { return PlayerPrefs.GetString("Queen_Body"); } }
+    public string PlayerBodyType { get { return bodyType; } }
 
     public void ConfigureRequiredComponent()
     {
@@ -44,19 +46,20 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
 
     private void LoadOutfits()
     {
-        allOutfits = new Dictionary<string, List<BodyType>>();
-        outfitStyles = new List<OutfitStyle>();
+        allOutfits = new Dictionary<string, List<BodyMesh>>();
 
-        foreach (BodyType outfit in outfits)
+        foreach (BodyMesh bodyMesh in bodyMeshes)
         {
-            string[] bodyInfo = outfit.name.Split('_');
+            string[] bodyInfo = bodyMesh.name.Split('_');
             string bodyType = bodyInfo[0] + "_" + bodyInfo[1];
 
             if (!allOutfits.ContainsKey(bodyType))
-                allOutfits.Add(bodyType, new List<BodyType>());
+                allOutfits.Add(bodyType, new List<BodyMesh>());
 
-            allOutfits[bodyType].Add(outfit);
+            allOutfits[bodyType].Add(bodyMesh);
         }
+        ChangeBody(bodyMeshes[0]);
+        ChangeOutfit(baseStyle);
     }
 
     public void LoadOutfitsByPlayer()
@@ -64,15 +67,17 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
         if (!allOutfits.ContainsKey(PlayerBodyType))
             return;
 
-        foreach (BodyType bodyType in allOutfits[PlayerBodyType])
+        outfitStyles = new List<OutfitStyle>();
+        foreach (BodyMesh bodyType in allOutfits[PlayerBodyType])
         {
             outfitStyles.Add(new OutfitStyle(bodyType));
         }
+        outfitStyle = outfitStyles[0].CodeName;
     }
 
-    public List<BodyType> GetBodyTypes()
+    public List<BodyMesh> GetBodyTypes()
     {
-        List<BodyType> bodies = new List<BodyType>();
+        List<BodyMesh> bodies = new List<BodyMesh>();
         foreach (string bodyType in allOutfits.Keys)
         {
             bodies.Add(allOutfits[bodyType][0]);
@@ -82,7 +87,7 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
 
     public void ChangeOutfit(string outfitName)
     {
-        foreach (BodyType outfit in allOutfits[PlayerBodyType])
+        foreach (BodyMesh outfit in allOutfits[PlayerBodyType])
         {
             if (outfit.OutfitName.Equals(outfitName))
             {
@@ -105,29 +110,32 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
             Color skinColor = new Color(r, g, b, 1f);
             LoadOutfitsByPlayer();
             ChangeSkinColor(skinColor);
-            ChangeBody(PlayerBodyType);
+            ChangeBody(PlayerPrefs.GetString("Queen_Body"));
         }
         else
         {
+            string[] bodyInfo = bodyMeshes[0].name.Split('_');
+            bodyType = bodyInfo[0] + "_" + bodyInfo[1];
+            ChangeBody(bodyType);
             ChangeSkinColor(baseSkinColor);
         }
 
         ChangeClothesColor(baseClothesColor);
     }
 
-    public void ChangeBody(BodyType bodyType)
+    public void ChangeBody(BodyMesh bodyTypeMesh)
     {
-        Mesh meshInstance = Instantiate(bodyType.Mesh);
+        string[] bodyInfo = bodyTypeMesh.name.Split('_');
+        bodyType = bodyInfo[0] + "_" + bodyInfo[1];
+        Mesh meshInstance = Instantiate(bodyTypeMesh.Mesh);
         bodyMesh.sharedMesh = meshInstance;
         colliderMesh.sharedMesh = meshInstance;
     }
 
     private void ChangeBody(string bodyType)
     {
-        string[] bodyInfo = bodyType.Split('_');
-        string body = bodyInfo[0] + "_" + bodyInfo[1];
-        outfitStyle = allOutfits[body][0].OutfitName;
-        ChangeBody(allOutfits[body][0]);
+        outfitStyle = allOutfits[bodyType][0].OutfitName;
+        ChangeBody(allOutfits[bodyType][0]);
     }
 
     public void ChangeSkinColor(Color color)
