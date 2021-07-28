@@ -18,12 +18,20 @@ public class Embelisher : ColorPicking, RequiredComponent
         EmbelishingVariables = new EmbelishingVariables();
 
         OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadPreview);
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.FinishedOutfit, CleanPreview);
     }
 
     private void LoadPreview()
     {
         preview = Inventory.Instance.GetOneDecoration();
         EmbelishingVariables.CurrentScale = Vector3.one;
+        preview.gameObject.SetActive(false);
+    }
+
+    private void CleanPreview()
+    {
+        Inventory.Instance.ReturnDecoration(preview);
+        preview = null;
     }
 
     void Update()

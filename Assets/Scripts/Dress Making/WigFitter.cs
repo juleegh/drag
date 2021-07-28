@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WigFitter : MonoBehaviour
+public class WigFitter : MonoBehaviour, GlobalComponent
 {
     public static WigFitter Instance { get { return instance; } }
     private static WigFitter instance;
@@ -13,7 +13,7 @@ public class WigFitter : MonoBehaviour
     public string CurrentWig { get { return current != null ? current.name : ""; } }
     private WigConfig current;
 
-    void Awake()
+    public void ConfigureRequiredComponent()
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);

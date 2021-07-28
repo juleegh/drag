@@ -11,6 +11,7 @@ public class WigSelection : MonoBehaviour, GlobalComponent
     private Dictionary<WigType, Wig> wigs;
     public Dictionary<WigType, Wig> Wigs { get { return wigs; } }
     private WigType current;
+    public Wig Current { get { return wigs[current]; } }
 
     public void ConfigureRequiredComponent()
     {
@@ -22,6 +23,7 @@ public class WigSelection : MonoBehaviour, GlobalComponent
     {
         current = selected;
         WigFitter.Instance.ChangeSelected(wigsConfig.Wigs[current]);
+        OutfitEventsManager.Instance.Notify(OutfitEvent.WigSelected);
     }
 
     public void ChangeSelected(string selected)

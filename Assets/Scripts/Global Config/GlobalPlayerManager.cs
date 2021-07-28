@@ -16,7 +16,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
 
     public void ConfigureRequiredComponent()
     {
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         if (instance == null)
         {
             instance = this;

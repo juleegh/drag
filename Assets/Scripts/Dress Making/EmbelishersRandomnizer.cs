@@ -14,6 +14,9 @@ public class EmbelishersRandomnizer : MonoBehaviour
     [SerializeField] private Toggle hueToggle;
     [SerializeField] private Toggle saturationToggle;
     [SerializeField] private Toggle valueToggle;
+    [SerializeField] private GameObject rotationContainer;
+    [SerializeField] private GameObject scaleContainer;
+    [SerializeField] private GameObject colorContainer;
 
     private UnityAction<bool> valueWasChanged;
     void Awake()
@@ -28,6 +31,10 @@ public class EmbelishersRandomnizer : MonoBehaviour
         hueToggle.onValueChanged.AddListener(valueWasChanged);
         saturationToggle.onValueChanged.AddListener(valueWasChanged);
         valueToggle.onValueChanged.AddListener(valueWasChanged);
+
+        rotationContainer.SetActive(rotationToggle.isOn);
+        scaleContainer.SetActive(sizeToggle.isOn);
+        colorContainer.SetActive(hueToggle.isOn || saturationToggle.isOn || valueToggle.isOn);
     }
 
     private void SomethingChanged(bool result)
@@ -41,5 +48,9 @@ public class EmbelishersRandomnizer : MonoBehaviour
         Embelisher.Instance.EmbelishingVariables.RandomnizeColorSaturation = saturationToggle.isOn;
         Embelisher.Instance.EmbelishingVariables.RandomnizeColorValue = valueToggle.isOn;
         Embelisher.Instance.EmbelishingVariables.RandomnizeValues();
+
+        rotationContainer.SetActive(rotationToggle.isOn);
+        scaleContainer.SetActive(sizeToggle.isOn);
+        colorContainer.SetActive(hueToggle.isOn || saturationToggle.isOn || valueToggle.isOn);
     }
 }
