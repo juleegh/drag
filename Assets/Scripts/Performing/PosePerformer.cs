@@ -11,13 +11,13 @@ public class PosePerformer : MonoBehaviour
     [SerializeField] private Animator bodyAnimator;
 
     private List<Transform> bones;
+    private bool idle = false;
 
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
             GameObject[] theBones = GameObject.FindGameObjectsWithTag("Bone");
             bones = new List<Transform>();
             foreach (GameObject bone in theBones)
@@ -67,6 +67,27 @@ public class PosePerformer : MonoBehaviour
         bodyAnimator.Play(poseType.ToString());
 
         if (CameraPosing.Instance != null) CameraPosing.Instance.HitPose(poseType);
+        idle = false;
+    }
+
+    public void SetTempo(float tempo)
+    {
+        idle = true;
+        bodyAnimator.speed = 1 / tempo;
+    }
+
+    public void HitTempo()
+    {
+        if (idle)
+        {
+            bodyAnimator.Play("Idle");
+        }
+    }
+
+    private bool AnimatorIsPlaying()
+    {
+        return bodyAnimator.GetCurrentAnimatorStateInfo(0).length >
+               bodyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
 
     public Transform GetClosestBone(Vector3 pos)

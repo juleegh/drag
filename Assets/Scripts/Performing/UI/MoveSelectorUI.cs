@@ -12,12 +12,14 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
 
     private List<MoveUI> moves;
     private int currentMove;
+    private Vector3 indicatorSize;
 
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.SequenceCreated, CreateSlots);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovesShifted, ShiftMoves);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, PerformedMove);
+        indicatorSize = indicator.transform.localScale;
     }
 
     public void CleanMoves()
@@ -101,6 +103,8 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
         {
             moves[i].transform.DOMoveX(moves[i].transform.position.x - moveDistance, PerformSystem.Instance.Tempo).SetEase(Ease.Linear);
         }
+        indicator.transform.localScale = indicatorSize * 1.1f;
+        indicator.transform.DOScale(indicatorSize, PerformSystem.Instance.Tempo).SetEase(Ease.Linear);
 
         MoveUI old = moves[0];
         moves.Remove(old);

@@ -34,6 +34,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     {
         SoundManager.Instance.SetTrack(song.track);
         TempoCounter.Instance.SetTempo(song.tempo);
+        PosePerformer.Instance.SetTempo(song.tempo);
         LoadSongToSelector();
         performState = PerformState.PickingSequence;
         StartPerforming();
@@ -52,7 +53,6 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     {
         currentMove = 0;
         SoundManager.Instance.StartTrack();
-        PosePerformer.Instance.HitPose(PoseType.Idle);
         StartCoroutine(TinyWait());
     }
 
@@ -60,6 +60,8 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     {
         if (performState == PerformState.PickingSequence)
             return;
+
+        PosePerformer.Instance.HitTempo();
 
         if (!SongSequence.Instance.Slots[currentMove].performed)
         {
