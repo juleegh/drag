@@ -26,6 +26,23 @@ public class ColorPicker : MonoBehaviour
 
     void SomethingChanged()
     {
+        Color currentColor = GetInputColor();
+
+        if (colorPicking != null)
+            colorPicking.SetCurrentColor(currentColor);
+
+        colorView.color = currentColor;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (colorPicking != null && colorPicking.GetCurrentColor() != GetInputColor())
+            colorView.color = colorPicking.GetCurrentColor();
+    }
+
+    private Color GetInputColor()
+    {
         float h = 1;
         if (hue != null) h = hue.value;
         float s = 1;
@@ -33,21 +50,6 @@ public class ColorPicker : MonoBehaviour
         float v = 1;
         if (value != null) v = value.value;
 
-        Color currentColor = Color.HSVToRGB(h, s, v);
-
-        if (colorPicking != null)
-            colorPicking.SetCurrentColor(currentColor);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (colorPicking != null)
-            colorView.color = colorPicking.GetCurrentColor();
-        else
-        {
-            Color currentColor = Color.HSVToRGB(hue.value, saturation.value, value.value);
-            colorView.color = currentColor;
-        }
+        return Color.HSVToRGB(h, s, v);
     }
 }
