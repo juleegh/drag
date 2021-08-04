@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour, RequiredComponent
 {
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private float cameraSpeed = 1f;
     [SerializeField] float minFov = 0.5f;
     [SerializeField] float maxFov = 2f;
-    float sensitivity = 1f;
+    [SerializeField] float sensitivity;
+    [SerializeField] float maxAngle;
     float minUp = -1f;
     float maxUp = 1f;
     float upSensitivity = 0.3f;
@@ -20,55 +21,80 @@ public class CameraController : MonoBehaviour, RequiredComponent
 
     public void ConfigureRequiredComponent()
     {
-        basePosition = cameraTransform.localPosition;
-        baseRotation = cameraTransform.localEulerAngles;
+        basePosition = transform.localPosition;
+        baseRotation = transform.localEulerAngles;
         ready = true;
     }
 
     void Update()
     {
-        if (!ready || OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
+        //if (!ready || OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
+        if (!ready)
             return;
 
-        if (Input.GetKey(KeyCode.X))
-            MoveY();
-        else if (Input.GetKey(KeyCode.C))
-            RotateInX();
-        else if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0)
+            MoveHorizontal(Input.GetAxis("Horizontal"), cameraSpeed * Time.deltaTime);
+
+        if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
+            MoveVertical(Input.GetAxis("Vertical"), cameraSpeed * Time.deltaTime);
+
+        if (Input.GetMouseButton(2))
+            RotateWithMouse();
+
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
             Zoom();
     }
 
     public void ClearValues()
     {
-        cameraTransform.localPosition = basePosition;
-        cameraTransform.localEulerAngles = baseRotation;
+        transform.localPosition = basePosition;
+        transform.localEulerAngles = baseRotation;
     }
 
     private void Zoom()
     {
+
         Vector3 manPosition = mannequin.position;
         manPosition.y = 0f;
-        Vector3 cameraPos = cameraTransform.position;
+        Vector3 cameraPos = transform.position;
         cameraPos.y = 0f;
         float fov = Vector3.Distance(manPosition, cameraPos);
-        float inputVal = Input.GetAxis("Mouse ScrollWheel") * sensitivity;
-        fov -= inputVal;
-        fov = Mathf.Clamp(fov, minFov, maxFov);
-        Vector3 newPos = manPosition + cameraTransform.forward * -fov;
-        cameraTransform.position = newPos;
-        cameraTransform.localPosition = cameraTransform.localPosition - Vector3.up * cameraTransform.localPosition.y;
+
+        float deltaTime = Time.deltaTime;
+        float inputVal = Input.GetAxis("Mouse ScrollWheel") * 100 * sensitivity;
+
+        if (inputVal < 0 && fov + inputVal * deltaTime <= maxFov)
+            MoveForward(inputVal, deltaTime * cameraSpeed);
+        else if (inputVal > 0 && fov + inputVal * deltaTime >= minFov)
+            MoveForward(inputVal, deltaTime * cameraSpeed);
     }
 
-    private void MoveY()
+    private void MoveHorizontal(float direction, float time)
     {
-        float up = Input.GetAxis("Mouse ScrollWheel") * upSensitivity;
-        up = Mathf.Clamp(up, minUp, maxUp);
-        transform.Translate(transform.up * up);
+        Vector3 right = transform.worldToLocalMatrix.MultiplyVector(transform.right);
+        transform.Translate(right * direction * time, Space.Self);
     }
 
-    private void RotateInX()
+    private void MoveVertical(float direction, float time)
     {
-        float angle = Input.GetAxis("Mouse ScrollWheel") * moveSensitivity;
-        transform.eulerAngles += Vector3.up * angle;
+        Vector3 up = transform.worldToLocalMatrix.MultiplyVector(transform.up);
+        transform.Translate(up * direction * time, Space.World);
+    }
+
+    private void MoveForward(float direction, float time)
+    {
+        Vector3 forward = transform.worldToLocalMatrix.MultiplyVector(transform.forward);
+        transform.Translate(forward * direction * time, Space.Self);
+    }
+
+    private void RotateWithMouse()
+    {
+        Vector2 currentRotation = new Vector2(transform.eulerAngles.y, transform.eulerAngles.x);
+
+        currentRotation.x += Input.GetAxis("Mouse X") * sensitivity;
+        currentRotation.y -= Input.GetAxis("Mouse Y") * sensitivity;
+        currentRotation.x = Mathf.Repeat(currentRotation.x, 360);
+        currentRotation.y = Mathf.Clamp(currentRotation.y, -maxAngle, maxAngle);
+        transform.rotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0);
     }
 }
