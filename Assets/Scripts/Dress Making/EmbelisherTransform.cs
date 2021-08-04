@@ -45,8 +45,7 @@ public class EmbelisherTransform : MonoBehaviour, RequiredComponent
             decoration.Rotate(Vector3.up * 180, Space.Self);
 
         DecorationSetting currentDecoration = Inventory.Instance.CurrentSelected;
-        float dimension = SpriteAspectRatio.GetDimension(currentDecoration.Sprite);
-        decoration.localScale = Embelisher.Instance.EmbelishingVariables.Scale * SpriteAspectRatio.GetAspectRatio(dimension);
+        decoration.localScale = Embelisher.Instance.EmbelishingVariables.Scale * AspectRatioUtil.GetSpriteAspectRatio(currentDecoration.Sprite);
         decoration.GetComponent<Image>().color = Embelisher.Instance.EmbelishingVariables.GetTempColor();
         decoration.GetComponent<Image>().sprite = Inventory.Instance.CurrentSelected.Sprite;
     }

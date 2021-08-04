@@ -11,6 +11,7 @@ public class Embelisher : ColorPicking, RequiredComponent
     private GameObject preview;
     private Decoration currentlySelected;
     public bool erasing;
+    private float clickDelay = 0f;
 
     public void ConfigureRequiredComponent()
     {
@@ -40,12 +41,14 @@ public class Embelisher : ColorPicking, RequiredComponent
             return;
 
         preview.gameObject.SetActive(false);
+        if (clickDelay > 0)
+            clickDelay -= Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             if (erasing)
                 CheckForErasing();
-            else
+            else if (clickDelay <= 0)
                 CheckForPlacement();
         }
         else
@@ -102,6 +105,7 @@ public class Embelisher : ColorPicking, RequiredComponent
             CreateObjectToHit(decoration, hit);
             EmbelishingVariables.RandomnizeValues();
             decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
+            clickDelay = 0.05f;
         }
     }
 

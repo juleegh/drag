@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ad5e89f3a01d645b9f940cb5a0977e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 487624281}
+  connectedLight: {fileID: 487624281}
 --- !u!108 &487624281
 Light:
   m_ObjectHideFlags: 0
@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ad5e89f3a01d645b9f940cb5a0977e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 723286620}
+  connectedLight: {fileID: 0}
 --- !u!1 &772386367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1346,7 +1346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ad5e89f3a01d645b9f940cb5a0977e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 844185690}
+  connectedLight: {fileID: 844185690}
 --- !u!1 &867424453
 GameObject:
   m_ObjectHideFlags: 0

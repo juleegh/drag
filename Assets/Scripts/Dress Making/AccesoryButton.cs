@@ -20,8 +20,7 @@ public class AccesoryButton : MonoBehaviour
         if (decoration != null)
         {
             RectTransform rect = preview.GetComponent<RectTransform>();
-            float dimension = SpriteAspectRatio.GetDimension(accesory.Sprite);
-            float aspectRatio = SpriteAspectRatio.GetAspectRatio(dimension);
+            float aspectRatio = AspectRatioUtil.GetSpriteAspectRatio(accesory.Sprite);
             float distanceFromEdges = 1 - aspectRatio;
             rect.anchorMin = new Vector2(distanceFromEdges / 2, distanceFromEdges / 2);
             rect.anchorMax = new Vector2(1 - distanceFromEdges / 2, 1 - distanceFromEdges / 2);

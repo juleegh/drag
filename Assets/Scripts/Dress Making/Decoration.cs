@@ -26,7 +26,7 @@ public class Decoration : MonoBehaviour
 
     private void ScaleCollider(Sprite sprite)
     {
-        boxCollider.size = initialBounds * SpriteAspectRatio.GetAspectRatio(SpriteAspectRatio.GetDimension(sprite));
+        boxCollider.size = initialBounds * AspectRatioUtil.GetColliderAspectRatio(sprite);
     }
 
     public void LoadFromFile(GameDataReader dataReader)

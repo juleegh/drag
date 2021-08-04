@@ -5,15 +5,15 @@ using DG.Tweening;
 
 public class LightController : MonoBehaviour
 {
-    [SerializeField] private Light light;
+    [SerializeField] private Light connectedLight;
 
     public void FadeIn(float time)
     {
-        light.DOIntensity(0.5f, time);
+        connectedLight.DOIntensity(0.5f, time);
     }
 
     public void FadeOut(float time)
     {
-        light.DOIntensity(0f, time);
+        connectedLight.DOIntensity(0f, time);
     }
 }
