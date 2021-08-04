@@ -14,7 +14,9 @@ public class OutfitStepManager : MonoBehaviour, RequiredComponent
     public class TabButtons : SerializableDictionaryBase<OutfitStep, GameObject> { }
 
     [SerializeField] private TabButtons sections;
+    [SerializeField] private Button cancelButton;
 
+    private Dictionary<OutfitStep, DragTabButton> buttons;
     private OutfitStep step;
     public OutfitStep CurrentOutfitStep { get { return step; } }
 
@@ -34,14 +36,19 @@ public class OutfitStepManager : MonoBehaviour, RequiredComponent
     private void LoadUI()
     {
         int index = 0;
-        DragTabButton[] buttons = GetComponentsInChildren<DragTabButton>();
-        foreach (DragTabButton button in buttons)
+        buttons = new Dictionary<OutfitStep, DragTabButton>();
+        DragTabButton[] containerButtons = GetComponentsInChildren<DragTabButton>();
+        foreach (DragTabButton button in containerButtons)
         {
             button.SetButtonClick((step) => { ButtonPressed(step); }, (OutfitStep)index);
+            buttons.Add((OutfitStep)index, button);
             index++;
         }
         step = OutfitStep.Hair;
         ButtonPressed(OutfitStep.Hair);
+
+        cancelButton.onClick.RemoveAllListeners();
+        cancelButton.onClick.AddListener(CancelOutfit);
     }
 
     public void ButtonPressed(OutfitStep pressedButton)
@@ -50,8 +57,14 @@ public class OutfitStepManager : MonoBehaviour, RequiredComponent
         foreach (KeyValuePair<OutfitStep, GameObject> button in sections)
         {
             button.Value.SetActive(pressedButton == button.Key);
+            buttons[button.Key].MarkAsSelected(pressedButton == button.Key);
         }
         OutfitEventsManager.Instance.Notify(OutfitEvent.OutfitStepChanged);
+    }
+
+    private void CancelOutfit()
+    {
+        GlobalPlayerManager.Instance.GoToLobby();
     }
 
 }

@@ -21,4 +21,10 @@ public class DragTabButton : MonoBehaviour
     {
         linkedAction(step);
     }
+
+    public void MarkAsSelected(bool selected)
+    {
+        button.image.color = selected ? Color.green : Color.white;
+        button.transform.localScale = selected ? Vector3.one * 1.1f : Vector3.one;
+    }
 }
