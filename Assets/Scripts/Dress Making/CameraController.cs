@@ -28,8 +28,7 @@ public class CameraController : MonoBehaviour, RequiredComponent
 
     void Update()
     {
-        //if (!ready || OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
-        if (!ready)
+        if (!ready || OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
             return;
 
         if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0)

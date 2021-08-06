@@ -19,6 +19,7 @@ public class GameDataManager : MonoBehaviour, GlobalComponent
         instance = this;
         GameEventsManager.Instance.AddActionToEvent(GameEvent.DependenciesLoaded, Initialize);
         GameEventsManager.Instance.AddActionToEvent(GameEvent.EnteredDraggingRoom, ClearDecorations);
+        GameEventsManager.Instance.AddActionToEvent(GameEvent.OutfitCanceled, ClearDecorations);
     }
 
     private void Initialize()

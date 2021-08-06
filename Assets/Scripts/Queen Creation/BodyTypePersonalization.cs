@@ -2,22 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BodyTypePersonalization : MonoBehaviour
+public class BodyTypePersonalization : MonoBehaviour, RequiredComponent
 {
     private static BodyTypePersonalization instance;
     public static BodyTypePersonalization Instance { get { return instance; } }
     private BodyMesh selectedBody;
 
-    void Awake()
+    public void ConfigureRequiredComponent()
     {
         if (instance == null)
         {
             instance = this;
             selectedBody = BodyMeshController.Instance.GetBodyTypes()[0];
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 

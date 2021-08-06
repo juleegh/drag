@@ -25,5 +25,6 @@ public class StepCameraPosition : MonoBehaviour, RequiredComponent
         cameraObject.ClearValues();
         cameraObject.transform.DOMove(positions[OutfitStepManager.Instance.CurrentOutfitStep].position, movementDelay).SetEase(Ease.OutExpo);
         cameraObject.transform.DORotate(positions[OutfitStepManager.Instance.CurrentOutfitStep].eulerAngles, movementDelay).SetEase(Ease.OutExpo);
+        GlobalPlayerManager.Instance.transform.rotation = Quaternion.identity;
     }
 }

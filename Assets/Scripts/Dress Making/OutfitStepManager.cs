@@ -64,6 +64,7 @@ public class OutfitStepManager : MonoBehaviour, RequiredComponent
 
     private void CancelOutfit()
     {
+        GameEventsManager.Instance.Notify(GameEvent.OutfitCanceled);
         GlobalPlayerManager.Instance.GoToLobby();
     }
 
