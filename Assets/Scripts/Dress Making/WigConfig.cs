@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Wig")]
 public class WigConfig : ScriptableObject
 {
     [SerializeField] private GameObject mesh;

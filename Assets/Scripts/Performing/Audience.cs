@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Audience Settings")]
 public class Audience : ScriptableObject
 {
     [SerializeField] private float moveAReaction;

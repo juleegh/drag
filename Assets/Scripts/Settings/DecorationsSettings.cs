@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 
-[CreateAssetMenu(fileName = "Decorations Settings")]
 public class DecorationsSettings : ScriptableObject
 {
     [Serializable]

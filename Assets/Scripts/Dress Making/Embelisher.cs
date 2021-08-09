@@ -106,6 +106,7 @@ public class Embelisher : ColorPicking, RequiredComponent
             EmbelishingVariables.RandomnizeValues();
             decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
             clickDelay = 0.05f;
+            TimeManager.Instance.AdvanceHour(0.05f);
         }
     }
 

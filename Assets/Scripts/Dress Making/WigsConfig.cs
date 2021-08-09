@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 
-[CreateAssetMenu(fileName = "Wigs Config")]
 public class WigsConfig : ScriptableObject
 {
     [Serializable]

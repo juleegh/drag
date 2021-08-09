@@ -4,7 +4,6 @@ using System;
 using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 
-[CreateAssetMenu(fileName = "Moves Properties")]
 public class MovesProperties : ScriptableObject
 {
     [Serializable]

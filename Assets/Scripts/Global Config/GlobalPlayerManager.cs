@@ -62,4 +62,9 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     {
         SceneManager.LoadScene((int)GameFunctions.Lobby);
     }
+
+    public void GoToWork()
+    {
+        SceneManager.LoadScene((int)GameFunctions.Work);
+    }
 }

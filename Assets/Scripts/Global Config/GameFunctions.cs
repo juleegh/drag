@@ -9,4 +9,5 @@ public enum GameFunctions
     Lobby = 2,
     Dress_Making = 3,
     Performing = 4,
+    Work = 5,
 }

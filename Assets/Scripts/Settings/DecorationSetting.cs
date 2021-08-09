@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Decoration Settings")]
 public class DecorationSetting : ScriptableObject
 {
     [SerializeField] private int price;
