@@ -15,6 +15,7 @@ public class MoneyManager : MonoBehaviour, GlobalComponent
         if (instance == null)
         {
             instance = this;
+            dollars = 500;
         }
         else
         {
@@ -32,5 +33,20 @@ public class MoneyManager : MonoBehaviour, GlobalComponent
     {
         dollars += quantity;
         GameEventsManager.Instance.Notify(GameEvent.MoneyChanged);
+    }
+
+    public bool SpendDollars(float quantity)
+    {
+        if (Dollars < quantity)
+            return false;
+
+        dollars -= quantity;
+        GameEventsManager.Instance.Notify(GameEvent.MoneyChanged);
+        return true;
+    }
+
+    public bool HasEnoughMoney(float quantity)
+    {
+        return Dollars >= quantity;
     }
 }

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 5993218115837737598, guid: 2a7efe12c498e75429180c7b6d075411, type: 3}
   sprite: {fileID: -507730805829082370, guid: bb63550388abeee4c930ae31051ad2d9, type: 3}
-  price: 0
+  price: 60

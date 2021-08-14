@@ -9,7 +9,16 @@ public class OutfitStyleSelection : MonoBehaviour, RequiredComponent
 
     public void ConfigureRequiredComponent()
     {
-        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadStyles);
+        if (OutfitEventsManager.Instance != null)
+        {
+            OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadStyles);
+        }
+
+        if (ShoppingEventsManager.Instance != null)
+        {
+            ShoppingEventsManager.Instance.AddActionToEvent(ShoppingEvent.DependenciesLoaded, LoadStyles);
+        }
+
     }
 
     private void LoadStyles()

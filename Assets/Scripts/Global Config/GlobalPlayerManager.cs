@@ -16,7 +16,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
 
     public void ConfigureRequiredComponent()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         if (instance == null)
         {
             instance = this;
@@ -66,5 +66,10 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     public void GoToWork()
     {
         SceneManager.LoadScene((int)GameFunctions.Work);
+    }
+
+    public void GoToStore()
+    {
+        SceneManager.LoadScene((int)GameFunctions.Store);
     }
 }

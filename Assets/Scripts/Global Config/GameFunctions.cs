@@ -10,4 +10,5 @@ public enum GameFunctions
     Dress_Making = 3,
     Performing = 4,
     Work = 5,
+    Store = 6,
 }

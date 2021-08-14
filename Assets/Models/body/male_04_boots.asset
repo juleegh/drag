@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: male_04_boots
   m_EditorClassIdentifier: 
   bodyMesh: {fileID: 1830124285757711798, guid: 0896aebd851631b41b7957437805c5d8, type: 3}
+  price: 100

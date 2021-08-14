@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: male_04_jumpsuit
   m_EditorClassIdentifier: 
   bodyMesh: {fileID: -8787223358302603768, guid: 5096c5477f2198c4b94e527402bcfaef, type: 3}
+  price: 120

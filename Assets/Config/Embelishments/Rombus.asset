@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690ff302fde6b8a4db9b06b74e62c57c, type: 3}
   m_Name: Rombus
   m_EditorClassIdentifier: 
-  price: 30
+  price: 10
   sprite: {fileID: 9057021389675859395, guid: 810038d5532d96a42829dc0569c06601, type: 3}
   decorationType: 9

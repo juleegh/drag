@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 public class ColorPicker : MonoBehaviour
 {
-    [SerializeField] private Image colorView;
+    [SerializeField] private ColorDisplay colorView;
     [SerializeField] private Slider hue;
     [SerializeField] private Slider saturation;
     [SerializeField] private Slider value;
@@ -31,14 +28,15 @@ public class ColorPicker : MonoBehaviour
         if (colorPicking != null)
             colorPicking.SetCurrentColor(currentColor);
 
-        colorView.color = currentColor;
+        if (colorView != null)
+            colorView.ChangeDisplayColor(currentColor);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (colorPicking != null && colorPicking.GetCurrentColor() != GetInputColor())
-            colorView.color = colorPicking.GetCurrentColor();
+        if (colorView != null && colorPicking != null && colorPicking.GetCurrentColor() != GetInputColor())
+            colorView.ChangeDisplayColor(colorPicking.GetCurrentColor());
     }
 
     private Color GetInputColor()

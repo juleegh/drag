@@ -11,8 +11,16 @@ public class WigsUILoader : MonoBehaviour, RequiredComponent
 
     public void ConfigureRequiredComponent()
     {
-        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadWigs);
-        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.WigSelected, RefreshView);
+        if (OutfitEventsManager.Instance != null)
+        {
+            OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadWigs);
+            OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.WigSelected, RefreshView);
+        }
+
+        if (ShoppingEventsManager.Instance != null)
+        {
+            ShoppingEventsManager.Instance.AddActionToEvent(ShoppingEvent.DependenciesLoaded, LoadWigs);
+        }
     }
 
     private void LoadWigs()
@@ -28,6 +36,7 @@ public class WigsUILoader : MonoBehaviour, RequiredComponent
 
     private void RefreshView()
     {
-        wigPreview.sprite = WigSelection.Instance.Current.Sprite;
+        if (wigPreview != null)
+            wigPreview.sprite = WigSelection.Instance.Current.Sprite;
     }
 }

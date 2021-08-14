@@ -52,4 +52,14 @@ public class WigSelection : MonoBehaviour, GlobalComponent
         }
         return WigType.None;
     }
+
+    public WigConfig GetConfigFromType(WigType wigType)
+    {
+        foreach (KeyValuePair<WigType, WigConfig> wig in wigsConfig.Wigs)
+        {
+            if (wig.Key == wigType)
+                return wig.Value;
+        }
+        return null;
+    }
 }

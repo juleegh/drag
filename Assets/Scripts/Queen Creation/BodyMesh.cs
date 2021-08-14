@@ -5,7 +5,9 @@ using UnityEngine;
 public class BodyMesh : ScriptableObject
 {
     [SerializeField] private Mesh bodyMesh;
+    [SerializeField] private float price;
     public Mesh Mesh { get { return bodyMesh; } }
+    public float Price { get { return price; } }
 
     public string OutfitName
     {

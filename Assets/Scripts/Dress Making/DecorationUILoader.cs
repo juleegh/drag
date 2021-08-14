@@ -11,12 +11,21 @@ public class DecorationUILoader : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         loaded = false;
-        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.OutfitStepChanged, CheckDecorations);
+
+        if (OutfitEventsManager.Instance != null)
+        {
+            OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.OutfitStepChanged, CheckDecorations);
+        }
+
+        if (ShoppingEventsManager.Instance != null)
+        {
+            ShoppingEventsManager.Instance.AddActionToEvent(ShoppingEvent.ShoppingSectionChanged, CheckDecorations);
+        }
     }
 
     private void CheckDecorations()
     {
-        if (OutfitStepManager.Instance.CurrentOutfitStep == OutfitStep.Outfit)
+        //if (OutfitStepManager.Instance.CurrentOutfitStep == OutfitStep.Outfit)
         {
             if (!loaded)
                 LoadDecorations();
