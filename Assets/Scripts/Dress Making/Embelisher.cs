@@ -12,6 +12,8 @@ public class Embelisher : ColorPicking, RequiredComponent
     private Decoration currentlySelected;
     public bool erasing;
     private float clickDelay = 0f;
+    private bool hasEmbelishment = false;
+    public bool HasEmbelishment { get { return hasEmbelishment; } }
 
     public void ConfigureRequiredComponent()
     {
@@ -20,6 +22,8 @@ public class Embelisher : ColorPicking, RequiredComponent
 
         OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.DependenciesLoaded, LoadPreview);
         OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.FinishedOutfit, CleanPreview);
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.OutfitStepChanged, CleanSection);
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.EmbelishmentSelected, CheckQuantity);
     }
 
     private void LoadPreview()
@@ -35,12 +39,26 @@ public class Embelisher : ColorPicking, RequiredComponent
         preview = null;
     }
 
+    private void CleanSection()
+    {
+        if (OutfitStepManager.Instance.CurrentOutfitStep == OutfitStep.Outfit)
+            return;
+
+        hasEmbelishment = false;
+    }
+
+    private void CheckQuantity()
+    {
+        hasEmbelishment = Inventory.Instance.CurrentDecorationsLeft() > 0;
+    }
+
     void Update()
     {
         if (instance == null || OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
             return;
 
         preview.gameObject.SetActive(false);
+
         if (clickDelay > 0)
             clickDelay -= Time.deltaTime;
 
@@ -48,7 +66,7 @@ public class Embelisher : ColorPicking, RequiredComponent
         {
             if (erasing)
                 CheckForErasing();
-            else if (clickDelay <= 0)
+            else if (clickDelay <= 0 && hasEmbelishment)
                 CheckForPlacement();
         }
         else
@@ -56,7 +74,7 @@ public class Embelisher : ColorPicking, RequiredComponent
             ChangeCurrentlySelected(null);
             if (erasing)
                 PreviewForErasing();
-            else
+            else if (hasEmbelishment)
                 PreviewForPlacement();
         }
     }
@@ -81,7 +99,7 @@ public class Embelisher : ColorPicking, RequiredComponent
             decoration.transform.Rotate(Vector3.up * 180, Space.Self);
         decoration.transform.localScale = EmbelishingVariables.Scale;
         decoration.GetComponent<Decoration>().SetColor(EmbelishingVariables.GetTempColor());
-        decoration.GetComponent<Decoration>().LoadInfo(Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
+        decoration.GetComponent<Decoration>().LoadInfo(Inventory.Instance.CurrentSelected.DecoType, Inventory.Instance.CurrentSelected.CodeName, Inventory.Instance.CurrentSelected.Sprite);
     }
 
     public override void SetCurrentColor(Color color)
@@ -107,6 +125,8 @@ public class Embelisher : ColorPicking, RequiredComponent
             decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
             clickDelay = 0.05f;
             TimeManager.Instance.AdvanceHour(0.05f);
+            Inventory.Instance.UsedDecoration();
+            CheckQuantity();
         }
     }
 
@@ -117,6 +137,7 @@ public class Embelisher : ColorPicking, RequiredComponent
         if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.layer == LayerMask.NameToLayer("Decoration"))
         {
             Inventory.Instance.ReturnDecoration(hit.transform.gameObject);
+            Inventory.Instance.RecycledDecoration(hit.transform.GetComponent<Decoration>().DecorationType);
         }
     }
 

@@ -9,9 +9,12 @@ public class Decoration : MonoBehaviour
     public SpriteRenderer SpriteRenderer { get { return spriteRenderer; } }
     GarmentDecoration data;
     private Vector3 initialBounds = new Vector3(0.1f, 0.1f, 0.001f);
+    private DecorationType decorationType;
+    public DecorationType DecorationType { get { return decorationType; } }
 
-    public void LoadInfo(string code, Sprite sprite)
+    public void LoadInfo(DecorationType decoType, string code, Sprite sprite)
     {
+        decorationType = decoType;
         spriteRenderer.sprite = sprite;
         ScaleCollider(sprite);
         data = new GarmentDecoration();

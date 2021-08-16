@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EmbelisherTransform : MonoBehaviour, RequiredComponent
 {
@@ -12,6 +13,7 @@ public class EmbelisherTransform : MonoBehaviour, RequiredComponent
     [SerializeField] private Slider rotation;
     [SerializeField] private Toggle mirror;
     [SerializeField] private Transform decoration;
+    [SerializeField] private TextMeshProUGUI quantity;
 
     public void ConfigureRequiredComponent()
     {
@@ -20,12 +22,34 @@ public class EmbelisherTransform : MonoBehaviour, RequiredComponent
         rotation.onValueChanged.AddListener(delegate { SomethingChanged(); });
         mirror.onValueChanged.AddListener((changed) => { SomethingChanged(); });
 
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.OutfitStepChanged, CleanSection);
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.EmbelishmentSelected, UpdateQuantity);
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.EmbelishmentUsed, UpdateQuantity);
+        OutfitEventsManager.Instance.AddActionToEvent(OutfitEvent.EmbelishmentDeleted, UpdateQuantity);
+
+        quantity.text = "";
+
         SomethingChanged();
+    }
+
+    void UpdateQuantity()
+    {
+        quantity.text = "x" + Inventory.Instance.CurrentDecorationsLeft();
+        UpdatePreview();
     }
 
     void Initialize()
     {
         EmbelishingVariables.ValueChanged += UpdatePreview;
+    }
+
+    void CleanSection()
+    {
+        if (OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)
+            return;
+
+        decoration.gameObject.SetActive(false);
+        quantity.text = "";
     }
 
     void SomethingChanged()
@@ -37,8 +61,10 @@ public class EmbelisherTransform : MonoBehaviour, RequiredComponent
 
     public void UpdatePreview()
     {
-        if (Embelisher.Instance == null)
+        if (Embelisher.Instance == null || !Embelisher.Instance.HasEmbelishment)
             return;
+
+        decoration.gameObject.SetActive(true);
         decoration.rotation = Quaternion.identity;
         decoration.Rotate(Vector3.forward * Embelisher.Instance.EmbelishingVariables.Rotation, Space.Self);
         if (Embelisher.Instance.EmbelishingVariables.Mirrored)

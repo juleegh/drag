@@ -36,12 +36,13 @@ public class Inventory : MonoBehaviour, GlobalComponent
     {
         current = selected;
         Embelisher.Instance.EmbelishingVariables.CurrentStyle = CurrentSelected.Sprite;
+        OutfitEventsManager.Instance.Notify(OutfitEvent.EmbelishmentSelected);
     }
 
     public GameObject GetOneDecoration()
     {
         GameObject newDeco = decorationsPool.GetObject();
-        newDeco.GetComponent<Decoration>().LoadInfo(current.ToString(), CurrentSelected.Sprite);
+        newDeco.GetComponent<Decoration>().LoadInfo(CurrentSelected.DecoType, current.ToString(), CurrentSelected.Sprite);
         return newDeco;
     }
 
@@ -49,12 +50,34 @@ public class Inventory : MonoBehaviour, GlobalComponent
     {
         DecorationType decoType = (DecorationType)System.Enum.Parse(typeof(DecorationType), code);
         GameObject decorationPrefab = decorationsPool.GetObject();
-        decorationPrefab.GetComponent<Decoration>().LoadInfo(code, decorationsSettings.Decorations[decoType].Sprite);
+        decorationPrefab.GetComponent<Decoration>().LoadInfo(decoType, code, decorationsSettings.Decorations[decoType].Sprite);
         return decorationPrefab;
     }
 
     public void ReturnDecoration(GameObject decoration)
     {
         decorationsPool.ReturnObject(decoration);
+    }
+
+    public int CurrentDecorationsLeft()
+    {
+        int quantity = PlayerPrefs.GetInt(decorations[current].CodeName, 0);
+        return quantity;
+    }
+
+    public void UsedDecoration()
+    {
+        int quantity = PlayerPrefs.GetInt(decorations[current].CodeName, 0);
+        quantity--;
+        PlayerPrefs.SetInt(decorations[current].CodeName, quantity);
+        OutfitEventsManager.Instance.Notify(OutfitEvent.EmbelishmentUsed);
+    }
+
+    public void RecycledDecoration(DecorationType decorationType)
+    {
+        int quantity = PlayerPrefs.GetInt(decorations[decorationType].CodeName, 0);
+        quantity++;
+        PlayerPrefs.SetInt(decorations[decorationType].CodeName, quantity);
+        OutfitEventsManager.Instance.Notify(OutfitEvent.EmbelishmentDeleted);
     }
 }

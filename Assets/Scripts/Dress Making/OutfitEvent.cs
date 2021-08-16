@@ -4,4 +4,7 @@ public enum OutfitEvent
     WigSelected,
     OutfitStepChanged,
     FinishedOutfit,
+    EmbelishmentSelected,
+    EmbelishmentUsed,
+    EmbelishmentDeleted,
 }

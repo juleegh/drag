@@ -45,7 +45,7 @@ public class GarmentPurchaser : MonoBehaviour, RequiredComponent
     {
         int amountOfGarments = PlayerPrefs.GetInt("GarmentsOwned", 0);
         PlayerPrefs.SetString("GarmentType" + amountOfGarments, selectedGarment.CodeName);
-        PlayerPrefs.SetString("GarmentColor" + amountOfGarments, GarmentColorPicking.GetCurrentColor().ToString());
+        PlayerPrefs.SetString("GarmentColor" + amountOfGarments, ColorConversion.StringFromColor(GarmentColorPicking.GetCurrentColor()));
         amountOfGarments++;
         PlayerPrefs.SetInt("GarmentsOwned", amountOfGarments);
     }

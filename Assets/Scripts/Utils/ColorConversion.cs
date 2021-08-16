@@ -11,4 +11,15 @@ public static class ColorConversion
     {
         return new Color(color.x, color.y, color.z, 1);
     }
+
+    public static Color ColorFromString(string color)
+    {
+        string[] components = color.Split(',');
+        return new Color(float.Parse(components[0]), float.Parse(components[1]), float.Parse(components[2]), 1);
+    }
+
+    public static string StringFromColor(Color color)
+    {
+        return color.r + "," + color.g + "," + color.b;
+    }
 }

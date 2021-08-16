@@ -39,7 +39,8 @@ public class WigPurchaser : MonoBehaviour, RequiredComponent
     {
         int amountOfWigs = PlayerPrefs.GetInt("WigsOwned", 0);
         PlayerPrefs.SetString("WigType" + amountOfWigs, selectedWig.CodeName);
-        PlayerPrefs.SetString("WigColor" + amountOfWigs, wigColorPicking.GetCurrentColor().ToString());
+        Color colorWig = wigColorPicking.GetCurrentColor();
+        PlayerPrefs.SetString("WigColor" + amountOfWigs, ColorConversion.StringFromColor(colorWig));
         amountOfWigs++;
         PlayerPrefs.SetInt("WigsOwned", amountOfWigs);
     }

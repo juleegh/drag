@@ -13,7 +13,7 @@ public class EmbelisherTools : MonoBehaviour
     {
         drawBtn.onClick.AddListener(() => { ToggleMode(false); });
         eraserBtn.onClick.AddListener(() => { ToggleMode(true); });
-        drawBtn.image.color = Color.gray;
+        drawBtn.image.color = Color.green;
         currentErasing = false;
     }
 
@@ -39,7 +39,7 @@ public class EmbelisherTools : MonoBehaviour
     {
         currentErasing = erasing;
         Embelisher.Instance.erasing = erasing;
-        drawBtn.image.color = !erasing ? Color.gray : Color.white;
-        eraserBtn.image.color = erasing ? Color.gray : Color.white;
+        drawBtn.image.color = !erasing ? Color.green : Color.white;
+        eraserBtn.image.color = erasing ? Color.green : Color.white;
     }
 }

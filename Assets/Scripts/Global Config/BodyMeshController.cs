@@ -75,6 +75,16 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
         outfitStyle = outfitStyles[0].CodeName;
     }
 
+    public OutfitStyle GetOutfitByName(string outfitName)
+    {
+        foreach (OutfitStyle style in outfitStyles)
+        {
+            if (style.CodeName == outfitName)
+                return style;
+        }
+        return null;
+    }
+
     public List<BodyMesh> GetBodyTypes()
     {
         List<BodyMesh> bodies = new List<BodyMesh>();
