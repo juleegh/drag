@@ -16,10 +16,16 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
 
     public void ConfigureRequiredComponent()
     {
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, HideUI);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.SequenceCreated, CreateSlots);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovesShifted, ShiftMoves);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, PerformedMove);
         indicatorSize = indicator.transform.localScale;
+    }
+
+    private void HideUI()
+    {
+        indicator.gameObject.SetActive(false);
     }
 
     public void CleanMoves()

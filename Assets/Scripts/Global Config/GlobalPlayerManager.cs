@@ -44,7 +44,8 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        transform.position = Vector3.zero;
+        if (scene.buildIndex != (int)GameFunctions.Performing)
+            transform.position = Vector3.zero;
     }
 
     public void GoToDragging()

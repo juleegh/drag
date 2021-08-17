@@ -10,8 +10,19 @@ public class AudienceEmotionsUI : MonoBehaviour, RequiredComponent
     public class AudienceBarsDictionary : SerializableDictionaryBase<MoveType, EmotionBar> { }
 
     [SerializeField] private AudienceBarsDictionary bars;
+    [SerializeField] private GameObject container;
 
     public void ConfigureRequiredComponent()
+    {
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, HideStats);
+    }
+
+    private void HideStats()
+    {
+        container.SetActive(false);
+    }
+
+    private void LoadUI()
     {
         foreach (KeyValuePair<MoveType, EmotionBar> bar in bars)
         {

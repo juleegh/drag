@@ -27,7 +27,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     {
         instance = this;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TempoEnded, NextMove);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartPerformingSystem);
+        //PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartPerformingSystem);
     }
 
     private void StartPerformingSystem()
