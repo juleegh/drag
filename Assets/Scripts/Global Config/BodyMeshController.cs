@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BodyMeshController : MonoBehaviour, GlobalComponent
+public class BodyMeshController : BodyPreview, GlobalComponent
 {
     private static BodyMeshController instance;
     public static BodyMeshController Instance { get { return instance; } }
 
-    [SerializeField] private SkinnedMeshRenderer bodyMesh;
-    [SerializeField] private MeshCollider colliderMesh;
-    [SerializeField] private Material meshMaterial;
     [SerializeField] private Color baseSkinColor;
     [SerializeField] private Color baseClothesColor;
     [SerializeField] private string baseStyle;
@@ -17,16 +14,10 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
 
     private Dictionary<string, List<BodyMesh>> allOutfits;
     private List<OutfitStyle> outfitStyles;
-    private Color skinColor;
-    private Color clothesColor;
-    private string outfitStyle;
-    private string bodyType;
-    public Color SkinColor { get { return skinColor; } }
-    public Color ClothesColor { get { return clothesColor; } }
-    public string OutfitStyle { get { return outfitStyle; } }
 
     public List<OutfitStyle> OutfitStyles { get { return outfitStyles; } }
     public string PlayerBodyType { get { return bodyType; } }
+    public List<BodyMesh> BodyMeshes { get { return bodyMeshes; } }
 
     public void ConfigureRequiredComponent()
     {
@@ -133,30 +124,9 @@ public class BodyMeshController : MonoBehaviour, GlobalComponent
         ChangeClothesColor(baseClothesColor);
     }
 
-    public void ChangeBody(BodyMesh bodyTypeMesh)
-    {
-        string[] bodyInfo = bodyTypeMesh.name.Split('_');
-        bodyType = bodyInfo[0] + "_" + bodyInfo[1];
-        Mesh meshInstance = Instantiate(bodyTypeMesh.Mesh);
-        bodyMesh.sharedMesh = meshInstance;
-        colliderMesh.sharedMesh = meshInstance;
-    }
-
     private void ChangeBody(string bodyType)
     {
         outfitStyle = allOutfits[bodyType][0].OutfitName;
         ChangeBody(allOutfits[bodyType][0]);
-    }
-
-    public void ChangeSkinColor(Color color)
-    {
-        skinColor = color;
-        meshMaterial.SetColor("Color_71541232085d449d84d0f5bba4469500", color);
-    }
-
-    public void ChangeClothesColor(Color color)
-    {
-        clothesColor = color;
-        meshMaterial.SetColor("Color_e17f239f599b4965bdc5b9b436d7ed12", color);
     }
 }

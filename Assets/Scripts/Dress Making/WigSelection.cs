@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class WigSelection : MonoBehaviour, GlobalComponent
 {
@@ -12,6 +13,7 @@ public class WigSelection : MonoBehaviour, GlobalComponent
     public Dictionary<WigType, Wig> Wigs { get { return wigs; } }
     private WigType current;
     public Wig Current { get { return wigs[current]; } }
+    public List<WigConfig> WigList { get { return wigsConfig.Wigs.Values.ToList<WigConfig>(); } }
 
     public void ConfigureRequiredComponent()
     {
