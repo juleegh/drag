@@ -2,15 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QueenRandomnizer : MonoBehaviour, RequiredComponent
+public class QueenRandomnizer : MonoBehaviour
 {
     [SerializeField] private WigPreview wigPreview;
     [SerializeField] private BodyPreview bodyPreview;
+    [SerializeField] private CharacterPose characterPose;
     [SerializeField] private List<Color> skinTones;
 
-    public void ConfigureRequiredComponent()
+    public void MakeRandomIdleQueen()
     {
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, GenerateRandomQueen);
+        GenerateRandomQueen();
+        characterPose.HitPose(GetRandomIdle());
+        characterPose.AddOffset();
+    }
+
+    public void MakeRandomDancingQueen()
+    {
+        GenerateRandomQueen();
+        characterPose.HitPose(GetRandomDancing());
+        characterPose.AddOffset();
     }
 
     private void GenerateRandomQueen()
@@ -46,5 +56,26 @@ public class QueenRandomnizer : MonoBehaviour, RequiredComponent
     private Color GetRandomSkinTone()
     {
         return skinTones[Random.Range(0, skinTones.Count)];
+    }
+
+    private PoseType GetRandomIdle()
+    {
+        List<PoseType> posesList = new List<PoseType>();
+        posesList.Add(PoseType.Club_Idle_1);
+        posesList.Add(PoseType.Club_Idle_2);
+        posesList.Add(PoseType.Club_Idle_3);
+        return posesList[Random.Range(0, posesList.Count)];
+    }
+
+    private PoseType GetRandomDancing()
+    {
+        List<PoseType> posesList = new List<PoseType>();
+        posesList.Add(PoseType.Club_Dancing_1);
+        posesList.Add(PoseType.Club_Dancing_2);
+        posesList.Add(PoseType.Club_Dancing_3);
+        posesList.Add(PoseType.Club_Dancing_4);
+        posesList.Add(PoseType.Club_Dancing_5);
+        posesList.Add(PoseType.Club_Dancing_6);
+        return posesList[Random.Range(0, posesList.Count)];
     }
 }

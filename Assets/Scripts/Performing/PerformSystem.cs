@@ -61,8 +61,6 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         if (performState == PerformState.PickingSequence)
             return;
 
-        PosePerformer.Instance.HitTempo();
-
         if (!SongSequence.Instance.Slots[currentMove].performed)
         {
             SongSequence.Instance.Slots[currentMove].performed = true;

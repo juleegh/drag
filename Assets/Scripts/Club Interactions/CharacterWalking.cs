@@ -5,9 +5,11 @@ using UnityEngine;
 public class CharacterWalking : MonoBehaviour, RequiredComponent
 {
     [SerializeField] private float speed;
+    bool isWalking;
 
     public void ConfigureRequiredComponent()
     {
+        isWalking = false;
         //PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, PossesPlayer);
     }
 
@@ -28,5 +30,23 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
         Vector3 movement = new Vector3(horizontal, 0, vertical);
         transform.LookAt(transform.position + movement);
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
+
+        if (movement.magnitude != 0)
+        {
+            if (!isWalking)
+            {
+                isWalking = true;
+                PosePerformer.Instance.HitPose(PoseType.Walking);
+            }
+            PosePerformer.Instance.SetSpeed(movement.magnitude);
+        }
+        else
+        {
+            if (isWalking)
+            {
+                isWalking = false;
+                PosePerformer.Instance.HitPose(PoseType.Idle);
+            }
+        }
     }
 }

@@ -13,5 +13,6 @@ public enum PerformingEvent
     SequenceInputComplete,
     MovePerformed,
     TempoEnded,
-    MovesShifted
+    MovesShifted,
+    ClubLoaded,
 }

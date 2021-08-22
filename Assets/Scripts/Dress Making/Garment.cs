@@ -45,7 +45,7 @@ public class Garment : GameData
 
             GameObject ornament = Inventory.Instance.GetEmbelishmentByOrnamentType(code);
             ornament.GetComponent<Decoration>().LoadFromFile(reader);
-            ornament.transform.SetParent(PosePerformer.Instance.GetClosestBone(ornament.transform.position));
+            ornament.transform.SetParent(SqueletonManager.Instance.GetClosestBone(ornament.transform.position));
         }
         string wig = reader.ReadString();
         WigSelection.Instance.ChangeSelected(wig);

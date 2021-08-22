@@ -122,7 +122,7 @@ public class Embelisher : ColorPicking, RequiredComponent
             GameObject decoration = Inventory.Instance.GetOneDecoration();
             CreateObjectToHit(decoration, hit);
             EmbelishingVariables.RandomnizeValues();
-            decoration.transform.SetParent(PosePerformer.Instance.GetClosestBone(hit.point));
+            decoration.transform.SetParent(SqueletonManager.Instance.GetClosestBone(hit.point));
             clickDelay = 0.05f;
             TimeManager.Instance.AdvanceHour(0.05f);
             Inventory.Instance.UsedDecoration();

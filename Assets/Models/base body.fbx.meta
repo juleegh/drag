@@ -4,44 +4,125 @@ ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 8448738342706383627
-    second: fem_011|0TPose
+      74: -6422465813605690695
+    second: fem_base.001|0TPose
   - first:
-      74: 8145222539177801559
-    second: fem_011|Cobra
+      74: 6818596926301363331
+    second: fem_base.001|0TPose.001
   - first:
-      74: -4341596116814082052
-    second: fem_011|Egiptian
+      74: -6142057790441208733
+    second: fem_base.001|0TPose.002
   - first:
-      74: -8844953362745277012
-    second: fem_011|Face_Cover
+      74: -3435699413430490836
+    second: fem_base.001|0TPose.005
   - first:
-      74: -4249046170910966416
-    second: fem_011|Hand_Up
+      74: 680692906812955875
+    second: fem_base.001|0TPose.006
   - first:
-      74: -1586611307994352455
-    second: fem_011|Hands_Hips
+      74: 6129064206185398406
+    second: fem_base.001|0TPose.007
   - first:
-      74: 8604929265454343817
-    second: fem_011|Idle
+      74: -25082074918839213
+    second: fem_base.001|0TPose.008
   - first:
-      74: -5612205676129466282
-    second: fem_011|Knee_Down
+      74: 5478168925664016091
+    second: fem_base.001|0TPose.009
   - first:
-      74: -6482980192956793895
-    second: fem_011|Muscle_Up
+      74: -3176344103868857382
+    second: fem_base.001|0TPose.010
   - first:
-      74: 6844099986118211519
-    second: fem_011|Schwazeneger
+      74: -284039309730445030
+    second: fem_base.001|0TPose.011
   - first:
-      74: -1477180010378971138
-    second: fem_011|Squat_Like
+      74: -362033347599963508
+    second: fem_base.001|0TPose.012
   - first:
-      74: -4035793911185451318
-    second: fem_011|Tiger
+      74: 3765496580047322102
+    second: fem_base.001|0TPose.013
   - first:
-      74: 5051380242131121918
-    second: fem_011|Vogue
+      74: -5561531075764031614
+    second: fem_base.001|0TPose.014
+  - first:
+      74: -8225897862292141848
+    second: fem_base.001|Club_01
+  - first:
+      74: 7892509990885430626
+    second: fem_base.001|Club_02
+  - first:
+      74: -2716707583816110958
+    second: fem_base.001|Club_03
+  - first:
+      74: 2728233474520494768
+    second: fem_base.001|Club_04
+  - first:
+      74: -5940704468153799939
+    second: fem_base.001|Club_05
+  - first:
+      74: 4166377176500048982
+    second: fem_base.001|Club_06
+  - first:
+      74: -8473547793262466990
+    second: fem_base.001|Club_07
+  - first:
+      74: 2797900208706173385
+    second: fem_base.001|Club_08
+  - first:
+      74: -5504145613179890595
+    second: fem_base.001|Club_09
+  - first:
+      74: -3878536352056281422
+    second: fem_base.001|Cobra
+  - first:
+      74: 717402499883829706
+    second: fem_base.001|Egiptian
+  - first:
+      74: 8252853492604298142
+    second: fem_base.001|Face_Cover
+  - first:
+      74: 7191504531575462169
+    second: fem_base.001|Hand_Up
+  - first:
+      74: -5674696961234362458
+    second: fem_base.001|Hands_Hips
+  - first:
+      74: -3858150587713162591
+    second: fem_base.001|Hands_Hips.001
+  - first:
+      74: 4375871530573029141
+    second: fem_base.001|Hands_Hips.002
+  - first:
+      74: -7349414410923718673
+    second: fem_base.001|Idle
+  - first:
+      74: -7907615199072819943
+    second: fem_base.001|Knee_Down
+  - first:
+      74: -7799868714182380490
+    second: fem_base.001|Muscle_Up
+  - first:
+      74: -8445146757525492653
+    second: fem_base.001|Schwazeneger
+  - first:
+      74: 6485783620907172758
+    second: fem_base.001|Squat_Like
+  - first:
+      74: 6278688930610870093
+    second: fem_base.001|Tiger
+  - first:
+      74: -7069778442645281916
+    second: fem_base.001|Vogue
+  - first:
+      74: 8119944374999094511
+    second: fem_base.001|Vogue.005
+  - first:
+      74: 2171007318037899610
+    second: fem_base.001|Vogue.006
+  - first:
+      74: 4534878116309454437
+    second: fem_base.001|Walking
+  - first:
+      74: -8782482626245788303
+    second: fem_base.001|Walking.001
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -71,8 +152,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: fem_011|0TPose
-      takeName: fem_011|0TPose
+      name: fem_base.001|0TPose
+      takeName: fem_base.001|0TPose
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -100,18 +181,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Cobra
-      takeName: fem_011|Cobra
+      name: fem_base.001|Club_01
+      takeName: fem_base.001|Club_01
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 105
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -129,18 +210,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Egiptian
-      takeName: fem_011|Egiptian
+      name: fem_base.001|Club_02
+      takeName: fem_base.001|Club_02
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 105
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -158,18 +239,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Face_Cover
-      takeName: fem_011|Face_Cover
+      name: fem_base.001|Club_03
+      takeName: fem_base.001|Club_03
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -187,18 +268,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Hand_Up
-      takeName: fem_011|Hand_Up
+      name: fem_base.001|Club_04
+      takeName: fem_base.001|Club_04
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -216,18 +297,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Hands_Hips
-      takeName: fem_011|Hands_Hips
+      name: fem_base.001|Club_05
+      takeName: fem_base.001|Club_05
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -245,8 +326,66 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Idle
-      takeName: fem_011|Idle
+      name: fem_base.001|Club_06
+      takeName: fem_base.001|Club_06
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Club_07
+      takeName: fem_base.001|Club_07
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Club_08
+      takeName: fem_base.001|Club_08
       internalID: 0
       firstFrame: 0
       lastFrame: 12
@@ -256,7 +395,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -274,8 +413,37 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Knee_Down
-      takeName: fem_011|Knee_Down
+      name: fem_base.001|Club_09
+      takeName: fem_base.001|Club_09
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 300
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Cobra
+      takeName: fem_base.001|Cobra
       internalID: 0
       firstFrame: 0
       lastFrame: 19
@@ -303,8 +471,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Muscle_Up
-      takeName: fem_011|Muscle_Up
+      name: fem_base.001|Egiptian
+      takeName: fem_base.001|Egiptian
       internalID: 0
       firstFrame: 0
       lastFrame: 19
@@ -332,8 +500,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Schwazeneger
-      takeName: fem_011|Schwazeneger
+      name: fem_base.001|Face_Cover
+      takeName: fem_base.001|Face_Cover
       internalID: 0
       firstFrame: 0
       lastFrame: 19
@@ -361,8 +529,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Squat_Like
-      takeName: fem_011|Squat_Like
+      name: fem_base.001|Hand_Up
+      takeName: fem_base.001|Hand_Up
       internalID: 0
       firstFrame: 0
       lastFrame: 19
@@ -390,8 +558,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Tiger
-      takeName: fem_011|Tiger
+      name: fem_base.001|Hands_Hips
+      takeName: fem_base.001|Hands_Hips
       internalID: 0
       firstFrame: 0
       lastFrame: 19
@@ -419,8 +587,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: fem_011|Vogue
-      takeName: fem_011|Vogue
+      name: fem_base.001|Idle
+      takeName: fem_base.001|Idle
       internalID: 0
       firstFrame: 0
       lastFrame: 19
@@ -431,6 +599,209 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Knee_Down
+      takeName: fem_base.001|Knee_Down
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Muscle_Up
+      takeName: fem_base.001|Muscle_Up
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Schwazeneger
+      takeName: fem_base.001|Schwazeneger
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Squat_Like
+      takeName: fem_base.001|Squat_Like
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Tiger
+      takeName: fem_base.001|Tiger
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Vogue
+      takeName: fem_base.001|Vogue
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: fem_base.001|Walking
+      takeName: fem_base.001|Walking
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
