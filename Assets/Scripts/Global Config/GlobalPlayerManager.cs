@@ -73,4 +73,9 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     {
         SceneManager.LoadScene((int)GameFunctions.Store);
     }
+
+    public void GoPractice()
+    {
+        SceneManager.LoadScene((int)GameFunctions.Practice);
+    }
 }

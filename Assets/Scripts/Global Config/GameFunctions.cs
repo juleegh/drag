@@ -11,4 +11,5 @@ public enum GameFunctions
     Performing = 4,
     Work = 5,
     Store = 6,
+    Practice = 7,
 }

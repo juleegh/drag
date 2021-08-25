@@ -21,3 +21,4 @@ MonoBehaviour:
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
+  movesQuantity: 24

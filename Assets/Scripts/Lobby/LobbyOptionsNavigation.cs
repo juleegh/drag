@@ -10,6 +10,7 @@ public class LobbyOptionsNavigation : MonoBehaviour
     [SerializeField] private Button goPerformingBtn;
     [SerializeField] private Button goWorkBtn;
     [SerializeField] private Button goStoreBtn;
+    [SerializeField] private Button goPracticingBtn;
     [SerializeField] private GameObject selectionUI;
 
     void Awake()
@@ -19,6 +20,7 @@ public class LobbyOptionsNavigation : MonoBehaviour
         goPerformingBtn.onClick.AddListener(() => { GoToSection(GameFunctions.Performing); });
         goWorkBtn.onClick.AddListener(() => { GoToSection(GameFunctions.Work); });
         goStoreBtn.onClick.AddListener(() => { GoToSection(GameFunctions.Store); });
+        goPracticingBtn.onClick.AddListener(() => { GoToSection(GameFunctions.Practice); });
     }
 
     private void ShowSelectOutfitUI()
@@ -41,6 +43,9 @@ public class LobbyOptionsNavigation : MonoBehaviour
                 break;
             case GameFunctions.Store:
                 GlobalPlayerManager.Instance.GoToStore();
+                break;
+            case GameFunctions.Practice:
+                GlobalPlayerManager.Instance.GoPractice();
                 break;
 
         }

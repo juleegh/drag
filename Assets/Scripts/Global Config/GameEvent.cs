@@ -5,4 +5,5 @@ public enum GameEvent
     OutfitCanceled,
     HourAdvanced,
     MoneyChanged,
+    ExperienceGained,
 }
