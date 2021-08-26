@@ -19,7 +19,9 @@ public class ProgressManager : MonoBehaviour, GlobalComponent
     [SerializeField] private List<LevelProperties> gameLevels;
     private Dictionary<BossLevel, LevelProperties> gameBosses;
     private BossLevel currentLevel;
+
     public LevelProperties CurrentLevel { get { return gameBosses[currentLevel]; } }
+    public BossLevel BossLevel { get { return currentLevel; } }
     public Dictionary<BossLevel, LevelProperties> GameBosses { get { return gameBosses; } }
 
     public void ConfigureRequiredComponent()

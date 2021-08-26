@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 
 public class Choreography
 {
     private BossLevel bossLevel;
-
     private Dictionary<int, DanceMove[]> movesPerTime;
+    public Dictionary<int, DanceMove[]> MovesPerTime { get { return movesPerTime; } }
 
     public void AddMoveToTempo(int tempo, int position, DanceMove danceMove)
     {
@@ -38,10 +39,17 @@ public class Choreography
         bossLevel = boss;
 
         string savePath = Path.Combine(Application.persistentDataPath, "choreo_" + bossLevel.ToString());
-        BinaryReader bReader = new BinaryReader(File.Open(savePath, FileMode.Open));
-        GameDataReader reader = new GameDataReader(bReader);
-
-        bReader.Close();
+        try
+        {
+            BinaryReader bReader = new BinaryReader(File.Open(savePath, FileMode.Open));
+            GameDataReader reader = new GameDataReader(bReader);
+            LoadMoves(reader);
+            bReader.Close();
+        }
+        catch (Exception e)
+        {
+            LoadEmpty();
+        }
     }
 
     private void SaveMoves(GameDataWriter writer)
@@ -59,7 +67,7 @@ public class Choreography
         }
     }
 
-    public void LoadMoves(GameDataReader reader)
+    private void LoadMoves(GameDataReader reader)
     {
         int movesQuantity = ProgressManager.Instance.GameBosses[bossLevel].BattleSong.MovesQuantity;
         for (int i = 0; i < movesQuantity; i++)
@@ -73,6 +81,17 @@ public class Choreography
                     AddMoveToTempo(tempo, slot, DanceMovesManager.Instance.DanceMovesList[move]);
                 }
             }
+        }
+    }
+
+    private void LoadEmpty()
+    {
+        foreach (KeyValuePair<int, MoveBuff> moves in ProgressManager.Instance.CurrentLevel.BattleSong.SongBuffs)
+        {
+            AddMoveToTempo(moves.Key, 0, null);
+            AddMoveToTempo(moves.Key, 1, null);
+            AddMoveToTempo(moves.Key, 2, null);
+            AddMoveToTempo(moves.Key, 3, null);
         }
     }
 }

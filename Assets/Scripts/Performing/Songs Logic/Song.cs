@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using RotaryHeart.Lib.SerializableDictionary;
 
 public class Song : ScriptableObject
 {
@@ -11,14 +13,19 @@ public class Song : ScriptableObject
     public float initialDelay;
     public List<string> sections;
 
-    private Dictionary<int, MoveBuff> songBuffs;
+    [Serializable]
+    public class TempoBuffs : SerializableDictionaryBase<int, MoveBuff> { }
+
+    [SerializeField] private TempoBuffs songBuffs;
     [SerializeField] private int movesQuantity;
+
     public int MovesQuantity { get { return movesQuantity; } }
+    public TempoBuffs SongBuffs { get { return songBuffs; } }
 
     [ContextMenu("Load Song Info")]
     public void PlayableTempos()
     {
-        songBuffs = new Dictionary<int, MoveBuff>();
+        songBuffs = new TempoBuffs();
         int tempo = 0;
 
         foreach (string section in sections)

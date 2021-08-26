@@ -21,4 +21,30 @@ MonoBehaviour:
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
   - N,N,N,D,N,H,N,D,N,N,N,D,H,H,H,D
+  songBuffs:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues: 0300000005000000070000000b0000000c0000000d0000000e0000000f0000001300000015000000170000001b0000001c0000001d0000001e0000001f0000002300000025000000270000002b0000002c0000002d0000002e0000002f000000
+    _keys: 0300000005000000070000000b0000000c0000000d0000000e0000000f0000001300000015000000170000001b0000001c0000001d0000001e0000001f0000002300000025000000270000002b0000002c0000002d0000002e0000002f000000
+    _values: 030000000200000003000000030000000200000002000000020000000300000003000000020000000300000003000000020000000200000002000000030000000300000002000000030000000300000002000000020000000200000003000000
   movesQuantity: 24

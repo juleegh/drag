@@ -7,4 +7,5 @@ public class DanceMove : ScriptableObject
     [SerializeField] private PoseType poseType;
 
     public string Identifier { get { return poseType.ToString(); } }
+    public int StaminaRequired { get { return staminaRequired; } }
 }

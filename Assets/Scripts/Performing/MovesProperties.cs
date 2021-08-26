@@ -9,8 +9,15 @@ public class MovesProperties : ScriptableObject
     [Serializable]
     public class MoveColorsDictionary : SerializableDictionaryBase<MoveType, Color> { }
 
+    [Serializable]
+    public class BuffsIconsDictionary : SerializableDictionaryBase<MoveBuff, Sprite> { }
+
     [SerializeField] private MoveColorsDictionary colorByMove;
     public MoveColorsDictionary ColorByMove { get { return colorByMove; } }
+
+    [SerializeField] private BuffsIconsDictionary spriteByBuff;
+    public BuffsIconsDictionary SpriteByBuff { get { return spriteByBuff; } }
+
     [SerializeField] private float acceptablePercentage;
     public float AcceptablePercentage { get { return acceptablePercentage; } }
     [SerializeField] private int movesBefore;
