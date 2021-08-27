@@ -8,4 +8,6 @@ public enum PracticeEvents
     ChoreographyLoaded,
     NavigatedNextTempo,
     NavigatedPreviousTempo,
+    NavigatedForwardTempo,
+    NavigatedBackTempo,
 }

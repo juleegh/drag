@@ -15,5 +15,13 @@ public class PracticeInputManager : MonoBehaviour
         {
             PracticeEventsManager.Instance.Notify(PracticeEvents.NavigatedPreviousTempo);
         }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            PracticeEventsManager.Instance.Notify(PracticeEvents.NavigatedForwardTempo);
+        }
+        else if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            PracticeEventsManager.Instance.Notify(PracticeEvents.NavigatedBackTempo);
+        }
     }
 }

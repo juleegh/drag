@@ -34,4 +34,12 @@ public class TempoMovesPreview : MonoBehaviour
     {
         highlight.SetActive(selected);
     }
+
+    public void ToggleSelectedMove(int selectedMove)
+    {
+        for (int i = 0; i < movesPreviews.Length; i++)
+        {
+            movesPreviews[i].ToggleHighlight(selectedMove == i);
+        }
+    }
 }

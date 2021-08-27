@@ -54,15 +54,16 @@ public class Choreography
 
     private void SaveMoves(GameDataWriter writer)
     {
-        foreach (KeyValuePair<int, DanceMove[]> tempo in movesPerTime)
+        foreach (KeyValuePair<int, MoveBuff> tempo in ProgressManager.Instance.CurrentLevel.BattleSong.SongBuffs)
         {
             writer.Write(tempo.Key);
+
             for (int i = 0; i < 4; i++)
             {
-                if (tempo.Value[i] == null)
+                if (!movesPerTime.ContainsKey(tempo.Key) || movesPerTime[tempo.Key][i] == null)
                     writer.Write("Empty");
                 else
-                    writer.Write(tempo.Value[i].Identifier);
+                    writer.Write(movesPerTime[tempo.Key][i].Identifier);
             }
         }
     }
@@ -80,6 +81,8 @@ public class Choreography
                 {
                     AddMoveToTempo(tempo, slot, DanceMovesManager.Instance.DanceMovesList[move]);
                 }
+                else
+                    AddMoveToTempo(tempo, slot, null);
             }
         }
     }
@@ -88,10 +91,10 @@ public class Choreography
     {
         foreach (KeyValuePair<int, MoveBuff> moves in ProgressManager.Instance.CurrentLevel.BattleSong.SongBuffs)
         {
-            AddMoveToTempo(moves.Key, 0, null);
-            AddMoveToTempo(moves.Key, 1, null);
-            AddMoveToTempo(moves.Key, 2, null);
-            AddMoveToTempo(moves.Key, 3, null);
+            for (int slot = 0; slot < 4; slot++)
+            {
+                AddMoveToTempo(moves.Key, slot, null);
+            }
         }
     }
 }

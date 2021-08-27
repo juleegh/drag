@@ -40,15 +40,30 @@ public class ChoreographyPreview : MonoBehaviour, RequiredComponent
         List<KeyValuePair<int, DanceMove[]>> tempos = Choreography.MovesPerTime.ToList();
         for (int i = topTempo; i < topTempo + temposOnScreen; i++)
         {
+            if (i >= tempos.Count)
+            {
+                previewIndex++;
+                continue;
+            }
+
             KeyValuePair<int, DanceMove[]> tempo = tempos[i];
             tempoPreviews[previewIndex].SetBuffInfo(Song.SongBuffs[tempo.Key], tempo.Key);
             tempoPreviews[previewIndex].FillDanceMoves(tempo.Value);
             tempoPreviews[previewIndex].ToggleSelected(previewIndex == selectedTempo);
             previewIndex++;
         }
-        Debug.LogError(selectedTempo);
 
         UpIndicator.SetActive(topTempo > 0);
         DownIndicator.SetActive(topTempo + temposOnScreen < Choreography.MovesPerTime.Count - 1);
+    }
+
+    public void RefreshTempoView(int selectedTempo, int selectedMove)
+    {
+        for (int i = 0; i < temposOnScreen; i++)
+        {
+            tempoPreviews[i].ToggleSelected(i == selectedTempo);
+            if (i == selectedTempo)
+                tempoPreviews[i].ToggleSelectedMove(selectedMove);
+        }
     }
 }
