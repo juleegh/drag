@@ -56,4 +56,40 @@ public class Song : ScriptableObject
         }
         movesQuantity = songBuffs.Count;
     }
+
+    public List<MoveSequence> GetSequences()
+    {
+        List<MoveSequence> sequences = new List<MoveSequence>();
+
+        for (int i = 0; i < sections.Count; i++)
+        {
+            MoveSequence sequence = new MoveSequence();
+            sequence.slots = RecoverSequence(sections[i]);
+            sequences.Add(sequence);
+        }
+
+        return sequences;
+    }
+
+    private List<MoveSlot> RecoverSequence(string chain)
+    {
+        List<MoveSlot> sequence = new List<MoveSlot>();
+        string[] splitArray = chain.Split(char.Parse(","));
+
+        foreach (string slot in splitArray)
+        {
+            MoveSlot newSlot = new MoveSlot();
+            if (slot == "N")
+                newSlot.buff = MoveBuff.None;
+            if (slot == "R")
+                newSlot.buff = MoveBuff.Regular;
+            if (slot == "D")
+                newSlot.buff = MoveBuff.Double;
+            if (slot == "H")
+                newSlot.buff = MoveBuff.Half;
+
+            sequence.Add(newSlot);
+        }
+        return sequence;
+    }
 }

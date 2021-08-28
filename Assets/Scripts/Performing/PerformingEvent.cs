@@ -15,4 +15,5 @@ public enum PerformingEvent
     TempoEnded,
     MovesShifted,
     ClubLoaded,
+    StartPerformance,
 }

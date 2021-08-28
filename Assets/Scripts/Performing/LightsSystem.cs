@@ -22,6 +22,8 @@ public class LightsSystem : MonoBehaviour, RequiredComponent
     private void SetupFaceBone()
     {
         faceBone = GlobalPlayerManager.Instance.FaceBone;
+        foreach (LightController light in tempoLights)
+            light.FadeOut(0f);
     }
 
     private void Update()

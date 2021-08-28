@@ -47,7 +47,7 @@ public class EmotionFeed
         targetEmotions[MoveType.YType] = 0f;
     }
 
-    public void ReactToMove(Move move)
+    public void ReactToMove(PerformedMove move)
     {
         if (currentEmotions.ContainsKey(move.moveType))
             currentEmotions[move.moveType] += move.score;

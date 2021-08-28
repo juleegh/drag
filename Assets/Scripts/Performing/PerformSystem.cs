@@ -7,7 +7,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     public static PerformSystem Instance { get { return instance; } }
     private static PerformSystem instance;
 
-    [SerializeField] private Song song;
+    private Song song { get { return ProgressManager.Instance.CurrentLevel.BattleSong; } }
     [SerializeField] private MovesProperties movesProperties;
     public MovesProperties MovesProperties { get { return movesProperties; } }
     private EmotionFeed emotionFeed;
@@ -30,6 +30,12 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         //PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartPerformingSystem);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            StartPerformingSystem();
+    }
+
     private void StartPerformingSystem()
     {
         SoundManager.Instance.SetTrack(song.track);
@@ -38,12 +44,12 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         LoadSongToSelector();
         performState = PerformState.PickingSequence;
         StartPerforming();
+        PerformingEventsManager.Instance.Notify(PerformingEvent.StartPerformance);
     }
 
     private void LoadSongToSelector()
     {
-        SongLoader loader = new SongLoader();
-        SongSequence.Instance.ConfigureSongSequences(loader.LoadSong(song));
+        SongSequence.Instance.ConfigureSongSequences(song);
 
         emotionFeed = new EmotionFeed();
         emotionFeed.DefineTargets(SongSequence.Instance.GetMovesForCurrentSequence());
@@ -90,7 +96,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         TempoCounter.Instance.StartTempoCount();
     }
 
-    public void PerformedMove(Move move)
+    public void PerformedMove(PerformedMove move)
     {
         if (TempoCounter.Instance.IsOnPostTempo)
             PostTempo(move);
@@ -98,7 +104,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
             PreTempo(move);
     }
 
-    private void PreTempo(Move move)
+    private void PreTempo(PerformedMove move)
     {
         if (SongSequence.Instance.Slots[currentMove].performed)
             return;
@@ -111,12 +117,12 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         {
             move.score *= SongSequence.Instance.Slots[currentMove].GetMultiplier();
             emotionFeed.ReactToMove(move);
-            PosePerformer.Instance.HitPose(move.poseType);
+            PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
     }
 
-    private void PostTempo(Move move)
+    private void PostTempo(PerformedMove move)
     {
         if (SongSequence.Instance.Slots[currentMove - 1].performed)
             return;
@@ -129,7 +135,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         {
             move.score *= SongSequence.Instance.Slots[currentMove - 1].GetMultiplier();
             emotionFeed.ReactToMove(move);
-            PosePerformer.Instance.HitPose(move.poseType);
+            PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
         }
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
     }

@@ -9,7 +9,7 @@ public class LightController : MonoBehaviour
 
     public void FadeIn(float time)
     {
-        connectedLight.DOIntensity(0.5f, time);
+        connectedLight.DOIntensity(1f, time);
     }
 
     public void FadeOut(float time)

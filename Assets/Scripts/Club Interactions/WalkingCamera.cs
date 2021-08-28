@@ -13,6 +13,7 @@ public class WalkingCamera : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartFollowingPlayer);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, StopFollowingPlayer);
     }
 
     private void StartFollowingPlayer()
@@ -22,12 +23,16 @@ public class WalkingCamera : MonoBehaviour, RequiredComponent
         followingPlayer = true;
     }
 
+    private void StopFollowingPlayer()
+    {
+        followingPlayer = false;
+    }
+
     private void Update()
     {
         if (followingPlayer)
         {
             Vector3 expectedPosition = characterWalking.transform.position - distanceFromPlayer;
-            //transform.Translate((expectedPosition - transform.position) * speed * Time.deltaTime);
             transform.position = Vector3.Lerp(transform.position, expectedPosition, Time.deltaTime * speed);
             transform.eulerAngles = followingAngle;
 

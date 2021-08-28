@@ -18,9 +18,9 @@ public class SongSequence : MonoBehaviour, RequiredComponent
         slots = new List<MoveSlot>();
     }
 
-    public void ConfigureSongSequences(List<MoveSequence> sequences)
+    public void ConfigureSongSequences(Song song)
     {
-        songSequences = sequences;
+        songSequences = song.GetSequences();
         sequenceIndexes = new List<int>();
         for (int i = 0; i < songSequences.Count; i++)
         {
@@ -109,30 +109,17 @@ public class SongSequence : MonoBehaviour, RequiredComponent
 
     private void PlayerSelectedMove(MoveType moveType)
     {
-        Move newMove = new Move();
+        PerformedMove newMove = new PerformedMove();
         newMove.moveType = moveType;
         newMove.score = 200;
-        newMove.poseType = RandomPose();
+        newMove.AssignSelectedMove(GetMoveFromChoreography(moveType));
 
         slots[PerformSystem.Instance.CurrentMoveIndex].move = newMove;
         PerformSystem.Instance.PerformedMove(newMove);
     }
 
-    private PoseType RandomPose()
+    private DanceMove GetMoveFromChoreography(MoveType moveType)
     {
-        List<PoseType> poses = new List<PoseType>();
-        poses.Add(PoseType.Cobra);
-        poses.Add(PoseType.Egiptian);
-        poses.Add(PoseType.Face_Cover);
-        poses.Add(PoseType.Hand_Up);
-        poses.Add(PoseType.Hands_Hips);
-        poses.Add(PoseType.Knee_Down);
-        poses.Add(PoseType.Muscle_Up);
-        poses.Add(PoseType.Schwazeneger);
-        poses.Add(PoseType.Squat_Like);
-        poses.Add(PoseType.Tiger);
-        poses.Add(PoseType.Vogue);
-
-        return poses[Random.Range(0, poses.Count)];
+        return PerformingChoreoLoader.Instance.Choreography.GetMoveInTempoByType(PerformSystem.Instance.CurrentMoveIndex, moveType);
     }
 }

@@ -17,6 +17,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, HideUI);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, ShowUI);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.SequenceCreated, CreateSlots);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovesShifted, ShiftMoves);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, PerformedMove);
@@ -26,6 +27,11 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
     private void HideUI()
     {
         indicator.gameObject.SetActive(false);
+    }
+
+    private void ShowUI()
+    {
+        indicator.gameObject.SetActive(true);
     }
 
     public void CleanMoves()
@@ -78,7 +84,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
             {
                 if (index < SongSequence.Instance.Slots.Count)
                 {
-                    Move move = SongSequence.Instance.Slots[index].move;
+                    PerformedMove move = SongSequence.Instance.Slots[index].move;
                     moves[i].MarkAsBuff(SongSequence.Instance.Slots[index].buff);
                     if (move != null)
                         moves[i].MarkAsMove(move.moveType);

@@ -6,11 +6,12 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
 {
     [SerializeField] private float speed;
     bool isWalking;
+    bool isPossesed;
 
     public void ConfigureRequiredComponent()
     {
         isWalking = false;
-        //PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, PossesPlayer);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, ReleasePlayer);
     }
 
     public void PossesPlayer()
@@ -20,10 +21,22 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
         GlobalPlayerManager.Instance.transform.localPosition = Vector3.zero;
         GlobalPlayerManager.Instance.transform.eulerAngles = Vector3.zero;
         GlobalPlayerManager.Instance.gameObject.SetActive(true);
+        isPossesed = true;
+    }
+
+    private void ReleasePlayer()
+    {
+        isPossesed = false;
+        GlobalPlayerManager.Instance.transform.SetParent(null);
+        GlobalPlayerManager.Instance.transform.position = Vector3.zero + Vector3.up * 2.2f;
+        GlobalPlayerManager.Instance.transform.eulerAngles = Vector3.up * 180;
     }
 
     private void Update()
     {
+        if (!isPossesed)
+            return;
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 

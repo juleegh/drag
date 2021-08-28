@@ -113,4 +113,12 @@ public class Choreography
         }
         return average;
     }
+
+    public DanceMove GetMoveInTempoByType(int tempo, MoveType moveType)
+    {
+        if (!movesPerTime.ContainsKey(tempo))
+            return null;
+
+        return movesPerTime[tempo][PerformanceConversions.ConvertIndexFromMoveType(moveType)];
+    }
 }
