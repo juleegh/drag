@@ -30,6 +30,8 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
         int tempo = Song.SongBuffs.ToList()[tempoIndex].Key;
         DanceMove danceMove = DanceMovesManager.Instance.DanceMovesList.ToList()[danceMoveIndex].Value;
         choreography.AddMoveToTempo(tempo, position, danceMove);
+        PosePerformer.Instance.HitPose(PoseType.Idle);
+        PracticeEventsManager.Instance.Notify(PracticeEvents.ChoreographyUpdated);
         choreography.SaveChoreo();
     }
 
@@ -38,4 +40,5 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
         DanceMove danceMove = DanceMovesManager.Instance.DanceMovesList.ToList()[danceMoveIndex].Value;
         PosePerformer.Instance.HitPose(danceMove.PoseType);
     }
+
 }

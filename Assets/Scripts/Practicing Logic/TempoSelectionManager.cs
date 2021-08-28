@@ -62,11 +62,13 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
             if (selectedMovementType < DanceMovesManager.Instance.DanceMovesList.Count - 1)
             {
                 selectedMovementType++;
+                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
                 moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
             }
             else if (topMovementType + moveTypeListPreview.MovesOnScreen + 1 < DanceMovesManager.Instance.DanceMovesList.Count)
             {
                 topMovementType++;
+                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
                 choreoPreview.RefreshView(topMovementType, selectedMovementType);
             }
         }
@@ -101,11 +103,13 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
             {
                 selectedMovementType--;
                 moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
+                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
             }
             else if (topMovementType > 0)
             {
                 topMovementType--;
                 moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
+                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
             }
         }
     }

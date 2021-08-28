@@ -26,7 +26,9 @@ public class TempoMovesPreview : MonoBehaviour
     {
         for (int i = 0; i < movesPreviews.Length; i++)
         {
-            movesPreviews[i].UpdateMoveText(danceMoves[i] != null ? danceMoves[i].Identifier : "");
+            string moveName = danceMoves[i] != null ? danceMoves[i].Identifier : "";
+            int moveStamina = danceMoves[i] != null ? danceMoves[i].StaminaRequired : 0;
+            movesPreviews[i].UpdateMoveText(moveName, moveStamina);
         }
     }
 

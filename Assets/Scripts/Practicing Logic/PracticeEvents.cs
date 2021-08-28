@@ -10,4 +10,5 @@ public enum PracticeEvents
     NavigatedPreviousTempo,
     NavigatedForwardTempo,
     NavigatedBackTempo,
+    ChoreographyUpdated,
 }

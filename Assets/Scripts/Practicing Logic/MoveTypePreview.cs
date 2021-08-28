@@ -6,16 +6,19 @@ using TMPro;
 public class MoveTypePreview : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI moveTitle;
+    [SerializeField] private TextMeshProUGUI staminaCounter;
     [SerializeField] private GameObject highlight;
 
-    public void UpdateMoveName(string title)
+    public void UpdateMoveInfo(string title, int stamina)
     {
         moveTitle.text = title;
+        staminaCounter.text = "SP: " + stamina;
     }
 
     public void SetEmpty()
     {
         moveTitle.text = "";
+        staminaCounter.text = "";
         ToggleSelected(false);
     }
 

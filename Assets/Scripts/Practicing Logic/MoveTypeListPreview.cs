@@ -47,7 +47,7 @@ public class MoveTypeListPreview : MonoBehaviour, RequiredComponent
             }
 
             KeyValuePair<string, DanceMove> danceMove = movesAvailable[i];
-            movesTypesPreviews[previewIndex].UpdateMoveName(danceMove.Key);
+            movesTypesPreviews[previewIndex].UpdateMoveInfo(danceMove.Key, danceMove.Value.StaminaRequired);
             movesTypesPreviews[previewIndex].ToggleSelected(previewIndex == selectedMove);
             previewIndex++;
         }

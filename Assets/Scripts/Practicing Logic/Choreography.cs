@@ -97,4 +97,20 @@ public class Choreography
             }
         }
     }
+
+    public int GetAverageStamina()
+    {
+        int average = 0;
+        foreach (KeyValuePair<int, DanceMove[]> tempo in movesPerTime)
+        {
+            int inTempo = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (tempo.Value[i] != null)
+                    inTempo += tempo.Value[i].StaminaRequired;
+            }
+            average += inTempo / 4;
+        }
+        return average;
+    }
 }
