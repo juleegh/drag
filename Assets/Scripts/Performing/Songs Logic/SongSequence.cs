@@ -112,14 +112,9 @@ public class SongSequence : MonoBehaviour, RequiredComponent
         PerformedMove newMove = new PerformedMove();
         newMove.moveType = moveType;
         newMove.score = 200;
-        newMove.AssignSelectedMove(GetMoveFromChoreography(moveType));
+        newMove.AssignSelectedMove(PerformingChoreoController.Instance.GetMoveFromType(moveType));
 
         slots[PerformSystem.Instance.CurrentMoveIndex].move = newMove;
         PerformSystem.Instance.PerformedMove(newMove);
-    }
-
-    private DanceMove GetMoveFromChoreography(MoveType moveType)
-    {
-        return PerformingChoreoLoader.Instance.Choreography.GetMoveInTempoByType(PerformSystem.Instance.CurrentMoveIndex, moveType);
     }
 }

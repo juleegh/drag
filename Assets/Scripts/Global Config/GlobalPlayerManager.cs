@@ -4,6 +4,7 @@ using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 using System;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
 {
@@ -13,10 +14,16 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     [SerializeField] private Transform faceBone;
     public GameObject Body { get { return body; } }
     public Transform FaceBone { get { return faceBone; } }
+    public bool cleanPlayer;
 
     public void ConfigureRequiredComponent()
     {
-        //PlayerPrefs.DeleteAll();
+        if (cleanPlayer)
+        {
+            PlayerPrefs.DeleteAll();
+            string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+            foreach (string filePath in filePaths) File.Delete(filePath);
+        }
         if (instance == null)
         {
             instance = this;

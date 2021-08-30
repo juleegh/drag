@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 4442519220347789821}
   faceBone: {fileID: 2440081785033229645}
+  cleanPlayer: 0
 --- !u!114 &6196990030242932224
 MonoBehaviour:
   m_ObjectHideFlags: 0

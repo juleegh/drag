@@ -9,11 +9,11 @@ public enum PerformingEvent
     SlotAdded,
     SequenceCreated,
     CreatedAudienceEmotions,
-    PlayerSelectedMove,
     SequenceInputComplete,
     MovePerformed,
     TempoEnded,
     MovesShifted,
     ClubLoaded,
     StartPerformance,
+    ShiftedTempo,
 }

@@ -70,10 +70,19 @@ public class Choreography
 
     private void LoadMoves(GameDataReader reader)
     {
+        movesPerTime = new Dictionary<int, DanceMove[]>();
         int movesQuantity = ProgressManager.Instance.GameBosses[bossLevel].BattleSong.MovesQuantity;
+
+        if (movesQuantity == 0)
+        {
+            ProgressManager.Instance.GameBosses[bossLevel].BattleSong.LoadPlayableTempos();
+            movesQuantity = ProgressManager.Instance.GameBosses[bossLevel].BattleSong.MovesQuantity;
+        }
+
         for (int i = 0; i < movesQuantity; i++)
         {
             int tempo = reader.ReadInt();
+
             for (int slot = 0; slot < 4; slot++)
             {
                 string move = reader.ReadString();
@@ -89,6 +98,7 @@ public class Choreography
 
     private void LoadEmpty()
     {
+        movesPerTime = new Dictionary<int, DanceMove[]>();
         foreach (KeyValuePair<int, MoveBuff> moves in ProgressManager.Instance.CurrentLevel.BattleSong.SongBuffs)
         {
             for (int slot = 0; slot < 4; slot++)

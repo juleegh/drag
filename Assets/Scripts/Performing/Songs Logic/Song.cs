@@ -23,7 +23,7 @@ public class Song : ScriptableObject
     public TempoBuffs SongBuffs { get { return songBuffs; } }
 
     [ContextMenu("Load Song Info")]
-    public void PlayableTempos()
+    public void LoadPlayableTempos()
     {
         songBuffs = new TempoBuffs();
         int tempo = 0;

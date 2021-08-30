@@ -15,15 +15,12 @@ public class AudienceEmotionsUI : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, HideStats);
-    }
-
-    private void HideStats()
-    {
-        container.SetActive(false);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, LoadUI);
     }
 
     private void LoadUI()
     {
+        container.SetActive(true);
         foreach (KeyValuePair<MoveType, EmotionBar> bar in bars)
         {
             bar.Value.SetEmotion(bar.Key, PerformSystem.Instance.MovesProperties.ColorByMove[bar.Key]);
@@ -36,6 +33,11 @@ public class AudienceEmotionsUI : MonoBehaviour, RequiredComponent
             bars[emotion.Key].SetExpected(0);
             bars[emotion.Key].SetFilled(0);
         }
+    }
+
+    private void HideStats()
+    {
+        container.SetActive(false);
     }
 
     public void SetSequenceEmotions()
