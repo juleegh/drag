@@ -17,8 +17,7 @@ public class MoveUI : MonoBehaviour
     [SerializeField] private Color right;
     [SerializeField] private Color wrong;
     [SerializeField] private Color transparent;
-    [SerializeField] private Sprite halfBuff;
-    [SerializeField] private Sprite doubleBuff;
+    [SerializeField] private MovesProperties properties;
 
     private MoveBuff moveBuff;
 
@@ -54,11 +53,11 @@ public class MoveUI : MonoBehaviour
                 buff.color = transparent;
                 break;
             case MoveBuff.Double:
-                buff.sprite = doubleBuff;
+                buff.sprite = properties.SpriteByBuff[MoveBuff.Double];
                 buff.color = Color.white;
                 break;
             case MoveBuff.Half:
-                buff.sprite = halfBuff;
+                buff.sprite = properties.SpriteByBuff[MoveBuff.Half];
                 buff.color = Color.white;
                 break;
         }
