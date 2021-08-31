@@ -70,6 +70,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         if (!SongSequence.Instance.Slots[currentMove].performed)
         {
             SongSequence.Instance.Slots[currentMove].performed = true;
+            PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);
         }
 
         currentMove++;
@@ -98,45 +99,37 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
 
     public void PerformedMove(PerformedMove move)
     {
-        if (TempoCounter.Instance.IsOnPostTempo)
-            PostTempo(move);
-        else
-            PreTempo(move);
+        QualifyTempo(move, TempoCounter.Instance.IsOnPostTempo);
     }
 
-    private void PreTempo(PerformedMove move)
+    private void QualifyTempo(PerformedMove move, bool postTempo)
     {
-        if (SongSequence.Instance.Slots[currentMove].performed)
+        int moveIndex = postTempo ? currentMove - 1 : currentMove;
+        if (SongSequence.Instance.Slots[moveIndex].performed)
             return;
 
-        bool isCorrect = TempoCounter.Instance.IsOnPreTempo;
-        SongSequence.Instance.Slots[currentMove].performed = true;
-        SongSequence.Instance.Slots[currentMove].correct = isCorrect;
+        bool isOnPreTempo = TempoCounter.Instance.IsOnPreTempo && !postTempo;
+        bool isOnPostTempo = TempoCounter.Instance.IsOnPostTempo && postTempo;
 
-        if (isCorrect)
+        bool isCorrect = isOnPreTempo || isOnPostTempo;
+        SongSequence.Instance.Slots[moveIndex].performed = true;
+        SongSequence.Instance.Slots[moveIndex].correct = isCorrect;
+
+        bool hasTheStamina = move.selectedMove.StaminaRequired <= PerformingChoreoController.Instance.CharacterStamina;
+
+        if (isCorrect && hasTheStamina)
         {
-            move.score *= SongSequence.Instance.Slots[currentMove].GetMultiplier();
+            move.score *= SongSequence.Instance.Slots[moveIndex].GetMultiplier();
             emotionFeed.ReactToMove(move);
+            PerformingChoreoController.Instance.PlayerPerformedMove(move.selectedMove);
             PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
         }
-        PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
-    }
-
-    private void PostTempo(PerformedMove move)
-    {
-        if (SongSequence.Instance.Slots[currentMove - 1].performed)
-            return;
-
-        bool isCorrect = TempoCounter.Instance.IsOnPostTempo;
-        SongSequence.Instance.Slots[currentMove - 1].performed = true;
-        SongSequence.Instance.Slots[currentMove - 1].correct = isCorrect;
-
-        if (isCorrect)
+        else if (!hasTheStamina)
         {
-            move.score *= SongSequence.Instance.Slots[currentMove - 1].GetMultiplier();
-            emotionFeed.ReactToMove(move);
-            PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
+            PosePerformer.Instance.HitPose(PoseType.Idle);
         }
+
+        PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
     }
 }

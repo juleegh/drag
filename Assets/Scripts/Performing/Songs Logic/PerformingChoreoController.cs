@@ -12,6 +12,8 @@ public class PerformingChoreoController : MonoBehaviour, RequiredComponent
     public static PerformingChoreoController Instance { get { return instance; } }
     private KeyValuePair<int, DanceMove[]> currentTempo;
     private int currentTempoIndex;
+    private int characterStamina;
+    public int CharacterStamina { get { return characterStamina; } }
 
     public void ConfigureRequiredComponent()
     {
@@ -27,6 +29,7 @@ public class PerformingChoreoController : MonoBehaviour, RequiredComponent
 
         currentTempoIndex = 0;
         currentTempo = choreography.MovesPerTime.ToList()[currentTempoIndex];
+        characterStamina = ProgressManager.Instance.Stamina;
     }
 
     private void CheckIndex()
@@ -48,5 +51,10 @@ public class PerformingChoreoController : MonoBehaviour, RequiredComponent
     public DanceMove[] GetOptionsForTempo()
     {
         return currentTempo.Value;
+    }
+
+    public void PlayerPerformedMove(DanceMove danceMove)
+    {
+        characterStamina -= danceMove.StaminaRequired;
     }
 }

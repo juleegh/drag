@@ -16,4 +16,5 @@ public enum PerformingEvent
     ClubLoaded,
     StartPerformance,
     ShiftedTempo,
+    BuffPassed,
 }
