@@ -11,6 +11,7 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
     [SerializeField] private GameObject prompt;
     bool receivingInput;
     bool waitingToStart;
+    bool finished;
     private Dictionary<MoveType, bool> previewed;
     private Vector3 indicatorSize;
 
@@ -26,10 +27,14 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
         container.SetActive(false);
         indicatorSize = movesPreviews[0].transform.localScale;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, StartPreview);
+        finished = false;
     }
 
     private void StartPreview()
     {
+        if (finished)
+            return;
+
         UpdatePreviews();
         container.SetActive(true);
         receivingInput = true;
@@ -39,6 +44,17 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
     {
         if (!receivingInput && !waitingToStart)
             return;
+
+        if (Input.GetKeyDown(KeyCode.Space) && waitingToStart)
+        {
+            finished = true;
+            waitingToStart = false;
+            receivingInput = false;
+            container.SetActive(false);
+            prompt.SetActive(false);
+            PerformingEventsManager.Instance.Notify(PerformingEvent.PlayerReadyToPerform);
+            return;
+        }
 
         if (Input.GetKeyDown(MovesInputManager.Instance.A))
         {
@@ -62,16 +78,6 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
     {
         movesPreviews[PerformanceConversions.ConvertIndexFromMoveType(moveType)].transform.localScale = indicatorSize * 1.1f;
         movesPreviews[PerformanceConversions.ConvertIndexFromMoveType(moveType)].transform.DOScale(indicatorSize, PerformSystem.Instance.Tempo).SetEase(Ease.Linear);
-
-        if (waitingToStart)
-        {
-            waitingToStart = false;
-            receivingInput = false;
-            container.SetActive(false);
-            prompt.SetActive(false);
-            PerformingEventsManager.Instance.Notify(PerformingEvent.PlayerReadyToPerform);
-            return;
-        }
 
         previewed[moveType] = true;
         UpdatePreviews();
