@@ -11,7 +11,7 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         isWalking = false;
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, ReleasePlayer);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, ReleasePlayer);
     }
 
     public void PossesPlayer()

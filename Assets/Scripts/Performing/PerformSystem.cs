@@ -27,13 +27,13 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     {
         instance = this;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TempoEnded, NextMove);
-        //PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartPerformingSystem);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.PlayerReadyToPerform, StartPerformingSystem);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            StartPerformingSystem();
+            PerformingEventsManager.Instance.Notify(PerformingEvent.EnteredTheDanceFloor);
     }
 
     private void StartPerformingSystem()

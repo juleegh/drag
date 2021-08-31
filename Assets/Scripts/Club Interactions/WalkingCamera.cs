@@ -13,7 +13,7 @@ public class WalkingCamera : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartFollowingPlayer);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, StopFollowingPlayer);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, StopFollowingPlayer);
     }
 
     private void StartFollowingPlayer()

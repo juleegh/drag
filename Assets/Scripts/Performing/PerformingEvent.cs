@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public enum PerformingEvent
 {
     DependenciesLoaded,
@@ -17,4 +13,6 @@ public enum PerformingEvent
     StartPerformance,
     ShiftedTempo,
     BuffPassed,
+    EnteredTheDanceFloor,
+    PlayerReadyToPerform,
 }

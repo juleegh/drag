@@ -17,13 +17,21 @@ public class CameraPosing : MonoBehaviour, RequiredComponent
         {
             instance = this;
         }
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, GoToPerformance);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, GoToPerformance);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, StartedPerformance);
     }
 
     private void GoToPerformance()
     {
         transform.position = new Vector3(0, 2.2f, 0);
         transform.eulerAngles = Vector3.zero;
+        PosePerformer.Instance.SetSpeed(0.2f);
+        HitPose(PoseType.Walking);
+    }
+
+    private void StartedPerformance()
+    {
+        PosePerformer.Instance.SetSpeed(1f);
         HitPose(PoseType.Idle);
     }
 
