@@ -59,17 +59,17 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
         }
         else if (currentlySelected == Selection.Move)
         {
-            if (selectedMovementType < DanceMovesManager.Instance.DanceMovesList.Count - 1)
+            if (selectedMovementType < moveTypeListPreview.MovesOnScreen - 1)
             {
                 selectedMovementType++;
-                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
                 moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
+                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
             }
             else if (topMovementType + moveTypeListPreview.MovesOnScreen + 1 < DanceMovesManager.Instance.DanceMovesList.Count)
             {
                 topMovementType++;
+                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
                 ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
-                choreoPreview.RefreshView(topMovementType, selectedMovementType);
             }
         }
     }
@@ -126,6 +126,7 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
             case Selection.Tempo:
                 currentlySelected = Selection.Move;
                 moveTypeListPreview.ShowList(true);
+                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
                 return;
             case Selection.Move:
                 ChoreographyEditor.Instance.SaveMoveToTempo(topTempo + selectedTempo, selectedMovement, selectedMovementType + topMovementType);
@@ -148,6 +149,7 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
             case Selection.Move:
                 currentlySelected = Selection.Tempo;
                 moveTypeListPreview.ShowList(false);
+                ChoreographyEditor.Instance.CancelPreview();
                 return;
         }
     }

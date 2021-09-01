@@ -244,6 +244,14 @@ MonoBehaviour:
   danceMoves:
   - {fileID: 11400000, guid: f318ec5dfd67b474388d48b0a8025c7c, type: 2}
   - {fileID: 11400000, guid: b0fed7976f5bfd34b92af2481ddfa768, type: 2}
+  - {fileID: 11400000, guid: 308077be46bad884faf090e7ecb7c685, type: 2}
+  - {fileID: 11400000, guid: a6e2d031d479f3e4a920a54e91850151, type: 2}
+  - {fileID: 11400000, guid: ad39bbd4086e9634cae9e294148c66f4, type: 2}
+  - {fileID: 11400000, guid: f31be55dac4d72a4794919a948c8b65c, type: 2}
+  - {fileID: 11400000, guid: ef02d4fff92ec4c43b28e939e627dd22, type: 2}
+  - {fileID: 11400000, guid: b4434eaab1b44c44a82813d0bf0b57dd, type: 2}
+  - {fileID: 11400000, guid: b9e7e099bb397174c8f218c0a2bf4547, type: 2}
+  - {fileID: 11400000, guid: af3a4908f2df64e4dbc363b126e72cae, type: 2}
   - {fileID: 11400000, guid: 063b2dd2b64c8eb4d984958e34948867, type: 2}
 --- !u!114 &6737105187925666929
 MonoBehaviour:

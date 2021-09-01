@@ -12,6 +12,9 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
     public Choreography Choreography { get { return choreography; } }
     private Song Song { get { return ProgressManager.Instance.CurrentLevel.BattleSong; } }
 
+    private float previewDelay = 0;
+    private PoseType previewPose;
+
     public void ConfigureRequiredComponent()
     {
         instance = this;
@@ -31,6 +34,7 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
         DanceMove danceMove = DanceMovesManager.Instance.DanceMovesList.ToList()[danceMoveIndex].Value;
         choreography.AddMoveToTempo(tempo, position, danceMove);
         PosePerformer.Instance.HitPose(PoseType.Idle);
+        CancelPreview();
         PracticeEventsManager.Instance.Notify(PracticeEvents.ChoreographyUpdated);
         choreography.SaveChoreo();
     }
@@ -38,7 +42,23 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
     public void PreviewMove(int danceMoveIndex)
     {
         DanceMove danceMove = DanceMovesManager.Instance.DanceMovesList.ToList()[danceMoveIndex].Value;
-        PosePerformer.Instance.HitPose(danceMove.PoseType);
+        previewDelay = 0.8f;
+        previewPose = danceMove.PoseType;
+    }
+
+    public void CancelPreview()
+    {
+        previewDelay = -1;
+    }
+
+    private void Update()
+    {
+        if (previewDelay > 0)
+        {
+            previewDelay -= Time.deltaTime;
+            if (previewDelay <= 0)
+                PosePerformer.Instance.HitPose(previewPose);
+        }
     }
 
 }

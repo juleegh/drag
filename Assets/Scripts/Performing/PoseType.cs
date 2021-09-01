@@ -2,7 +2,9 @@ public enum PoseType
 {
     Idle = 0,
     Walking = 1,
+    Checking_Outfit = 2,
 
+    Tired = 100,
     Cobra = 101,
     Egiptian = 102,
     Face_Cover = 103,
@@ -24,4 +26,7 @@ public enum PoseType
     Club_Dancing_4 = 207,
     Club_Dancing_5 = 208,
     Club_Dancing_6 = 209,
+
+    Casual_1 = 301,
+    Casual_2 = 302,
 }
