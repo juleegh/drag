@@ -3,6 +3,7 @@ public enum PoseType
     Idle = 0,
     Walking = 1,
     Checking_Outfit = 2,
+    TPose = 3,
 
     Tired = 100,
     Cobra = 101,
