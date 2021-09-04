@@ -126,7 +126,6 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         }
         else if (!hasTheStamina)
         {
-            Debug.LogError("OMBE");
             PosePerformer.Instance.HitPose(PoseType.Tired);
         }
 

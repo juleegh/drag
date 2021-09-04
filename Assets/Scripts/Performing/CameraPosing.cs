@@ -23,8 +23,8 @@ public class CameraPosing : MonoBehaviour, RequiredComponent
 
     private void GoToPerformance()
     {
-        transform.position = new Vector3(0, 2.2f, 0);
-        transform.eulerAngles = Vector3.zero;
+        transform.position = ClubLevelLoader.Instance.CurrentClubConfiguration.CameraStagePosition.position;
+        transform.eulerAngles = ClubLevelLoader.Instance.CurrentClubConfiguration.CameraStagePosition.eulerAngles;
         PosePerformer.Instance.SetSpeed(0.2f);
         HitPose(PoseType.Walking);
     }
@@ -37,8 +37,16 @@ public class CameraPosing : MonoBehaviour, RequiredComponent
 
     public void HitPose(PoseType poseType)
     {
+        if (!IsPosing(poseType) && poseType != PoseType.Walking)
+            return;
         animator.Rebind();
         animator.Play(poseType.ToString());
+    }
+
+    private bool IsPosing(PoseType poseType)
+    {
+        int poseId = (int)poseType;
+        return poseId >= 100 && poseId < 200;
     }
 
 }

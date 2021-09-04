@@ -10,6 +10,7 @@ public class ClubLevelLoader : MonoBehaviour, RequiredComponent
     [SerializeField] private ClubConfiguration currentClubConfiguration;
     [SerializeField] private SimpleObjectPool npcPool;
     public SimpleObjectPool NPCPool { get { return npcPool; } }
+    public ClubConfiguration CurrentClubConfiguration { get { return currentClubConfiguration;}}
 
     public void ConfigureRequiredComponent()
     {

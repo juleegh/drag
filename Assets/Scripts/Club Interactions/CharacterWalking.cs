@@ -28,8 +28,8 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
     {
         isPossesed = false;
         GlobalPlayerManager.Instance.transform.SetParent(null);
-        GlobalPlayerManager.Instance.transform.position = Vector3.zero + Vector3.up * 2.2f;
-        GlobalPlayerManager.Instance.transform.eulerAngles = Vector3.up * 180;
+        GlobalPlayerManager.Instance.transform.position = ClubLevelLoader.Instance.CurrentClubConfiguration.PlayerStagePosition.position;
+        GlobalPlayerManager.Instance.transform.eulerAngles = ClubLevelLoader.Instance.CurrentClubConfiguration.PlayerStagePosition.eulerAngles;
     }
 
     private void Update()

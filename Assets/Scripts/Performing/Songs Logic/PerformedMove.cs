@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PerformedMove : MonoBehaviour
+public class PerformedMove
 {
     public DanceMove selectedMove;
     public MoveType moveType;

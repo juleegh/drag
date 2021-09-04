@@ -5,10 +5,14 @@ using UnityEngine;
 public class ClubConfiguration : MonoBehaviour
 {
     [SerializeField] private Transform entryPoint;
-    [SerializeField] private Transform dancefloor;
+    [SerializeField] private Transform cameraStagePosition;
+    [SerializeField] private Transform playerStagePosition;
     [SerializeField] private CharacterWalking character;
     [SerializeField] private List<Transform> idlePositions;
     [SerializeField] private List<Transform> dancingPositions;
+
+    public Transform CameraStagePosition { get { return cameraStagePosition; } }
+    public Transform PlayerStagePosition { get { return playerStagePosition; } }
 
     public void LoadClubConfig()
     {
