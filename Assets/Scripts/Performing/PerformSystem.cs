@@ -20,7 +20,6 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     public PerformState PerformState { get { return performState; } }
     private PerformState performState;
     public float Tempo { get { return song.tempo; } }
-    float delay = 0;
     float count = 0;
 
     public void ConfigureRequiredComponent()

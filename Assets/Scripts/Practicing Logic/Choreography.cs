@@ -46,7 +46,7 @@ public class Choreography
             LoadMoves(reader);
             bReader.Close();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             LoadEmpty();
         }

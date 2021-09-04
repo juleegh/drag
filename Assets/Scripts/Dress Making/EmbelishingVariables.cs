@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class EmbelishingVariables
 {
-    public delegate void EmbelisherChanges();
-    public static event EmbelisherChanges ValueChanged;
-
     private Color currentColor;
     private Sprite currentStyle;
 

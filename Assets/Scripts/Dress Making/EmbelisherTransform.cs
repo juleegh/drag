@@ -38,11 +38,6 @@ public class EmbelisherTransform : MonoBehaviour, RequiredComponent
         UpdatePreview();
     }
 
-    void Initialize()
-    {
-        EmbelishingVariables.ValueChanged += UpdatePreview;
-    }
-
     void CleanSection()
     {
         if (OutfitStepManager.Instance.CurrentOutfitStep != OutfitStep.Outfit)

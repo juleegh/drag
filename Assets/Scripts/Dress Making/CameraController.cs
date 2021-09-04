@@ -9,10 +9,6 @@ public class CameraController : MonoBehaviour, RequiredComponent
     [SerializeField] float maxFov = 2f;
     [SerializeField] float sensitivity;
     [SerializeField] float maxAngle;
-    float minUp = -1f;
-    float maxUp = 1f;
-    float upSensitivity = 0.3f;
-    float moveSensitivity = 10f;
     private Transform mannequin { get { return GlobalPlayerManager.Instance != null ? GlobalPlayerManager.Instance.transform : null; } }
 
     private Vector3 basePosition;

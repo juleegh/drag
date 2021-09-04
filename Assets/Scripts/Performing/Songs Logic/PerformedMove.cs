@@ -15,7 +15,7 @@ public class PerformedMove
             selectedMove = selected;
         else
         {
-            selectedMove = new DanceMove();
+            selectedMove = (DanceMove)ScriptableObject.CreateInstance("DanceMove");
             selectedMove.MakeEmpty();
         }
 
