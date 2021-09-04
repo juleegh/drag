@@ -14,6 +14,7 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
     bool finished;
     private Dictionary<MoveType, bool> previewed;
     private Vector3 indicatorSize;
+    private bool loaded = false;
 
     public void ConfigureRequiredComponent()
     {
@@ -28,6 +29,7 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
         indicatorSize = movesPreviews[0].transform.localScale;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, StartPreview);
         finished = false;
+        loaded = true;
     }
 
     private void StartPreview()
@@ -42,6 +44,9 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
 
     private void Update()
     {
+        if (!loaded)
+            return;
+
         if (!receivingInput && !waitingToStart)
             return;
 

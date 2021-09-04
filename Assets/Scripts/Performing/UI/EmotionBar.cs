@@ -17,22 +17,7 @@ public class EmotionBar : MonoBehaviour
         mild.a = 0.5f;
         expected.color = mild;
         filled.color = color;
-
-        switch (moveType)
-        {
-            case MoveType.AType:
-                buttonCode.text = "A";
-                break;
-            case MoveType.BType:
-                buttonCode.text = "B";
-                break;
-            case MoveType.XType:
-                buttonCode.text = "X";
-                break;
-            case MoveType.YType:
-                buttonCode.text = "Y";
-                break;
-        }
+        buttonCode.text = MovesInputManager.Instance.GetNameFromMoveType(moveType);
     }
 
     public void SetExpected(float percent)
