@@ -6,4 +6,10 @@ public enum GameEvent
     HourAdvanced,
     MoneyChanged,
     ExperienceGained,
+    HideMoney,
+    ShowMoney,
+    HideHour,
+    ShowHour,
+    HideExperience,
+    ShowExperience,
 }

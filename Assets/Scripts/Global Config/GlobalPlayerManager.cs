@@ -12,6 +12,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     public static GlobalPlayerManager Instance { get { return instance; } }
     [SerializeField] private GameObject body;
     [SerializeField] private Transform faceBone;
+    [SerializeField] private GlobalUIManager globalUIManager;
     public GameObject Body { get { return body; } }
     public Transform FaceBone { get { return faceBone; } }
     public bool cleanPlayer;
@@ -59,30 +60,36 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     {
         SceneManager.LoadScene((int)GameFunctions.Dress_Making);
         GameEventsManager.Instance.Notify(GameEvent.EnteredDraggingRoom);
+        globalUIManager.ReloadUI(GameFunctions.Dress_Making);
     }
 
     public void GoToPerforming()
     {
         SceneManager.LoadScene((int)GameFunctions.Performing);
+        globalUIManager.ReloadUI(GameFunctions.Performing);
     }
 
     public void GoToLobby()
     {
         SceneManager.LoadScene((int)GameFunctions.Lobby);
+        globalUIManager.ReloadUI(GameFunctions.Lobby);
     }
 
     public void GoToWork()
     {
         SceneManager.LoadScene((int)GameFunctions.Work);
+        globalUIManager.ReloadUI(GameFunctions.Work);
     }
 
     public void GoToStore()
     {
         SceneManager.LoadScene((int)GameFunctions.Store);
+        globalUIManager.ReloadUI(GameFunctions.Store);
     }
 
     public void GoPractice()
     {
         SceneManager.LoadScene((int)GameFunctions.Practice);
+        globalUIManager.ReloadUI(GameFunctions.Practice);
     }
 }
