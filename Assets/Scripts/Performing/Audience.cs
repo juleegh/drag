@@ -13,14 +13,12 @@ public class Audience : ScriptableObject
     {
         switch (moveType)
         {
-            case MoveType.AType:
+            case MoveType.Score:
                 return moveAReaction;
-            case MoveType.BType:
+            case MoveType.Defense:
                 return moveBReaction;
-            case MoveType.XType:
+            case MoveType.Attack:
                 return moveXReaction;
-            case MoveType.YType:
-                return moveYReaction;
         }
 
         return 0f;

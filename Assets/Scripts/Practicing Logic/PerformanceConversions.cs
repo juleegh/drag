@@ -5,29 +5,25 @@ public static class PerformanceConversions
         switch (index)
         {
             case 0:
-                return MoveType.AType;
+                return MoveType.Score;
             case 1:
-                return MoveType.BType;
+                return MoveType.Defense;
             case 2:
-                return MoveType.XType;
-            case 3:
-                return MoveType.YType;
+                return MoveType.Attack;
         }
-        return MoveType.AType;
+        return MoveType.Score;
     }
 
     public static int ConvertIndexFromMoveType(MoveType moveType)
     {
         switch (moveType)
         {
-            case MoveType.AType:
+            case MoveType.Score:
                 return 0;
-            case MoveType.BType:
+            case MoveType.Defense:
                 return 1;
-            case MoveType.XType:
+            case MoveType.Attack:
                 return 2;
-            case MoveType.YType:
-                return 3;
         }
         return 0;
     }

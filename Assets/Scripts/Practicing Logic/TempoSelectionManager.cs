@@ -24,6 +24,8 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
 
     private Song Song { get { return ProgressManager.Instance.CurrentLevel.BattleSong; } }
     private Choreography Choreography { get { return ChoreographyEditor.Instance.Choreography; } }
+    private MoveType MoveTypeSelected { get { return PerformanceConversions.ConvertMoveTypeFromIndex(selectedMovement); } }
+    private DanceMove DanceMoveSelected { get { return DanceMovesManager.Instance.GetListFromType(MoveTypeSelected)[topMovementType + selectedMovementType]; } }
 
     public void ConfigureRequiredComponent()
     {
@@ -51,7 +53,7 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
         }
         else if (currentlySelected == Selection.Tempo)
         {
-            if (selectedMovement < 3)
+            if (selectedMovement < 2)
             {
                 selectedMovement++;
                 choreoPreview.RefreshTempoView(selectedTempo, selectedMovement);
@@ -59,17 +61,17 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
         }
         else if (currentlySelected == Selection.Move)
         {
-            if (selectedMovementType < moveTypeListPreview.MovesOnScreen - 1)
+            if (selectedMovementType < moveTypeListPreview.MovesOnScreen - 1 && selectedMovementType < DanceMovesManager.Instance.GetListFromType(MoveTypeSelected).Count - 1)
             {
                 selectedMovementType++;
-                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
-                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
+                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType, MoveTypeSelected);
+                ChoreographyEditor.Instance.PreviewMove(DanceMoveSelected);
             }
-            else if (topMovementType + moveTypeListPreview.MovesOnScreen + 1 < DanceMovesManager.Instance.DanceMovesList.Count)
+            else if (topMovementType + moveTypeListPreview.MovesOnScreen + 1 < DanceMovesManager.Instance.GetListFromType(MoveTypeSelected).Count)
             {
                 topMovementType++;
-                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
-                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
+                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType, MoveTypeSelected);
+                ChoreographyEditor.Instance.PreviewMove(DanceMoveSelected);
             }
         }
     }
@@ -102,14 +104,14 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
             if (selectedMovementType > 0)
             {
                 selectedMovementType--;
-                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
-                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
+                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType, MoveTypeSelected);
+                ChoreographyEditor.Instance.PreviewMove(DanceMoveSelected);
             }
             else if (topMovementType > 0)
             {
                 topMovementType--;
-                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType);
-                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
+                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType, MoveTypeSelected);
+                ChoreographyEditor.Instance.PreviewMove(DanceMoveSelected);
             }
         }
     }
@@ -126,13 +128,16 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
             case Selection.Tempo:
                 currentlySelected = Selection.Move;
                 moveTypeListPreview.ShowList(true);
-                ChoreographyEditor.Instance.PreviewMove(topMovementType + selectedMovementType);
+                ChoreographyEditor.Instance.PreviewMove(DanceMoveSelected);
+                moveTypeListPreview.RefreshView(topMovementType, selectedMovementType, MoveTypeSelected);
                 return;
             case Selection.Move:
-                ChoreographyEditor.Instance.SaveMoveToTempo(topTempo + selectedTempo, selectedMovement, selectedMovementType + topMovementType);
+                ChoreographyEditor.Instance.SaveMoveToTempo(topTempo + selectedTempo, selectedMovement, DanceMoveSelected);
                 choreoPreview.RefreshView(topTempo, selectedTempo);
                 choreoPreview.RefreshTempoView(selectedTempo, selectedMovement);
                 currentlySelected = Selection.Tempo;
+                topMovementType = 0;
+                selectedMovementType = 0;
                 moveTypeListPreview.ShowList(false);
                 return;
         }
@@ -147,6 +152,8 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
                 choreoPreview.RefreshTempoView(selectedTempo, -1);
                 return;
             case Selection.Move:
+                topMovementType = 0;
+                selectedMovementType = 0;
                 currentlySelected = Selection.Tempo;
                 moveTypeListPreview.ShowList(false);
                 ChoreographyEditor.Instance.CancelPreview();

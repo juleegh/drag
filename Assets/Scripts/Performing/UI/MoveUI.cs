@@ -74,21 +74,17 @@ public class MoveUI : MonoBehaviour
         background.color = full;
         switch (moveType)
         {
-            case MoveType.AType:
-                sphere.color = PerformSystem.Instance.MovesProperties.ColorByMove[MoveType.AType];
+            case MoveType.Score:
+                sphere.color = PerformSystem.Instance.MovesProperties.ColorByMove[MoveType.Score];
                 typeText.text = "A";
                 break;
-            case MoveType.BType:
-                sphere.color = PerformSystem.Instance.MovesProperties.ColorByMove[MoveType.BType];
+            case MoveType.Defense:
+                sphere.color = PerformSystem.Instance.MovesProperties.ColorByMove[MoveType.Defense];
                 typeText.text = "B";
                 break;
-            case MoveType.XType:
-                sphere.color = PerformSystem.Instance.MovesProperties.ColorByMove[MoveType.XType];
+            case MoveType.Attack:
+                sphere.color = PerformSystem.Instance.MovesProperties.ColorByMove[MoveType.Attack];
                 typeText.text = "X";
-                break;
-            case MoveType.YType:
-                sphere.color = PerformSystem.Instance.MovesProperties.ColorByMove[MoveType.YType];
-                typeText.text = "Y";
                 break;
         }
     }

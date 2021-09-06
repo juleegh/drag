@@ -19,10 +19,9 @@ public class EmotionFeed
     public void DefineTargets(List<MoveSlot> sequenceMoves)
     {
         List<MoveType> types = new List<MoveType>();
-        types.Add(MoveType.AType);
-        types.Add(MoveType.BType);
-        types.Add(MoveType.XType);
-        types.Add(MoveType.YType);
+        types.Add(MoveType.Score);
+        types.Add(MoveType.Defense);
+        types.Add(MoveType.Attack);
 
         for (int i = 0; i < sequenceMoves.Count; i++)
         {
@@ -36,15 +35,13 @@ public class EmotionFeed
 
     private void CleanAll()
     {
-        currentEmotions[MoveType.AType] = 0f;
-        currentEmotions[MoveType.BType] = 0f;
-        currentEmotions[MoveType.XType] = 0f;
-        currentEmotions[MoveType.YType] = 0f;
+        currentEmotions[MoveType.Score] = 0f;
+        currentEmotions[MoveType.Defense] = 0f;
+        currentEmotions[MoveType.Attack] = 0f;
 
-        targetEmotions[MoveType.AType] = 0f;
-        targetEmotions[MoveType.BType] = 0f;
-        targetEmotions[MoveType.XType] = 0f;
-        targetEmotions[MoveType.YType] = 0f;
+        targetEmotions[MoveType.Score] = 0f;
+        targetEmotions[MoveType.Defense] = 0f;
+        targetEmotions[MoveType.Attack] = 0f;
     }
 
     public void ReactToMove(PerformedMove move)

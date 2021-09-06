@@ -16,10 +16,10 @@ public class TempoMovesPreview : MonoBehaviour
     {
         buffType.sprite = properties.SpriteByBuff[buff];
         tempoID.text = tempo.ToString();
-        movesPreviews[0].SetMoveInfo(MoveType.AType);
-        movesPreviews[1].SetMoveInfo(MoveType.BType);
-        movesPreviews[2].SetMoveInfo(MoveType.XType);
-        movesPreviews[3].SetMoveInfo(MoveType.YType);
+        movesPreviews[0].SetMoveInfo(MoveType.Score);
+        movesPreviews[1].SetMoveInfo(MoveType.Defense);
+        movesPreviews[2].SetMoveInfo(MoveType.Attack);
+        //movesPreviews[3].SetMoveInfo(MoveType.YType);
     }
 
     public void FillDanceMoves(DanceMove[] danceMoves)

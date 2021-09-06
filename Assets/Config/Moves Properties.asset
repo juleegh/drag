@@ -35,13 +35,12 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 00000000010000000200000003000000
-    _keys: 00000000010000000200000003000000
+    _keyValues: 000000000100000002000000
+    _keys: 000000000100000002000000
     _values:
     - {r: 1, g: 0, b: 1, a: 1}
     - {r: 0, g: 1, b: 1, a: 1}
     - {r: 1, g: 1, b: 0, a: 1}
-    - {r: 1, g: 0.48235294, b: 0, a: 1}
   spriteByBuff:
     reorderableList:
       canAdd: 1

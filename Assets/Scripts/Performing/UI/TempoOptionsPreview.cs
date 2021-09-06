@@ -17,10 +17,10 @@ public class TempoOptionsPreview : MonoBehaviour, RequiredComponent
 
     private void ClearUI()
     {
-        movePreviews[0].SetMoveInfo(MoveType.AType);
-        movePreviews[1].SetMoveInfo(MoveType.BType);
-        movePreviews[2].SetMoveInfo(MoveType.XType);
-        movePreviews[3].SetMoveInfo(MoveType.YType);
+        movePreviews[0].SetMoveInfo(MoveType.Score);
+        movePreviews[1].SetMoveInfo(MoveType.Defense);
+        movePreviews[2].SetMoveInfo(MoveType.Attack);
+        //movePreviews[3].SetMoveInfo(MoveType.YType);
         container.SetActive(false);
     }
 

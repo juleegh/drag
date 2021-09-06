@@ -28,10 +28,9 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
         PracticeEventsManager.Instance.Notify(PracticeEvents.ChoreographyLoaded);
     }
 
-    public void SaveMoveToTempo(int tempoIndex, int position, int danceMoveIndex)
+    public void SaveMoveToTempo(int tempoIndex, int position, DanceMove danceMove)
     {
         int tempo = Song.SongBuffs.ToList()[tempoIndex].Key;
-        DanceMove danceMove = DanceMovesManager.Instance.DanceMovesList.ToList()[danceMoveIndex].Value;
         choreography.AddMoveToTempo(tempo, position, danceMove);
         PosePerformer.Instance.HitPose(PoseType.Idle);
         CancelPreview();
@@ -39,9 +38,8 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
         choreography.SaveChoreo();
     }
 
-    public void PreviewMove(int danceMoveIndex)
+    public void PreviewMove(DanceMove danceMove)
     {
-        DanceMove danceMove = DanceMovesManager.Instance.DanceMovesList.ToList()[danceMoveIndex].Value;
         previewDelay = 0.8f;
         previewPose = danceMove.PoseType;
     }

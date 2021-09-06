@@ -28,15 +28,15 @@ public class MoveTypeListPreview : MonoBehaviour, RequiredComponent
             movesTypesPreviews[i] = Instantiate(moveTypePreviewPrefab).GetComponent<MoveTypePreview>();
             movesTypesPreviews[i].transform.SetParent(movesContainer);
         }
-        RefreshView(0, 0);
+        RefreshView(0, 0, MoveType.Score);
         previewContainer.SetActive(false);
     }
 
-    public void RefreshView(int topMove, int selectedMove)
+    public void RefreshView(int topMove, int selectedMove, MoveType moveType)
     {
         int previewIndex = 0;
 
-        List<KeyValuePair<string, DanceMove>> movesAvailable = DanceMovesManager.Instance.DanceMovesList.ToList();
+        List<DanceMove> movesAvailable = DanceMovesManager.Instance.GetListFromType(moveType);
         for (int i = topMove; i < topMove + movesOnScreen; i++)
         {
             if (i >= movesAvailable.Count)
@@ -46,8 +46,8 @@ public class MoveTypeListPreview : MonoBehaviour, RequiredComponent
                 continue;
             }
 
-            KeyValuePair<string, DanceMove> danceMove = movesAvailable[i];
-            movesTypesPreviews[previewIndex].UpdateMoveInfo(danceMove.Key, danceMove.Value.StaminaRequired);
+            DanceMove danceMove = movesAvailable[i];
+            movesTypesPreviews[previewIndex].UpdateMoveInfo(danceMove.Identifier, danceMove.StaminaRequired);
             movesTypesPreviews[previewIndex].ToggleSelected(previewIndex == selectedMove);
             previewIndex++;
         }

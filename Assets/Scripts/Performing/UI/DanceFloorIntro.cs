@@ -20,10 +20,9 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
     {
         receivingInput = false;
         previewed = new Dictionary<MoveType, bool>();
-        previewed[MoveType.AType] = false;
-        previewed[MoveType.BType] = false;
-        previewed[MoveType.XType] = false;
-        previewed[MoveType.YType] = false;
+        previewed[MoveType.Score] = false;
+        previewed[MoveType.Defense] = false;
+        previewed[MoveType.Attack] = false;
         prompt.SetActive(false);
         container.SetActive(false);
         indicatorSize = movesPreviews[0].transform.localScale;
@@ -63,19 +62,15 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
 
         if (Input.GetKeyDown(MovesInputManager.Instance.A))
         {
-            PlayerSelectedMove(MoveType.AType);
+            PlayerSelectedMove(MoveType.Score);
         }
         else if (Input.GetKeyDown(MovesInputManager.Instance.B))
         {
-            PlayerSelectedMove(MoveType.BType);
+            PlayerSelectedMove(MoveType.Defense);
         }
         else if (Input.GetKeyDown(MovesInputManager.Instance.X))
         {
-            PlayerSelectedMove(MoveType.XType);
-        }
-        else if (Input.GetKeyDown(MovesInputManager.Instance.Y))
-        {
-            PlayerSelectedMove(MoveType.YType);
+            PlayerSelectedMove(MoveType.Attack);
         }
     }
 

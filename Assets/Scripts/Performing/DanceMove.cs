@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Dance Move")]
 public class DanceMove : ScriptableObject
 {
     [SerializeField] private int staminaRequired;

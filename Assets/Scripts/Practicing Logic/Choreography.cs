@@ -10,6 +10,7 @@ public class Choreography
     private BossLevel bossLevel;
     private Dictionary<int, DanceMove[]> movesPerTime;
     public Dictionary<int, DanceMove[]> MovesPerTime { get { return movesPerTime; } }
+    private int moveTypesQuantity = 3;
 
     public void AddMoveToTempo(int tempo, int position, DanceMove danceMove)
     {
@@ -18,7 +19,7 @@ public class Choreography
 
         if (!movesPerTime.ContainsKey(tempo))
         {
-            movesPerTime.Add(tempo, new DanceMove[4]);
+            movesPerTime.Add(tempo, new DanceMove[moveTypesQuantity]);
         }
 
         movesPerTime[tempo][position] = danceMove;
@@ -39,17 +40,10 @@ public class Choreography
         bossLevel = boss;
 
         string savePath = Path.Combine(Application.persistentDataPath, "choreo_" + bossLevel.ToString());
-        try
-        {
-            BinaryReader bReader = new BinaryReader(File.Open(savePath, FileMode.Open));
-            GameDataReader reader = new GameDataReader(bReader);
-            LoadMoves(reader);
-            bReader.Close();
-        }
-        catch (Exception)
-        {
-            LoadEmpty();
-        }
+        BinaryReader bReader = new BinaryReader(File.Open(savePath, FileMode.Open));
+        GameDataReader reader = new GameDataReader(bReader);
+        LoadMoves(reader);
+        bReader.Close();
     }
 
     private void SaveMoves(GameDataWriter writer)
@@ -58,12 +52,15 @@ public class Choreography
         {
             writer.Write(tempo.Key);
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < moveTypesQuantity; i++)
             {
                 if (!movesPerTime.ContainsKey(tempo.Key) || movesPerTime[tempo.Key][i] == null)
                     writer.Write("Empty");
                 else
+                {
+                    Debug.LogError("Saved " + movesPerTime[tempo.Key][i].Identifier);
                     writer.Write(movesPerTime[tempo.Key][i].Identifier);
+                }
             }
         }
     }
@@ -83,10 +80,10 @@ public class Choreography
         {
             int tempo = reader.ReadInt();
 
-            for (int slot = 0; slot < 4; slot++)
+            for (int slot = 0; slot < moveTypesQuantity; slot++)
             {
                 string move = reader.ReadString();
-                if (!move.Equals("Empty"))
+                if (move != null && !move.Equals("Empty") && !move.Equals("") && DanceMovesManager.Instance.DanceMovesList.ContainsKey(move))
                 {
                     AddMoveToTempo(tempo, slot, DanceMovesManager.Instance.DanceMovesList[move]);
                 }
@@ -101,7 +98,7 @@ public class Choreography
         movesPerTime = new Dictionary<int, DanceMove[]>();
         foreach (KeyValuePair<int, MoveBuff> moves in ProgressManager.Instance.CurrentLevel.BattleSong.SongBuffs)
         {
-            for (int slot = 0; slot < 4; slot++)
+            for (int slot = 0; slot < moveTypesQuantity; slot++)
             {
                 AddMoveToTempo(moves.Key, slot, null);
             }
@@ -114,12 +111,12 @@ public class Choreography
         foreach (KeyValuePair<int, DanceMove[]> tempo in movesPerTime)
         {
             int inTempo = 0;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < moveTypesQuantity; i++)
             {
                 if (tempo.Value[i] != null)
                     inTempo += tempo.Value[i].StaminaRequired;
             }
-            average += inTempo / 4;
+            average += inTempo / moveTypesQuantity;
         }
         return average;
     }

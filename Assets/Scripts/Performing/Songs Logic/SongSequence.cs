@@ -91,19 +91,15 @@ public class SongSequence : MonoBehaviour, RequiredComponent
 
         if (Input.GetKeyDown(MovesInputManager.Instance.A))
         {
-            PlayerSelectedMove(MoveType.AType);
+            PlayerSelectedMove(MoveType.Score);
         }
         else if (Input.GetKeyDown(MovesInputManager.Instance.B))
         {
-            PlayerSelectedMove(MoveType.BType);
+            PlayerSelectedMove(MoveType.Defense);
         }
         else if (Input.GetKeyDown(MovesInputManager.Instance.X))
         {
-            PlayerSelectedMove(MoveType.XType);
-        }
-        else if (Input.GetKeyDown(MovesInputManager.Instance.Y))
-        {
-            PlayerSelectedMove(MoveType.YType);
+            PlayerSelectedMove(MoveType.Attack);
         }
     }
 

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public enum MoveType
 {
-    AType,
-    BType,
-    XType,
-    YType,
+    Score,
+    Defense,
+    Attack,
 }

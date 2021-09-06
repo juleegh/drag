@@ -10,12 +10,10 @@ public class MovesInputManager : MonoBehaviour, RequiredComponent
     [SerializeField] private KeyCode a;
     [SerializeField] private KeyCode b;
     [SerializeField] private KeyCode x;
-    [SerializeField] private KeyCode y;
 
     public KeyCode A { get { return a; } }
     public KeyCode B { get { return b; } }
     public KeyCode X { get { return x; } }
-    public KeyCode Y { get { return y; } }
 
     public void ConfigureRequiredComponent()
     {
@@ -26,14 +24,12 @@ public class MovesInputManager : MonoBehaviour, RequiredComponent
     {
         switch (moveType)
         {
-            case MoveType.AType:
+            case MoveType.Score:
                 return a;
-            case MoveType.BType:
+            case MoveType.Defense:
                 return b;
-            case MoveType.XType:
+            case MoveType.Attack:
                 return x;
-            case MoveType.YType:
-                return y;
         }
 
         return KeyCode.None;
@@ -43,14 +39,12 @@ public class MovesInputManager : MonoBehaviour, RequiredComponent
     {
         switch (moveType)
         {
-            case MoveType.AType:
+            case MoveType.Score:
                 return "A";
-            case MoveType.BType:
+            case MoveType.Defense:
                 return "B";
-            case MoveType.XType:
+            case MoveType.Attack:
                 return "X";
-            case MoveType.YType:
-                return "Y";
         }
 
         return " ";
