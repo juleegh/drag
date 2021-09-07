@@ -114,18 +114,11 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         SongSequence.Instance.Slots[moveIndex].performed = true;
         SongSequence.Instance.Slots[moveIndex].correct = isCorrect;
 
-        bool hasTheStamina = move.selectedMove.StaminaRequired <= PerformingChoreoController.Instance.CharacterStamina;
-
-        if (isCorrect && hasTheStamina)
+        if (isCorrect)
         {
             move.score *= SongSequence.Instance.Slots[moveIndex].GetMultiplier();
             emotionFeed.ReactToMove(move);
-            PerformingChoreoController.Instance.PlayerPerformedMove(move.selectedMove);
             PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
-        }
-        else if (!hasTheStamina)
-        {
-            PosePerformer.Instance.HitPose(PoseType.Tired);
         }
 
         PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);

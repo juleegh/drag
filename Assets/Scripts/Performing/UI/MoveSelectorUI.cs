@@ -8,7 +8,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
     [SerializeField] private SimpleObjectPool pool;
     [SerializeField] private Transform container;
     [SerializeField] private GameObject indicator;
-    [SerializeField] private float moveDistance = 60f;
+    [SerializeField] private float moveDistance;
 
     private List<MoveUI> moves;
     private int currentMove;
@@ -65,8 +65,8 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
                 ui.MarkAsEmpty();
             ui.transform.SetParent(container);
 
-            float xPosition = ((float)(2 * i - amountOfMoves) / amountOfMoves) * (amountOfMoves * moveDistance / 2);
-            ui.transform.position = transform.position + Vector3.right * xPosition;
+            float yPosition = i * moveDistance;
+            ui.transform.position = transform.position + Vector3.up * yPosition;
             moves.Add(ui);
 
             if (i == PerformSystem.Instance.MovesProperties.MovesBefore)
@@ -108,12 +108,12 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
             ui.MarkAsEmpty();
 
         ui.transform.SetParent(container);
-        ui.transform.position = moves[moves.Count - 1].transform.position + Vector3.right * moveDistance;
+        ui.transform.position = moves[moves.Count - 1].transform.position + Vector3.up * moveDistance;
         moves.Add(ui);
 
         for (int i = 0; i < moves.Count; i++)
         {
-            moves[i].transform.DOMoveX(moves[i].transform.position.x - moveDistance, PerformSystem.Instance.Tempo).SetEase(Ease.Linear);
+            moves[i].transform.DOMoveY(moves[i].transform.position.y - moveDistance, PerformSystem.Instance.Tempo).SetEase(Ease.Linear);
         }
         indicator.transform.localScale = indicatorSize * 1.1f;
         indicator.transform.DOScale(indicatorSize, PerformSystem.Instance.Tempo).SetEase(Ease.Linear);

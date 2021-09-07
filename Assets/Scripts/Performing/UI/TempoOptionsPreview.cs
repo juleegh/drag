@@ -34,7 +34,7 @@ public class TempoOptionsPreview : MonoBehaviour, RequiredComponent
             if (move == null)
                 movePreviews[i].UpdateMoveText("", 0);
             else
-                movePreviews[i].UpdateMoveText(move.Identifier, move.StaminaRequired);
+                movePreviews[i].UpdateMoveText(move.Identifier, 0);
 
             i++;
         }
