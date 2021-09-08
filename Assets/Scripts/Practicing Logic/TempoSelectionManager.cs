@@ -45,7 +45,7 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
                 selectedTempo++;
                 choreoPreview.RefreshView(topTempo, selectedTempo);
             }
-            else if (topTempo + choreoPreview.TemposOnScreen + 1 < Choreography.MovesPerTime.Count)
+            else if (topTempo + choreoPreview.TemposOnScreen + 1 <= Choreography.MovesPerTime.Count)
             {
                 topTempo++;
                 choreoPreview.RefreshView(topTempo, selectedTempo);
@@ -67,7 +67,7 @@ public class TempoSelectionManager : MonoBehaviour, RequiredComponent
                 moveTypeListPreview.RefreshView(topMovementType, selectedMovementType, MoveTypeSelected);
                 ChoreographyEditor.Instance.PreviewMove(DanceMoveSelected);
             }
-            else if (topMovementType + moveTypeListPreview.MovesOnScreen + 1 < DanceMovesManager.Instance.GetListFromType(MoveTypeSelected).Count)
+            else if (topMovementType + moveTypeListPreview.MovesOnScreen + 1 <= DanceMovesManager.Instance.GetListFromType(MoveTypeSelected).Count)
             {
                 topMovementType++;
                 moveTypeListPreview.RefreshView(topMovementType, selectedMovementType, MoveTypeSelected);

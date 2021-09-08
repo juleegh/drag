@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DefenseMove : DanceMove
+public class BuffMove : DanceMove
 {
     [SerializeField] private DefenseBuff defenseBuff;
     public DefenseBuff DefenseBuff { get { return defenseBuff; } }

@@ -53,7 +53,7 @@ public class MoveTypeListPreview : MonoBehaviour, RequiredComponent
         }
 
         UpIndicator.SetActive(topMove > 0);
-        DownIndicator.SetActive(topMove + movesOnScreen < movesAvailable.Count - 1);
+        DownIndicator.SetActive(topMove + movesOnScreen <= movesAvailable.Count - 1);
     }
 
     public void ShowList(bool visible)

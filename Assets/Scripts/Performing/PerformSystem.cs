@@ -116,9 +116,9 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
 
         if (isCorrect)
         {
-            move.score *= SongSequence.Instance.Slots[moveIndex].GetMultiplier();
             emotionFeed.ReactToMove(move);
             PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
+            DanceBattleManager.Instance.PlayerPerformedMove(move.selectedMove);
         }
 
         PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);

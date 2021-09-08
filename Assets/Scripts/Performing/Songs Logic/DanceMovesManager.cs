@@ -46,9 +46,9 @@ public class DanceMovesManager : MonoBehaviour, GlobalComponent
         {
             danceMovesList.Add(danceMove.Identifier, danceMove);
 
-            if (danceMove as AttackMove != null)
+            if (danceMove as SabotageMove != null)
                 attackMoves.Add(danceMove);
-            if (danceMove as DefenseMove != null)
+            if (danceMove as BuffMove != null)
                 defenseMoves.Add(danceMove);
             if (danceMove as ScoreMove != null)
                 scoreMoves.Add(danceMove);

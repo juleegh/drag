@@ -39,11 +39,18 @@ public class Choreography
     {
         bossLevel = boss;
 
-        string savePath = Path.Combine(Application.persistentDataPath, "choreo_" + bossLevel.ToString());
-        BinaryReader bReader = new BinaryReader(File.Open(savePath, FileMode.Open));
-        GameDataReader reader = new GameDataReader(bReader);
-        LoadMoves(reader);
-        bReader.Close();
+        try
+        {
+            string savePath = Path.Combine(Application.persistentDataPath, "choreo_" + bossLevel.ToString());
+            BinaryReader bReader = new BinaryReader(File.Open(savePath, FileMode.Open));
+            GameDataReader reader = new GameDataReader(bReader);
+            LoadMoves(reader);
+            bReader.Close();
+        }
+        catch (Exception)
+        {
+            LoadEmpty();
+        }
     }
 
     private void SaveMoves(GameDataWriter writer)
@@ -58,7 +65,6 @@ public class Choreography
                     writer.Write("Empty");
                 else
                 {
-                    Debug.LogError("Saved " + movesPerTime[tempo.Key][i].Identifier);
                     writer.Write(movesPerTime[tempo.Key][i].Identifier);
                 }
             }

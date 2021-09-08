@@ -54,7 +54,7 @@ public class ChoreographyPreview : MonoBehaviour, RequiredComponent
         }
 
         UpIndicator.SetActive(topTempo > 0);
-        DownIndicator.SetActive(topTempo + temposOnScreen < Choreography.MovesPerTime.Count - 1);
+        DownIndicator.SetActive(topTempo + temposOnScreen <= Choreography.MovesPerTime.Count - 1);
     }
 
     public void RefreshTempoView(int selectedTempo, int selectedMove)
