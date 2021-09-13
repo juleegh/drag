@@ -38,6 +38,15 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
         choreography.SaveChoreo();
     }
 
+    public int GetTentativeStamina(int tempoIndex, int position, DanceMove danceMove)
+    {
+        int tempo = Song.SongBuffs.ToList()[tempoIndex].Key;
+        int stamina = choreography.GetTotalStamina();
+        stamina -= choreography.MovesPerTime[tempo][position].StaminaRequired;
+        stamina += danceMove.StaminaRequired;
+        return stamina;
+    }
+
     public void PreviewMove(DanceMove danceMove)
     {
         previewDelay = 0.8f;

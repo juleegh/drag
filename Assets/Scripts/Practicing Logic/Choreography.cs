@@ -111,9 +111,9 @@ public class Choreography
         }
     }
 
-    public int GetAverageStamina()
+    public int GetTotalStamina()
     {
-        int average = 0;
+        int total = 0;
         foreach (KeyValuePair<int, DanceMove[]> tempo in movesPerTime)
         {
             int inTempo = 0;
@@ -122,9 +122,9 @@ public class Choreography
                 if (tempo.Value[i] != null)
                     inTempo += tempo.Value[i].StaminaRequired;
             }
-            average += inTempo / moveTypesQuantity;
+            total += inTempo;
         }
-        return average;
+        return total;
     }
 
     public DanceMove GetMoveInTempoByType(int tempo, MoveType moveType)

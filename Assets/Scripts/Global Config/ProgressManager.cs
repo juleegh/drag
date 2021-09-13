@@ -38,7 +38,7 @@ public class ProgressManager : MonoBehaviour, GlobalComponent
         }
 
         experiencePoints = PlayerPrefs.GetInt("experience", 0);
-        stamina = 30;
+        stamina = 196;
     }
 
     void Start()

@@ -1437,6 +1437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   averageStamina: {fileID: 776220392}
   characterStamina: {fileID: 1763761704}
+  background: {fileID: 1387287602}
 --- !u!114 &1600989572
 MonoBehaviour:
   m_ObjectHideFlags: 0

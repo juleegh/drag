@@ -11,4 +11,5 @@ public enum PracticeEvents
     NavigatedForwardTempo,
     NavigatedBackTempo,
     ChoreographyUpdated,
+    NotEnoughStamina,
 }
