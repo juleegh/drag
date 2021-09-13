@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaRequired: 10
   poseType: 101
-  score: 0
+  score: 1
   defenseBuff: 1

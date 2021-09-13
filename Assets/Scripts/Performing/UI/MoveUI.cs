@@ -13,6 +13,8 @@ public class MoveUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI typeText;
 
     [SerializeField] private Color empty;
+    [SerializeField] private Color player;
+    [SerializeField] private Color opponent;
     [SerializeField] private Color full;
     [SerializeField] private Color right;
     [SerializeField] private Color wrong;
@@ -31,7 +33,7 @@ public class MoveUI : MonoBehaviour
         buff.color = transparent;
     }
 
-    public void MarkAsBuff(MoveBuff theBuff)
+    public void MarkAsBuff(bool isPlayerTempo, MoveBuff theBuff)
     {
         moveBuff = theBuff;
 
@@ -46,24 +48,28 @@ public class MoveUI : MonoBehaviour
         sphere.color = transparent;
         typeText.text = "";
 
-        switch (theBuff)
-        {
-            case MoveBuff.None:
-                buff.sprite = null;
-                buff.color = transparent;
-                break;
-            case MoveBuff.Double:
-                buff.sprite = properties.SpriteByBuff[MoveBuff.Double];
-                buff.color = Color.white;
-                break;
-            case MoveBuff.Half:
-                buff.sprite = properties.SpriteByBuff[MoveBuff.Half];
-                buff.color = Color.white;
-                break;
-        }
+        background.color = isPlayerTempo ? player : opponent;
+
+        /*
+                switch (theBuff)
+                {
+                    case MoveBuff.None:
+                        buff.sprite = null;
+                        buff.color = transparent;
+                        break;
+                    case MoveBuff.Double:
+                        buff.sprite = properties.SpriteByBuff[MoveBuff.Double];
+                        buff.color = Color.white;
+                        break;
+                    case MoveBuff.Half:
+                        buff.sprite = properties.SpriteByBuff[MoveBuff.Half];
+                        buff.color = Color.white;
+                        break;
+                }
+                */
     }
 
-    public void MarkAsMove(MoveType moveType)
+    public void MarkAsMove(bool isPlayerTempo, MoveType moveType)
     {
         if (moveBuff == MoveBuff.None)
         {
@@ -71,7 +77,8 @@ public class MoveUI : MonoBehaviour
             return;
         }
 
-        background.color = full;
+        background.color = isPlayerTempo ? player : opponent;
+
         switch (moveType)
         {
             case MoveType.Score:

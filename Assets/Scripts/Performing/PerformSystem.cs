@@ -66,10 +66,12 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         if (performState == PerformState.PickingSequence)
             return;
 
+        if (SongSequence.Instance.Slots[currentMove].buff != MoveBuff.None)
+            PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);
+
         if (!SongSequence.Instance.Slots[currentMove].performed)
         {
             SongSequence.Instance.Slots[currentMove].performed = true;
-            PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);
         }
 
         currentMove++;
@@ -121,7 +123,6 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
             DanceBattleManager.Instance.PlayerPerformedMove(move.selectedMove);
         }
 
-        PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);
     }
 }

@@ -26,7 +26,11 @@ public class TempoOptionsPreview : MonoBehaviour, RequiredComponent
 
     private void SetOptions()
     {
-        container.SetActive(true);
+        container.SetActive(DanceBattleManager.Instance.IsPlayerTurn);
+
+        if (!DanceBattleManager.Instance.IsPlayerTurn)
+            return;
+
         DanceMove[] currentOptions = PerformingChoreoController.Instance.GetOptionsForTempo();
         int i = 0;
         foreach (DanceMove move in currentOptions)

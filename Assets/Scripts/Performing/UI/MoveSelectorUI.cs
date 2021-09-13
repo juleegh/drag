@@ -60,7 +60,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
             GameObject move = pool.GetObject();
             MoveUI ui = move.GetComponent<MoveUI>();
             if (i >= PerformSystem.Instance.MovesProperties.MovesBefore)
-                ui.MarkAsBuff(slots[i - PerformSystem.Instance.MovesProperties.MovesBefore].buff);
+                ui.MarkAsBuff(DanceBattleManager.Instance.PlayerGoesFirst, slots[i - PerformSystem.Instance.MovesProperties.MovesBefore].buff);
             else
                 ui.MarkAsEmpty();
             ui.transform.SetParent(container);
@@ -85,9 +85,9 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
                 if (index < SongSequence.Instance.Slots.Count)
                 {
                     PerformedMove move = SongSequence.Instance.Slots[index].move;
-                    moves[i].MarkAsBuff(SongSequence.Instance.Slots[index].buff);
+                    moves[i].MarkAsBuff(PerformingChoreoController.Instance.IsPlayerMove(index), SongSequence.Instance.Slots[index].buff);
                     if (move != null)
-                        moves[i].MarkAsMove(move.moveType);
+                        moves[i].MarkAsMove(PerformingChoreoController.Instance.IsPlayerMove(index), move.moveType);
                 }
                 else
                     moves[i].MarkAsEmpty();
@@ -103,7 +103,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
         int index = PerformSystem.Instance.CurrentMoveIndex + PerformSystem.Instance.MovesProperties.MovesAhead + 1;
 
         if (index < SongSequence.Instance.Slots.Count)
-            ui.MarkAsBuff(SongSequence.Instance.Slots[index].buff);
+            ui.MarkAsBuff(PerformingChoreoController.Instance.IsPlayerMove(index), SongSequence.Instance.Slots[index].buff);
         else
             ui.MarkAsEmpty();
 
@@ -127,7 +127,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
 
     public void PerformedMove()
     {
-        moves[PerformSystem.Instance.MovesProperties.MovesBefore].MarkAsMove(PerformSystem.Instance.CurrentSlot.move.moveType);
+        moves[PerformSystem.Instance.MovesProperties.MovesBefore].MarkAsMove(true, PerformSystem.Instance.CurrentSlot.move.moveType);
         bool correct = PerformSystem.Instance.CurrentSlot.correct;
         moves[PerformSystem.Instance.MovesProperties.MovesBefore].MarkCompleted(correct);
     }

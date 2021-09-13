@@ -49,4 +49,18 @@ public class PerformingChoreoController : MonoBehaviour, RequiredComponent
     {
         return currentTempo.Value;
     }
+
+    public bool IsPlayerMove(int tempo)
+    {
+        bool isPlayerMove = DanceBattleManager.Instance.PlayerGoesFirst;
+        foreach (int tempoIndex in SongSequence.Instance.DanceTempos)
+        {
+            if (tempo == tempoIndex)
+                return isPlayerMove;
+
+            isPlayerMove = !isPlayerMove;
+        }
+
+        return isPlayerMove;
+    }
 }

@@ -17,6 +17,9 @@ public class DanceBattleManager : MonoBehaviour, RequiredComponent
     private bool isPlayerTurn;
     public bool IsPlayerTurn { get { return isPlayerTurn; } }
 
+    private bool playerGoesFirst;
+    public bool PlayerGoesFirst { get { return playerGoesFirst; } }
+
     private PerformanceStatus CurrentPlayer { get { return isPlayerTurn ? player : opponent; } }
     private PerformanceStatus OppositePlayer { get { return !isPlayerTurn ? player : opponent; } }
 
@@ -24,6 +27,7 @@ public class DanceBattleManager : MonoBehaviour, RequiredComponent
     {
         instance = this;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, CreateBattleInfo);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.BuffPassed, ChangeCurrentPlayer);
     }
 
     private void CreateBattleInfo()
@@ -32,6 +36,12 @@ public class DanceBattleManager : MonoBehaviour, RequiredComponent
         opponent = new PerformanceStatus();
         isPlayerTurn = true;
         //isPlayerTurn = Random.Range(0, 9) % 2 == 0;
+        playerGoesFirst = isPlayerTurn;
+    }
+
+    private void ChangeCurrentPlayer()
+    {
+        isPlayerTurn = !isPlayerTurn;
     }
 
     public void PlayerPerformedMove(DanceMove danceMove)

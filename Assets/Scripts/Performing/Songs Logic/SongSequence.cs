@@ -8,6 +8,8 @@ public class SongSequence : MonoBehaviour, RequiredComponent
     private static SongSequence instance;
 
     private List<int> sequenceIndexes;
+    private List<int> danceTempos;
+    public List<int> DanceTempos { get { return danceTempos; } }
     private List<MoveSlot> slots;
     public List<MoveSlot> Slots { get { return slots; } }
     private List<MoveSequence> songSequences;
@@ -22,12 +24,19 @@ public class SongSequence : MonoBehaviour, RequiredComponent
     {
         songSequences = song.GetSequences();
         sequenceIndexes = new List<int>();
+        danceTempos = new List<int>();
+        int tempoCounter = 0;
+
         for (int i = 0; i < songSequences.Count; i++)
         {
             sequenceIndexes.Add(slots.Count);
             for (int j = 0; j < songSequences[i].slots.Count; j++)
             {
                 slots.Add(songSequences[i].slots[j]);
+                if (songSequences[i].slots[j].buff != MoveBuff.None)
+                    danceTempos.Add(tempoCounter);
+
+                tempoCounter++;
             }
             sequenceIndexes.Add(slots.Count);
         }
@@ -87,6 +96,9 @@ public class SongSequence : MonoBehaviour, RequiredComponent
     void Update()
     {
         if (instance == null || PerformSystem.Instance.PerformState != PerformState.Executing)
+            return;
+
+        if (!DanceBattleManager.Instance.IsPlayerTurn)
             return;
 
         if (Input.GetKeyDown(MovesInputManager.Instance.A))
