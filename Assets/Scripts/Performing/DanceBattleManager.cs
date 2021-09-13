@@ -27,7 +27,7 @@ public class DanceBattleManager : MonoBehaviour, RequiredComponent
     {
         instance = this;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, CreateBattleInfo);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.BuffPassed, ChangeCurrentPlayer);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TurnAdvanced, ChangeCurrentPlayer);
     }
 
     private void CreateBattleInfo()

@@ -2372,6 +2372,7 @@ GameObject:
   - component: {fileID: 718751632}
   - component: {fileID: 718751627}
   - component: {fileID: 718751628}
+  - component: {fileID: 718751635}
   m_Layer: 0
   m_Name: Perform System
   m_TagString: Untagged
@@ -2562,6 +2563,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3980c48d07f4824bbe4a55503b02f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &718751635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718751626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163463e4de356f3478bb2a7ac1a7e13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &722635784

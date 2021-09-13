@@ -15,4 +15,5 @@ public enum PerformingEvent
     BuffPassed,
     EnteredTheDanceFloor,
     PlayerReadyToPerform,
+    TurnAdvanced,
 }

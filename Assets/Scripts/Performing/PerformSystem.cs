@@ -67,7 +67,11 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
             return;
 
         if (SongSequence.Instance.Slots[currentMove].buff != MoveBuff.None)
+        {
             PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);
+            if (!SongSequence.Instance.Slots[currentMove].performed)
+                PerformingEventsManager.Instance.Notify(PerformingEvent.TurnAdvanced);
+        }
 
         if (!SongSequence.Instance.Slots[currentMove].performed)
         {
@@ -121,6 +125,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
             emotionFeed.ReactToMove(move);
             PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
             DanceBattleManager.Instance.PlayerPerformedMove(move.selectedMove);
+            PerformingEventsManager.Instance.Notify(PerformingEvent.TurnAdvanced);
         }
 
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);

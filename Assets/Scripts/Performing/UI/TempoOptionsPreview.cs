@@ -12,7 +12,7 @@ public class TempoOptionsPreview : MonoBehaviour, RequiredComponent
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, ClearUI);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, SetOptions);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.BuffPassed, SetOptions);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TurnAdvanced, SetOptions);
     }
 
     private void ClearUI()
