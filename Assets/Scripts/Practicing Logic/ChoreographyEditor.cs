@@ -42,7 +42,7 @@ public class ChoreographyEditor : MonoBehaviour, RequiredComponent
     {
         int tempo = Song.SongBuffs.ToList()[tempoIndex].Key;
         int stamina = choreography.GetTotalStamina();
-        stamina -= choreography.MovesPerTime[tempo][position].StaminaRequired;
+        stamina -= choreography.MovesPerTime[tempo][position] != null ? choreography.MovesPerTime[tempo][position].StaminaRequired : 0;
         stamina += danceMove.StaminaRequired;
         return stamina;
     }
