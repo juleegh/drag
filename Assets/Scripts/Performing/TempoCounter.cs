@@ -11,15 +11,21 @@ public class TempoCounter : MonoBehaviour, RequiredComponent
     private bool isPlaying;
     private bool preBeatFrame;
     private bool postBeatFrame;
+    bool firstTime;
+
+    WaitForSeconds unaceptable;
+    WaitForSeconds preAcceptable;
+    WaitForSeconds postAcceptable;
 
     public bool IsOnPreTempo { get { return preBeatFrame; } }
     public bool IsOnPostTempo { get { return postBeatFrame; } }
-    public float TempoPercentage { get { return isPlaying ? tempoTime / frequency : 0f; } }
-    private float tempoTime;
+
+    [SerializeField] private float delayDuration;
 
     public void ConfigureRequiredComponent()
     {
         instance = this;
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, ClearDelay);
     }
 
     public void SetTempo(float freq)
@@ -29,9 +35,12 @@ public class TempoCounter : MonoBehaviour, RequiredComponent
 
     public void StartTempoCount()
     {
-        tempoTime = 0f;
+        firstTime = true;
         isPlaying = true;
-        StartCoroutine(QualifyTempo());
+        unaceptable = new WaitForSeconds(frequency * (1 - PerformSystem.Instance.MovesProperties.AcceptablePercentage));
+        preAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.65f);
+        postAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.35f);
+        StartCoroutine(PreTempo());
     }
 
     public void StopTempoCount()
@@ -40,35 +49,46 @@ public class TempoCounter : MonoBehaviour, RequiredComponent
         StopAllCoroutines();
     }
 
-    private void Update()
+    private IEnumerator PreTempo()
     {
-        if (isPlaying)
-            tempoTime += Time.deltaTime;
+        if (firstTime)
+        {
+            yield return postAcceptable;
+            firstTime = false;
+        }
+        yield return unaceptable;
+        preBeatFrame = true;
+        if (SongSequence.Instance.Slots[PerformSystem.Instance.CurrentMoveIndex].buff != MoveBuff.None)
+        {
+            StartCoroutine(PlayCooldown());
+            PerformingEventsManager.Instance.Notify(PerformingEvent.CurrentTempoStarted);
+        }
+        else
+            StartCoroutine(PostTempo());
     }
 
-    private IEnumerator QualifyTempo()
+    private IEnumerator PlayCooldown()
     {
-        WaitForSeconds unaceptable = new WaitForSeconds(frequency * (1 - PerformSystem.Instance.MovesProperties.AcceptablePercentage));
-        WaitForSeconds preAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.65f);
-        WaitForSeconds postAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.35f);
+        PerformingEventsManager.Instance.Notify(PerformingEvent.CurrentDelayStarted);
+        yield return new WaitForSeconds(delayDuration);
+        PerformingEventsManager.Instance.Notify(PerformingEvent.CurrentDelayEnded);
+        StartCoroutine(PostTempo());
+    }
 
-        bool firstTime = true;
-        while (isPlaying)
-        {
-            if (firstTime)
-            {
-                yield return postAcceptable;
-                firstTime = false;
-            }
-            yield return unaceptable;
-            preBeatFrame = true;
-            yield return preAcceptable;
-            PerformingEventsManager.Instance.Notify(PerformingEvent.TempoEnded);
-            tempoTime = 0f;
-            preBeatFrame = false;
-            postBeatFrame = true;
-            yield return postAcceptable;
-            postBeatFrame = false;
-        }
+    private void ClearDelay()
+    {
+        StopAllCoroutines();
+        StartCoroutine(PostTempo());
+    }
+
+    private IEnumerator PostTempo()
+    {
+        yield return preAcceptable;
+        PerformingEventsManager.Instance.Notify(PerformingEvent.TempoEnded);
+        preBeatFrame = false;
+        postBeatFrame = true;
+        yield return postAcceptable;
+        postBeatFrame = false;
+        StartCoroutine(PreTempo());
     }
 }

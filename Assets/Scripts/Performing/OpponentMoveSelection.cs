@@ -14,7 +14,7 @@ public class OpponentMoveSelection : MonoBehaviour, RequiredComponent
         instance = this;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, PerformanceStarted);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TurnAdvanced, CheckNextTempo);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.BuffPassed, TryMove);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.CurrentTempoStarted, TryMove);
 
     }
 

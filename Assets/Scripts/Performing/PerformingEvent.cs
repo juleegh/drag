@@ -16,4 +16,7 @@ public enum PerformingEvent
     EnteredTheDanceFloor,
     PlayerReadyToPerform,
     TurnAdvanced,
+    CurrentTempoStarted,
+    CurrentDelayStarted,
+    CurrentDelayEnded,
 }

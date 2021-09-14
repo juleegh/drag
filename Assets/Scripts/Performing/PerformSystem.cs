@@ -20,7 +20,6 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     public PerformState PerformState { get { return performState; } }
     private PerformState performState;
     public float Tempo { get { return song.tempo; } }
-    float count = 0;
 
     public void ConfigureRequiredComponent()
     {
@@ -85,7 +84,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
 
         if (currentMove == SongSequence.Instance.Slots.Count)
         {
-            count--;
+            currentMove--;
             performState = PerformState.PickingSequence;
             //TempoCounter.Instance.StopTempoCount();
         }
@@ -110,7 +109,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
     private void QualifyTempo(PerformedMove move, bool postTempo)
     {
         int moveIndex = postTempo ? currentMove - 1 : currentMove;
-        if (SongSequence.Instance.Slots[moveIndex].performed)
+        if (SongSequence.Instance.Slots[moveIndex].performed || SongSequence.Instance.Slots[moveIndex].buff == MoveBuff.None)
             return;
 
         bool isOnPreTempo = TempoCounter.Instance.IsOnPreTempo && !postTempo;

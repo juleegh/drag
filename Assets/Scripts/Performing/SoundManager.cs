@@ -13,6 +13,9 @@ public class SoundManager : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         instance = this;
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.CurrentTempoStarted, StopTrack);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TempoEnded, ContinueTrack);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, ContinueTrack);
     }
 
     public void SetTrack(AudioClip clip)
@@ -25,6 +28,11 @@ public class SoundManager : MonoBehaviour, RequiredComponent
         if (imUpset)
             return;
         audioSource.Play();
+    }
+
+    private void ContinueTrack()
+    {
+        audioSource.UnPause();
     }
 
     public void StopTrack()
