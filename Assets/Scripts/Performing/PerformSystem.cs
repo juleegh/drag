@@ -125,6 +125,7 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
             PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
             DanceBattleManager.Instance.PlayerPerformedMove(move.selectedMove);
             PerformingEventsManager.Instance.Notify(PerformingEvent.TurnAdvanced);
+            BattleSoundEffects.Instance.PlayEffect(move.moveType);
         }
 
         PerformingEventsManager.Instance.Notify(PerformingEvent.MovePerformed);

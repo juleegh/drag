@@ -10,8 +10,11 @@ public class PerformanceScoreUI : MonoBehaviour, RequiredComponent
     [SerializeField] private Image scoreBar;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI multiplier;
+    [SerializeField] private GameObject multiplierContainer;
     [SerializeField] private GameObject container;
     [SerializeField] private bool isPlayers;
+
+    int previousMultiplier = 1;
 
     public void ConfigureRequiredComponent()
     {
@@ -41,5 +44,21 @@ public class PerformanceScoreUI : MonoBehaviour, RequiredComponent
         scoreBar.DOFillAmount(scoreAmount, 0.3f).SetEase(Ease.InOutQuad);
         scoreText.text = "Score: " + status.PerformingScore;
         multiplier.text = "x" + status.Multiplier;
+
+        if (previousMultiplier < status.Multiplier)
+        {
+            Vector3 nextScale = Vector3.one + status.Multiplier * Vector3.one * 0.03f;
+            multiplierContainer.transform.DOPunchScale(nextScale, 0.35f).OnComplete(() =>
+           multiplierContainer.transform.DOScale(nextScale, 0.35f)
+            );
+        }
+        else if (previousMultiplier > status.Multiplier)
+        {
+            Vector3 nextScale = Vector3.one + status.Multiplier * Vector3.one * 0.03f;
+            multiplierContainer.transform.DOPunchScale(nextScale, 0.35f).OnComplete(() =>
+           multiplierContainer.transform.DOScale(nextScale, 0.35f)
+            );
+        }
+        previousMultiplier = status.Multiplier;
     }
 }

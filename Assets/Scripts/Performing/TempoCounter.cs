@@ -8,7 +8,6 @@ public class TempoCounter : MonoBehaviour, RequiredComponent
     private static TempoCounter instance;
 
     private float frequency;
-    private bool isPlaying;
     private bool preBeatFrame;
     private bool postBeatFrame;
     bool firstTime;
@@ -36,7 +35,6 @@ public class TempoCounter : MonoBehaviour, RequiredComponent
     public void StartTempoCount()
     {
         firstTime = true;
-        isPlaying = true;
         unaceptable = new WaitForSeconds(frequency * (1 - PerformSystem.Instance.MovesProperties.AcceptablePercentage));
         preAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.65f);
         postAcceptable = new WaitForSeconds(frequency * PerformSystem.Instance.MovesProperties.AcceptablePercentage * 0.35f);
@@ -45,7 +43,6 @@ public class TempoCounter : MonoBehaviour, RequiredComponent
 
     public void StopTempoCount()
     {
-        isPlaying = false;
         StopAllCoroutines();
     }
 
