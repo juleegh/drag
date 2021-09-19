@@ -66,9 +66,7 @@ public class TempoCounter : MonoBehaviour, RequiredComponent
 
     private IEnumerator PlayCooldown()
     {
-        PerformingEventsManager.Instance.Notify(PerformingEvent.CurrentDelayStarted);
         yield return new WaitForSeconds(delayDuration);
-        PerformingEventsManager.Instance.Notify(PerformingEvent.CurrentDelayEnded);
         StartCoroutine(PostTempo());
     }
 

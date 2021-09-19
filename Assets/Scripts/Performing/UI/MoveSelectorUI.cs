@@ -17,6 +17,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, HideUI);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.LeftDanceFloor, HideUI);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, ShowUI);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.SequenceCreated, CreateSlots);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovesShifted, ShiftMoves);
@@ -27,6 +28,7 @@ public class MoveSelectorUI : MonoBehaviour, RequiredComponent
     private void HideUI()
     {
         indicator.gameObject.SetActive(false);
+        CleanMoves();
     }
 
     private void ShowUI()

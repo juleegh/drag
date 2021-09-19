@@ -20,6 +20,11 @@ public class ClubConfiguration : MonoBehaviour
         SetPlayerInEntryPoint();
     }
 
+    public void SetPlayerInPosition()
+    {
+        SetPlayerInEntryPoint();
+    }
+
     private void SetPlayerInEntryPoint()
     {
         character.transform.position = entryPoint.position;

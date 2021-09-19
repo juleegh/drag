@@ -36,7 +36,6 @@ public class PerformingChoreoController : MonoBehaviour, RequiredComponent
             currentTempoIndex++;
             if (currentTempoIndex < choreography.MovesPerTime.Count)
                 currentTempo = choreography.MovesPerTime.ToList()[currentTempoIndex];
-            PerformingEventsManager.Instance.Notify(PerformingEvent.ShiftedTempo);
         }
     }
 

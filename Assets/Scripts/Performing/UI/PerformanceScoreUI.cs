@@ -19,6 +19,7 @@ public class PerformanceScoreUI : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, CleanScore);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.LeftDanceFloor, CleanScore);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, ShowScore);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.MovePerformed, UpdateScore);
     }
@@ -27,12 +28,14 @@ public class PerformanceScoreUI : MonoBehaviour, RequiredComponent
     {
         container.SetActive(false);
         scoreBar.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
     }
 
     private void ShowScore()
     {
         container.SetActive(true);
         scoreBar.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);
         UpdateScore();
     }
 

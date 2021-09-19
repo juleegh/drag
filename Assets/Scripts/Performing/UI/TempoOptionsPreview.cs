@@ -11,6 +11,7 @@ public class TempoOptionsPreview : MonoBehaviour, RequiredComponent
     public void ConfigureRequiredComponent()
     {
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, ClearUI);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.LeftDanceFloor, ClearUI);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, SetOptions);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TurnAdvanced, SetOptions);
     }

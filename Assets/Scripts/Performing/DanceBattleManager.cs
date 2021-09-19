@@ -22,6 +22,7 @@ public class DanceBattleManager : MonoBehaviour, RequiredComponent
 
     private PerformanceStatus CurrentPlayer { get { return isPlayerTurn ? player : opponent; } }
     private PerformanceStatus OppositePlayer { get { return !isPlayerTurn ? player : opponent; } }
+    public bool PlayerWins { get { return player.PerformingScore >= opponent.PerformingScore; } }
 
     public void ConfigureRequiredComponent()
     {

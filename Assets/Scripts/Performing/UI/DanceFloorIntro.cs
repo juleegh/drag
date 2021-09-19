@@ -34,7 +34,9 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
     private void StartPreview()
     {
         if (finished)
+        {
             return;
+        }
 
         UpdatePreviews();
         container.SetActive(true);

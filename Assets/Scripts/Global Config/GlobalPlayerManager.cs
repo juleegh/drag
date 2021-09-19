@@ -16,6 +16,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     public GameObject Body { get { return body; } }
     public Transform FaceBone { get { return faceBone; } }
     public bool cleanPlayer;
+    public string QueenName { get { return PlayerPrefs.GetString("Queen_Name"); } }
 
     public void ConfigureRequiredComponent()
     {
@@ -42,7 +43,7 @@ public class GlobalPlayerManager : MonoBehaviour, GlobalComponent
     void CheckEntry()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        if (PlayerPrefs.GetString("Queen_Name") == "")
+        if (QueenName == "")
         {
             SceneManager.LoadScene((int)GameFunctions.Queen_Creation);
         }

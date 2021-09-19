@@ -67,7 +67,6 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
 
         if (SongSequence.Instance.Slots[currentMove].buff != MoveBuff.None)
         {
-            PerformingEventsManager.Instance.Notify(PerformingEvent.BuffPassed);
             if (!SongSequence.Instance.Slots[currentMove].performed)
                 PerformingEventsManager.Instance.Notify(PerformingEvent.TurnAdvanced);
         }
@@ -86,7 +85,8 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         {
             currentMove--;
             performState = PerformState.PickingSequence;
-            //TempoCounter.Instance.StopTempoCount();
+            TempoCounter.Instance.StopTempoCount();
+            PerformingEventsManager.Instance.Notify(PerformingEvent.PerformanceEnded);
         }
         else
         {
