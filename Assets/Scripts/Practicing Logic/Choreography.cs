@@ -10,7 +10,6 @@ public class Choreography
     private BossLevel bossLevel;
     private Dictionary<int, DanceMove[]> movesPerTime;
     public Dictionary<int, DanceMove[]> MovesPerTime { get { return movesPerTime; } }
-    private int moveTypesQuantity = 3;
 
     public void AddMoveToTempo(int tempo, int position, DanceMove danceMove)
     {
@@ -19,7 +18,7 @@ public class Choreography
 
         if (!movesPerTime.ContainsKey(tempo))
         {
-            movesPerTime.Add(tempo, new DanceMove[moveTypesQuantity]);
+            movesPerTime.Add(tempo, new DanceMove[PerformanceConversions.MoveTypesQuantity]);
         }
 
         movesPerTime[tempo][position] = danceMove;
@@ -59,7 +58,7 @@ public class Choreography
         {
             writer.Write(tempo.Key);
 
-            for (int i = 0; i < moveTypesQuantity; i++)
+            for (int i = 0; i < PerformanceConversions.MoveTypesQuantity; i++)
             {
                 if (!movesPerTime.ContainsKey(tempo.Key) || movesPerTime[tempo.Key][i] == null)
                     writer.Write("Empty");
@@ -86,7 +85,7 @@ public class Choreography
         {
             int tempo = reader.ReadInt();
 
-            for (int slot = 0; slot < moveTypesQuantity; slot++)
+            for (int slot = 0; slot < PerformanceConversions.MoveTypesQuantity; slot++)
             {
                 string move = reader.ReadString();
                 if (move != null && !move.Equals("Empty") && !move.Equals("") && DanceMovesManager.Instance.DanceMovesList.ContainsKey(move))
@@ -104,7 +103,7 @@ public class Choreography
         movesPerTime = new Dictionary<int, DanceMove[]>();
         foreach (KeyValuePair<int, MoveBuff> moves in ProgressManager.Instance.CurrentLevel.BattleSong.SongBuffs)
         {
-            for (int slot = 0; slot < moveTypesQuantity; slot++)
+            for (int slot = 0; slot < PerformanceConversions.MoveTypesQuantity; slot++)
             {
                 AddMoveToTempo(moves.Key, slot, null);
             }
@@ -117,7 +116,7 @@ public class Choreography
         foreach (KeyValuePair<int, DanceMove[]> tempo in movesPerTime)
         {
             int inTempo = 0;
-            for (int i = 0; i < moveTypesQuantity; i++)
+            for (int i = 0; i < PerformanceConversions.MoveTypesQuantity; i++)
             {
                 if (tempo.Value[i] != null)
                     inTempo += tempo.Value[i].StaminaRequired;

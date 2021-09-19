@@ -69,4 +69,19 @@ public class DanceMovesManager : MonoBehaviour, GlobalComponent
 
         return new List<DanceMove>();
     }
+
+    public DanceMove GetRandomFromType(MoveType moveType)
+    {
+        switch (moveType)
+        {
+            case MoveType.Score:
+                return scoreMoves[Random.Range(0, scoreMoves.Count)];
+            case MoveType.Defense:
+                return defenseMoves[Random.Range(0, defenseMoves.Count)];
+            case MoveType.Attack:
+                return attackMoves[Random.Range(0, attackMoves.Count)];
+        }
+
+        return null;
+    }
 }

@@ -27,4 +27,6 @@ public static class PerformanceConversions
         }
         return 0;
     }
+
+    public static int MoveTypesQuantity { get { return 3; } }
 }

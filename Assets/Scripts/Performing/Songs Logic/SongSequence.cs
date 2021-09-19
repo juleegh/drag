@@ -115,13 +115,12 @@ public class SongSequence : MonoBehaviour, RequiredComponent
         }
     }
 
-    public void OpponentPlayRandomMove()
+    public void OpponentPlayMove(MoveType moveType, DanceMove danceMove)
     {
         PerformedMove newMove = new PerformedMove();
-        int randomMove = Random.Range(0, 3);
-        newMove.moveType = PerformanceConversions.ConvertMoveTypeFromIndex(randomMove);
+        newMove.moveType = moveType;
         newMove.score = 200;
-        newMove.AssignSelectedMove(PerformingChoreoController.Instance.GetMoveFromType(newMove.moveType));
+        newMove.AssignSelectedMove(danceMove);
 
         slots[PerformSystem.Instance.CurrentMoveIndex].move = newMove;
         PerformSystem.Instance.PerformedMove(newMove);

@@ -31,6 +31,24 @@ public class OpponentMoveSelection : MonoBehaviour, RequiredComponent
     private void TryMove()
     {
         if (willPlayMove)
-            SongSequence.Instance.OpponentPlayRandomMove();
+        {
+            MoveType moveType = DecideNextMove();
+            DanceMove selectedMove = ProgressManager.Instance.CurrentLevel.BossChoreo.GetResponseFromTempo(PerformSystem.Instance.CurrentMoveIndex, moveType);
+
+            if (selectedMove == null)
+                selectedMove = DanceMovesManager.Instance.GetRandomFromType(moveType);
+
+            SongSequence.Instance.OpponentPlayMove(moveType, selectedMove);
+        }
+    }
+
+    private MoveType DecideNextMove()
+    {
+        if (DanceBattleManager.Instance.Player.Multiplier > DanceBattleManager.Instance.Opponent.Multiplier)
+            return MoveType.Attack;
+        else if (DanceBattleManager.Instance.Opponent.Multiplier <= 1)
+            return MoveType.Defense;
+        else
+            return PerformanceConversions.ConvertMoveTypeFromIndex(Random.Range(0, PerformanceConversions.MoveTypesQuantity));
     }
 }
