@@ -34,7 +34,7 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
 
     private void Update()
     {
-        if (!isPossesed)
+        if (!isPossesed || DialogSystemController.Instance.IsInteracting)
             return;
 
         float horizontal = Input.GetAxis("Horizontal");

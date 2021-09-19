@@ -1,0 +1,11 @@
+,TEXT,NEXT NODE(S)
+1,Well well... look what the cat has dragged,2
+2,I knew you would come eventually; bring it on already!,3
+3,You think you can win! The nerve! The audacity!,4
+4,Shall we begin? Our battle will be legendary,5;6
+5,BRING.IT.ON,7
+6,Woh... chill mate; I'm not ready,8
+7,Letsssss GO!,9
+8,HaHA! scared. Potter? See you later then,10
+9,<StartPerformance>,
+10,<FinishDialog>,
