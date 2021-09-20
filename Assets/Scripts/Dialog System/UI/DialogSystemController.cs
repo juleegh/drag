@@ -56,7 +56,10 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
     private void ShowCurrent()
     {
         if (currentCharacter.Dialogs.CurrentNode.IsQuestion)
+        {
             visuals.SetContent(currentCharacter.CharacterName, currentCharacter.Dialogs.CurrentNode.Text, currentCharacter.Dialogs.GetAnswersInText());
+            visuals.ToggleSelected(selectedOption);
+        }
         else
             visuals.SetContent(currentCharacter.CharacterName, currentCharacter.Dialogs.CurrentNode.Text);
 
@@ -74,10 +77,16 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
             return;
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && selectedOption > 0)
+        {
             selectedOption--;
+            visuals.ToggleSelected(selectedOption);
+        }
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && selectedOption < currentDialogs.Count - 1)
+        {
             selectedOption++;
+            visuals.ToggleSelected(selectedOption);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
