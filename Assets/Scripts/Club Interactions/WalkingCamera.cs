@@ -19,6 +19,7 @@ public class WalkingCamera : MonoBehaviour, RequiredComponent
 
     private void StartFollowingPlayer()
     {
+        CameraPosing.Instance.Reset();
         transform.position = characterWalking.transform.position - distanceFromPlayer;
         transform.eulerAngles = followingAngle;
         followingPlayer = true;

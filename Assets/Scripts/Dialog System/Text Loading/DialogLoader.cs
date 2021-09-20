@@ -20,14 +20,23 @@ public static class DialogLoader
             string identifier = line[idColumn].Trim();
             string nodeText = line[textColumn].Trim();
             string[] nextNodes = line[nextNodeColumn].Split(';');
-            DialogNode newNode;
+            DialogNode newNode = new DialogNode();
+
 
             if (nextNodes.Length > 1)
                 newNode = new DialogQuestion();
-            else
-                newNode = new DialogText();
 
-            newNode.SetText(nodeText);
+            if (nodeText.Contains("<"))
+            {
+                nodeText = nodeText.Replace("<", "");
+                nodeText = nodeText.Replace(">", "");
+                newNode.SetAction(nodeText);
+            }
+            else
+            {
+                newNode.SetText(nodeText);
+            }
+
             tree.LoadNode(identifier, newNode);
         }
 
@@ -54,8 +63,7 @@ public static class DialogLoader
             }
             else
             {
-                DialogText text = tree.GetNode(identifier) as DialogText;
-                text.AssignNextNode(tree.GetNode(line[nextNodeColumn].Trim()));
+                tree.GetNode(identifier).AssignNextNode(tree.GetNode(line[nextNodeColumn].Trim()));
             }
         }
 

@@ -12,4 +12,6 @@ public enum GameEvent
     ShowHour,
     HideExperience,
     ShowExperience,
+
+    FinishDialog,
 }

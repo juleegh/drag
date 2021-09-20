@@ -22,6 +22,7 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
     {
         instance = this;
         visuals.ToggleView(false);
+        GameEventsManager.Instance.AddActionToEvent(GameEvent.FinishDialog, EndDialog);
     }
 
     public void StartInteraction(Character character)
@@ -37,20 +38,21 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
         nextDialogDelay = 0.15f;
         selectedOption = 0;
 
-        if (currentCharacter.Dialogs.CurrentNode != null)
+        if (currentCharacter.Dialogs.CurrentNode != null && currentCharacter != null)
         {
             currentDialogs = new List<DialogNode> { currentCharacter.Dialogs.CurrentNode.NextNode };
+
             if (currentCharacter.Dialogs.CurrentNode.IsQuestion)
                 currentDialogs = currentCharacter.Dialogs.GetAnswers().ToList();
+
+            ShowCurrent();
+
+            if (currentCharacter.Dialogs.CurrentNode.AssociatedAction != null)
+                currentCharacter.Dialogs.CurrentNode.AssociatedAction.ExecuteAction();
         }
         else
-        {
-            isInteracting = false;
-            visuals.ToggleView(false);
-            return;
-        }
+            EndDialog();
 
-        ShowCurrent();
     }
 
     private void ShowCurrent()
@@ -73,7 +75,7 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
             return;
         }
 
-        if (!isInteracting)
+        if (!isInteracting || currentCharacter == null)
             return;
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && selectedOption > 0)
@@ -101,5 +103,12 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
             currentCharacter.Dialogs.AdvanceNode(currentDialogs[selectedOption].NextNode);
         else
             currentCharacter.Dialogs.AdvanceNode(currentDialogs[selectedOption]);
+    }
+
+    public void EndDialog()
+    {
+        currentCharacter = null;
+        isInteracting = false;
+        visuals.ToggleView(false);
     }
 }

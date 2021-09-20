@@ -36,6 +36,7 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
         if (finished)
             return;
 
+        DialogSystemController.Instance.EndDialog();
         UpdatePreviews();
         container.SetActive(true);
         receivingInput = true;

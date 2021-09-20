@@ -32,13 +32,14 @@ public class CameraPosing : MonoBehaviour, RequiredComponent
     private void StartedPerformance()
     {
         PosePerformer.Instance.SetSpeed(1f);
-        HitPose(PoseType.Idle);
+        PosePerformer.Instance.HitPose(PoseType.Idle);
     }
 
     public void HitPose(PoseType poseType)
     {
         if (!IsPosing(poseType) && poseType != PoseType.Walking)
             return;
+        animator.enabled = true;
         animator.Rebind();
         animator.Play(poseType.ToString());
     }
@@ -49,4 +50,11 @@ public class CameraPosing : MonoBehaviour, RequiredComponent
         return poseId >= 100 && poseId < 200;
     }
 
+    public void Reset()
+    {
+        animator.StopPlayback();
+        animator.enabled = false;
+        cameraObject.transform.localPosition = Vector3.zero;
+        cameraObject.transform.eulerAngles = Vector3.zero;
+    }
 }

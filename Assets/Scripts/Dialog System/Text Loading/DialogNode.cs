@@ -12,6 +12,15 @@ public class DialogNode
 
     public virtual bool IsQuestion { get { return false; } }
 
+    protected DialogAction associatedAction;
+    public DialogAction AssociatedAction { get { return associatedAction; } }
+
+    public void SetAction(string actionType)
+    {
+        associatedAction = new DialogAction();
+        associatedAction.SetAction(actionType);
+    }
+
     public void SetText(string newText)
     {
         text = newText;
