@@ -107,6 +107,7 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
 
     public void EndDialog()
     {
+        currentCharacter.ResetState();
         currentCharacter = null;
         isInteracting = false;
         visuals.ToggleView(false);

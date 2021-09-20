@@ -17,9 +17,14 @@ public class Character : MonoBehaviour, RequiredComponent
 
     private void LoadCharacter()
     {
-        dialogTree = DialogLoader.LoadDialogs(info.DialogsFile);
-        dialogTree.LoadFirst();
+        dialogTree = DialogLoader.LoadDialogs(info.NameIdentifier, info.DialogsFile);
+        dialogTree.LoadPreviousSaveState();
 
         //GetComponent<QueenRandomnizer>().MakeRandomIdleQueen();
+    }
+
+    public void ResetState()
+    {
+        dialogTree.LoadPreviousSaveState();
     }
 }

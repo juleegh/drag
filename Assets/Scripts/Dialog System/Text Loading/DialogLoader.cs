@@ -8,8 +8,10 @@ public static class DialogLoader
     private static int idColumn = 0;
     private static int textColumn = 1;
     private static int nextNodeColumn = 2;
+    private static int saveStateColumn = 3;
+    private static int triggerColumn = 4;
 
-    public static DialogTree LoadDialogs(TextAsset dialogCsv)
+    public static DialogTree LoadDialogs(string characterName, TextAsset dialogCsv)
     {
         List<string[]> dialogs = FileDataReader.LoadGrid(dialogCsv);
 
@@ -19,12 +21,14 @@ public static class DialogLoader
         {
             string identifier = line[idColumn].Trim();
             string nodeText = line[textColumn].Trim();
+            string isSaveState = line[saveStateColumn].Trim();
+            string trigger = line[triggerColumn].Trim();
             string[] nextNodes = line[nextNodeColumn].Split(';');
-            DialogNode newNode = new DialogNode();
+            DialogNode newNode = new DialogNode(identifier);
 
 
             if (nextNodes.Length > 1)
-                newNode = new DialogQuestion();
+                newNode = new DialogQuestion(identifier);
 
             if (nodeText.Contains("<"))
             {
@@ -38,6 +42,16 @@ public static class DialogLoader
             }
 
             tree.LoadNode(identifier, newNode);
+
+            if (isSaveState == "y")
+                tree.AddSaveState(characterName, identifier);
+
+            if (trigger != "")
+            {
+                trigger = trigger.Replace("<", "");
+                trigger = trigger.Replace(">", "");
+                tree.AddTrigger((GameEvent)System.Enum.Parse(typeof(GameEvent), trigger), newNode);
+            }
         }
 
         foreach (string[] line in dialogs)

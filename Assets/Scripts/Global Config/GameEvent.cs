@@ -14,4 +14,6 @@ public enum GameEvent
     ShowExperience,
 
     FinishDialog,
+    PlayerWon,
+    PlayerLose,
 }

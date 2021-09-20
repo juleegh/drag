@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DialogNode
 {
+    protected string dIdentifier;
+    public string DIdentifier { get { return dIdentifier; } }
+
     protected DialogNode nextNode;
     public DialogNode NextNode { get { return nextNode; } }
 
@@ -14,6 +17,11 @@ public class DialogNode
 
     protected DialogAction associatedAction;
     public DialogAction AssociatedAction { get { return associatedAction; } }
+
+    public DialogNode(string id)
+    {
+        dIdentifier = id;
+    }
 
     public void SetAction(string actionType)
     {

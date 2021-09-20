@@ -1,11 +1,18 @@
-,TEXT,NEXT NODE(S)
-1,Well well... look what the cat has dragged,2
-2,I knew you would come eventually; bring it on already!,3
-3,You think you can win! The nerve! The audacity!,4
-4,Shall we begin? Our battle will be legendary,5;6
-5,BRING.IT.ON,7
-6,Woh... chill mate; I'm not ready,8
-7,Letsssss GO!,9
-8,HaHA! scared. Potter? See you later then,10
-9,<EnteredTheDanceFloor>,
-10,<FinishDialog>,
+,TEXT,NEXT NODE(S),SAVE STATE,TRIGGER
+1,Well well... look what the cat has dragged,2,y,
+2,I knew you would come eventually; bring it on already!,3,n,
+3,You think you can win! The nerve! The audacity!,4,n,
+4,Shall we begin? Our battle will be legendary,5;6,n,
+5,BRING.IT.ON,7,n,
+6,Woh... chill mate; I'm not ready,8,n,
+7,Letsssss GO!,9,n,
+8,HaHA! scared Potter? See you later then,10,n,
+9,<EnteredTheDanceFloor>,,n,
+11,Oh honey; so sad. At least you tried!,12,n,<PlayerLose>
+12,Go work on yourself an we'll talk again. Bye bestie!,,n,
+13,I....uh....,14,y,<PlayerWon>
+14,You know what I can't? even. I can't even.,15,n,
+15,Well; you did that! Take this badge from my gym or whatever.,16,n,
+16,Now go to the next club; annoy somebody else!,17,n,
+17,...,18,n,
+18,And congrats!,,y,

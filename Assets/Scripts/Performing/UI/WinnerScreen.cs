@@ -29,6 +29,7 @@ public class WinnerScreen : MonoBehaviour, RequiredComponent
     {
         container.SetActive(true);
         string winnerName = DanceBattleManager.Instance.PlayerWins ? GlobalPlayerManager.Instance.QueenName : ProgressManager.Instance.CurrentLevel.BossName;
+        GameEventsManager.Instance.Notify(DanceBattleManager.Instance.PlayerWins ? GameEvent.PlayerWon : GameEvent.PlayerLose);
         winnerTitle.text = winnerName + " WINS";
         Sequence sequence = DOTween.Sequence();
         sequence.AppendInterval(3f);

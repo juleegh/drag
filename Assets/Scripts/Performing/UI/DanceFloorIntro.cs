@@ -18,6 +18,13 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
 
     public void ConfigureRequiredComponent()
     {
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, ClearAndLoad);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, ClearAndLoad);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, StartPreview);
+    }
+
+    private void ClearAndLoad()
+    {
         receivingInput = false;
         previewed = new Dictionary<MoveType, bool>();
         previewed[MoveType.Score] = false;
@@ -26,7 +33,6 @@ public class DanceFloorIntro : MonoBehaviour, RequiredComponent
         prompt.SetActive(false);
         container.SetActive(false);
         indicatorSize = movesPreviews[0].transform.localScale;
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, StartPreview);
         finished = false;
         loaded = true;
     }
