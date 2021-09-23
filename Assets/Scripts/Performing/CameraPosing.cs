@@ -19,20 +19,32 @@ public class CameraPosing : MonoBehaviour, RequiredComponent
         }
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, GoToPerformance);
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.StartPerformance, StartedPerformance);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.TurnAdvanced, TurnAdvanced);
     }
 
     private void GoToPerformance()
     {
-        transform.position = ClubLevelLoader.Instance.CurrentClubConfiguration.CameraStagePosition.position;
-        transform.eulerAngles = ClubLevelLoader.Instance.CurrentClubConfiguration.CameraStagePosition.eulerAngles;
+        transform.position = ClubLevelLoader.Instance.CurrentClubConfiguration.PlayerPositions.CameraStagePosition.position;
+        transform.eulerAngles = ClubLevelLoader.Instance.CurrentClubConfiguration.PlayerPositions.CameraStagePosition.eulerAngles;
         PosePerformer.Instance.SetSpeed(0.2f);
         HitPose(PoseType.Walking);
+    }
+
+    private Transform CurrentTransform
+    {
+        get { return DanceBattleManager.Instance.IsPlayerTurn ? ClubLevelLoader.Instance.CurrentClubConfiguration.PlayerPositions.CameraStagePosition : ClubLevelLoader.Instance.CurrentClubConfiguration.OpponentPositions.CameraStagePosition; }
     }
 
     private void StartedPerformance()
     {
         PosePerformer.Instance.SetSpeed(1f);
         PosePerformer.Instance.HitPose(PoseType.Idle);
+    }
+
+    private void TurnAdvanced()
+    {
+        transform.position = CurrentTransform.position;
+        transform.eulerAngles = CurrentTransform.eulerAngles;
     }
 
     public void HitPose(PoseType poseType)

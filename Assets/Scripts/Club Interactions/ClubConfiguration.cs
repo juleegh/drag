@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class ClubConfiguration : MonoBehaviour
 {
-    [SerializeField] private Transform entryPoint;
-    [SerializeField] private Transform cameraStagePosition;
-    [SerializeField] private Transform playerStagePosition;
+    [SerializeField] private CharacterClubProperties playerPositions;
+    [SerializeField] private CharacterClubProperties opponentPositions;
     [SerializeField] private CharacterWalking character;
+    [SerializeField] private Transform opponent;
     [SerializeField] private List<Transform> idlePositions;
     [SerializeField] private List<Transform> dancingPositions;
 
-    public Transform CameraStagePosition { get { return cameraStagePosition; } }
-    public Transform PlayerStagePosition { get { return playerStagePosition; } }
+    public CharacterClubProperties PlayerPositions { get { return playerPositions; } }
+    public CharacterClubProperties OpponentPositions { get { return opponentPositions; } }
 
     public void LoadClubConfig()
     {
         LoadNPCs();
         SetPlayerInEntryPoint();
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, MoveOpponentToDanceFloor);
+        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.LeftDanceFloor, SetOpponentOnPosition);
+    }
+
+    private void MoveOpponentToDanceFloor()
+    {
+        opponent.position = opponentPositions.StagePosition.position;
+        opponent.eulerAngles = opponentPositions.StagePosition.eulerAngles;
+    }
+
+    private void SetOpponentOnPosition()
+    {
+        opponent.position = opponentPositions.EntryPoint.position;
+        opponent.eulerAngles = opponentPositions.EntryPoint.eulerAngles;
+        OpponentPosePerformer.Instance.HitPose(PoseType.Idle);
     }
 
     public void SetPlayerInPosition()
@@ -27,8 +42,10 @@ public class ClubConfiguration : MonoBehaviour
 
     private void SetPlayerInEntryPoint()
     {
-        character.transform.position = entryPoint.position;
+        character.transform.position = playerPositions.EntryPoint.position;
         character.PossesPlayer();
+
+        SetOpponentOnPosition();
     }
 
     private void LoadNPCs()

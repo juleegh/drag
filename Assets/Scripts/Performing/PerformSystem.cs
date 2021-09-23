@@ -116,7 +116,10 @@ public class PerformSystem : MonoBehaviour, RequiredComponent
         if (isCorrect)
         {
             emotionFeed.ReactToMove(move);
-            PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
+            if (DanceBattleManager.Instance.IsPlayerTurn)
+                PosePerformer.Instance.HitPose(move.selectedMove.PoseType);
+            else
+                OpponentPosePerformer.Instance.HitPose(move.selectedMove.PoseType);
             DanceBattleManager.Instance.PlayerPerformedMove(move.selectedMove);
             PerformingEventsManager.Instance.Notify(PerformingEvent.TurnAdvanced);
             BattleSoundEffects.Instance.PlayEffect(move.moveType);
