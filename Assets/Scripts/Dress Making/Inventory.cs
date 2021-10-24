@@ -71,6 +71,7 @@ public class Inventory : MonoBehaviour, GlobalComponent
         quantity--;
         PlayerPrefs.SetInt(decorations[current].CodeName, quantity);
         OutfitEventsManager.Instance.Notify(OutfitEvent.EmbelishmentUsed);
+        OutfitEvaluator.Instance.CheckProgress();
     }
 
     public void RecycledDecoration(DecorationType decorationType)
@@ -79,5 +80,6 @@ public class Inventory : MonoBehaviour, GlobalComponent
         quantity++;
         PlayerPrefs.SetInt(decorations[decorationType].CodeName, quantity);
         OutfitEventsManager.Instance.Notify(OutfitEvent.EmbelishmentDeleted);
+        OutfitEvaluator.Instance.CheckProgress();
     }
 }

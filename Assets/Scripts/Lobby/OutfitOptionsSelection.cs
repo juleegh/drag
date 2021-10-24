@@ -18,7 +18,7 @@ public class OutfitOptionsSelection : MonoBehaviour, RequiredComponent
     private void LoadOptions()
     {
         closeButton.onClick.AddListener(CloseSection);
-        List<string> outfits = GameDataManager.Instance.GetSavedOutfits();
+        List<string> outfits = CharacterOutfitManager.Instance.GetSavedOutfits();
 
         foreach (string outfit in outfits)
         {
@@ -30,7 +30,7 @@ public class OutfitOptionsSelection : MonoBehaviour, RequiredComponent
 
     private void OutfitSelected(string outfit)
     {
-        GameDataManager.Instance.Load(outfit);
+        CharacterOutfitManager.Instance.Load(outfit);
     }
 
     private void CloseSection()

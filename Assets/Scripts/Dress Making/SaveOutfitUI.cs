@@ -36,7 +36,7 @@ public class SaveOutfitUI : MonoBehaviour
     private void SaveInfo()
     {
         OutfitEventsManager.Instance.Notify(OutfitEvent.FinishedOutfit);
-        GameDataManager.Instance.Save(inputName.text);
+        CharacterOutfitManager.Instance.Save(inputName.text);
         GlobalPlayerManager.Instance.GoToLobby();
     }
 

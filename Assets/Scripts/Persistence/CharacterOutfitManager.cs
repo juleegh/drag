@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class GameDataManager : MonoBehaviour, GlobalComponent
+public class CharacterOutfitManager : MonoBehaviour, GlobalComponent
 {
-    private static GameDataManager instance;
-    public static GameDataManager Instance { get { return instance; } }
+    private static CharacterOutfitManager instance;
+    public static CharacterOutfitManager Instance { get { return instance; } }
 
     private GameObject garmentHolder;
     GameDataWriter writer;
@@ -66,7 +66,7 @@ public class GameDataManager : MonoBehaviour, GlobalComponent
         bWriter.Close();
     }
 
-    private List<Decoration> GetDecorations()
+    public List<Decoration> GetDecorations()
     {
         List<Decoration> decos = new List<Decoration>();
         Decoration[] decosInBody = garmentHolder.GetComponentsInChildren<Decoration>();

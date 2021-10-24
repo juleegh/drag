@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf58049567895bd4ca74207061240286, type: 3}
+  m_Name: Level02 Outfit Rules
+  m_EditorClassIdentifier: 
+  prompt: I'm blue dadadee...
+  rules:
+  - {fileID: 11400000, guid: b0270545a25c9564982e8c8765068cdd, type: 2}
+  - {fileID: 11400000, guid: 051a4a1df74ca2a439c4a5643dd21dab, type: 2}

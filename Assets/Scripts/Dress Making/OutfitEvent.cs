@@ -7,4 +7,5 @@ public enum OutfitEvent
     EmbelishmentSelected,
     EmbelishmentUsed,
     EmbelishmentDeleted,
+    OutfitProgressUpdated,
 }
