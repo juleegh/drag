@@ -5,6 +5,7 @@ using UnityEngine;
 public class HighContrastOutfitRule : OutfitRule
 {
     [SerializeField] private float contrastGoal;
+    public override string Prompt { get { return "Color contrast"; } }
 
     public override void Evaluate(List<Decoration> decorations)
     {

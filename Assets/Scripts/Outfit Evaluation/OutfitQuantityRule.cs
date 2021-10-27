@@ -5,6 +5,7 @@ using UnityEngine;
 public class OutfitQuantityRule : OutfitRule
 {
     [SerializeField] private int quantityRequired;
+    public override string Prompt { get { return "Decoration quantity"; } }
 
     public override void Evaluate(List<Decoration> decorations)
     {

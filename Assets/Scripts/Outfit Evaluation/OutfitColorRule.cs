@@ -7,6 +7,7 @@ public class OutfitColorRule : OutfitRule
     [SerializeField] private Color expectedColor;
     [SerializeField] private float colorFlexibility;
     [SerializeField] private float percentageInColor;
+    public override string Prompt { get { return "Percentage of color"; } }
 
     public override void Evaluate(List<Decoration> decorations)
     {

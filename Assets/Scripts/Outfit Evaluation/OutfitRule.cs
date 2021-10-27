@@ -9,6 +9,7 @@ public class OutfitRule : ScriptableObject
 
     public virtual float Progress { get { return progress; } }
     public virtual float ProgressionWeight { get { return progressionWeight; } }
+    public virtual string Prompt { get { return ""; } }
 
     public virtual void Evaluate(List<Decoration> decorations)
     {

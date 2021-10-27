@@ -15,5 +15,5 @@ MonoBehaviour:
   bossLevel: 0
   battleSong: {fileID: 11400000, guid: 0387eb4d348d75342b4735105b05d487, type: 2}
   choreography: {fileID: 11400000, guid: 65d87f83e3919b3478d5e96a9b2b1aaa, type: 2}
-  outfitRules: {fileID: 11400000, guid: 0496e4d6179fbe34babb2ed863600f5d, type: 2}
+  outfitRules: {fileID: 11400000, guid: 06540baf02be0c84bb5eb60f638bba07, type: 2}
   bossName: Layla
