@@ -48,7 +48,11 @@ public class DialogSystemController : MonoBehaviour, GlobalComponent
             ShowCurrent();
 
             if (currentCharacter.Dialogs.CurrentNode.AssociatedAction != null)
+            {
+                if (currentCharacter.Dialogs.CurrentNode.AssociatedAction.HasCallback)
+                    currentCharacter.Dialogs.CurrentNode.AssociatedAction.SetCallbackPosition();
                 currentCharacter.Dialogs.CurrentNode.AssociatedAction.ExecuteAction();
+            }
         }
         else
             EndDialog();

@@ -18,15 +18,24 @@ public class DialogNode
     protected DialogAction associatedAction;
     public DialogAction AssociatedAction { get { return associatedAction; } }
 
-    public DialogNode(string id)
+    protected Character belongingCharacter;
+
+    public DialogNode(string id, Character character)
     {
         dIdentifier = id;
+        belongingCharacter = character;
     }
 
     public void SetAction(string actionType)
     {
         associatedAction = new DialogAction();
+        associatedAction.SetCharacter(belongingCharacter);
         associatedAction.SetAction(actionType);
+    }
+
+    public void SetCallback(string actionType)
+    {
+        associatedAction.SetupCallback(actionType);
     }
 
     public void SetText(string newText)

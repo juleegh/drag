@@ -16,17 +16,11 @@ public class ClubLevelLoader : MonoBehaviour, RequiredComponent
     {
         instance = this;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, LoadClub);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.LeftDanceFloor, LeftDanceFloor);
     }
 
     private void LoadClub()
     {
         currentClubConfiguration.LoadClubConfig();
         PerformingEventsManager.Instance.Notify(PerformingEvent.ClubLoaded);
-    }
-
-    private void LeftDanceFloor()
-    {
-        currentClubConfiguration.SetPlayerInPosition();
     }
 }

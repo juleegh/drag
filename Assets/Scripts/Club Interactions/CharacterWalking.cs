@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class CharacterWalking : MonoBehaviour, RequiredComponent
 {
+    private static CharacterWalking instance;
+    public static CharacterWalking Instance { get { return instance; } }
+
     [SerializeField] private float speed;
     bool isWalking;
     bool isPossesed;
 
     public void ConfigureRequiredComponent()
     {
+        instance = this;
         isWalking = false;
         PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, ReleasePlayer);
     }
 
-    public void PossesPlayer()
+    private void PossesPlayer()
     {
         GlobalPlayerManager.Instance.gameObject.SetActive(false);
         GlobalPlayerManager.Instance.transform.SetParent(this.transform);
@@ -24,10 +28,21 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
         isPossesed = true;
     }
 
+    public void PlacePlayerForWalking(Vector3 position, Quaternion rotation)
+    {
+        Debug.LogError(1);
+        PossesPlayer();
+        transform.position = position;
+        transform.rotation = rotation;
+        WalkingCamera.Instance.StartFollowingPlayer();
+    }
+
     private void ReleasePlayer()
     {
+        Debug.LogError(0);
         isPossesed = false;
         GlobalPlayerManager.Instance.transform.SetParent(null);
+        WalkingCamera.Instance.StopFollowingPlayer();
         GlobalPlayerManager.Instance.transform.position = ClubLevelLoader.Instance.CurrentClubConfiguration.PlayerPositions.StagePosition.position;
         GlobalPlayerManager.Instance.transform.eulerAngles = ClubLevelLoader.Instance.CurrentClubConfiguration.PlayerPositions.StagePosition.eulerAngles;
     }

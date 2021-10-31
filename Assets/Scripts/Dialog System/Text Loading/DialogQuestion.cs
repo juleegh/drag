@@ -11,9 +11,10 @@ public class DialogQuestion : DialogNode
 
     public override bool IsQuestion { get { return true; } }
 
-    public DialogQuestion(string id) : base(id)
+    public DialogQuestion(string id, Character character) : base(id, character)
     {
         dIdentifier = id;
+        belongingCharacter = character;
     }
 
     public void AddAnswers(DialogNode[] answersP)

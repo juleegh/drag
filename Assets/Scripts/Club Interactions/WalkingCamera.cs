@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class WalkingCamera : MonoBehaviour, RequiredComponent
 {
+    private static WalkingCamera instance;
+    public static WalkingCamera Instance { get { return instance; } }
+
     [SerializeField] private Vector3 distanceFromPlayer;
     [SerializeField] private Vector3 followingAngle;
     [SerializeField] private float speed;
-    [SerializeField] private CharacterWalking characterWalking;
     private bool followingPlayer;
 
     public void ConfigureRequiredComponent()
     {
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.DependenciesLoaded, StartFollowingPlayer);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.LeftDanceFloor, StartFollowingPlayer);
-        PerformingEventsManager.Instance.AddActionToEvent(PerformingEvent.EnteredTheDanceFloor, StopFollowingPlayer);
+        instance = this;
     }
 
-    private void StartFollowingPlayer()
+    public void StartFollowingPlayer()
     {
         CameraPosing.Instance.Reset();
-        transform.position = characterWalking.transform.position - distanceFromPlayer;
+        transform.position = CharacterWalking.Instance.transform.position - distanceFromPlayer;
         transform.eulerAngles = followingAngle;
         followingPlayer = true;
     }
 
-    private void StopFollowingPlayer()
+    public void StopFollowingPlayer()
     {
         followingPlayer = false;
     }
@@ -34,10 +34,10 @@ public class WalkingCamera : MonoBehaviour, RequiredComponent
     {
         if (followingPlayer)
         {
-            Vector3 expectedPosition = characterWalking.transform.position - distanceFromPlayer;
+
+            Vector3 expectedPosition = CharacterWalking.Instance.transform.position - distanceFromPlayer;
             transform.position = Vector3.Lerp(transform.position, expectedPosition, Time.deltaTime * speed);
             transform.eulerAngles = followingAngle;
-
         }
     }
 }

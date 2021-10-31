@@ -6,7 +6,6 @@ public class ClubConfiguration : MonoBehaviour
 {
     [SerializeField] private CharacterClubProperties playerPositions;
     [SerializeField] private CharacterClubProperties opponentPositions;
-    [SerializeField] private CharacterWalking character;
     [SerializeField] private Transform opponent;
     [SerializeField] private List<Transform> idlePositions;
     [SerializeField] private List<Transform> dancingPositions;
@@ -42,9 +41,7 @@ public class ClubConfiguration : MonoBehaviour
 
     private void SetPlayerInEntryPoint()
     {
-        character.transform.position = playerPositions.EntryPoint.position;
-        character.PossesPlayer();
-
+        CharacterWalking.Instance.PlacePlayerForWalking(playerPositions.EntryPoint.position, Quaternion.identity);
         SetOpponentOnPosition();
     }
 

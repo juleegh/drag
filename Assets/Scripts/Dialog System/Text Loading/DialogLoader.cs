@@ -10,8 +10,9 @@ public static class DialogLoader
     private static int nextNodeColumn = 2;
     private static int saveStateColumn = 3;
     private static int triggerColumn = 4;
+    private static int callbackColumn = 5;
 
-    public static DialogTree LoadDialogs(string characterName, TextAsset dialogCsv)
+    public static DialogTree LoadDialogs(string characterName, Character belongingCharacter, TextAsset dialogCsv)
     {
         List<string[]> dialogs = FileDataReader.LoadGrid(dialogCsv);
 
@@ -23,18 +24,26 @@ public static class DialogLoader
             string nodeText = line[textColumn].Trim();
             string isSaveState = line[saveStateColumn].Trim();
             string trigger = line[triggerColumn].Trim();
+            string callback = line[callbackColumn].Trim();
             string[] nextNodes = line[nextNodeColumn].Split(';');
-            DialogNode newNode = new DialogNode(identifier);
+            DialogNode newNode = new DialogNode(identifier, belongingCharacter);
 
 
             if (nextNodes.Length > 1)
-                newNode = new DialogQuestion(identifier);
+                newNode = new DialogQuestion(identifier, belongingCharacter);
 
             if (nodeText.Contains("<"))
             {
                 nodeText = nodeText.Replace("<", "");
                 nodeText = nodeText.Replace(">", "");
                 newNode.SetAction(nodeText);
+
+                if (callback != "")
+                {
+                    callback = callback.Replace("<", "");
+                    callback = callback.Replace(">", "");
+                    newNode.SetCallback(callback);
+                }
             }
             else
             {
