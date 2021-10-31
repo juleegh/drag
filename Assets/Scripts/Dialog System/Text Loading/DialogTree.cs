@@ -32,9 +32,12 @@ public class DialogTree
         saveStates.Add(identifier, completed);
     }
 
-    public void AddTrigger(GameEvent gameEvent, DialogNode node)
+    public void AddTrigger(string gameEvent, DialogNode node)
     {
-        GameEventsManager.Instance.AddActionToEvent(gameEvent, () => { currentNode = node; });
+        if (EventParsing.IsGameEvent(gameEvent))
+            GameEventsManager.Instance.AddActionToEvent(EventParsing.GetGameEvent(gameEvent), () => { currentNode = node; });
+        else if (EventParsing.IsPerformingEvent(gameEvent))
+            PerformingEventsManager.Instance.AddActionToEvent(EventParsing.GetPerformingEvent(gameEvent), () => { currentNode = node; });
     }
 
     public void LoadPreviousSaveState()

@@ -1,7 +1,9 @@
 ,TEXT,NEXT NODE(S),SAVE STATE,TRIGGER,CALLBACK EVENTS
 1,Well well... look what the cat has dragged,2,y,,
-2,I knew you would come eventually; bring it on already!,3,n,,
-3,You think you can win! The nerve! The audacity!,4,n,,
+2,I knew you would come eventually; bring it on already!,19,n,,
+19,BUT FIRST! Let's see that outfit bitch,20,n,,
+20,<OutfitEvaluationStarted>,,n,,<OutfitEvaluationEnded>
+3,You think you can win! The nerve! The audacity!,4,y,<OutfitEvaluated>,
 4,Shall we begin? Our battle will be legendary,5;6,n,,
 5,BRING.IT.ON,7,n,,
 6,Woh... chill mate; I'm not ready,8,n,,

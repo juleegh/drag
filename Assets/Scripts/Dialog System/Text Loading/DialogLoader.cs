@@ -59,7 +59,7 @@ public static class DialogLoader
             {
                 trigger = trigger.Replace("<", "");
                 trigger = trigger.Replace(">", "");
-                tree.AddTrigger((GameEvent)System.Enum.Parse(typeof(GameEvent), trigger), newNode);
+                tree.AddTrigger(trigger, newNode);
             }
         }
 

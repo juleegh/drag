@@ -34,7 +34,6 @@ public class WalkingCamera : MonoBehaviour, RequiredComponent
     {
         if (followingPlayer)
         {
-
             Vector3 expectedPosition = CharacterWalking.Instance.transform.position - distanceFromPlayer;
             transform.position = Vector3.Lerp(transform.position, expectedPosition, Time.deltaTime * speed);
             transform.eulerAngles = followingAngle;

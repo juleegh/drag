@@ -14,4 +14,7 @@ public enum PerformingEvent
     CurrentTempoStarted,
     PerformanceEnded,
     LeftDanceFloor,
+    OutfitEvaluationStarted,
+    OutfitEvaluated,
+    OutfitEvaluationEnded,
 }

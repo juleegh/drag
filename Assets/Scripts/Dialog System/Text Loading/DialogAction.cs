@@ -47,42 +47,28 @@ public class DialogAction
         DialogSystemController.Instance.StartInteraction(belongingCharacter);
     }
 
-    private void ParseAndSaveEvent(string eventName)
+    private void ParseAndSaveEvent(string gameEvent)
     {
-        try
+        if (EventParsing.IsGameEvent(gameEvent))
         {
-            PerformingEvent gameEvent = (PerformingEvent)System.Enum.Parse(typeof(PerformingEvent), eventName);
-            action = () => PerformingEventsManager.Instance.Notify(gameEvent);
-            return;
+            action = () => GameEventsManager.Instance.Notify(EventParsing.GetGameEvent(gameEvent));
         }
-        catch (Exception) { }
-
-        try
+        else if (EventParsing.IsPerformingEvent(gameEvent))
         {
-            GameEvent gameEvent = (GameEvent)System.Enum.Parse(typeof(GameEvent), eventName);
-            action = () => GameEventsManager.Instance.Notify(gameEvent);
-            return;
+            action = () => PerformingEventsManager.Instance.Notify(EventParsing.GetPerformingEvent(gameEvent));
         }
-        catch (Exception) { }
     }
 
-    private void ParseAndSaveCallback(string eventName)
+    private void ParseAndSaveCallback(string gameEvent)
     {
-        try
+        if (EventParsing.IsGameEvent(gameEvent))
         {
-            PerformingEvent gameEvent = (PerformingEvent)System.Enum.Parse(typeof(PerformingEvent), eventName);
-            PerformingEventsManager.Instance.AddActionToEvent(gameEvent, ActionCallback);
-            return;
+            GameEventsManager.Instance.AddActionToEvent(EventParsing.GetGameEvent(gameEvent), ActionCallback);
         }
-        catch (Exception) { }
-
-        try
+        else if (EventParsing.IsPerformingEvent(gameEvent))
         {
-            GameEvent gameEvent = (GameEvent)System.Enum.Parse(typeof(GameEvent), eventName);
-            GameEventsManager.Instance.AddActionToEvent(gameEvent, ActionCallback);
-            return;
+            PerformingEventsManager.Instance.AddActionToEvent(EventParsing.GetPerformingEvent(gameEvent), ActionCallback);
         }
-        catch (Exception) { }
     }
 
 }

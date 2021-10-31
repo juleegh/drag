@@ -10,14 +10,14 @@ public class OutfitEvaluator : MonoBehaviour, GlobalComponent
     private LevelOutfitRules currentRules { get { return ProgressManager.Instance.CurrentLevel.OutfitRules; } }
 
     private float currentProgress;
-    public float CurrentProgress { get { return currentProgress; } }
+    public float CurrentProgress { get { EvaluateProgress(); return currentProgress; } }
 
     public void ConfigureRequiredComponent()
     {
         instance = this;
     }
 
-    public void CheckProgress()
+    private void EvaluateProgress()
     {
         List<Decoration> decorations = CharacterOutfitManager.Instance.GetDecorations();
         currentProgress = 0;
@@ -30,7 +30,11 @@ public class OutfitEvaluator : MonoBehaviour, GlobalComponent
 
         if (currentProgress > 1f)
             currentProgress = 1f;
+    }
 
+    public void CheckProgress()
+    {
+        EvaluateProgress();
         OutfitEventsManager.Instance.Notify(OutfitEvent.OutfitProgressUpdated);
     }
 }

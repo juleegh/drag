@@ -30,7 +30,9 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
 
     public void PlacePlayerForWalking(Vector3 position, Quaternion rotation)
     {
-        Debug.LogError(1);
+        if (isPossesed)
+            return;
+
         PossesPlayer();
         transform.position = position;
         transform.rotation = rotation;
@@ -39,7 +41,6 @@ public class CharacterWalking : MonoBehaviour, RequiredComponent
 
     private void ReleasePlayer()
     {
-        Debug.LogError(0);
         isPossesed = false;
         GlobalPlayerManager.Instance.transform.SetParent(null);
         WalkingCamera.Instance.StopFollowingPlayer();

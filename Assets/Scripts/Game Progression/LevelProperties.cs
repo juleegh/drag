@@ -10,10 +10,12 @@ public class LevelProperties : ScriptableObject
     [SerializeField] private OpponentChoreography choreography;
     [SerializeField] private LevelOutfitRules outfitRules;
     [SerializeField] private string bossName;
+    [SerializeField] private string clubName;
 
     public BossLevel BossLevel { get { return bossLevel; } }
     public Song BattleSong { get { return battleSong; } }
     public string BossName { get { return bossName; } }
+    public string ClubName { get { return clubName; } }
     public OpponentChoreography BossChoreo { get { return choreography; } }
     public LevelOutfitRules OutfitRules { get { return outfitRules; } }
 }
