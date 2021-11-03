@@ -8,6 +8,17 @@ public class BoardCellUI : MonoBehaviour
 
     public void ChangeFill(CellState newState)
     {
-        fill.color = newState == CellState.Empty ? Color.black : Color.white;
+        switch (newState)
+        {
+            case CellState.Empty:
+                fill.color = Color.black;
+                break;
+            case CellState.Moving:
+                fill.color = Color.green;
+                break;
+            case CellState.Set:
+                fill.color = Color.white;
+                break;
+        }
     }
 }

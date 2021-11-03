@@ -4,40 +4,40 @@ using UnityEngine;
 
 public static class BoardPiecesUtils
 {
-    public static List<BoardPosition> GetPositionsByPieceType(BoardPieceType pieceType)
+    public static Vector2Int[] GetPositionsByPieceType(BoardPieceType pieceType)
     {
-        List<BoardPosition> positions = new List<BoardPosition>();
+        Vector2Int[] positions = new Vector2Int[1];
 
         switch (pieceType)
         {
+
             case BoardPieceType.Single_Square:
-                positions.Add(GetPosition(0, 0));
+                positions = new Vector2Int[1];
+                positions[0] = new Vector2Int(0, 0);
                 break;
 
             case BoardPieceType.Double_Square:
-                positions.Add(GetPosition(0, 0));
-                positions.Add(GetPosition(1, 0));
-                positions.Add(GetPosition(0, 1));
-                positions.Add(GetPosition(1, 1));
+                positions = new Vector2Int[4];
+                positions[0] = new Vector2Int(0, 0);
+                positions[1] = new Vector2Int(1, 0);
+                positions[2] = new Vector2Int(0, 1);
+                positions[3] = new Vector2Int(1, 1);
                 break;
 
             case BoardPieceType.Two_Cells:
-                positions.Add(GetPosition(0, 0));
-                positions.Add(GetPosition(1, 0));
+                positions = new Vector2Int[2];
+                positions[0] = new Vector2Int(0, 0);
+                positions[1] = new Vector2Int(1, 0);
                 break;
 
             case BoardPieceType.Corner:
-                positions.Add(GetPosition(0, 0));
-                positions.Add(GetPosition(1, 0));
-                positions.Add(GetPosition(1, 1));
+                positions = new Vector2Int[3];
+                positions[0] = new Vector2Int(0, 0);
+                positions[1] = new Vector2Int(1, 0);
+                positions[2] = new Vector2Int(1, 1);
                 break;
         }
 
         return positions;
-    }
-
-    public static BoardPosition GetPosition(int x, int y)
-    {
-        return new BoardPosition(x, y);
     }
 }

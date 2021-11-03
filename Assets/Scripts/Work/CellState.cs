@@ -5,5 +5,6 @@ using UnityEngine;
 public enum CellState
 {
     Empty,
-    White,
+    Set,
+    Moving,
 }
