@@ -55,19 +55,21 @@ public class WorkBoard : MonoBehaviour
         return board[position];
     }
 
-    private void SpawnNextPiece()
+    public void SpawnNextPiece()
     {
         if (currentPiece != null)
             ChangeCurrentPieceState(CellState.Set);
 
+        BoardAlgorithmsUtils.CheckLines(board);
+
         currentPosition = new Vector2Int(width / 2, height / 2);
-        currentPiece = new BoardPiece(GetRandomPiece());
+        currentPiece = new BoardPiece(BoardPiecesUtils.GetRandomPiece());
 
         ChangeCurrentPieceState(CellState.Moving);
         WorkBoardUI.Instance.Refresh();
     }
 
-    private void RotateCurrentPiece()
+    public void RotateCurrentPiece()
     {
         ChangeCurrentPieceState(CellState.Empty);
         currentPiece.TryToRotate(currentPosition.x, currentPosition.y);
@@ -75,37 +77,15 @@ public class WorkBoard : MonoBehaviour
         WorkBoardUI.Instance.Refresh();
     }
 
-    private void Update()
+    public void TryToMove(int deltaX, int deltaY)
     {
-        if (currentPiece != null)
+        bool result = currentPiece.TryToMove(currentPosition.x + deltaX, currentPosition.y + deltaY);
+        if (result)
         {
-            int deltaX = 0;
-            int deltaY = 0;
-
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                deltaX = -1;
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-                deltaX = 1;
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
-                deltaY = -1;
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
-                deltaY = 1;
-            else if (Input.GetKeyDown(KeyCode.Space))
-                SpawnNextPiece();
-            else if (Input.GetKeyDown(KeyCode.R))
-                RotateCurrentPiece();
-
-            if (deltaX != 0 || deltaY != 0)
-            {
-                bool result = currentPiece.TryToMove(currentPosition.x + deltaX, currentPosition.y + deltaY);
-                if (result)
-                {
-                    ChangeCurrentPieceState(CellState.Empty);
-                    currentPosition += new Vector2Int(deltaX, deltaY);
-                    ChangeCurrentPieceState(CellState.Moving);
-                    WorkBoardUI.Instance.Refresh();
-                }
-            }
+            ChangeCurrentPieceState(CellState.Empty);
+            currentPosition += new Vector2Int(deltaX, deltaY);
+            ChangeCurrentPieceState(CellState.Moving);
+            WorkBoardUI.Instance.Refresh();
         }
     }
 
@@ -115,16 +95,5 @@ public class WorkBoard : MonoBehaviour
         {
             board[currentPosition + position].ChangeCellState(newState);
         }
-    }
-
-    private BoardPieceType GetRandomPiece()
-    {
-        List<BoardPieceType> list = new List<BoardPieceType>();
-        list.Add(BoardPieceType.Single_Square);
-        list.Add(BoardPieceType.Double_Square);
-        list.Add(BoardPieceType.Corner);
-        list.Add(BoardPieceType.Two_Cells);
-
-        return list[Random.Range(0, list.Count)];
     }
 }

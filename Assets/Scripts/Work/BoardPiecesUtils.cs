@@ -40,4 +40,15 @@ public static class BoardPiecesUtils
 
         return positions;
     }
+
+    public static BoardPieceType GetRandomPiece()
+    {
+        List<BoardPieceType> list = new List<BoardPieceType>();
+        list.Add(BoardPieceType.Single_Square);
+        list.Add(BoardPieceType.Double_Square);
+        list.Add(BoardPieceType.Corner);
+        list.Add(BoardPieceType.Two_Cells);
+
+        return list[Random.Range(0, list.Count)];
+    }
 }
