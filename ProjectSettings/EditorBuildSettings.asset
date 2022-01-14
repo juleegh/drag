@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Practicing.unity
     guid: a6349f54f10d9804ab66413d1de6b325
+  - enabled: 1
+    path: Assets/Scenes/Test Gameplay.unity
+    guid: 42d139ce28b0741438d958c2600f296f
   m_configObjects: {}

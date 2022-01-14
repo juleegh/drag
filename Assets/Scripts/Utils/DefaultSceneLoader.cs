@@ -7,7 +7,7 @@ public static class DefaultSceneLoader
 {
     static DefaultSceneLoader()
     {
-        EditorApplication.playModeStateChanged += LoadDefaultScene;
+        //EditorApplication.playModeStateChanged += LoadDefaultScene;
     }
 
     static void LoadDefaultScene(PlayModeStateChange state)
