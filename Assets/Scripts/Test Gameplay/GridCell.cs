@@ -29,8 +29,8 @@ namespace TestGameplay
         {
             cellInfo.color = transparent;
             return;
-            if (cellInfo.color != transparent)
-                cellInfo.DOColor(transparent, colorDelay);
+            //if (cellInfo.color != transparent)
+              //  cellInfo.DOColor(transparent, colorDelay);
         }
 
         public void PaintAction(BattleActionType input)

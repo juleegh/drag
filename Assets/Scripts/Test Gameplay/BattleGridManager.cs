@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using RotaryHeart.Lib.SerializableDictionary;
 
 namespace TestGameplay
 {
@@ -44,13 +42,40 @@ namespace TestGameplay
             gridUI.AssignGrid(grid);
         }
 
-        public bool MoveCharacter(Vector2Int direction, float delay = 0.5f)
+        public bool MoveCharacter(Vector2Int direction)
         {
             if (!IsValidPosition(BattleSectionManager.Instance.InTurn.CurrentPosition + direction))
                 return false;
 
-            BattleSectionManager.Instance.InTurn.Move(direction, delay);
+            BattleSectionManager.Instance.InTurn.Move(direction);
             return true;
+        }
+
+        public void CheckForOverlappedCharacter()
+        {
+            if (BattleSectionManager.Instance.InTurn.CurrentPosition != BattleSectionManager.Instance.NotInTurn.CurrentPosition)
+                return;
+
+            List<Vector2Int> directions = new List<Vector2Int>();
+            directions.Add(Vector2Int.down);
+            directions.Add(Vector2Int.left);
+            directions.Add(Vector2Int.right);
+            directions.Add(Vector2Int.up);
+            directions.Add(Vector2Int.up + Vector2Int.right);
+            directions.Add(Vector2Int.up + Vector2Int.left);
+            directions.Add(Vector2Int.down + Vector2Int.right);
+            directions.Add(Vector2Int.down + Vector2Int.left);
+
+            while (directions.Count > 0)
+            {
+                Vector2Int current = directions[Random.Range(0, directions.Count)];
+                directions.Remove(current);
+                if (IsValidPosition(current + BattleSectionManager.Instance.NotInTurn.CurrentPosition))
+                {
+                    BattleSectionManager.Instance.NotInTurn.Move(current);
+                    return;
+                }
+            }
         }
 
         public bool IsValidPosition(Vector2Int position)

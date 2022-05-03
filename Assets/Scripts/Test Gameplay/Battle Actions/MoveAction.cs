@@ -25,6 +25,7 @@ namespace TestGameplay
             BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
             base.Execute();
             BattleGridManager.Instance.UpdatePreview();
+            BattleGridManager.Instance.CheckForOverlappedCharacter();
         }
 
         public override bool WouldHaveEffect()

@@ -93,9 +93,7 @@ namespace TestGameplay
 
         public void ResetBoosts()
         {
-            stamina += baseStamina / 4;
-            if (stamina > baseStamina)
-                stamina = baseStamina;
+            stamina = baseStamina;
         }
     }
 }

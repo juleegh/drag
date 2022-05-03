@@ -228,7 +228,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 24.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -964,7 +964,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 24.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2094,7 +2094,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.5
+  m_fontSize: 18.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2621,7 +2621,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.3
+  m_fontSize: 18.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3885,7 +3885,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.85
+  m_fontSize: 19.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4491,11 +4491,12 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 020000000000000003000000
-    _keys: 020000000000000003000000
+    _keyValues: 02000000000000000300000001000000
+    _keys: 02000000000000000300000001000000
     _values:
     - {fileID: 11400000, guid: 781fa44d730f2e040b9082b1cb8a1287, type: 2}
-    - {fileID: 11400000, guid: d915ebb90073e404986a8a1077bd35a1, type: 2}
+    - {fileID: 11400000, guid: e78278578cbfacd4595cf34fddec3d78, type: 2}
+    - {fileID: 11400000, guid: 9fece4ececaaf7d4fbdd850ccbe96ac5, type: 2}
     - {fileID: 11400000, guid: 3fe6c1475ed622f4781eff4242e47141, type: 2}
 --- !u!114 &1105658680
 MonoBehaviour:
@@ -4679,11 +4680,12 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 020000000000000003000000
-    _keys: 020000000000000003000000
+    _keyValues: 02000000000000000300000001000000
+    _keys: 02000000000000000300000001000000
     _values:
     - {fileID: 11400000, guid: 781fa44d730f2e040b9082b1cb8a1287, type: 2}
-    - {fileID: 11400000, guid: d915ebb90073e404986a8a1077bd35a1, type: 2}
+    - {fileID: 11400000, guid: e78278578cbfacd4595cf34fddec3d78, type: 2}
+    - {fileID: 11400000, guid: 9fece4ececaaf7d4fbdd850ccbe96ac5, type: 2}
     - {fileID: 11400000, guid: 3fe6c1475ed622f4781eff4242e47141, type: 2}
 --- !u!4 &1117442913 stripped
 Transform:
@@ -7404,7 +7406,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 24.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7728,7 +7730,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 24.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8024,7 +8026,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.85
+  m_fontSize: 21.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

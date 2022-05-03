@@ -7,7 +7,7 @@ namespace TestGameplay
 {
     public class BattleCharacter : MonoBehaviour
     {
-        private int initialHealth = 10;
+        private int initialHealth = 20;
         private int initialStamina = 10;
         private Vector2Int currentPosition;
         public Vector2Int CurrentPosition { get { return currentPosition; } }
@@ -26,7 +26,7 @@ namespace TestGameplay
             defenseUI.UpdateDefense(stats.Defense);
         }
 
-        public void Move(Vector2Int position, float delay)
+        public void Move(Vector2Int position, float delay = 0.5f)
         {
             currentPosition += position;
             transform.DOMove(BattleGridManager.Instance.ConvertPosition(currentPosition), delay);

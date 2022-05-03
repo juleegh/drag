@@ -21,6 +21,18 @@ namespace TestGameplay
                     BattleGridManager.Instance.CharacterAttacked(position, damage);
                 BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
                 base.Execute();
+
+                Vector2Int previous = Vector2Int.zero;
+                foreach (Vector2Int position in TargetDirections)
+                {
+                    bool couldMove = BattleGridManager.Instance.MoveCharacter(position - previous);
+                    if (!couldMove)
+                        break;
+                    previous = position;
+                }
+
+                BattleGridManager.Instance.UpdatePreview();
+                BattleGridManager.Instance.CheckForOverlappedCharacter();
             }
         }
 

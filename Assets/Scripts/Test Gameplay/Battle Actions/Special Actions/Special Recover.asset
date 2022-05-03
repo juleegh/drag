@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Special Recover
   m_EditorClassIdentifier: 
   actionInput: 2
-  requiredStamina: 8
+  requiredStamina: 10
   sprite: {fileID: -32239468427962368, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
   shortDescription: 5
   actionType: 4
-  health: 5
+  health: 4

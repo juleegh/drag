@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack Left
   m_EditorClassIdentifier: 
   actionInput: 2
-  requiredStamina: 0
+  requiredStamina: 2
   sprite: {fileID: -7255726176831047129, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
   shortDescription: 2
   attackedPositions:

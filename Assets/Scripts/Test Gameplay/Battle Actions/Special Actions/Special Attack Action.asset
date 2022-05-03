@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21bd6c995c36cdf4da7dc540636bdcba, type: 3}
-  m_Name: Special Attack
+  m_Script: {fileID: 11500000, guid: 8fc66c87cac51364093955b4f1ce8f8d, type: 3}
+  m_Name: Special Attack Action
   m_EditorClassIdentifier: 
-  actionInput: 0
+  actionInput: 3
   requiredStamina: 8
   sprite: {fileID: -7255726176831047129, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
-  shortDescription: 5
-  actionType: 1
-  positionsDelta:
-  - {x: 0, y: 1}
-  - {x: 1, y: 2}
-  - {x: 2, y: 3}
-  damage: 5
+  shortDescription: 
+  attackedPositions:
+  - {x: 1, y: 0}
+  - {x: 2, y: 0}
+  - {x: 2, y: 1}
+  damage: 10

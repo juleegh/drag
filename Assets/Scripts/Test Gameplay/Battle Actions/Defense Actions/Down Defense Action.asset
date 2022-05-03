@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Down Defense Action
   m_EditorClassIdentifier: 
   actionInput: 1
-  requiredStamina: 0
+  requiredStamina: 1
   sprite: {fileID: -3281552012634458351, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
   shortDescription: 
-  defenseIncrease: 2
+  defenseIncrease: 1
