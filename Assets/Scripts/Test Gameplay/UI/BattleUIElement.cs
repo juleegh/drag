@@ -36,5 +36,11 @@ namespace TestGameplay
         {
             image.DOColor(highlited, colorDelay / 2).OnComplete(() => { image.DOColor(obscured, colorDelay / 2); });
         }
+
+        public void Cooldown()
+        {
+            image.color = highlited;
+            image.DOColor(obscured, colorDelay);
+        }
     }
 }

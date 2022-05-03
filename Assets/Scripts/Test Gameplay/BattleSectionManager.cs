@@ -21,15 +21,30 @@ namespace TestGameplay
         public BattleCharacter InTurn { get { return currentTurn; } }
         public BattleCharacter NotInTurn { get { return notInTurn; } }
         public bool IsPlayerTurn { get { return currentTurn == player; } }
+        public BattleActionExecuter CurrentExecuter { get { return IsPlayerTurn ? (BattleActionExecuter)PlayerActionsManager.Instance : (BattleActionExecuter)BattleAIInput.Instance; } }
         private int sectionTempoCount;
+        public int TemposRemaining { get { return temposPerPlayer - sectionTempoCount; } }
+        public int TemposPerPlayer { get { return temposPerPlayer; } }
+        private bool isInPreview;
+        public bool IsInPreview { get { return isInPreview; } }
 
         void Awake()
         {
             instance = this;
             sectionTempoCount = 0;
+            currentTurn = null;
+            notInTurn = null;
+            isInPreview = true;
+            sectionUI.Initialize(temposPerPlayer);
+            StartTurn();
+        }
+
+        public void StartTurn()
+        {
             currentTurn = player;
             notInTurn = opponent;
-            sectionUI.Initialize(temposPerPlayer);
+            isInPreview = false;
+            BattleActionTempo.Instance.StartTempoCount();
         }
 
         public void NewTempo()
@@ -52,6 +67,9 @@ namespace TestGameplay
         {
             currentTurn = currentTurn == player ? opponent : player;
             notInTurn = notInTurn == player ? opponent : player;
+            currentTurn.ResetStats();
+            sectionUI.ToggleOwner(currentTurn);
+            BattleGridManager.Instance.UpdatePreview();
         }
     }
 }

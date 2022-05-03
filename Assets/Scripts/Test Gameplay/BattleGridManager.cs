@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using RotaryHeart.Lib.SerializableDictionary;
 
 namespace TestGameplay
 {
@@ -9,12 +11,11 @@ namespace TestGameplay
         private static BattleGridManager instance;
         public static BattleGridManager Instance { get { return instance; } }
 
-        [SerializeField] private int rows;
-        [SerializeField] private int columns;
-        [SerializeField] private GameObject cellPrefab;
         [SerializeField] private Transform cellsContainer;
         [SerializeField] private Vector2Int initialPosPlayer;
         [SerializeField] private Vector2Int initialPosOpponent;
+        [SerializeField] private BattleGridUI gridUI;
+        [SerializeField] private PlayerActionOptionsPreview actionPreview;
 
         private Dictionary<Vector2Int, GridCell> grid;
 
@@ -23,33 +24,49 @@ namespace TestGameplay
             instance = this;
 
             grid = new Dictionary<Vector2Int, GridCell>();
-            for (int column = 0; column < columns; column++)
-            {
-                for (int row = 0; row < rows; row++)
-                {
-                    GridCell cell = Instantiate(cellPrefab).GetComponent<GridCell>();
-                    grid[new Vector2Int(column, row)] = cell;
-                    cell.transform.position = new Vector3(column, 0f, row);
-                }
-            }
 
+            GridCell[] cells = cellsContainer.GetComponentsInChildren<GridCell>();
+            foreach (GridCell cell in cells)
+            {
+                Vector3Int roundedPos = Vector3Int.CeilToInt(cell.transform.position);
+                roundedPos.y = 0;
+                cell.transform.position = roundedPos;
+
+                Vector2Int pos = new Vector2Int(roundedPos.x, roundedPos.z);
+                grid[pos] = cell;
+            }
         }
 
         void Start()
         {
             BattleSectionManager.Instance.Player.Initialize(initialPosPlayer);
             BattleSectionManager.Instance.Opponent.Initialize(initialPosOpponent);
+            gridUI.AssignGrid(grid);
         }
 
-        public void CharacterMoved(Vector2Int position, float delay = 0.5f)
+        public bool MoveCharacter(Vector2Int direction, float delay = 0.5f)
         {
-            BattleSectionManager.Instance.InTurn.Move(position, delay);
-            UpdatePreview();
+            if (!IsValidPosition(BattleSectionManager.Instance.InTurn.CurrentPosition + direction))
+                return false;
+
+            BattleSectionManager.Instance.InTurn.Move(direction, delay);
+            return true;
         }
 
-        public void CharacterAttacked(Vector2Int position, float damage)
+        public bool IsValidPosition(Vector2Int position)
         {
-            BattleSectionManager.Instance.NotInTurn.ReceiveDamage(BattleSectionManager.Instance.InTurn.CurrentPosition + position, damage);
+            return grid.ContainsKey(position);
+        }
+
+        public bool CanMoveInDirection(Vector2Int position, Vector2Int direction)
+        {
+            Vector2Int target = position + direction;
+            return grid.ContainsKey(target);
+        }
+
+        public void CharacterAttacked(Vector2Int direction, int damage)
+        {
+            BattleSectionManager.Instance.NotInTurn.ReceiveDamage(BattleSectionManager.Instance.InTurn.CurrentPosition, BattleSectionManager.Instance.InTurn.CurrentPosition + direction, damage);
         }
 
         public Vector3 ConvertPosition(Vector2Int position)
@@ -64,29 +81,13 @@ namespace TestGameplay
 
         public void UpdatePreview()
         {
-            List<Vector2Int> positions = PlayerActionsManager.Instance.GetTargetPositions();
+            gridUI.UpdatePreview();
+            actionPreview.UpdateActionPreview();
+        }
 
-            foreach (KeyValuePair<Vector2Int, GridCell> cell in grid)
-            {
-                switch (PlayerActionsManager.Instance.CurrentActionType)
-                {
-                    case BattleActionType.Unselected:
-                        cell.Value.Clean();
-                        break;
-                    case BattleActionType.Attack:
-                        if (positions.Contains(cell.Key - BattleSectionManager.Instance.InTurn.CurrentPosition))
-                            cell.Value.PaintAttack();
-                        else
-                            cell.Value.Clean();
-                        break;
-                    case BattleActionType.Move:
-                        if (positions.Contains(cell.Key - BattleSectionManager.Instance.InTurn.CurrentPosition))
-                            cell.Value.PaintMove();
-                        else
-                            cell.Value.Clean();
-                        break;
-                }
-            }
+        public void HighlightSelected(ActionInput actionInput)
+        {
+            actionPreview.HighlightSelected(actionInput);
         }
     }
 }

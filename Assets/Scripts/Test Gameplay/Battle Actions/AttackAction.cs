@@ -8,13 +8,25 @@ namespace TestGameplay
     public class AttackAction : BattleAction
     {
         [SerializeField] private List<Vector2Int> attackedPositions;
-        [SerializeField] private float damage;
+        [SerializeField] private int damage;
 
-        public override List<Vector2Int> TargetPositions { get { return attackedPositions; } }
+        public override List<Vector2Int> TargetDirections { get { return attackedPositions; } }
+        public override BattleActionType ActionType { get { return BattleActionType.Attack; } }
+
         public override void Execute()
         {
-            foreach (Vector2Int position in attackedPositions)
-                BattleGridManager.Instance.CharacterAttacked(position, damage);
+            if (HasEnoughStamina())
+            {
+                foreach (Vector2Int position in TargetDirections)
+                    BattleGridManager.Instance.CharacterAttacked(position, damage);
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
+                base.Execute();
+            }
+        }
+
+        public override bool WouldHaveEffect()
+        {
+            return OpponentInTargetPosition();
         }
     }
 }

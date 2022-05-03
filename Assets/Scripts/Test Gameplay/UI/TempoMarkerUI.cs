@@ -8,11 +8,9 @@ namespace TestGameplay
 {
     public class TempoMarkerUI : MonoBehaviour
     {
-        [SerializeField] private Image marker;
+        [SerializeField] private SpriteRenderer marker;
         [SerializeField] private Color empty;
         [SerializeField] private Color filled;
-
-        //float colorDelay = 0.3f;
 
         public void MarkAsEmpty()
         {

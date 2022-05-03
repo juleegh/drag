@@ -17,7 +17,6 @@ namespace TestGameplay
         public class ActionsUIDictionary : SerializableDictionaryBase<ActionInput, BattleUIElement> { }
 
         [SerializeField] private ActionsUIDictionary actionTypes;
-        [SerializeField] private ActionsUIDictionary actionOptions;
 
         void Awake()
         {
@@ -31,11 +30,5 @@ namespace TestGameplay
                 actionTypes[image.Key].Hightlight(actionInput == image.Key);
             }
         }
-
-        public void ShowExecutedAction(ActionInput actionInput)
-        {
-            actionOptions[actionInput].Twinkle();
-        }
-
     }
 }

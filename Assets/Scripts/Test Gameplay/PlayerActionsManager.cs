@@ -6,20 +6,10 @@ using RotaryHeart.Lib.SerializableDictionary;
 
 namespace TestGameplay
 {
-    public class PlayerActionsManager : MonoBehaviour
+    public class PlayerActionsManager : BattleActionExecuter
     {
-        private static PlayerActionsManager instance;
+        protected static PlayerActionsManager instance;
         public static PlayerActionsManager Instance { get { return instance; } }
-
-        [Serializable]
-        public class ActionsDictionary : SerializableDictionaryBase<ActionInput, BattleAction> { }
-
-        [SerializeField] private ActionsDictionary moveActions;
-        [SerializeField] private ActionsDictionary attackActions;
-        [SerializeField] private ActionsDictionary defenseActions;
-
-        private BattleActionType currentActionType;
-        public BattleActionType CurrentActionType { get { return currentActionType; } }
 
         void Awake()
         {
@@ -35,42 +25,31 @@ namespace TestGameplay
 
         public void ExecutedAction(ActionInput executedAction)
         {
+            BattleAction selected = null;
             switch (currentActionType)
             {
                 case BattleActionType.Attack:
-                    attackActions[executedAction].Execute();
+                    if (attackActions.ContainsKey(executedAction))
+                        selected = attackActions[executedAction];
                     break;
                 case BattleActionType.Move:
-                    moveActions[executedAction].Execute();
+                    if (moveActions.ContainsKey(executedAction))
+                        selected = moveActions[executedAction];
                     break;
                 case BattleActionType.Defend:
-                    defenseActions[executedAction].Execute();
+                    if (defenseActions.ContainsKey(executedAction))
+                        selected = defenseActions[executedAction];
+                    break;
+                case BattleActionType.Special:
+                    if (specialActions.ContainsKey(executedAction))
+                        selected = specialActions[executedAction];
                     break;
             }
-            UIBattleActionSelection.Instance.ShowExecutedAction(executedAction);
-        }
 
-        public List<Vector2Int> GetTargetPositions()
-        {
-            List<Vector2Int> positions = new List<Vector2Int>();
-
-            switch (currentActionType)
+            if (selected != null)
             {
-                case BattleActionType.Attack:
-                    foreach (BattleAction battleAction in attackActions.Values)
-                    {
-                        positions.AddRange(battleAction.TargetPositions);
-                    }
-                    break;
-                case BattleActionType.Move:
-                    foreach (BattleAction battleAction in moveActions.Values)
-                    {
-                        positions.AddRange(battleAction.TargetPositions);
-                    }
-                    break;
+                selected.Execute();
             }
-
-            return positions;
         }
     }
 }
