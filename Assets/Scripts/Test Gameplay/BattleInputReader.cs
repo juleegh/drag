@@ -19,25 +19,6 @@ namespace TestGameplay
             if (!BattleSectionManager.Instance.IsPlayerTurn)
                 return;
 
-            if (!BattleActionTempo.Instance.IsOnPostTempo && !BattleActionTempo.Instance.IsOnPreTempo)
-                return;
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                actionsManager.ExecutedAction(ActionInput.Down);
-            }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                actionsManager.ExecutedAction(ActionInput.Up);
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                actionsManager.ExecutedAction(ActionInput.Left);
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                actionsManager.ExecutedAction(ActionInput.Right);
-            }
 
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -58,6 +39,26 @@ namespace TestGameplay
             {
                 actionsManager.ChangeActionType(BattleActionType.Defend);
                 UIBattleActionSelection.Instance.PaintSelectedAction(ActionInput.Down);
+            }
+
+            if (!BattleActionTempo.Instance.IsOnPostTempo && !BattleActionTempo.Instance.IsOnPreTempo)
+                return;
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                actionsManager.ExecutedAction(ActionInput.Down);
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                actionsManager.ExecutedAction(ActionInput.Up);
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                actionsManager.ExecutedAction(ActionInput.Left);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                actionsManager.ExecutedAction(ActionInput.Right);
             }
         }
 

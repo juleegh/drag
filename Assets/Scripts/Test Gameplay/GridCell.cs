@@ -18,6 +18,7 @@ namespace TestGameplay
         float colorDelay = 0.3f;
         Color transparent = new Color(0, 0, 0, 0);
         Color alpha = new Color(0, 0, 0, 0.4f);
+        Tween colorTween;
 
         void Start()
         {
@@ -27,10 +28,12 @@ namespace TestGameplay
 
         public void Clean()
         {
+            if (colorTween != null)
+                colorTween.Kill();
             cellInfo.color = transparent;
             return;
             //if (cellInfo.color != transparent)
-              //  cellInfo.DOColor(transparent, colorDelay);
+            //  cellInfo.DOColor(transparent, colorDelay);
         }
 
         public void PaintAction(BattleActionType input)
@@ -39,15 +42,15 @@ namespace TestGameplay
             {
                 case BattleActionType.Attack:
                     if (cellInfo.color != attackColor)
-                        cellInfo.DOColor(attackColor, colorDelay);
+                        colorTween = cellInfo.DOColor(attackColor, colorDelay);
                     break;
                 case BattleActionType.Move:
                     if (cellInfo.color != moveColor)
-                        cellInfo.DOColor(moveColor, colorDelay);
+                        colorTween = cellInfo.DOColor(moveColor, colorDelay);
                     break;
                 case BattleActionType.Defend:
                     if (cellInfo.color != defendColor)
-                        cellInfo.DOColor(defendColor, colorDelay);
+                        colorTween = cellInfo.DOColor(defendColor, colorDelay);
                     break;
             }
         }

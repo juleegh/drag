@@ -15,34 +15,45 @@ namespace TestGameplay
 
         public void UpdatePreview()
         {
-            List<Vector2Int> positions = BattleSectionManager.Instance.CurrentExecuter.GetTargetPositions();
             BattleActionType currentActionType = BattleSectionManager.Instance.CurrentExecuter.CurrentActionType;
             foreach (KeyValuePair<Vector2Int, GridCell> cell in grid)
             {
                 cell.Value.Clean();
             }
 
+            ActionInput[] inputs = { ActionInput.Up, ActionInput.Down, ActionInput.Left, ActionInput.Right };
 
-            foreach (Vector2Int position in positions)
+            foreach (ActionInput input in inputs)
             {
-                Vector2Int dancerPosition = BattleSectionManager.Instance.InTurn.CurrentPosition;
-                Vector2Int cellPosition = dancerPosition + position;
-
-                if (!grid.ContainsKey(cellPosition))
-                    continue;
-
-                switch (currentActionType)
+                List<Vector2Int> positions = BattleSectionManager.Instance.CurrentExecuter.GetTargetPositions(input);
+                foreach (Vector2Int position in positions)
                 {
-                    case BattleActionType.Attack:
-                    case BattleActionType.Defend:
-                    case BattleActionType.Move:
-                        grid[cellPosition].PaintAction(currentActionType);
-                        break;
-                    case BattleActionType.Special:
-                        grid[cellPosition].PaintAction(GetActionType(dancerPosition, cellPosition));
-                        break;
+                    Vector2Int dancerPosition = BattleSectionManager.Instance.InTurn.CurrentPosition;
+                    Vector2Int cellPosition = dancerPosition + position;
+
+                    if (!grid.ContainsKey(cellPosition))
+                    {
+                        if (currentActionType == BattleActionType.Move || GetActionType(dancerPosition, cellPosition) == BattleActionType.Move)
+                            break;
+                        else
+                            continue;
+                    }
+
+                    switch (currentActionType)
+                    {
+                        case BattleActionType.Attack:
+                        case BattleActionType.Defend:
+                        case BattleActionType.Move:
+                            grid[cellPosition].PaintAction(currentActionType);
+                            break;
+                        case BattleActionType.Special:
+                            grid[cellPosition].PaintAction(GetActionType(dancerPosition, cellPosition));
+                            break;
+                    }
                 }
             }
+
+
         }
 
         private ActionInput GetInputByPosition(Vector2Int dancer, Vector2Int cell)

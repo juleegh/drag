@@ -23,39 +23,22 @@ namespace TestGameplay
         public ActionsDictionary DefenseActions { get { return defenseActions; } }
         public ActionsDictionary SpecialActions { get { return specialActions; } }
 
-        public List<Vector2Int> GetTargetPositions()
+        public List<Vector2Int> GetTargetPositions(ActionInput actionInput)
         {
-            List<Vector2Int> positions = new List<Vector2Int>();
 
             switch (currentActionType)
             {
                 case BattleActionType.Attack:
-                    foreach (BattleAction battleAction in attackActions.Values)
-                    {
-                        positions.AddRange(battleAction.TargetDirections);
-                    }
-                    break;
+                    return attackActions[actionInput].TargetDirections;
                 case BattleActionType.Move:
-                    foreach (BattleAction battleAction in moveActions.Values)
-                    {
-                        positions.AddRange(battleAction.TargetDirections);
-                    }
-                    break;
+                    return moveActions[actionInput].TargetDirections;
                 case BattleActionType.Defend:
-                    foreach (BattleAction battleAction in defenseActions.Values)
-                    {
-                        positions.AddRange(battleAction.TargetDirections);
-                    }
-                    break;
+                    return defenseActions[actionInput].TargetDirections;
                 case BattleActionType.Special:
-                    foreach (BattleAction battleAction in specialActions.Values)
-                    {
-                        positions.AddRange(battleAction.TargetDirections);
-                    }
-                    break;
+                    return specialActions[actionInput].TargetDirections;
             }
 
-            return positions;
+            return new List<Vector2Int>();
         }
 
         public BattleAction GetActionByPosition(Vector2Int delta)

@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: -3281552012634458351
     second: shield
+  - first:
+      213: -7502543631540482459
+    second: shield_full
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -119,7 +122,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 139
+        y: 281
         width: 117
         height: 118
       alignment: 0
@@ -140,7 +143,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 120
-        y: 137
+        y: 281
         width: 110
         height: 110
       alignment: 0
@@ -160,8 +163,8 @@ TextureImporter:
       name: heal
       rect:
         serializedVersion: 2
-        x: 14
-        y: 22
+        x: 15
+        y: 161
         width: 110
         height: 110
       alignment: 0
@@ -181,8 +184,8 @@ TextureImporter:
       name: shield
       rect:
         serializedVersion: 2
-        x: 124
-        y: 22
+        x: 125
+        y: 161
         width: 110
         height: 110
       alignment: 0
@@ -194,6 +197,27 @@ TextureImporter:
       bones: []
       spriteID: 11774f6b4d59572d0800000000000000
       internalID: -3281552012634458351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: shield_full
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 11
+        width: 132
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56e092a315c91e790800000000000000
+      internalID: -7502543631540482459
       vertices: []
       indices: 
       edges: []

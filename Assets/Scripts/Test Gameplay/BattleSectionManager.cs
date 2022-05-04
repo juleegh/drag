@@ -27,6 +27,7 @@ namespace TestGameplay
         public int TemposPerPlayer { get { return temposPerPlayer; } }
         private bool isInPreview;
         public bool IsInPreview { get { return isInPreview; } }
+        bool playing;
 
         void Awake()
         {
@@ -36,14 +37,23 @@ namespace TestGameplay
             notInTurn = null;
             isInPreview = true;
             sectionUI.Initialize(temposPerPlayer);
-            StartTurn();
+            playing = false;
+            currentTurn = player;
+            notInTurn = opponent;
+            isInPreview = false;
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && !playing)
+            {
+                playing = true;
+                StartTurn();
+            }
         }
 
         public void StartTurn()
         {
-            currentTurn = player;
-            notInTurn = opponent;
-            isInPreview = false;
             BattleActionTempo.Instance.StartTempoCount();
         }
 

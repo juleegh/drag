@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionInput: 1
   requiredStamina: 6
-  sprite: {fileID: -3281552012634458351, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
+  sprite: {fileID: -7502543631540482459, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
   shortDescription: 
   actionType: 4
   defenseIncrease: 1
