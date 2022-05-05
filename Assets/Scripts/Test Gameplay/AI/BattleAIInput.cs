@@ -4,6 +4,16 @@ using UnityEngine;
 
 namespace TestGameplay
 {
+    public enum AIDecision
+    {
+        UseSpecialAbility,
+        UseDefenseAbility,
+        MoveToUseSpecial,
+        Escape,
+        MoveToUseAttack,
+        Attack,
+    }
+
     public class BattleAIInput : BattleActionExecuter
     {
         protected static BattleAIInput instance;
@@ -11,6 +21,8 @@ namespace TestGameplay
 
         private float chanceToDefend = 0.40f;
         private float chanceToSpecial = 0.65f;
+        private float minWaitTime = 0.3f;
+        private float maxWaitTime = 0.85f;
 
         private AIAttackLogic attackLogic;
         private AIDefenseLogic defenseLogic;
@@ -20,6 +32,8 @@ namespace TestGameplay
         private bool willDefend;
         private bool willSpecial;
         private bool turnFinished;
+        [SerializeField] private AIDecision currentDecision;
+        BattleActionType chosenActionType;
 
         void Awake()
         {
@@ -41,23 +55,35 @@ namespace TestGameplay
                 turnFinished = false;
                 willDefend = PassesCheck(chanceToDefend);
                 willSpecial = PassesCheck(chanceToSpecial);
+                PickAbilityType();
             }
 
-            if (willDefend && TryToUseDefenseAbility())
+            BattleAction abilityToUse;
+            switch (currentDecision)
             {
-                //Debug.LogError("Defended");
-            }
-            else if (willSpecial && TryToUseSpecialAbility())
-            {
-                //Debug.LogError("Special");
-            }
-            else if (TryToGetAway())
-            {
-                //Debug.LogError("Escaped");
-            }
-            else if (TryToAttackPlayer())
-            {
-                //Debug.LogError("Attack");
+                case AIDecision.MoveToUseSpecial:
+                    abilityToUse = specialLogic.PickAbilityToUse();
+                    moveLogic.MoveTorwardsSpecialAttack(abilityToUse.TargetDirections);
+                    break;
+                case AIDecision.UseSpecialAbility:
+                    abilityToUse = specialLogic.PickAbilityToUse();
+                    abilityToUse.Execute();
+                    willSpecial = false;
+                    break;
+                case AIDecision.UseDefenseAbility:
+                    abilityToUse = defenseLogic.PickAbilityToUse();
+                    abilityToUse.Execute();
+                    willDefend = false;
+                    break;
+                case AIDecision.MoveToUseAttack:
+                    moveLogic.MoveTorwardsPlayer();
+                    break;
+                case AIDecision.Attack:
+                    attackLogic.AttackPlayer();
+                    break;
+                case AIDecision.Escape:
+                    moveLogic.MoveAwayFromPlayer();
+                    break;
             }
 
             if (BattleSectionManager.Instance.TemposRemaining == 1)
@@ -66,113 +92,90 @@ namespace TestGameplay
                 willSpecial = false;
                 turnFinished = true;
             }
+
+            PickAbilityType();
         }
 
-        private bool TryToUseSpecialAbility()
+        private void PickAbilityType()
         {
-            BattleAction abilityToUse = specialLogic.PickAbilityToUse();
-            if (abilityToUse != null)
+            BattleAction specialAbilityToUse = specialLogic.PickAbilityToUse();
+            BattleAction defenseAbilityToUse = defenseLogic.PickAbilityToUse();
+
+            if (willDefend && defenseAbilityToUse != null)
             {
-                if (specialLogic.SpecialAbilityIsInRange(abilityToUse))
+                chosenActionType = BattleActionType.Defend;
+                currentDecision = AIDecision.UseDefenseAbility;
+                Decide();
+                return;
+            }
+
+            if (willSpecial && specialAbilityToUse != null)
+            {
+                if (specialLogic.SpecialAbilityIsInRange(specialAbilityToUse))
                 {
-                    if (currentActionType == BattleActionType.Special)
-                    {
-                        abilityToUse.Execute();
-                        willSpecial = false;
-                    }
-                    else
-                    {
-                        currentActionType = BattleActionType.Special;
-                        BattleGridManager.Instance.UpdatePreview();
-                    }
+                    chosenActionType = BattleActionType.Special;
+                    currentDecision = AIDecision.UseSpecialAbility;
+                    Decide();
+                    return;
                 }
                 else
                 {
-                    if (!moveLogic.CanMoveToSpecial(abilityToUse.TargetDirections))
+                    if (!moveLogic.CanMoveToSpecial(specialAbilityToUse.TargetDirections))
                     {
-                        return false;
-                    }
-
-                    if (currentActionType == BattleActionType.Move)
-                    {
-                        moveLogic.MoveTorwardsSpecialAttack(abilityToUse.TargetDirections);
-                    }
-                    else
-                    {
-                        currentActionType = BattleActionType.Move;
-                        BattleGridManager.Instance.UpdatePreview();
+                        chosenActionType = BattleActionType.Move;
+                        currentDecision = AIDecision.MoveToUseSpecial;
+                        Decide();
+                        return;
                     }
                 }
-                return true;
             }
-            return false;
-        }
 
-        private bool TryToUseDefenseAbility()
-        {
-            BattleAction abilityToUse = defenseLogic.PickAbilityToUse();
-            if (abilityToUse != null)
+            if (ShouldGetAway())
             {
-                if (currentActionType == BattleActionType.Defend)
-                {
-                    abilityToUse.Execute();
-                    willDefend = false;
-                }
-                else
-                {
-                    currentActionType = BattleActionType.Defend;
-                    BattleGridManager.Instance.UpdatePreview();
-                }
-                return true;
+                chosenActionType = BattleActionType.Move;
+                currentDecision = AIDecision.Escape;
+                Decide();
+                return;
             }
-            return false;
+
+            if (attackLogic.IsPlayerInAttackRange())
+            {
+                chosenActionType = BattleActionType.Attack;
+                currentDecision = AIDecision.Attack;
+                Decide();
+                return;
+            }
+            else
+            {
+                chosenActionType = BattleActionType.Move;
+                currentDecision = AIDecision.MoveToUseAttack;
+                Decide();
+                return;
+            }
+
         }
 
-        private bool TryToGetAway()
+        private void Decide()
+        {
+            if (chosenActionType != currentActionType)
+            {
+                currentActionType = chosenActionType;
+                StartCoroutine(MakeDecision());
+            }
+        }
+
+        private IEnumerator MakeDecision()
+        {
+            yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
+            BattleGridManager.Instance.UpdatePreview();
+        }
+
+        private bool ShouldGetAway()
         {
             float healthPercentage = BattleSectionManager.Instance.InTurn.Stats.Health / BattleSectionManager.Instance.InTurn.Stats.BaseHealth;
             int turnsLeft = BattleSectionManager.Instance.TemposRemaining;
 
-            if (healthPercentage <= 0.3f && turnsLeft <= BattleSectionManager.Instance.TemposPerPlayer / 4)
-            {
-                if (currentActionType == BattleActionType.Move)
-                    moveLogic.MoveAwayFromPlayer();
-                else
-                {
-                    currentActionType = BattleActionType.Move;
-                    BattleGridManager.Instance.UpdatePreview();
-                }
-                return true;
-            }
-            return false;
-        }
-
-        private bool TryToAttackPlayer()
-        {
-            if (attackLogic.IsPlayerInAttackRange())
-            {
-                if (currentActionType == BattleActionType.Attack)
-                {
-                    attackLogic.AttackPlayer();
-                }
-                else
-                {
-                    currentActionType = BattleActionType.Attack;
-                    BattleGridManager.Instance.UpdatePreview();
-                }
-            }
-            else
-            {
-                if (currentActionType != BattleActionType.Move)
-                {
-                    currentActionType = BattleActionType.Move;
-                    BattleGridManager.Instance.UpdatePreview();
-                }
-                else
-                    moveLogic.MoveTorwardsPlayer();
-            }
-
-            return true;
+            return healthPercentage <= 0.3f && turnsLeft <= BattleSectionManager.Instance.TemposPerPlayer / 4;
         }
 
         private bool PassesCheck(float valueToCheck)
