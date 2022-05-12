@@ -45,6 +45,11 @@ namespace TestGameplay
             turnFinished = true;
         }
 
+        void Start()
+        {
+            moveLogic.Initialize();
+        }
+
         public void NewTempo()
         {
             if (BattleSectionManager.Instance.IsPlayerTurn || BattleSectionManager.Instance.Opponent.Stats.Health <= 0)
@@ -56,6 +61,7 @@ namespace TestGameplay
                 willDefend = PassesCheck(chanceToDefend);
                 willSpecial = PassesCheck(chanceToSpecial);
                 PickAbilityType();
+                return;
             }
 
             BattleAction abilityToUse;
@@ -101,7 +107,7 @@ namespace TestGameplay
             BattleAction specialAbilityToUse = specialLogic.PickAbilityToUse();
             BattleAction defenseAbilityToUse = defenseLogic.PickAbilityToUse();
 
-            if (willDefend && defenseAbilityToUse != null)
+            if (willDefend && BattleSectionManager.Instance.TemposRemaining <= 3 && defenseAbilityToUse != null)
             {
                 chosenActionType = BattleActionType.Defend;
                 currentDecision = AIDecision.UseDefenseAbility;

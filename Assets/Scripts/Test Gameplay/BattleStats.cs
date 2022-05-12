@@ -38,36 +38,40 @@ namespace TestGameplay
 
         public void ReceiveDamage(Vector2Int direction, int damage)
         {
-            bool takesDamage = false;
+            bool takesDamage = true;
 
             if (direction.x < 0)
             {
                 if (defense[ActionInput.Left] > 0)
+                {
                     defense[ActionInput.Left]--;
-                else
-                    takesDamage = true;
+                    takesDamage = false;
+                }
             }
             else if (direction.x > 0)
             {
                 if (defense[ActionInput.Right] > 0)
+                {
                     defense[ActionInput.Right]--;
-                else
-                    takesDamage = true;
+                    takesDamage = false;
+                }
             }
 
             if (direction.y < 0)
             {
                 if (defense[ActionInput.Down] > 0)
+                {
                     defense[ActionInput.Down]--;
-                else
-                    takesDamage = true;
+                    takesDamage = false;
+                }
             }
             else if (direction.y > 0)
             {
                 if (defense[ActionInput.Up] > 0)
+                {
                     defense[ActionInput.Up]--;
-                else
-                    takesDamage = true;
+                    takesDamage = false;
+                }
             }
 
             if (!takesDamage)

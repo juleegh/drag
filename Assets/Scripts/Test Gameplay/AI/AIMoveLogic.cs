@@ -7,15 +7,34 @@ namespace TestGameplay
     public class AIMoveLogic
     {
         private BattleAIInput config;
+        private ShortestPath dijkstra;
+        private List<Vector2Int> currentPath;
+        private Vector2Int currentObjective;
 
         public AIMoveLogic(BattleAIInput configuration)
         {
             config = configuration;
+            dijkstra = new ShortestPath();
+        }
+
+        public void Initialize()
+        {
+            dijkstra.Initialize(BattleGridManager.Instance.Cells);
+            currentPath = dijkstra.findShortestPath(BattleSectionManager.Instance.Opponent.CurrentPosition, BattleSectionManager.Instance.Player.CurrentPosition);
+            currentObjective = BattleSectionManager.Instance.Player.CurrentPosition;
+            currentPath.Remove(currentPath[0]);
         }
 
         public void MoveTorwardsPlayer()
         {
-            Vector2Int distance = BattleSectionManager.Instance.Opponent.CurrentPosition - BattleSectionManager.Instance.Player.CurrentPosition;
+            if (currentObjective != BattleSectionManager.Instance.Player.CurrentPosition)
+            {
+                currentPath = dijkstra.findShortestPath(BattleSectionManager.Instance.Opponent.CurrentPosition, BattleSectionManager.Instance.Player.CurrentPosition);
+                currentObjective = BattleSectionManager.Instance.Player.CurrentPosition;
+                currentPath.Remove(currentPath[0]);
+            }
+
+            Vector2Int distance = BattleSectionManager.Instance.Opponent.CurrentPosition - currentPath[0];
             ActionInput executedAction = ActionInput.Up;
 
             if (distance.x < 0 && config.MoveActions[ActionInput.Right].WouldHaveEffect())
@@ -27,6 +46,7 @@ namespace TestGameplay
             else if (distance.y > 0 && config.MoveActions[ActionInput.Down].WouldHaveEffect())
                 executedAction = ActionInput.Down;
 
+            currentPath.Remove(currentPath[0]);
             config.MoveActions[executedAction].Execute();
         }
 

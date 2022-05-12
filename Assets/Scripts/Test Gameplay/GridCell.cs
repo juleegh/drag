@@ -20,9 +20,13 @@ namespace TestGameplay
         Color alpha = new Color(0, 0, 0, 0.4f);
         Tween colorTween;
 
+        private Vector2Int position;
+        public Vector2Int Position { get { return position; } }
+
         void Start()
         {
             int posSum = (int)transform.position.x + (int)transform.position.z;
+            position = new Vector2Int((int)transform.position.x, (int)transform.position.z);
             counter.SetupStart(posSum % 2 == 0);
         }
 

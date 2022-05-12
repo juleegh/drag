@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace TestGameplay
 {
@@ -16,6 +17,7 @@ namespace TestGameplay
         [SerializeField] private PlayerActionOptionsPreview actionPreview;
 
         private Dictionary<Vector2Int, GridCell> grid;
+        public List<GridCell> Cells { get { return grid.Values.ToList(); } }
 
         void Awake()
         {
@@ -48,6 +50,7 @@ namespace TestGameplay
                 return false;
 
             BattleSectionManager.Instance.InTurn.Move(direction);
+            CheckForOverlappedCharacter();
             return true;
         }
 
@@ -80,7 +83,7 @@ namespace TestGameplay
 
         public bool IsValidPosition(Vector2Int position)
         {
-            return grid.ContainsKey(position);
+            return grid.ContainsKey(position);// && BattleSectionManager.Instance.NotInTurn.CurrentPosition != position;
         }
 
         public bool CanMoveInDirection(Vector2Int position, Vector2Int direction)

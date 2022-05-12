@@ -25,22 +25,16 @@ namespace TestGameplay
         private int sectionTempoCount;
         public int TemposRemaining { get { return temposPerPlayer - sectionTempoCount; } }
         public int TemposPerPlayer { get { return temposPerPlayer; } }
-        private bool isInPreview;
-        public bool IsInPreview { get { return isInPreview; } }
         bool playing;
 
         void Awake()
         {
             instance = this;
             sectionTempoCount = 0;
-            currentTurn = null;
-            notInTurn = null;
-            isInPreview = true;
             sectionUI.Initialize(temposPerPlayer);
             playing = false;
             currentTurn = player;
             notInTurn = opponent;
-            isInPreview = false;
         }
 
         void Update()

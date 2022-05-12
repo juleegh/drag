@@ -14,10 +14,9 @@ namespace TestGameplay
         [SerializeField] private TextMeshProUGUI tens;
 
         private BattleIconUI[] icons;
-        private int displayedIcons = 10;
         private int currentValue;
 
-        void Awake()
+        public void Setup(int displayedIcons)
         {
             icons = new BattleIconUI[displayedIcons];
             for (int i = 0; i < displayedIcons; i++)
@@ -34,7 +33,7 @@ namespace TestGameplay
         private IEnumerator Refresh()
         {
             yield return new WaitForEndOfFrame();
-            for (int i = 0; i < displayedIcons; i++)
+            for (int i = 0; i < icons.Length; i++)
             {
                 icons[i].gameObject.SetActive(false);
                 icons[i].gameObject.SetActive(true);
@@ -55,7 +54,7 @@ namespace TestGameplay
             tens.gameObject.SetActive(false);
             bool positiveChange = currentValue < fill;
 
-            for (int i = 0; i < displayedIcons; i++)
+            for (int i = 0; i < icons.Length; i++)
             {
                 //icons[i].Toggle(i + 1 <= belowTen, positiveChange);
                 icons[i].Toggle(i + 1 <= fill, positiveChange);

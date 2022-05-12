@@ -32,7 +32,6 @@ namespace TestGameplay
                 }
 
                 BattleGridManager.Instance.UpdatePreview();
-                BattleGridManager.Instance.CheckForOverlappedCharacter();
             }
         }
 

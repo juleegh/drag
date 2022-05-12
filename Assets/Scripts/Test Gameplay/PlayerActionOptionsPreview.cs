@@ -40,9 +40,6 @@ namespace TestGameplay
 
         private PlayerActionPreview GetActionPreview(ActionInput actionInput)
         {
-            //if (BattleSectionManager.Instance.CurrentExecuter.CurrentActionType != BattleActionType.Move && BattleSectionManager.Instance.CurrentExecuter.CurrentActionType != BattleActionType.Defend)
-            //  return GetPreviewByRotation(actionInput);
-
             switch (actionInput)
             {
                 case ActionInput.Up:
@@ -55,52 +52,5 @@ namespace TestGameplay
                     return RightAction;
             }
         }
-
-        /*
-                private PlayerActionPreview GetPreviewByRotation(ActionInput actionInput)
-                {
-                    Vector2Int direction = InputToOrientation(actionInput);
-                    Vector2Int orientation = BattleSectionManager.Instance.InTurn.Orientation;
-                    Vector2Int xValue = orientation * direction.y;
-                    Vector2Int yValue = new Vector2Int(orientation.y, -orientation.x) * direction.x;
-                    orientation = xValue + yValue;
-
-                    if (orientation == Vector2Int.up)
-                        return UpAction;
-                    if (orientation == Vector2Int.down)
-                        return DownAction;
-                    if (orientation == Vector2Int.left)
-                        return LeftAction;
-                    else
-                        return RightAction;
-                }
-
-                private Vector2Int InputToOrientation(ActionInput actionInput)
-                {
-                    switch (actionInput)
-                    {
-                        case ActionInput.Up:
-                            return Vector2Int.up;
-                        case ActionInput.Down:
-                            return Vector2Int.down;
-                        case ActionInput.Left:
-                            return Vector2Int.left;
-                        default:
-                            return Vector2Int.right;
-                    }
-                }
-
-                private ActionInput OrientationToInput(Vector2Int orientation)
-                {
-                    if (orientation == Vector2Int.up)
-                        return ActionInput.Up;
-                    if (orientation == Vector2Int.down)
-                        return ActionInput.Down;
-                    if (orientation == Vector2Int.left)
-                        return ActionInput.Left;
-                    else
-                        return ActionInput.Right;
-                }
-        */
     }
 }

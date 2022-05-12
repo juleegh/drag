@@ -92,7 +92,8 @@ namespace TestGameplay
         {
             Color color = GetActionColor();
 
-            if (battleAction.WouldHaveEffect() && battleAction.HasEnoughStamina())
+            //if (battleAction.WouldHaveEffect() && battleAction.HasEnoughStamina())
+            if (battleAction.HasEnoughStamina())
                 color -= regularAlpha;
             else
                 color -= blockedAlpha;
@@ -110,7 +111,8 @@ namespace TestGameplay
 
         private Color GetAvailableColor()
         {
-            if (battleAction.WouldHaveEffect() && battleAction.HasEnoughStamina())
+            //if (battleAction.WouldHaveEffect() && battleAction.HasEnoughStamina())
+            if (battleAction.HasEnoughStamina())
                 return regularAction;
             else
                 return blockedAction;
@@ -118,7 +120,7 @@ namespace TestGameplay
 
         public void HighlightSelected()
         {
-            Color current = background.color;
+            Color current = GetBackgroundColor();
             background.color = Color.white;
             background.transform.localScale = increasedScale;
             background.DOColor(current, 0.45f);

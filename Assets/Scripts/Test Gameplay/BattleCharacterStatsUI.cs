@@ -12,6 +12,8 @@ namespace TestGameplay
 
         public void Initialize(int health, int stamina)
         {
+            healthBar.Setup(health);
+            staminaBar.Setup(stamina);
             healthBar.Fill(health);
             staminaBar.Fill(stamina);
         }

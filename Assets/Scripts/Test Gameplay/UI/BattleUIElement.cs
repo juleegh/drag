@@ -8,15 +8,16 @@ namespace TestGameplay
 {
     public class BattleUIElement : MonoBehaviour
     {
-        [SerializeField] private Color highlited;
-        [SerializeField] private Color obscured;
+        private Color highlited;
+        private Color obscured;
 
-        private float colorDelay = 0.3f;
         private Image image;
 
         private void Awake()
         {
             image = GetComponent<Image>();
+            highlited = image.color;
+            obscured = highlited - Color.white * 0.4f;
             image.color = obscured;
         }
 
@@ -24,23 +25,12 @@ namespace TestGameplay
         {
             if (highlights && image.color == obscured)
             {
-                image.DOColor(highlited, colorDelay);
+                image.color = (highlited);
             }
             else if (!highlights && image.color == highlited)
             {
-                image.DOColor(obscured, colorDelay);
+                image.color = (obscured);
             }
-        }
-
-        public void Twinkle()
-        {
-            image.DOColor(highlited, colorDelay / 2).OnComplete(() => { image.DOColor(obscured, colorDelay / 2); });
-        }
-
-        public void Cooldown()
-        {
-            image.color = highlited;
-            image.DOColor(obscured, colorDelay);
         }
     }
 }

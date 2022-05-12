@@ -8,12 +8,16 @@ namespace TestGameplay
     {
         [SerializeField] private Vector3 distanceFromFocus;
         [SerializeField] private float panSpeed;
+        [SerializeField] private bool followCharacter = false;
 
         // Update is called once per frame
         void Update()
         {
-            Vector3 objective = BattleSectionManager.Instance.InTurn.transform.position + distanceFromFocus;
-            transform.position = Vector3.MoveTowards(transform.position, objective, Time.deltaTime * panSpeed);
+            if (followCharacter)
+            {
+                Vector3 objective = BattleSectionManager.Instance.InTurn.transform.position + distanceFromFocus;
+                transform.position = Vector3.MoveTowards(transform.position, objective, Time.deltaTime * panSpeed);
+            }
         }
     }
 }
