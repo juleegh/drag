@@ -1,38 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 namespace TestGameplay
 {
-    public class BattleCharacter : MonoBehaviour
+    public class BattleCharacter : GridActor
     {
         private int initialHealth = 20;
         private int initialStamina = 10;
-        private Vector2Int currentPosition;
-        public Vector2Int CurrentPosition { get { return currentPosition; } }
+
         private BattleStats stats;
         public BattleStats Stats { get { return stats; } }
 
         [SerializeField] private BattleCharacterStatsUI statsUI;
         [SerializeField] private BattleDefenseIndicator defenseUI;
 
-        public void Initialize(Vector2Int initialPosition)
+        public override void Initialize(Vector2Int initialPosition)
         {
-            currentPosition = initialPosition;
-            transform.position = BattleGridManager.Instance.ConvertPosition(initialPosition);
+            base.Initialize(initialPosition);
             stats = new BattleStats(initialHealth, initialStamina);
             statsUI.Initialize(initialHealth, initialStamina);
             defenseUI.UpdateDefense(stats.Defense);
         }
 
-        public void Move(Vector2Int position, float delay = 0.5f)
-        {
-            currentPosition += position;
-            transform.DOMove(BattleGridManager.Instance.ConvertPosition(currentPosition), delay);
-        }
-
-        public void ReceiveDamage(Vector2Int origin, Vector2Int destination, int damage)
+        public override void ReceiveDamage(Vector2Int origin, Vector2Int destination, int damage)
         {
             if (currentPosition == destination)
             {
