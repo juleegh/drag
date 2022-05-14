@@ -32,5 +32,10 @@ namespace TestGameplay
                 image.color = (obscured);
             }
         }
+
+        public void ToggleVisible(bool visible)
+        {
+            image.gameObject.SetActive(visible);
+        }
     }
 }

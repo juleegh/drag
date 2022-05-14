@@ -11,10 +11,8 @@ namespace TestGameplay
         public static BattleGridManager Instance { get { return instance; } }
 
         [SerializeField] private Transform cellsContainer;
-        [SerializeField] private Vector2Int initialPosPlayer;
-        [SerializeField] private Vector2Int initialPosOpponent;
         [SerializeField] private BattleGridUI gridUI;
-        [SerializeField] private PlayerActionOptionsPreview actionPreview;
+        private UIActionsOptionsPreview actionPreview { get { return UIActionsOptionsPreview.Instance; } }
 
         private Dictionary<Vector2Int, GridCell> grid;
         private List<GridActor> gridActors;
@@ -41,20 +39,15 @@ namespace TestGameplay
             GridActor[] actors = GameObject.FindObjectsOfType<GridActor>();
             foreach (GridActor actor in actors)
             {
-                Vector3Int roundedPos = Vector3Int.CeilToInt(actor.transform.position);
-                roundedPos.y = 0;
-                actor.transform.position = roundedPos;
-
-                Vector2Int pos = new Vector2Int(roundedPos.x, roundedPos.z);
-                actor.Initialize(pos);
+                actor.Initialize();
                 gridActors.Add(actor);
             }
         }
 
         void Start()
         {
-            BattleSectionManager.Instance.Player.Initialize(initialPosPlayer);
-            BattleSectionManager.Instance.Opponent.Initialize(initialPosOpponent);
+            BattleSectionManager.Instance.Player.Initialize();
+            BattleSectionManager.Instance.Opponent.Initialize();
             gridUI.AssignGrid(grid);
         }
 

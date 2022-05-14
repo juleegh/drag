@@ -53,11 +53,16 @@ namespace TestGameplay
 
         public void NewTempo()
         {
+            if (TutorialController.Instance.IsInTutorial)
+                return;
             sectionUI.MarkCompleted(sectionTempoCount);
         }
 
         public void FinishedTempo()
         {
+            if (TutorialController.Instance.IsInTutorial)
+                return;
+
             sectionTempoCount++;
             if (sectionTempoCount == temposPerPlayer)
             {

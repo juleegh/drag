@@ -25,7 +25,7 @@ namespace TestGameplay
                 Vector2Int previous = Vector2Int.zero;
                 foreach (Vector2Int position in TargetDirections)
                 {
-                    bool couldMove = BattleGridManager.Instance.MoveCharacter(position - previous);
+                    bool couldMove = BattleGridManager.Instance.MoveCharacter(position - previous, true);
                     if (!couldMove)
                         break;
                     previous = position;

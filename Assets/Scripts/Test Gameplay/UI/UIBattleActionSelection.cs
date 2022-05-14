@@ -30,5 +30,10 @@ namespace TestGameplay
                 actionTypes[image.Key].Hightlight(actionInput == image.Key);
             }
         }
+
+        public void ToggleActionVisibility(ActionInput actionInput, bool visible)
+        {
+            actionTypes[actionInput].ToggleVisible(visible);
+        }
     }
 }

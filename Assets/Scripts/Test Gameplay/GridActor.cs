@@ -13,10 +13,13 @@ namespace TestGameplay
         private bool activeInGrid = true;
         public bool ActiveInGrid { get { return activeInGrid; } }
 
-        public virtual void Initialize(Vector2Int initialPosition)
+        public virtual void Initialize()
         {
-            currentPosition = initialPosition;
-            transform.position = BattleGridManager.Instance.ConvertPosition(initialPosition);
+            Vector3Int roundedPos = Vector3Int.CeilToInt(transform.position);
+            roundedPos.y = 0;
+            transform.position = roundedPos;
+
+            currentPosition = new Vector2Int(roundedPos.x, roundedPos.z);
         }
 
         public void Move(Vector2Int position, float delay = 0.5f)

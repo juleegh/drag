@@ -15,9 +15,9 @@ namespace TestGameplay
         [SerializeField] private BattleCharacterStatsUI statsUI;
         [SerializeField] private BattleDefenseIndicator defenseUI;
 
-        public override void Initialize(Vector2Int initialPosition)
+        public override void Initialize()
         {
-            base.Initialize(initialPosition);
+            base.Initialize();
             stats = new BattleStats(initialHealth, initialStamina);
             statsUI.Initialize(initialHealth, initialStamina);
             defenseUI.UpdateDefense(stats.Defense);
