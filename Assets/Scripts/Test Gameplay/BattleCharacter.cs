@@ -6,7 +6,8 @@ namespace TestGameplay
 {
     public class BattleCharacter : GridActor
     {
-        private int initialHealth = 20;
+        //private int initialHealth = 20;
+        private int initialHealth = 1;
         private int initialStamina = 10;
 
         private BattleStats stats;
@@ -30,6 +31,11 @@ namespace TestGameplay
                 stats.ReceiveDamage(origin - destination, damage);
                 statsUI.SetHealth(stats.Health);
                 defenseUI.UpdateDefense(stats.Defense);
+
+                if (stats.Health <= 0 && BattleSectionManager.Instance.Player == this)
+                {
+                    BattleRespawn.Instance.RespawnCharacters();
+                }
             }
         }
 

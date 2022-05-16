@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf8586ceb70cd94fb6b023e8ea24d65, type: 3}
   m_Name: Right Defense Action
   m_EditorClassIdentifier: 
-  actionInput: 0
+  actionInput: 3
   requiredStamina: 1
   sprite: {fileID: -3281552012634458351, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
   shortDescription: 

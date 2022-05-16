@@ -35,6 +35,7 @@ namespace TestGameplay
             if (currentStep >= instructions.Count)
             {
                 //billboard.ToggleVisible(false);
+                BattleRespawn.Instance.SetCheckpoint(BattleSectionManager.Instance.Player, BattleSectionManager.Instance.Player.CurrentPosition);
             }
             else
                 LoadCurrentStep();

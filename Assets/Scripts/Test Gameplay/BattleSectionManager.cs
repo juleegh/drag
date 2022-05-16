@@ -25,29 +25,23 @@ namespace TestGameplay
         private int sectionTempoCount;
         public int TemposRemaining { get { return temposPerPlayer - sectionTempoCount; } }
         public int TemposPerPlayer { get { return temposPerPlayer; } }
-        bool playing;
 
         void Awake()
         {
             instance = this;
             sectionTempoCount = 0;
             sectionUI.Initialize(temposPerPlayer);
-            playing = false;
             currentTurn = player;
             notInTurn = opponent;
+            BattleActionTempo.Instance.StartTempoCount();
         }
 
-        void Update()
+        public void ResetTurns()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !playing)
-            {
-                playing = true;
-                StartTurn();
-            }
-        }
-
-        public void StartTurn()
-        {
+            sectionTempoCount = 0;
+            currentTurn = player;
+            notInTurn = opponent;
+            BattleActionTempo.Instance.StopTempoCount();
             BattleActionTempo.Instance.StartTempoCount();
         }
 
