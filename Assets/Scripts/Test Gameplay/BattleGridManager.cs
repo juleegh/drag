@@ -16,6 +16,7 @@ namespace TestGameplay
 
         private Dictionary<Vector2Int, GridCell> grid;
         private List<GridActor> gridActors;
+        private List<IGridDanger> gridDangers;
         public List<GridCell> Cells { get { return grid.Values.ToList(); } }
 
         void Awake()
@@ -24,6 +25,7 @@ namespace TestGameplay
 
             grid = new Dictionary<Vector2Int, GridCell>();
             gridActors = new List<GridActor>();
+            gridDangers = new List<IGridDanger>();
 
             GridCell[] cells = cellsContainer.GetComponentsInChildren<GridCell>();
             foreach (GridCell cell in cells)
@@ -41,6 +43,12 @@ namespace TestGameplay
             {
                 actor.Initialize();
                 gridActors.Add(actor);
+            }
+
+            IEnumerable<IGridDanger> dangers = FindObjectsOfType<MonoBehaviour>().OfType<IGridDanger>();
+            foreach (IGridDanger danger in dangers)
+            {
+                gridDangers.Add(danger);
             }
         }
 
@@ -61,12 +69,11 @@ namespace TestGameplay
             if (!canPush && IsPositionOccupied(BattleSectionManager.Instance.InTurn.CurrentPosition + direction))
                 return false;
 
-            BattleSectionManager.Instance.InTurn.Move(direction);
-            CheckForOverlappedCharacter();
+            BattleSectionManager.Instance.InTurn.Move(direction, MoveCallback);
             return true;
         }
 
-        public void CheckForOverlappedCharacter()
+        private void CheckForOverlappedCharacter()
         {
             if (BattleSectionManager.Instance.InTurn.CurrentPosition != BattleSectionManager.Instance.NotInTurn.CurrentPosition)
                 return;
@@ -87,8 +94,21 @@ namespace TestGameplay
                 directions.Remove(current);
                 if (IsValidPosition(current + BattleSectionManager.Instance.NotInTurn.CurrentPosition))
                 {
-                    BattleSectionManager.Instance.NotInTurn.Move(current);
+                    BattleSectionManager.Instance.NotInTurn.Move(current, MoveCallback);
                     return;
+                }
+            }
+        }
+
+        private void CheckForDangerousTiles()
+        {
+            foreach (IGridDanger danger in gridDangers)
+            {
+                Vector2Int position = danger.GetAffectedArea();
+                BattleCharacter character = GetCharacterInPosition(position);
+                if (character != null)
+                {
+                    CharacterAttacked(danger.GetCurrentPosition(), danger.GetDelta(), danger.GetDamage());
                 }
             }
         }
@@ -102,10 +122,30 @@ namespace TestGameplay
         {
             foreach (GridActor actor in gridActors)
             {
-                if (actor.CurrentPosition == position)
+                if (actor.CurrentPosition == position && actor.BlocksCell())
                     return true;
             }
             return false;
+        }
+
+        private BattleCharacter GetCharacterInPosition(Vector2Int position)
+        {
+            foreach (GridActor actor in gridActors)
+            {
+                if (actor.CurrentPosition == position)
+                {
+                    BattleCharacter character = actor as BattleCharacter;
+                    if (character != null)
+                        return character;
+                }
+            }
+            return null;
+        }
+
+        private void MoveCallback()
+        {
+            CheckForOverlappedCharacter();
+            CheckForDangerousTiles();
         }
 
         public bool CanMoveInDirection(Vector2Int position, Vector2Int direction)
@@ -114,12 +154,12 @@ namespace TestGameplay
             return grid.ContainsKey(target);
         }
 
-        public void CharacterAttacked(Vector2Int direction, int damage)
+        public void CharacterAttacked(Vector2Int origin, Vector2Int direction, int damage)
         {
             foreach (GridActor actor in gridActors)
             {
                 if (actor.ActiveInGrid)
-                    actor.ReceiveDamage(BattleSectionManager.Instance.InTurn.CurrentPosition, BattleSectionManager.Instance.InTurn.CurrentPosition + direction, damage);
+                    actor.ReceiveDamage(origin, origin + direction, damage);
             }
 
             List<GridActor> toRemove = new List<GridActor>();

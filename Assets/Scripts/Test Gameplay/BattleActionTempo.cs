@@ -8,6 +8,10 @@ namespace TestGameplay
 {
     public class BattleActionTempo : MonoBehaviour
     {
+        public delegate void TempoDelegates();
+        public static TempoDelegates OnTempoNotification;
+        public static TempoDelegates PostTempoNotification;
+
         public static BattleActionTempo Instance { get { return instance; } }
         private static BattleActionTempo instance;
 
@@ -72,11 +76,13 @@ namespace TestGameplay
                 counter.Toggle();
             BattleSectionManager.Instance.NewTempo();
             BattleAIInput.Instance.NewTempo();
+            OnTempoNotification();
             yield return preAcceptable;
             preBeatFrame = false;
             postBeatFrame = true;
             yield return postAcceptable;
             postBeatFrame = false;
+            PostTempoNotification();
             BattleSectionManager.Instance.FinishedTempo();
             StartCoroutine(PreTempo());
         }
