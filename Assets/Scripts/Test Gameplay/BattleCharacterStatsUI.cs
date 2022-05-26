@@ -5,20 +5,22 @@ using DG.Tweening;
 
 namespace TestGameplay
 {
-    public class BattleCharacterStatsUI : MonoBehaviour
+    public class BattleCharacterStatsUI : BattleActorStatsUI
     {
         [SerializeField] private UIStatsBar healthBar;
         [SerializeField] private UIStatsBar staminaBar;
 
-        public void Initialize(int health, int stamina)
+        public override void InitializeHealth(int health)
         {
             healthBar.Setup(health);
-            staminaBar.Setup(stamina);
-            healthBar.Fill(health);
-            staminaBar.Fill(stamina);
         }
 
-        public void SetHealth(int fill)
+        public void InitializeStamina(int stamina)
+        {
+            staminaBar.Setup(stamina);
+        }
+
+        public override void SetHealth(int fill)
         {
             healthBar.Fill(fill);
         }

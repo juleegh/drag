@@ -10,6 +10,11 @@ public class BattleIconUI : MonoBehaviour
     [SerializeField] private Color visible;
     [SerializeField] private Color notVisible;
 
+    public void Initialize(bool vis)
+    {
+        icon.color = vis ? visible : notVisible;
+    }
+
     public void Toggle(bool vis, bool positive)
     {
         Color target = vis ? visible : notVisible;

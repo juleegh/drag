@@ -54,8 +54,6 @@ namespace TestGameplay
 
         void Start()
         {
-            BattleSectionManager.Instance.Player.Initialize();
-            BattleSectionManager.Instance.Opponent.Initialize();
             BattleRespawn.Instance.SetCheckpoint(BattleSectionManager.Instance.Player, BattleSectionManager.Instance.Player.CurrentPosition);
             BattleRespawn.Instance.SetCheckpoint(BattleSectionManager.Instance.Opponent, BattleSectionManager.Instance.Opponent.CurrentPosition);
             gridUI.AssignGrid(grid);

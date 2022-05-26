@@ -24,6 +24,7 @@ namespace TestGameplay
                 BattleIconUI newIcon = Instantiate(prefab).GetComponent<BattleIconUI>();
                 newIcon.transform.SetParent(container);
                 newIcon.transform.localPosition = Vector3.zero;
+                newIcon.Initialize(true);
                 icons[i] = newIcon;
             }
 

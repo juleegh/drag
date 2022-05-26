@@ -71,6 +71,7 @@ namespace TestGameplay
             currentTurn = currentTurn == player ? opponent : player;
             notInTurn = notInTurn == player ? opponent : player;
             currentTurn.ResetStats();
+            notInTurn.ResetStats();
             sectionUI.ToggleOwner(currentTurn);
             BattleGridManager.Instance.UpdatePreview();
         }

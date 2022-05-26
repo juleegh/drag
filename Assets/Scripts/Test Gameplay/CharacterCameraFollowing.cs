@@ -10,6 +10,14 @@ namespace TestGameplay
         [SerializeField] private float panSpeed;
         [SerializeField] private bool followCharacter = false;
 
+        void Awake()
+        {
+            if (followCharacter)
+            {
+                Vector3 objective = BattleSectionManager.Instance.InTurn.transform.position + distanceFromFocus;
+                transform.position = objective;
+            }
+        }
         // Update is called once per frame
         void Update()
         {

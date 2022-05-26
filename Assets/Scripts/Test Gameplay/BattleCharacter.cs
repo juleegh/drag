@@ -6,22 +6,23 @@ namespace TestGameplay
 {
     public class BattleCharacter : GridActor
     {
-        //private int initialHealth = 20;
-        private int initialHealth = 1;
-        private int initialStamina = 10;
+        protected int initialHealth = 20;
+        protected int initialStamina = 10;
 
-        private BattleStats stats;
+        protected BattleStats stats;
         public BattleStats Stats { get { return stats; } }
 
-        [SerializeField] private BattleCharacterStatsUI statsUI;
-        [SerializeField] private BattleDefenseIndicator defenseUI;
+        [SerializeField] protected BattleDefenseIndicator defenseUI;
+        [SerializeField] protected BattleActorStatsUI actorStatsUI;
 
+        protected virtual BattleActorStatsUI StatsUI { get { return actorStatsUI; }  }
+        
         public override void Initialize()
         {
             base.Initialize();
             stats = new BattleStats(initialHealth, initialStamina);
-            statsUI.Initialize(initialHealth, initialStamina);
             defenseUI.UpdateDefense(stats.Defense);
+            StatsUI.InitializeHealth(initialHealth);
         }
 
         public override void ReceiveDamage(Vector2Int origin, Vector2Int destination, int damage)
@@ -29,26 +30,15 @@ namespace TestGameplay
             if (currentPosition == destination)
             {
                 stats.ReceiveDamage(origin - destination, damage);
-                statsUI.SetHealth(stats.Health);
                 defenseUI.UpdateDefense(stats.Defense);
-
-                if (stats.Health <= 0 && BattleSectionManager.Instance.Player == this)
-                {
-                    BattleRespawn.Instance.RespawnCharacters();
-                }
+                StatsUI.SetHealth(stats.Health);
             }
         }
 
         public void IncreaseHealth(int heal)
         {
             stats.IncreaseHealth(heal);
-            statsUI.SetHealth(stats.Health);
-        }
-
-        public void DecreaseStamina(int stamina)
-        {
-            stats.DecreaseStamina(stamina);
-            statsUI.SetStamina(stats.Stamina);
+            StatsUI.SetHealth(stats.Health);
         }
 
         public void IncreaseDefense(ActionInput direction, int defense)
@@ -57,10 +47,14 @@ namespace TestGameplay
             defenseUI.UpdateDefense(stats.Defense);
         }
 
-        public void ResetStats()
+        public virtual void DecreaseStamina(int stamina)
+        {
+            stats.DecreaseStamina(stamina);
+        }
+
+        public virtual void ResetStats()
         {
             stats.ResetBoosts();
-            statsUI.SetStamina(stats.Stamina);
         }
     }
 }
