@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a1f336f31e4664ebc535cb71561a7c, type: 3}
   m_Name: Special Recover
   m_EditorClassIdentifier: 
-  actionInput: 2
+  actionInput: 0
   requiredStamina: 10
   sprite: {fileID: -32239468427962368, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
   shortDescription: 5

@@ -30,7 +30,7 @@ namespace TestGameplay
             currentPosition += position;
             transform.DOMove(BattleGridManager.Instance.ConvertPosition(currentPosition), delay);
             Sequence sequence = DOTween.Sequence();
-            sequence.AppendInterval(delay);
+            sequence.AppendInterval(delay / 2);
             sequence.AppendCallback(() => { MoveCallback(); });
             sequence.Play();
         }

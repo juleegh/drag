@@ -28,16 +28,6 @@ namespace TestGameplay
             BattleActionTempo.OnTempoNotification += IddleAnimation;
         }
 
-        public void Attacked()
-        {
-            animations.Attack();
-        }
-
-        public void Moved()
-        {
-            animations.Move();
-        }
-
         public override void ReceiveDamage(Vector2Int origin, Vector2Int destination, int damage)
         {
             if (currentPosition == destination)
