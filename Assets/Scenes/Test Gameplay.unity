@@ -15469,6 +15469,7 @@ MonoBehaviour:
   distanceFromFocus: {x: 0, y: 9, z: 0}
   panSpeed: 4
   followCharacter: 1
+  maxDistance: 1
 --- !u!1 &1585399117
 GameObject:
   m_ObjectHideFlags: 0

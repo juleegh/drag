@@ -9,6 +9,7 @@ namespace TestGameplay
         [SerializeField] private Vector3 distanceFromFocus;
         [SerializeField] private float panSpeed;
         [SerializeField] private bool followCharacter = false;
+        [SerializeField] private float maxDistance;
 
         void Awake()
         {
@@ -24,7 +25,12 @@ namespace TestGameplay
             if (followCharacter)
             {
                 Vector3 objective = BattleSectionManager.Instance.InTurn.transform.position + distanceFromFocus;
-                transform.position = Vector3.MoveTowards(transform.position, objective, Time.deltaTime * panSpeed);
+                float currentDistance = Vector3.Distance(transform.position, objective);
+
+                if(currentDistance > maxDistance)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, objective, Time.deltaTime * panSpeed);
+                }
             }
         }
     }
