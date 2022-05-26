@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace TestGameplay
 {
@@ -14,6 +15,7 @@ namespace TestGameplay
 
         [SerializeField] protected BattleDefenseIndicator defenseUI;
         [SerializeField] protected BattleActorStatsUI actorStatsUI;
+        [SerializeField] protected BattleCharacterAnimation animations;
 
         protected virtual BattleActorStatsUI StatsUI { get { return actorStatsUI; }  }
         
@@ -23,6 +25,17 @@ namespace TestGameplay
             stats = new BattleStats(initialHealth, initialStamina);
             defenseUI.UpdateDefense(stats.Defense);
             StatsUI.InitializeHealth(initialHealth);
+            BattleActionTempo.OnTempoNotification += IddleAnimation;
+        }
+
+        public void Attacked()
+        {
+            animations.Attack();
+        }
+
+        public void Moved()
+        {
+            animations.Move();
         }
 
         public override void ReceiveDamage(Vector2Int origin, Vector2Int destination, int damage)
@@ -55,6 +68,11 @@ namespace TestGameplay
         public virtual void ResetStats()
         {
             stats.ResetBoosts();
+        }
+
+        private void IddleAnimation()
+        {
+            animations.MarkTempo();
         }
     }
 }
