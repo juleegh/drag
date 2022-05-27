@@ -6667,7 +6667,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a771120e3c88f37479415582eca9fc66, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 192d48e29bb779c45960979112eda4b1, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -10217,7 +10217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc70e815e89898546a10c937d3ae1436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frequency: 1.41176
+  frequency: 1.11
   acceptablePercentage: 0.7
   audioSource: {fileID: 752705368}
 --- !u!114 &1105658683

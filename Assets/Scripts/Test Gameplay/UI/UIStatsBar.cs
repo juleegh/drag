@@ -18,17 +18,27 @@ namespace TestGameplay
 
         public void Setup(int displayedIcons)
         {
-            icons = new BattleIconUI[displayedIcons];
-            for (int i = 0; i < displayedIcons; i++)
+            if(icons == null)
             {
-                BattleIconUI newIcon = Instantiate(prefab).GetComponent<BattleIconUI>();
-                newIcon.transform.SetParent(container);
-                newIcon.transform.localPosition = Vector3.zero;
-                newIcon.Initialize(true);
-                icons[i] = newIcon;
+                icons = new BattleIconUI[displayedIcons];
+                for (int i = 0; i < displayedIcons; i++)
+                {
+                    BattleIconUI newIcon = Instantiate(prefab).GetComponent<BattleIconUI>();
+                    newIcon.transform.SetParent(container);
+                    newIcon.transform.localPosition = Vector3.zero;
+                    newIcon.Initialize(true);
+                    icons[i] = newIcon;
+                    StartCoroutine(Refresh());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < displayedIcons; i++)
+                {
+                    icons[i].Initialize(true);
+                }
             }
 
-            StartCoroutine(Refresh());
         }
 
         private IEnumerator Refresh()
