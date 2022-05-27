@@ -74,6 +74,7 @@ namespace TestGameplay
             notInTurn.ResetStats();
             sectionUI.ToggleOwner(currentTurn);
             BattleGridManager.Instance.UpdatePreview();
+            TurnChangeUI.Instance.ShowTurnChange();
         }
     }
 }
