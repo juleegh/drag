@@ -9152,7 +9152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e60421e16ef4314a9a12d0c7057135d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temposPerPlayer: 4
+  temposPerPlayer: 8
   player: {fileID: 1018965854}
   opponent: {fileID: 26367280}
   sectionUI: {fileID: 1587180580}

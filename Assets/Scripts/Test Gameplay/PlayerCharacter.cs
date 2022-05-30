@@ -35,6 +35,11 @@ namespace TestGameplay
         public override void ResetStats()
         {
             base.ResetStats();
+        }
+
+        public override void ResetStamina()
+        {
+            base.ResetStamina();
             playerStatsUI.SetStamina(stats.Stamina);
         }
     }

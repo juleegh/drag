@@ -58,6 +58,12 @@ namespace TestGameplay
         public virtual void ResetStats()
         {
             stats.ResetBoosts();
+            defenseUI.UpdateDefense(stats.Defense);
+        }
+
+        public virtual void ResetStamina()
+        {
+            stats.ResetStamina();
         }
 
         private void IddleAnimation()

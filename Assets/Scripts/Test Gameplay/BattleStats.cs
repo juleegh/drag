@@ -44,7 +44,7 @@ namespace TestGameplay
             {
                 if (defense[ActionInput.Left] > 0)
                 {
-                    defense[ActionInput.Left]--;
+                    //defense[ActionInput.Left]--;
                     takesDamage = false;
                 }
             }
@@ -52,7 +52,7 @@ namespace TestGameplay
             {
                 if (defense[ActionInput.Right] > 0)
                 {
-                    defense[ActionInput.Right]--;
+                    //defense[ActionInput.Right]--;
                     takesDamage = false;
                 }
             }
@@ -61,7 +61,7 @@ namespace TestGameplay
             {
                 if (defense[ActionInput.Down] > 0)
                 {
-                    defense[ActionInput.Down]--;
+                    //defense[ActionInput.Down]--;
                     takesDamage = false;
                 }
             }
@@ -69,7 +69,7 @@ namespace TestGameplay
             {
                 if (defense[ActionInput.Up] > 0)
                 {
-                    defense[ActionInput.Up]--;
+                    //defense[ActionInput.Up]--;
                     takesDamage = false;
                 }
             }
@@ -95,9 +95,17 @@ namespace TestGameplay
             defense[direction] += boost;
         }
 
+        public void ResetStamina()
+        { 
+            stamina = baseStamina;
+        }
+
         public void ResetBoosts()
         {
-            stamina = baseStamina;
+            defense[ActionInput.Up] = 0;
+            defense[ActionInput.Down] = 0;
+            defense[ActionInput.Left] = 0;
+            defense[ActionInput.Right] = 0;
         }
     }
 }
