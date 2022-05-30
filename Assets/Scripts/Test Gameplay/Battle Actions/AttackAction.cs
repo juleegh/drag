@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "Attack Action")]
+    //[CreateAssetMenu(fileName = "Attack Action")]
     public class AttackAction : BattleAction
     {
         [SerializeField] private List<Vector2Int> attackedPositions;

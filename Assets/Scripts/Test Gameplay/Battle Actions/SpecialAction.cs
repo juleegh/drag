@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "Move Action")]
+    //[CreateAssetMenu(fileName = "Move Action")]
     public class SpecialAction : BattleAction
     {
         [SerializeField] protected BattleActionType actionType;

@@ -6,16 +6,14 @@ namespace TestGameplay
 {
     public class AISpecialLogic
     {
-        private BattleAIInput config;
-
         public AISpecialLogic(BattleAIInput configuration)
         {
-            config = configuration;
+
         }
 
         public BattleAction PickAbilityToUse()
         {
-            foreach (BattleAction battleAction in config.SpecialActions.Values)
+            foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
             {
                 if (!battleAction.HasEnoughStamina())
                     continue;

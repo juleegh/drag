@@ -13,7 +13,7 @@ namespace TestGameplay
         public Vector2Int CurrentPosition { get { return currentPosition; } }
         private bool activeInGrid = true;
         public bool ActiveInGrid { get { return activeInGrid; } }
-        float delay = 0.5f;
+        float delay = 0.25f;
 
         public virtual void Initialize()
         {

@@ -1,0 +1,48 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace TestGameplay
+{
+    public class AICondition : ScriptableObject
+    {
+        public virtual bool MeetsRequirement()
+        {
+            return true;
+        }
+    }
+
+    public class AIActionOption : ScriptableObject
+    {
+        [SerializeField] protected List<AICondition> conditions;
+
+        public virtual void ExecuteAction()
+        {
+            
+        }
+
+        public bool CanExecute()
+        {
+            Debug.LogWarning("--- Executing: " + name + "--------");
+
+            if (conditions.Count == 0)
+                return true;
+
+            Debug.LogWarning("--- Evaluating: " + name + "--------");
+
+            foreach (AICondition condition in conditions)
+            {
+                Debug.LogWarning("----- Condition met: " + condition.GetType() + "? : " + condition.MeetsRequirement());
+                if (!condition.MeetsRequirement())
+                    return false;
+            }
+            return true;
+        }
+
+        public virtual BattleActionType GetActionType()
+        {
+            return BattleActionType.Unselected;
+        }
+    }
+}
+

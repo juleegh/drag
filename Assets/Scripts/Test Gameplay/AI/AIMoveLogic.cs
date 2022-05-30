@@ -6,14 +6,12 @@ namespace TestGameplay
 {
     public class AIMoveLogic
     {
-        private BattleAIInput config;
         private ShortestPath dijkstra;
         private List<Vector2Int> currentPath;
         private Vector2Int currentObjective;
 
-        public AIMoveLogic(BattleAIInput configuration)
+        public AIMoveLogic()
         {
-            config = configuration;
             dijkstra = new ShortestPath();
         }
 
@@ -27,7 +25,7 @@ namespace TestGameplay
 
         public void MoveTorwardsPlayer()
         {
-            if (currentObjective != BattleSectionManager.Instance.Player.CurrentPosition)
+            if (currentObjective != BattleSectionManager.Instance.Player.CurrentPosition || currentPath.Count == 0)
             {
                 currentPath = dijkstra.findShortestPath(BattleSectionManager.Instance.Opponent.CurrentPosition, BattleSectionManager.Instance.Player.CurrentPosition);
                 currentObjective = BattleSectionManager.Instance.Player.CurrentPosition;
@@ -37,17 +35,17 @@ namespace TestGameplay
             Vector2Int distance = BattleSectionManager.Instance.Opponent.CurrentPosition - currentPath[0];
             ActionInput executedAction = ActionInput.Up;
 
-            if (distance.x < 0 && config.MoveActions[ActionInput.Right].WouldHaveEffect())
+            if (distance.x < 0 && BattleAIInput.Instance.MoveActions[ActionInput.Right].WouldHaveEffect())
                 executedAction = ActionInput.Right;
-            else if (distance.x > 0 && config.MoveActions[ActionInput.Left].WouldHaveEffect())
+            else if (distance.x > 0 && BattleAIInput.Instance.MoveActions[ActionInput.Left].WouldHaveEffect())
                 executedAction = ActionInput.Left;
-            else if (distance.y < 0 && config.MoveActions[ActionInput.Up].WouldHaveEffect())
+            else if (distance.y < 0 && BattleAIInput.Instance.MoveActions[ActionInput.Up].WouldHaveEffect())
                 executedAction = ActionInput.Up;
-            else if (distance.y > 0 && config.MoveActions[ActionInput.Down].WouldHaveEffect())
+            else if (distance.y > 0 && BattleAIInput.Instance.MoveActions[ActionInput.Down].WouldHaveEffect())
                 executedAction = ActionInput.Down;
 
             currentPath.Remove(currentPath[0]);
-            config.MoveActions[executedAction].Execute();
+            BattleAIInput.Instance.MoveActions[executedAction].Execute();
         }
 
         public void MoveAwayFromPlayer()
@@ -70,7 +68,7 @@ namespace TestGameplay
                     executedAction = ActionInput.Down;
             }
 
-            config.MoveActions[executedAction].Execute();
+            BattleAIInput.Instance.MoveActions[executedAction].Execute();
         }
 
         public bool CanMoveToSpecial(List<Vector2Int> positions)
@@ -136,7 +134,7 @@ namespace TestGameplay
                     executedAction = ActionInput.Down;
             }
 
-            config.MoveActions[executedAction].Execute();
+            BattleAIInput.Instance.MoveActions[executedAction].Execute();
         }
     }
 }

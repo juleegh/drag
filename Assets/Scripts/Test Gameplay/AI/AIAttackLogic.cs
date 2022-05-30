@@ -6,28 +6,14 @@ namespace TestGameplay
 {
     public class AIAttackLogic
     {
-        private BattleAIInput config;
-
-        public AIAttackLogic(BattleAIInput configuration)
+        public AIAttackLogic()
         {
-            config = configuration;
-        }
 
-        public bool IsPlayerInAttackRange()
-        {
-            Vector2Int playerPos = BattleSectionManager.Instance.Player.CurrentPosition;
-            List<Vector2Int> positions = new List<Vector2Int>();
-            foreach (BattleAction battleAction in config.AttackActions.Values)
-            {
-                positions.AddRange(battleAction.TargetDirections);
-            }
-
-            return positions.Contains(BattleSectionManager.Instance.Opponent.CurrentPosition - BattleSectionManager.Instance.Player.CurrentPosition);
         }
 
         public void AttackPlayer()
         {
-            foreach (BattleAction battleAction in config.AttackActions.Values)
+            foreach (BattleAction battleAction in BattleAIInput.Instance.AttackActions.Values)
             {
                 Vector2Int distance = BattleSectionManager.Instance.Player.CurrentPosition - BattleSectionManager.Instance.Opponent.CurrentPosition;
                 if (battleAction.TargetDirections.Contains(distance))

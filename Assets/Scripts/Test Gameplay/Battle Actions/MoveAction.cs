@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "Move Action")]
+    //[CreateAssetMenu(fileName = "Move Action")]
     public class MoveAction : BattleAction
     {
         [SerializeField] private List<Vector2Int> moveDelta;

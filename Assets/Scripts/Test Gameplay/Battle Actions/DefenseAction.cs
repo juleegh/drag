@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "Defense Action")]
+    //[CreateAssetMenu(fileName = "Defense Action")]
     public class DefenseAction : BattleAction
     {
         public override BattleActionType ActionType { get { return BattleActionType.Defend; } }

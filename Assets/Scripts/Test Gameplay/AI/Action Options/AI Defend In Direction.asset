@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f77a8ac01fbe844d88ee881d88ced65, type: 3}
+  m_Name: AI Defend In Direction
+  m_EditorClassIdentifier: 
+  conditions:
+  - {fileID: 11400000, guid: e759cf7e8cb3bda45bcccb109b437d38, type: 2}
+  - {fileID: 11400000, guid: 0d5bd37161b68014b850651ced64491c, type: 2}
+  - {fileID: 11400000, guid: 3a29d4cd114cb2e4f83caba30e6fa24c, type: 2}

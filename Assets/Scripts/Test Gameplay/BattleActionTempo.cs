@@ -29,6 +29,7 @@ namespace TestGameplay
 
         public bool IsOnPreTempo { get { return preBeatFrame; } }
         public bool IsOnPostTempo { get { return postBeatFrame; } }
+        public float Frequency { get { return frequency; } }
         private CellTempoCounter[] counters;
 
         void Awake()
