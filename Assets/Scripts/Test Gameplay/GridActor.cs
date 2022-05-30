@@ -25,13 +25,13 @@ namespace TestGameplay
             DOTween.KillAll();
         }
 
-        public void Move(Vector2Int position, Action MoveCallback)
+        public void Move(Vector2Int position, Action<Vector2Int> MoveCallback)
         {
             currentPosition += position;
             transform.DOMove(BattleGridManager.Instance.ConvertPosition(currentPosition), delay);
             Sequence sequence = DOTween.Sequence();
             sequence.AppendInterval(delay / 2);
-            sequence.AppendCallback(() => { MoveCallback(); });
+            sequence.AppendCallback(() => { MoveCallback(position); });
             sequence.Play();
         }
 

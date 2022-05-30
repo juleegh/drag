@@ -71,11 +71,21 @@ namespace TestGameplay
             return true;
         }
 
-        private void CheckForOverlappedCharacter()
+        private void CheckForOverlappedCharacter(Vector2Int direction)
         {
             if (BattleSectionManager.Instance.InTurn.CurrentPosition != BattleSectionManager.Instance.NotInTurn.CurrentPosition)
                 return;
 
+            Vector2Int position = BattleSectionManager.Instance.NotInTurn.CurrentPosition;
+            if (!IsValidPosition(direction + position))
+            {
+                direction = GetRandomViableDirection(position);
+            }
+            BattleSectionManager.Instance.NotInTurn.Move(direction, MoveCallback);
+        }
+
+        private Vector2Int GetRandomViableDirection(Vector2Int center)
+        {
             List<Vector2Int> directions = new List<Vector2Int>();
             directions.Add(Vector2Int.down);
             directions.Add(Vector2Int.left);
@@ -90,12 +100,12 @@ namespace TestGameplay
             {
                 Vector2Int current = directions[Random.Range(0, directions.Count)];
                 directions.Remove(current);
-                if (IsValidPosition(current + BattleSectionManager.Instance.NotInTurn.CurrentPosition))
+                if (IsValidPosition(current + center))
                 {
-                    BattleSectionManager.Instance.NotInTurn.Move(current, MoveCallback);
-                    return;
+                    return current;
                 }
             }
+            return Vector2Int.zero;
         }
 
         private void CheckForDangerousTiles()
@@ -140,9 +150,9 @@ namespace TestGameplay
             return null;
         }
 
-        private void MoveCallback()
+        private void MoveCallback(Vector2Int direction)
         {
-            CheckForOverlappedCharacter();
+            CheckForOverlappedCharacter(direction);
             CheckForDangerousTiles();
         }
 
