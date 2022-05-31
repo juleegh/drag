@@ -13,8 +13,12 @@ namespace TestGameplay
 
         public override void Execute()
         {
-            BattleSectionManager.Instance.InTurn.IncreaseDefense(actionInput, defenseIncrease);
-            base.Execute();
+            if (HasEnoughStamina())
+            {
+                BattleSectionManager.Instance.InTurn.IncreaseDefense(actionInput, defenseIncrease);
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
+                base.Execute();
+            }
         }
 
         public override bool WouldHaveEffect()

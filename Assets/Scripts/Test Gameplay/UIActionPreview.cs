@@ -26,8 +26,7 @@ namespace TestGameplay
 
         private Sprite ActionSprite { get { return battleAction != null ? battleAction.Sprite : null; } }
         private string ActionDescription { get { return battleAction != null ? battleAction.ShortDescription : ""; } }
-        private int ActionStamina { get { return 0; } }
-        private bool HasEnoughStamina { get { return true; } }
+        private int ActionStamina { get { return battleAction != null ? battleAction.RequiredStamina : 0; } }
 
         private Vector3 regularScale;
         private Vector3 increasedScale;
@@ -95,7 +94,7 @@ namespace TestGameplay
             Color color = GetActionColor();
 
             //if (battleAction.WouldHaveEffect() && battleAction.HasEnoughStamina())
-            if (HasEnoughStamina)
+            if (battleAction.HasEnoughStamina())
                 color -= regularAlpha;
             else
                 color -= blockedAlpha;
@@ -105,7 +104,7 @@ namespace TestGameplay
 
         private Color GetStaminaColor()
         {
-            if (!HasEnoughStamina)
+            if (!battleAction.HasEnoughStamina())
                 return Color.red;
             else
                 return Color.white;
@@ -114,7 +113,7 @@ namespace TestGameplay
         private Color GetAvailableColor()
         {
             //if (battleAction.WouldHaveEffect() && battleAction.HasEnoughStamina())
-            if (HasEnoughStamina)
+            if (battleAction.HasEnoughStamina())
                 return regularAction;
             else
                 return blockedAction;

@@ -68,6 +68,7 @@ namespace TestGameplay
 
         private void ToggleTurn()
         {
+            currentTurn.ResetStamina();
             currentTurn = currentTurn == player ? opponent : player;
             notInTurn = notInTurn == player ? opponent : player;
             currentTurn.ResetStats();

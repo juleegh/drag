@@ -22,6 +22,7 @@ namespace TestGameplay
                     break;
                 previous = position;
             }
+            BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
             base.Execute();
             BattleGridManager.Instance.UpdatePreview();
         }

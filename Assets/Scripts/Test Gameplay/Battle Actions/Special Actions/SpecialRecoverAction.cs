@@ -11,14 +11,32 @@ namespace TestGameplay
 
         public override void Execute()
         {
-            BattleSectionManager.Instance.InTurn.IncreaseHealth(health);
-            base.Execute();
+            if (HasEnoughStamina())
+            {
+                //foreach (Vector2Int position in positionsDelta)
+                //  BattleGridManager.Instance.CharacterAttacked(position, damage);
+                BattleSectionManager.Instance.InTurn.IncreaseHealth(health);
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
+                base.Execute();
+            }
         }
 
         public override List<Vector2Int> TargetDirections
         {
             get
             {
+                /*
+                List<Vector2Int> positionContainer = new List<Vector2Int>();
+                if (actionInput == ActionInput.Up)
+                    positionContainer.Add(Vector2Int.up);
+                if (actionInput == ActionInput.Down)
+                    positionContainer.Add(Vector2Int.down);
+                if (actionInput == ActionInput.Left)
+                    positionContainer.Add(Vector2Int.left);
+                if (actionInput == ActionInput.Right)
+                    positionContainer.Add(Vector2Int.right);
+                return positionContainer;
+                */
                 return new List<Vector2Int>();
             }
         }

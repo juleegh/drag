@@ -11,11 +11,15 @@ namespace TestGameplay
 
         public override void Execute()
         {
-            BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Up, defenseIncrease);
-            BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Down, defenseIncrease);
-            BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Left, defenseIncrease);
-            BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Right, defenseIncrease);
-            base.Execute();
+            if (HasEnoughStamina())
+            {
+                BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Up, defenseIncrease);
+                BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Down, defenseIncrease);
+                BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Left, defenseIncrease);
+                BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Right, defenseIncrease);
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
+                base.Execute();
+            }
         }
 
         public override List<Vector2Int> TargetDirections
