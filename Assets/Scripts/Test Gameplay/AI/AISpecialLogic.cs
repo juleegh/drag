@@ -15,7 +15,7 @@ namespace TestGameplay
         {
             foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
             {
-                if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Attack)
+                if (battleAction.ActionType != BattleActionType.Attack)
                     continue;
 
                 foreach (Vector2Int pos in battleAction.TargetDirections)
@@ -39,7 +39,7 @@ namespace TestGameplay
 
             foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
             {
-                if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Attack)
+                if (battleAction.ActionType != BattleActionType.Attack)
                     continue;
 
                 foreach (Vector2Int pos in battleAction.TargetDirections)

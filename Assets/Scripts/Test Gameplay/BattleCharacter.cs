@@ -8,7 +8,6 @@ namespace TestGameplay
     public class BattleCharacter : GridActor
     {
         protected int initialHealth = 20;
-        protected int initialStamina = 10;
 
         protected BattleStats stats;
         public BattleStats Stats { get { return stats; } }
@@ -22,7 +21,7 @@ namespace TestGameplay
         public override void Initialize()
         {
             base.Initialize();
-            stats = new BattleStats(initialHealth, initialStamina);
+            stats = new BattleStats(initialHealth);
             defenseUI.UpdateDefense(stats.Defense);
             StatsUI.InitializeHealth(initialHealth);
             BattleActionTempo.OnTempoNotification += IddleAnimation;
@@ -50,20 +49,10 @@ namespace TestGameplay
             defenseUI.UpdateDefense(stats.Defense);
         }
 
-        public virtual void DecreaseStamina(int stamina)
-        {
-            stats.DecreaseStamina(stamina);
-        }
-
         public virtual void ResetStats()
         {
             stats.ResetBoosts();
             defenseUI.UpdateDefense(stats.Defense);
-        }
-
-        public virtual void ResetStamina()
-        {
-            stats.ResetStamina();
         }
 
         private void IddleAnimation()

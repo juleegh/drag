@@ -15,24 +15,20 @@ namespace TestGameplay
 
         public override void Execute()
         {
-            if (HasEnoughStamina())
+            foreach (Vector2Int direction in TargetDirections)
+                BattleGridManager.Instance.CharacterAttacked(BattleSectionManager.Instance.InTurn.CurrentPosition, direction, damage);
+            base.Execute();
+
+            Vector2Int previous = Vector2Int.zero;
+            foreach (Vector2Int position in TargetDirections)
             {
-                foreach (Vector2Int direction in TargetDirections)
-                    BattleGridManager.Instance.CharacterAttacked(BattleSectionManager.Instance.InTurn.CurrentPosition, direction, damage);
-                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
-                base.Execute();
-
-                Vector2Int previous = Vector2Int.zero;
-                foreach (Vector2Int position in TargetDirections)
-                {
-                    bool couldMove = BattleGridManager.Instance.MoveCharacter(position - previous, true);
-                    if (!couldMove)
-                        break;
-                    previous = position;
-                }
-
-                BattleGridManager.Instance.UpdatePreview();
+                bool couldMove = BattleGridManager.Instance.MoveCharacter(position - previous, true);
+                if (!couldMove)
+                    break;
+                previous = position;
             }
+
+            BattleGridManager.Instance.UpdatePreview();
         }
 
         public override bool WouldHaveEffect()

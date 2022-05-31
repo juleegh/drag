@@ -7,10 +7,6 @@ namespace TestGameplay
 {
     public class BattleStats
     {
-        private int baseStamina;
-        private int stamina;
-        public int Stamina { get { return stamina; } }
-
         private int health;
         private int baseHealth;
         public int Health { get { return health; } }
@@ -22,12 +18,10 @@ namespace TestGameplay
         private int attack;
         public int Attack { get { return attack; } }
 
-        public BattleStats(int baseHealth, int baseStamina)
+        public BattleStats(int baseHealth)
         {
             this.baseHealth = baseHealth;
             health = baseHealth;
-            this.baseStamina = baseStamina;
-            stamina = baseStamina;
 
             defense = new Dictionary<ActionInput, int>();
             defense[ActionInput.Up] = 0;
@@ -85,19 +79,9 @@ namespace TestGameplay
             health += heal;
         }
 
-        public void DecreaseStamina(int tired)
-        {
-            stamina -= tired;
-        }
-
         public void BoostDefense(ActionInput direction, int boost)
         {
             defense[direction] += boost;
-        }
-
-        public void ResetStamina()
-        { 
-            stamina = baseStamina;
         }
 
         public void ResetBoosts()
