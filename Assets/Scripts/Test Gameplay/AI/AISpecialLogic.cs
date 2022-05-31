@@ -11,32 +11,64 @@ namespace TestGameplay
 
         }
 
-        public BattleAction PickAbilityToUse()
+        public BattleAction SpecialAttackInRange()
         {
             foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
             {
-                if (!battleAction.HasEnoughStamina())
+                if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Attack)
                     continue;
 
-                if (battleAction.ActionType == BattleActionType.Defend && battleAction.WouldHaveEffect())
-                    return battleAction;
-                else if (battleAction.ActionType == BattleActionType.Attack)
-                    return battleAction;
+                foreach (Vector2Int pos in battleAction.TargetDirections)
+                {
+                    Vector2Int attackPosition = BattleSectionManager.Instance.Opponent.CurrentPosition + pos;
+                    if (attackPosition == BattleSectionManager.Instance.Player.CurrentPosition)
+                        return battleAction;
+                }
             }
 
             return null;
         }
 
-        public bool SpecialAbilityIsInRange(BattleAction battleAction)
+        public AITranslateInfo PositionToSpecialAttack()
         {
-            foreach (Vector2Int pos in battleAction.TargetDirections)
+            AITranslateInfo translation = new AITranslateInfo();
+            translation.distance = Vector2Int.zero;
+            translation.finalPos = Vector2Int.zero;
+            translation.steps = 0;
+            bool first = true;
+
+            foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
             {
-                Vector2Int attackPosition = BattleSectionManager.Instance.Opponent.CurrentPosition + pos;
-                if (attackPosition == BattleSectionManager.Instance.Player.CurrentPosition)
-                    return true;
+                if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Attack)
+                    continue;
+
+                foreach (Vector2Int pos in battleAction.TargetDirections)
+                {
+                    Vector2Int attackPosition = BattleSectionManager.Instance.Opponent.CurrentPosition + pos;
+                    Vector2Int distance = BattleSectionManager.Instance.Player.CurrentPosition - attackPosition;
+                    int steps = BattleAIInput.Instance.MoveLogic.StepsToCell(distance + BattleSectionManager.Instance.Opponent.CurrentPosition);
+
+                    if (steps == -1)
+                        continue;
+
+                    if (first)
+                    {
+                        first = false;
+                        translation.distance = distance;
+                        translation.steps = steps;
+                        translation.finalPos = distance + BattleSectionManager.Instance.Opponent.CurrentPosition;
+                        continue;
+                    }
+                    else if (steps <= translation.steps)
+                    {
+                        translation.distance = distance;
+                        translation.steps = steps;
+                        translation.finalPos = distance + BattleSectionManager.Instance.Opponent.CurrentPosition;
+                    }
+                }
             }
 
-            return false;
+            return translation;
         }
     }
 }

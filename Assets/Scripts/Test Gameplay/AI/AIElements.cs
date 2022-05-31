@@ -23,8 +23,6 @@ namespace TestGameplay
 
         public bool CanExecute()
         {
-            Debug.LogWarning("--- Executing: " + name + "--------");
-
             if (conditions.Count == 0)
                 return true;
 
@@ -32,8 +30,9 @@ namespace TestGameplay
 
             foreach (AICondition condition in conditions)
             {
-                Debug.LogWarning("----- Condition met: " + condition.GetType() + "? : " + condition.MeetsRequirement());
-                if (!condition.MeetsRequirement())
+                bool success = condition.MeetsRequirement();
+                Debug.LogWarning("----- Condition met: " + condition.GetType() + "? : " + success);
+                if (!success)
                     return false;
             }
             return true;

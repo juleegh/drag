@@ -19,11 +19,11 @@ namespace TestGameplay
         public AIMoveLogic MoveLogic { get { return moveLogic; } }
         public AISpecialLogic SpecialLogic { get { return specialLogic; } }
 
-        private float MinDecisionTime {  get { return BattleActionTempo.Instance.Frequency * 0.15f; } }
-        private float MaxDecisionTime {  get { return BattleActionTempo.Instance.Frequency * 0.65f; } }
+        private float MinDecisionTime { get { return BattleActionTempo.Instance.Frequency * 0.35f; } }
+        private float MaxDecisionTime { get { return BattleActionTempo.Instance.Frequency * 0.85f; } }
 
         [SerializeField] private AIBehaviourTree behaviourTree;
-        
+
         void Awake()
         {
             instance = this;
@@ -40,10 +40,24 @@ namespace TestGameplay
 
         public void NewTempo()
         {
-            if (BattleSectionManager.Instance.IsPlayerTurn || BattleSectionManager.Instance.Opponent.Stats.Health <= 0)
-                return;
+            if (BattleSectionManager.Instance.IsPlayerTurn)
+            {
+                if (BattleSectionManager.Instance.Opponent.Stats.Health <= 0)
+                    return;
 
-            behaviourTree.ExecuteNextAction();
+                if (BattleSectionManager.Instance.TemposRemaining == 1)
+                    StartCoroutine(ChooseNextAction());
+            }
+            else
+            {
+                behaviourTree.ExecuteNextAction();
+                StartCoroutine(ChooseNextAction());
+            }
+        }
+
+        private IEnumerator ChooseNextAction()
+        {
+            yield return new WaitForSeconds(Random.Range(MinDecisionTime, MaxDecisionTime));
             behaviourTree.ChooseActionForTurn();
             PickNextAbilityType();
         }
@@ -54,14 +68,8 @@ namespace TestGameplay
             if (chosenActionType != currentActionType)
             {
                 currentActionType = chosenActionType;
-                StartCoroutine(MakeDecision());
+                BattleGridManager.Instance.UpdatePreview();
             }
-        }
-
-        private IEnumerator MakeDecision()
-        {
-            yield return new WaitForSeconds(Random.Range(MinDecisionTime, MaxDecisionTime));
-            BattleGridManager.Instance.UpdatePreview();
         }
     }
 }

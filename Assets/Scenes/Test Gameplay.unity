@@ -9152,7 +9152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e60421e16ef4314a9a12d0c7057135d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temposPerPlayer: 8
+  temposPerPlayer: 4
   player: {fileID: 1018965854}
   opponent: {fileID: 26367280}
   sectionUI: {fileID: 1587180580}
@@ -9331,6 +9331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnOptions:
+  - {fileID: 11400000, guid: 8cf19b4ca741e2a448879a56f092e367, type: 2}
+  - {fileID: 11400000, guid: 3a0a0a3e824363c4b9c7d9e4bb3a2301, type: 2}
   - {fileID: 11400000, guid: e45905fd152463c4b8f4fbfe147f885b, type: 2}
   - {fileID: 11400000, guid: 939c1103bcbc2c24c96e36290b1068e0, type: 2}
   - {fileID: 11400000, guid: 19adacd8e58000f4ca3edc5c954f5fb8, type: 2}

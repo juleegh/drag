@@ -14,7 +14,7 @@ namespace TestGameplay
             float currentHealth = (float) BattleSectionManager.Instance.InTurn.Stats.Health;
             float maxHealth = (float) BattleSectionManager.Instance.InTurn.Stats.BaseHealth;
             float remainingPercentage = currentHealth / maxHealth;
-            return remainingPercentage >= percentageAllowed;
+            return remainingPercentage <= percentageAllowed;
         }
     }
 }

@@ -71,69 +71,36 @@ namespace TestGameplay
             BattleAIInput.Instance.MoveActions[executedAction].Execute();
         }
 
-        public bool CanMoveToSpecial(List<Vector2Int> positions)
+        public int StepsToCell(Vector2Int destination)
         {
-            if (positions.Count < 1)
-                return false;
+            if (!BattleGridManager.Instance.IsValidPosition(destination))
+                return -1;
 
-            foreach (Vector2Int pos in positions)
-            {
-                Vector2Int targetPos = BattleSectionManager.Instance.Player.CurrentPosition - pos;
-                Vector2Int currentPos = BattleSectionManager.Instance.Opponent.CurrentPosition;
-                if (!BattleGridManager.Instance.IsValidPosition(targetPos))
-                    continue;
-
-                if (Mathf.Abs(targetPos.x - currentPos.x) + Mathf.Abs(targetPos.y - currentPos.y) > BattleSectionManager.Instance.TemposRemaining)
-                    continue;
-
-                return true;
-            }
-
-            return false;
+            return dijkstra.findShortestPath(BattleSectionManager.Instance.Opponent.CurrentPosition, destination).Count;
         }
 
-        public void MoveTorwardsSpecialAttack(List<Vector2Int> positions)
+        public void MoveTorwardsCell(Vector2Int position)
         {
-            if (positions.Count < 1)
-                return;
-
-            Vector2Int position = positions[0];
-            Vector2Int distanceToPos = BattleSectionManager.Instance.Player.CurrentPosition - (BattleSectionManager.Instance.Opponent.CurrentPosition + position);
-            foreach (Vector2Int pos in positions)
+            if (currentObjective != position || currentPath.Count == 0)
             {
-                Vector2Int distanceFromPlayer = BattleSectionManager.Instance.Player.CurrentPosition - (BattleSectionManager.Instance.Opponent.CurrentPosition + pos);
-                Vector2Int newPos = BattleSectionManager.Instance.Opponent.CurrentPosition + distanceFromPlayer;
-
-                if (!BattleGridManager.Instance.IsValidPosition(newPos))
-                {
-                    continue;
-                }
-
-                if (distanceFromPlayer.magnitude < distanceToPos.magnitude)
-                {
-                    position = pos;
-                    distanceToPos = distanceFromPlayer;
-                }
+                currentPath = dijkstra.findShortestPath(BattleSectionManager.Instance.Opponent.CurrentPosition, position);
+                currentObjective = position;
+                currentPath.Remove(currentPath[0]);
             }
 
-            Vector2Int distance = BattleSectionManager.Instance.Player.CurrentPosition - (position + BattleSectionManager.Instance.Opponent.CurrentPosition);
+            Vector2Int distance = BattleSectionManager.Instance.Opponent.CurrentPosition - currentPath[0];
             ActionInput executedAction = ActionInput.Up;
 
-            if (distance.x != 0)
-            {
-                if (distance.x > 0)
-                    executedAction = ActionInput.Right;
-                else
-                    executedAction = ActionInput.Left;
-            }
-            else
-            {
-                if (distance.y > 0)
-                    executedAction = ActionInput.Up;
-                else
-                    executedAction = ActionInput.Down;
-            }
+            if (distance.x < 0 && BattleAIInput.Instance.MoveActions[ActionInput.Right].WouldHaveEffect())
+                executedAction = ActionInput.Right;
+            else if (distance.x > 0 && BattleAIInput.Instance.MoveActions[ActionInput.Left].WouldHaveEffect())
+                executedAction = ActionInput.Left;
+            else if (distance.y < 0 && BattleAIInput.Instance.MoveActions[ActionInput.Up].WouldHaveEffect())
+                executedAction = ActionInput.Up;
+            else if (distance.y > 0 && BattleAIInput.Instance.MoveActions[ActionInput.Down].WouldHaveEffect())
+                executedAction = ActionInput.Down;
 
+            currentPath.Remove(currentPath[0]);
             BattleAIInput.Instance.MoveActions[executedAction].Execute();
         }
     }
