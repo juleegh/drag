@@ -11,24 +11,26 @@ namespace TestGameplay
     {
         [SerializeField] private Transform container;
         [SerializeField] private GameObject prefab;
-        [SerializeField] private TextMeshProUGUI tens;
 
         private BattleIconUI[] icons;
         private int currentValue;
 
         public void Setup(int displayedIcons)
         {
-            if(icons == null)
+            if (icons == null)
             {
                 icons = new BattleIconUI[displayedIcons];
                 for (int i = 0; i < displayedIcons; i++)
                 {
                     BattleIconUI newIcon = Instantiate(prefab).GetComponent<BattleIconUI>();
                     newIcon.transform.SetParent(container);
-                    newIcon.transform.localPosition = Vector3.zero;
+                    newIcon.transform.localPosition = Vector3.right * i / 2;
+                    newIcon.transform.localEulerAngles = Vector3.zero;
+                    newIcon.transform.localScale = Vector3.one;
                     newIcon.Initialize(true);
                     icons[i] = newIcon;
-                    StartCoroutine(Refresh());
+                    if (gameObject.activeInHierarchy)
+                        StartCoroutine(Refresh());
                 }
             }
             else
@@ -56,18 +58,10 @@ namespace TestGameplay
             if (icons == null || fill == currentValue)
                 return;
 
-            /*
-                        int aboveTen = (fill / displayedIcons);
-                        int belowTen = fill - (aboveTen * displayedIcons);
-                        tens.text = "x" + aboveTen;
-                        tens.gameObject.SetActive(aboveTen > 0);
-            */
-            tens.gameObject.SetActive(false);
             bool positiveChange = currentValue < fill;
 
             for (int i = 0; i < icons.Length; i++)
             {
-                //icons[i].Toggle(i + 1 <= belowTen, positiveChange);
                 icons[i].Toggle(i + 1 <= fill, positiveChange);
             }
 

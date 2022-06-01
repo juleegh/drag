@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 
 public class BattleIconUI : MonoBehaviour
 {
-    [SerializeField] private Image icon;
+    [SerializeField] private SpriteRenderer icon;
     [SerializeField] private Color visible;
     [SerializeField] private Color notVisible;
 
