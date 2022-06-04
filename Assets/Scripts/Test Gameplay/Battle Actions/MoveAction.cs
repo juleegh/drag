@@ -14,17 +14,20 @@ namespace TestGameplay
 
         public override void Execute()
         {
-            Vector2Int previous = Vector2Int.zero;
-            foreach (Vector2Int position in moveDelta)
+            if (HasEnoughStamina())
             {
-                bool couldMove = BattleGridManager.Instance.MoveCharacter(position - previous);
-                if (!couldMove)
-                    break;
-                previous = position;
+                Vector2Int previous = Vector2Int.zero;
+                foreach (Vector2Int position in moveDelta)
+                {
+                    bool couldMove = BattleGridManager.Instance.MoveCharacter(position - previous);
+                    if (!couldMove)
+                        break;
+                    previous = position;
+                }
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
+                base.Execute();
+                BattleGridManager.Instance.UpdatePreview();
             }
-            BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
-            base.Execute();
-            BattleGridManager.Instance.UpdatePreview();
         }
 
         public override bool WouldHaveEffect()

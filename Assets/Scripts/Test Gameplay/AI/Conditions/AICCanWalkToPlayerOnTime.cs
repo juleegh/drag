@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC Can Walk To Player On Time")]
+    //[CreateAssetMenu(fileName = "AIC Can Walk To Player On Time")]
     public class AICCanWalkToPlayerOnTime : AICondition
     {
         public override bool MeetsRequirement()

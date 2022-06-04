@@ -18,4 +18,4 @@ MonoBehaviour:
   shortDescription: 1
   attackedPositions:
   - {x: 0, y: -1}
-  damage: 1
+  damage: 2

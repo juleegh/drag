@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AI Walk To Special Attack")]
+    //[CreateAssetMenu(fileName = "AI Walk To Special Attack")]
     class AIWalkToSPecialAttack : AIActionOption
     {
         public override BattleActionType GetActionType()

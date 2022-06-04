@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC Close Enough To Player")]
+    //[CreateAssetMenu(fileName = "AIC Close Enough To Player")]
     public class AICCloseEnoughToPlayer : AICondition
     {
         [SerializeField] private int stepsRequired;

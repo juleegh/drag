@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC In Range Of Attack")]
+    //[CreateAssetMenu(fileName = "AIC In Range Of Attack")]
     public class AICInRangeOfAttack : AICondition
     {
         public override bool MeetsRequirement()

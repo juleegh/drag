@@ -8,6 +8,12 @@ namespace TestGameplay
     {
         public Vector2Int distance;
         public Vector2Int finalPos;
+        public List<Vector2Int> path;
         public int steps;
+
+        public AITranslateInfo()
+        {
+            path = new List<Vector2Int>();
+        }
     }
 }

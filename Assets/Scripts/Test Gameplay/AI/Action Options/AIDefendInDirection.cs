@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AI Heal")]
-    class AIHeal : AIActionOption
+    //[CreateAssetMenu(fileName = "AI Defend In Direction")]
+    class AIDefendInDirection : AIActionOption
     {
         public override BattleActionType GetActionType()
         {
-            return BattleActionType.Special;
+            return BattleActionType.Defend;
         }
 
         public override void ExecuteAction()
         {
-            //BattleAIInput.Instance.SpecialLogic.Heal();
+            BattleAIInput.Instance.DefenseLogic.DefendFromPlayer();
         }
     }
 }

@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AI Special Attack")]
-    class AISpecialAttack : AIActionOption
+    //[CreateAssetMenu(fileName = "AI Attack Player")]
+    class AIAttackPlayer : AIActionOption
     {
         public override BattleActionType GetActionType()
         {
-            return BattleActionType.Special;
+            return BattleActionType.Attack;
         }
 
         public override void ExecuteAction()
         {
-            BattleAIInput.Instance.SpecialLogic.SpecialAttackInRange().Execute();
+            BattleAIInput.Instance.AttackLogic.AttackPlayer();
         }
     }
 }

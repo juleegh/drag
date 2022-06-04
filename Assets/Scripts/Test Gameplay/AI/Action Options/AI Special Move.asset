@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9121fc320b116654fba2f85dbdd194f3, type: 3}
-  m_Name: AIC Percentage Moves Left
+  m_Script: {fileID: 11500000, guid: 1cae7375bf5016f45af237a9d594287a, type: 3}
+  m_Name: AI Special Move
   m_EditorClassIdentifier: 
-  percentageAllowed: 0.25
+  conditions:
+  - {fileID: 11400000, guid: 71ca7f24dc75be048a1c43a4e9066547, type: 2}
+  - {fileID: 11400000, guid: abe9b755fdd2f6f45a6415202c6d7c54, type: 2}

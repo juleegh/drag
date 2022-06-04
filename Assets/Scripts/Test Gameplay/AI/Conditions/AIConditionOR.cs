@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC OR")]
+    //[CreateAssetMenu(fileName = "AIC OR")]
     public class AIConditionOR : AICondition
     {
         [SerializeField] private AICondition conditionOne;

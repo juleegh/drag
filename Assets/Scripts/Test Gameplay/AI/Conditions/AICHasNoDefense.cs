@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC Has No Defense")]
+    //[CreateAssetMenu(fileName = "AIC Has No Defense")]
     public class AICHasNoDefense : AICondition
     {
         [SerializeField] private float percentageAllowed;

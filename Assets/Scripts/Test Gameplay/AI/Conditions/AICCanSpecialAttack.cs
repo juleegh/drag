@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC Can Special Attack")]
+    //[CreateAssetMenu(fileName = "AIC Can Special Attack")]
     public class AICCanSpecialAttack : AICondition
     {
         public override bool MeetsRequirement()

@@ -71,12 +71,19 @@ namespace TestGameplay
             BattleAIInput.Instance.MoveActions[executedAction].Execute();
         }
 
-        public int StepsToCell(Vector2Int destination)
+        public AITranslateInfo StepsToCell(Vector2Int destination)
         {
             if (!BattleGridManager.Instance.IsValidPosition(destination))
-                return -1;
+                return null;
 
-            return dijkstra.findShortestPath(BattleSectionManager.Instance.Opponent.CurrentPosition, destination).Count;
+
+            AITranslateInfo translation = new AITranslateInfo();
+            translation.distance = destination - BattleSectionManager.Instance.Opponent.CurrentPosition;
+            translation.finalPos = destination;
+            translation.path = dijkstra.findShortestPath(BattleSectionManager.Instance.Opponent.CurrentPosition, destination);
+            translation.steps = translation.path.Count;
+
+            return translation;
         }
 
         public void MoveTorwardsCell(Vector2Int position)

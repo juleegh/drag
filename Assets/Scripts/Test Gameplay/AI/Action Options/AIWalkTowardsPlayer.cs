@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AI Attack Player")]
-    class AIAttackPlayer : AIActionOption
+    //[CreateAssetMenu(fileName = "AI Walk Towards Player")]
+    class AIWalkTowardsPlayer : AIActionOption
     {
         public override BattleActionType GetActionType()
         {
-            return BattleActionType.Attack;
+            return BattleActionType.Move;
         }
 
         public override void ExecuteAction()
         {
-            BattleAIInput.Instance.AttackLogic.AttackPlayer();
+            BattleAIInput.Instance.MoveLogic.MoveTorwardsPlayer();
         }
     }
 }

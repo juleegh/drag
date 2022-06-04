@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC Pass Random Check")]
+    //[CreateAssetMenu(fileName = "AIC Pass Random Check")]
     class AICPassRandomCheck : AICondition
     {
         [SerializeField] private float randomCheck;

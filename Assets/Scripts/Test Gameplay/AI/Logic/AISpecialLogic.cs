@@ -46,7 +46,12 @@ namespace TestGameplay
                 {
                     Vector2Int attackPosition = BattleSectionManager.Instance.Opponent.CurrentPosition + pos;
                     Vector2Int distance = BattleSectionManager.Instance.Player.CurrentPosition - attackPosition;
-                    int steps = BattleAIInput.Instance.MoveLogic.StepsToCell(distance + BattleSectionManager.Instance.Opponent.CurrentPosition);
+                    AITranslateInfo translationTemp = BattleAIInput.Instance.MoveLogic.StepsToCell(distance + BattleSectionManager.Instance.Opponent.CurrentPosition);
+
+                    if (translationTemp == null)
+                        continue;
+
+                    int steps = translationTemp.steps;
 
                     if (steps == -1)
                         continue;
@@ -69,6 +74,42 @@ namespace TestGameplay
             }
 
             return translation;
+        }
+
+        public bool CanReachWithSpecial(Vector2Int destination)
+        {
+            foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
+            {
+                if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Move)
+                    continue;
+
+                foreach (Vector2Int pos in battleAction.TargetDirections)
+                {
+                    Vector2Int position = BattleSectionManager.Instance.Opponent.CurrentPosition + pos;
+                    if (destination == position)
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void CutPathWithSpecial(List<Vector2Int> destination)
+        {
+            foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
+            {
+                if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Move)
+                    continue;
+
+                foreach (Vector2Int pos in battleAction.TargetDirections)
+                {
+                    if (destination.Contains(BattleSectionManager.Instance.Opponent.CurrentPosition + pos))
+                    { 
+                        battleAction.Execute();
+                        return;
+                    }
+                }
+            }
         }
     }
 }

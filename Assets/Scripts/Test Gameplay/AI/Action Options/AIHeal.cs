@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AI Walk Towards Player")]
-    class AIWalkTowardsPlayer : AIActionOption
+    //[CreateAssetMenu(fileName = "AI Heal")]
+    class AIHeal : AIActionOption
     {
         public override BattleActionType GetActionType()
         {
-            return BattleActionType.Move;
+            return BattleActionType.Special;
         }
 
         public override void ExecuteAction()
         {
-            BattleAIInput.Instance.MoveLogic.MoveTorwardsPlayer();
+            //BattleAIInput.Instance.SpecialLogic.Heal();
         }
     }
 }

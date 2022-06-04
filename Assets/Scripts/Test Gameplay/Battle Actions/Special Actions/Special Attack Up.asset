@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fc66c87cac51364093955b4f1ce8f8d, type: 3}
-  m_Name: Special Attack Action
+  m_Name: Special Attack Up
   m_EditorClassIdentifier: 
-  actionInput: 2
-  requiredStamina: 8
+  actionInput: 0
+  requiredStamina: 3
   sprite: {fileID: -7255726176831047129, guid: 602cf449c5dd24842ac3accb977acbcf, type: 3}
   shortDescription: 
   attackedPositions:
-  - {x: -1, y: 0}
-  - {x: -2, y: 0}
-  - {x: -2, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
   damage: 6

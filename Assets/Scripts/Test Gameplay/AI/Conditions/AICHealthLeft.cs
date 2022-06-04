@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TestGameplay
 {
-    [CreateAssetMenu(fileName = "AIC Percentage Health Left")]
+    //[CreateAssetMenu(fileName = "AIC Percentage Health Left")]
     public class AICHealthLeft : AICondition
     {
         [SerializeField] private float percentageAllowed;
