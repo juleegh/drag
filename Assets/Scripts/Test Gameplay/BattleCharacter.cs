@@ -16,9 +16,13 @@ namespace TestGameplay
         [SerializeField] protected BattleDefenseIndicator defenseUI;
         [SerializeField] protected BattleActorStatsUI actorStatsUI;
         [SerializeField] protected BattleCharacterAnimation animations;
+        [SerializeField] protected AudioSource shieldUp;
+        [SerializeField] protected AudioSource shieldHit;
+        [SerializeField] protected AudioSource hurt;
 
-        protected virtual BattleActorStatsUI StatsUI { get { return actorStatsUI; }  }
-        
+        protected virtual BattleActorStatsUI StatsUI { get { return actorStatsUI; } }
+        public bool RequiresStamina { get { return initialStamina > stats.Stamina; } }
+
         public override void Initialize()
         {
             base.Initialize();
@@ -33,10 +37,22 @@ namespace TestGameplay
         {
             if (currentPosition == destination)
             {
+                int original = stats.Health;
                 stats.ReceiveDamage(origin - destination, damage);
                 defenseUI.UpdateDefense(stats.Defense);
                 StatsUI.SetHealth(stats.Health);
-                animations.Hurt();
+                if (original > stats.Health)
+                {
+                    if (stats.Health > 0)
+                    {
+                        hurt.Play();
+                    }
+                    animations.Hurt();
+                }
+                else
+                {
+                    shieldHit.Play();
+                }
             }
         }
 
@@ -48,6 +64,7 @@ namespace TestGameplay
 
         public void IncreaseDefense(ActionInput direction, int defense)
         {
+            shieldUp.Play();
             stats.BoostDefense(direction, defense);
             defenseUI.UpdateDefense(stats.Defense);
         }

@@ -11,6 +11,7 @@ namespace TestGameplay
         public static BattleGridManager Instance { get { return instance; } }
 
         [SerializeField] private Transform cellsContainer;
+        [SerializeField] private AudioSource attackSound;
         [SerializeField] private BattleGridUI gridUI;
         private UIActionsOptionsPreview actionPreview { get { return UIActionsOptionsPreview.Instance; } }
 
@@ -167,7 +168,10 @@ namespace TestGameplay
             foreach (GridActor actor in gridActors)
             {
                 if (actor.ActiveInGrid)
+                {
+                    attackSound.Play();
                     actor.ReceiveDamage(origin, origin + direction, damage);
+                }
             }
 
             List<GridActor> toRemove = new List<GridActor>();

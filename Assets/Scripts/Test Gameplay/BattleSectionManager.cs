@@ -11,6 +11,7 @@ namespace TestGameplay
         public static BattleSectionManager Instance { get { return instance; } }
 
         [SerializeField] private int temposPerPlayer;
+        [SerializeField] private AudioSource rechargeSound;
 
         private BattleCharacter currentTurn;
         private BattleCharacter notInTurn;
@@ -78,8 +79,12 @@ namespace TestGameplay
 
                 if (TutorialController.Instance.IsInTutorial)
                 {
+                    if (currentTurn.RequiresStamina)
+                        rechargeSound.Play();
+
                     currentTurn.ResetStamina();
                     currentTurn.ResetStats();
+                    TurnChangeUI.Instance.ShowTurnChange();
                 }
                 else
                     ToggleTurn();
@@ -88,9 +93,16 @@ namespace TestGameplay
 
         private void ToggleTurn()
         {
+
+            if (currentTurn == player && currentTurn.RequiresStamina)
+            {
+                rechargeSound.Play();
+            }
+
             currentTurn.ResetStamina();
             currentTurn = currentTurn == player ? opponent : player;
             notInTurn = notInTurn == player ? opponent : player;
+
             currentTurn.ResetStats();
             sectionUI.ToggleOwner(currentTurn);
             BattleGridManager.Instance.UpdatePreview();
