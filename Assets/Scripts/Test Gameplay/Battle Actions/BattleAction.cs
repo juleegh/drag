@@ -25,7 +25,7 @@ namespace TestGameplay
 
         public bool HasEnoughStamina()
         {
-            return BattleSectionManager.Instance.InTurn.Stats.Stamina >= requiredStamina;
+            return BattleSectionManager.Instance.InTurn != null && BattleSectionManager.Instance.InTurn.Stats.Stamina >= requiredStamina;
         }
 
         public virtual bool WouldHaveEffect()

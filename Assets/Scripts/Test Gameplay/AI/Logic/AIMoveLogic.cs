@@ -110,5 +110,10 @@ namespace TestGameplay
             currentPath.Remove(currentPath[0]);
             BattleAIInput.Instance.MoveActions[executedAction].Execute();
         }
+
+        public void ResetCurrentTarget()
+        {
+            currentPath.Clear();
+        }
     }
 }

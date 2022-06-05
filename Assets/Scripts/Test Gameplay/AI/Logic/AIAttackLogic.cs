@@ -23,5 +23,15 @@ namespace TestGameplay
                 }
             }
         }
+
+        public bool CanAttack()
+        {
+            foreach (BattleAction battleAction in BattleAIInput.Instance.AttackActions.Values)
+            {
+                if (!battleAction.HasEnoughStamina())
+                    return false;
+            }
+            return true;
+        }
     }
 }

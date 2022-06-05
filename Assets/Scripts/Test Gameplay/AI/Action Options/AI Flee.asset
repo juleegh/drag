@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d4407f9180dfc5418264790eb2ded4b, type: 3}
-  m_Name: AI Walk To Special Attack
+  m_Script: {fileID: 11500000, guid: 979f57473f0c5bb44b1485027efc0e81, type: 3}
+  m_Name: AI Flee
   m_EditorClassIdentifier: 
-  conditions:
-  - {fileID: 11400000, guid: d2a963dceac43ce43bab7ec83fead9b1, type: 2}
-  - {fileID: 11400000, guid: abe9b755fdd2f6f45a6415202c6d7c54, type: 2}
+  conditions: []

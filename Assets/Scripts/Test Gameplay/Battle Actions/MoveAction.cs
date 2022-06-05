@@ -16,6 +16,7 @@ namespace TestGameplay
         {
             if (HasEnoughStamina())
             {
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
                 Vector2Int previous = Vector2Int.zero;
                 foreach (Vector2Int position in moveDelta)
                 {
@@ -24,7 +25,6 @@ namespace TestGameplay
                         break;
                     previous = position;
                 }
-                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
                 base.Execute();
                 BattleGridManager.Instance.UpdatePreview();
             }

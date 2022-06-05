@@ -42,5 +42,11 @@ namespace TestGameplay
             sequence.AppendCallback(() => { spriteRenderer.sprite = idle; });
             sequence.Play();
         }
+
+        public void Hurt()
+        {
+            spriteRenderer.color = Color.red;
+            spriteRenderer.DOColor(Color.white, delay).SetEase(Ease.InBounce);
+        }
     }
 }

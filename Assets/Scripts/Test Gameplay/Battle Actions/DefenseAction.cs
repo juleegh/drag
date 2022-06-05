@@ -15,8 +15,8 @@ namespace TestGameplay
         {
             if (HasEnoughStamina())
             {
-                BattleSectionManager.Instance.InTurn.IncreaseDefense(actionInput, defenseIncrease);
                 BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
+                BattleSectionManager.Instance.InTurn.IncreaseDefense(actionInput, defenseIncrease);
                 base.Execute();
             }
         }

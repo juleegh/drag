@@ -7,7 +7,7 @@ namespace TestGameplay
 {
     public class BattleCharacter : GridActor
     {
-        protected int initialHealth = 20;
+        protected int initialHealth = 15;
         protected int initialStamina = 3;
 
         protected BattleStats stats;
@@ -36,6 +36,7 @@ namespace TestGameplay
                 stats.ReceiveDamage(origin - destination, damage);
                 defenseUI.UpdateDefense(stats.Defense);
                 StatsUI.SetHealth(stats.Health);
+                animations.Hurt();
             }
         }
 

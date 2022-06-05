@@ -203,5 +203,24 @@ namespace TestGameplay
         {
             actionPreview.HighlightSelected(actionInput);
         }
+
+        public bool AreAdjacent(Vector2Int original, Vector2Int other)
+        {
+            if(!grid.ContainsKey(original))
+                return false;
+
+            List<Vector2Int> adjacent = new List<Vector2Int>();
+
+            if (grid.ContainsKey(original + Vector2Int.down))
+                adjacent.Add(original + Vector2Int.down);
+            if (grid.ContainsKey(original + Vector2Int.up))
+                adjacent.Add(original + Vector2Int.up);
+            if (grid.ContainsKey(original + Vector2Int.left))
+                adjacent.Add(original + Vector2Int.left);
+            if (grid.ContainsKey(original + Vector2Int.right))
+                adjacent.Add(original + Vector2Int.right);
+
+            return adjacent.Contains(other);
+        }
     }
 }

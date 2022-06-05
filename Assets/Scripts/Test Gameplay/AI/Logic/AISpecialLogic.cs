@@ -29,6 +29,18 @@ namespace TestGameplay
             return null;
         }
 
+        public bool CanSpecialAttack()
+        {
+            foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
+            {
+                if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Attack)
+                    continue;
+                
+                return true;
+            }
+            return false;
+        }
+
         public AITranslateInfo PositionToSpecialAttack()
         {
             AITranslateInfo translation = new AITranslateInfo();
@@ -76,38 +88,42 @@ namespace TestGameplay
             return translation;
         }
 
-        public bool CanReachWithSpecial(Vector2Int destination)
+        public AITranslateInfo ResultWithSpecialMove(List<Vector2Int> destination)
         {
+
             foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
             {
                 if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Move)
                     continue;
 
-                foreach (Vector2Int pos in battleAction.TargetDirections)
+                Vector2Int position = BattleSectionManager.Instance.Opponent.CurrentPosition + battleAction.TargetDirections[battleAction.TargetDirections.Count - 1];
+                if (destination.Contains(position) && position != BattleSectionManager.Instance.Player.CurrentPosition)
                 {
-                    Vector2Int position = BattleSectionManager.Instance.Opponent.CurrentPosition + pos;
-                    if (destination == position)
-                        return true;
+                    AITranslateInfo info = new AITranslateInfo();
+                    info.finalPos = position;
+                    info.steps = battleAction.TargetDirections.Count;
+                    return info;
                 }
             }
 
-            return false;
+            return null;
         }
 
-        public void CutPathWithSpecial(List<Vector2Int> destination)
+        public void CutPathWithSpecial(Vector2Int destination)
         {
+            float currentDistance = Vector2Int.Distance(BattleSectionManager.Instance.Opponent.CurrentPosition, destination);
             foreach (BattleAction battleAction in BattleAIInput.Instance.SpecialActions.Values)
             {
                 if (!battleAction.HasEnoughStamina() || battleAction.ActionType != BattleActionType.Move)
                     continue;
 
-                foreach (Vector2Int pos in battleAction.TargetDirections)
+                Vector2Int endPos = BattleSectionManager.Instance.Opponent.CurrentPosition + battleAction.TargetDirections[battleAction.TargetDirections.Count - 1];
+                float distance = Vector2Int.Distance(endPos, destination);
+
+                if (BattleGridManager.Instance.IsValidPosition(endPos) && distance < currentDistance)
                 {
-                    if (destination.Contains(BattleSectionManager.Instance.Opponent.CurrentPosition + pos))
-                    { 
-                        battleAction.Execute();
-                        return;
-                    }
+                    battleAction.Execute();
+                    return;
                 }
             }
         }

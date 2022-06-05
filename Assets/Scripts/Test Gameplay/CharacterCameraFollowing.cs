@@ -22,7 +22,7 @@ namespace TestGameplay
         // Update is called once per frame
         void Update()
         {
-            if (followCharacter)
+            if (followCharacter && BattleSectionManager.Instance.InTurn != null)
             {
                 Vector3 objective = BattleSectionManager.Instance.InTurn.transform.position + distanceFromFocus;
                 float currentDistance = Vector3.Distance(transform.position, objective);

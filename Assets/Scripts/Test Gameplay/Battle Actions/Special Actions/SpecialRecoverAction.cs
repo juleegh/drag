@@ -13,10 +13,8 @@ namespace TestGameplay
         {
             if (HasEnoughStamina())
             {
-                //foreach (Vector2Int position in positionsDelta)
-                //  BattleGridManager.Instance.CharacterAttacked(position, damage);
-                BattleSectionManager.Instance.InTurn.IncreaseHealth(health);
                 BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
+                BattleSectionManager.Instance.InTurn.IncreaseHealth(health);
                 base.Execute();
             }
         }

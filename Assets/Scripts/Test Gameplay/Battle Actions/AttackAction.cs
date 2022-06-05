@@ -17,9 +17,9 @@ namespace TestGameplay
         {
             if (HasEnoughStamina())
             {
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
                 foreach (Vector2Int direction in TargetDirections)
                     BattleGridManager.Instance.CharacterAttacked(BattleSectionManager.Instance.InTurn.CurrentPosition, direction, damage);
-                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
                 base.Execute();
 
                 Vector2Int previous = Vector2Int.zero;

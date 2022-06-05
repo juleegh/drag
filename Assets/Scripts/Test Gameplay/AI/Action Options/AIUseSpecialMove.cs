@@ -14,8 +14,8 @@ namespace TestGameplay
 
         public override void ExecuteAction()
         {
-            AITranslateInfo translate = BattleAIInput.Instance.MoveLogic.StepsToCell(BattleSectionManager.Instance.Player.CurrentPosition);
-            BattleAIInput.Instance.SpecialLogic.CutPathWithSpecial(translate.path);
+            BattleAIInput.Instance.SpecialLogic.CutPathWithSpecial(BattleSectionManager.Instance.Player.CurrentPosition);
+            BattleAIInput.Instance.MoveLogic.ResetCurrentTarget();
         }
     }
 }

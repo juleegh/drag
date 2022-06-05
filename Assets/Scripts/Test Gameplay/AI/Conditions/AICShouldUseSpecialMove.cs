@@ -9,11 +9,15 @@ namespace TestGameplay
     {
         public override bool MeetsRequirement()
         {
+            float currentDistance = Vector2Int.Distance(BattleSectionManager.Instance.Opponent.CurrentPosition, BattleSectionManager.Instance.Player.CurrentPosition);
             AITranslateInfo info = BattleAIInput.Instance.MoveLogic.StepsToCell(BattleSectionManager.Instance.Player.CurrentPosition);
 
-            foreach (Vector2Int pos in info.path)
+            AITranslateInfo specialTranslation = BattleAIInput.Instance.SpecialLogic.ResultWithSpecialMove(info.path);
+
+            if (specialTranslation != null)
             {
-                if (BattleAIInput.Instance.SpecialLogic.CanReachWithSpecial(pos))
+                float newDistance = Vector2Int.Distance(BattleSectionManager.Instance.Player.CurrentPosition, specialTranslation.finalPos);
+                if (newDistance < currentDistance)
                     return true;
             }
 

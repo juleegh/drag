@@ -9,6 +9,9 @@ namespace TestGameplay
     {
         public override bool MeetsRequirement()
         {
+            if (!BattleAIInput.Instance.SpecialLogic.CanSpecialAttack())
+                return false;
+
             AITranslateInfo info = BattleAIInput.Instance.SpecialLogic.PositionToSpecialAttack();
 
             if (info.distance == Vector2Int.zero)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace TestGameplay
 {
@@ -39,10 +40,27 @@ namespace TestGameplay
         public void ResetTurns()
         {
             sectionTempoCount = 0;
-            currentTurn = player;
+            currentTurn.ResetStamina();
+            notInTurn.ResetStamina();
+            currentTurn.ResetStats();
+            notInTurn.ResetStats();
+            
             notInTurn = opponent;
+            currentTurn = player;
             BattleActionTempo.Instance.StopTempoCount();
+            BattleGridManager.Instance.UpdatePreview();
+
+            Sequence seq = DOTween.Sequence();
+            seq.AppendInterval(3f);
+            seq.AppendCallback(() => StartAgain());
+            seq.Play();
+        }
+
+        private void StartAgain()
+        {
             BattleActionTempo.Instance.StartTempoCount();
+            sectionUI.ToggleOwner(currentTurn);
+            TurnChangeUI.Instance.ShowTurnChange();
         }
 
         public void NewTempo()

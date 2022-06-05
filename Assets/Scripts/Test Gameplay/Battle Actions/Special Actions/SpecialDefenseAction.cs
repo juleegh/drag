@@ -13,11 +13,11 @@ namespace TestGameplay
         {
             if (HasEnoughStamina())
             {
+                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
                 BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Up, defenseIncrease);
                 BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Down, defenseIncrease);
                 BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Left, defenseIncrease);
                 BattleSectionManager.Instance.InTurn.IncreaseDefense(ActionInput.Right, defenseIncrease);
-                BattleSectionManager.Instance.InTurn.DecreaseStamina(requiredStamina);
                 base.Execute();
             }
         }
