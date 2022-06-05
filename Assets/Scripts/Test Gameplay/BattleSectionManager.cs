@@ -22,7 +22,7 @@ namespace TestGameplay
         public BattleCharacter InTurn { get { return currentTurn; } }
         public BattleCharacter NotInTurn { get { return notInTurn; } }
         public bool IsPlayerTurn { get { return currentTurn == player; } }
-        public BattleActionExecuter CurrentExecuter { get { return IsPlayerTurn ? (BattleActionExecuter)PlayerActionsManager.Instance : (BattleActionExecuter)BattleAIInput.Instance; } }
+        public BattleActionExecuter CurrentExecuter { get { return IsPlayerTurn ? (BattleActionExecuter) PlayerActionsManager.Instance : (BattleActionExecuter) BattleAIInput.Instance; } }
         private int sectionTempoCount;
         public int TemposRemaining { get { return temposPerPlayer - sectionTempoCount; } }
         public int TemposPerPlayer { get { return temposPerPlayer; } }
@@ -44,7 +44,7 @@ namespace TestGameplay
             notInTurn.ResetStamina();
             currentTurn.ResetStats();
             notInTurn.ResetStats();
-            
+
             notInTurn = opponent;
             currentTurn = player;
             BattleActionTempo.Instance.StopTempoCount();
@@ -65,22 +65,24 @@ namespace TestGameplay
 
         public void NewTempo()
         {
-            if (TutorialController.Instance.IsInTutorial)
-                return;
             sectionUI.MarkCompleted(sectionTempoCount);
         }
 
         public void FinishedTempo()
         {
-            if (TutorialController.Instance.IsInTutorial)
-                return;
-
             sectionTempoCount++;
             if (sectionTempoCount == temposPerPlayer)
             {
                 sectionTempoCount = 0;
                 sectionUI.Clean();
-                ToggleTurn();
+
+                if (TutorialController.Instance.IsInTutorial)
+                {
+                    currentTurn.ResetStamina();
+                    currentTurn.ResetStats();
+                }
+                else
+                    ToggleTurn();
             }
         }
 
